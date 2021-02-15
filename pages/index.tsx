@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 interface Props {}
 
-const Home: string = () => {
+const Home: NextPage<Props> = () => {
     return (
         <div>
             <Head>
