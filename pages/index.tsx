@@ -1,7 +1,11 @@
 import {GetServerSideProps, NextPage} from 'next'
 import Head from 'next/head'
 
-interface Props {}
+interface Props {
+    user: {
+        name: string
+    }
+}
 
 const Home: NextPage<Props> = () => {
     return (
@@ -23,7 +27,12 @@ export default Home
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const response = await fetch('')
     const data = await response.json()
+    console.log(data)
     return {
-        props: {},
+        props: {
+            user: {
+                name: data.username,
+            },
+        },
     }
 }
