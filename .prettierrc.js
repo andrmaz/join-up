@@ -5,5 +5,5 @@ module.exports = {
     singleQuote: true,
     jsxSingleQuote: true,
     bracketSpacing: false,
-    arrowParens: 'avoid'
+    arrowParens: 'avoid',
 }
