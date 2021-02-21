@@ -1,4 +1,6 @@
-### Registration Form
+### MVP Features
+
+#### Registration Form
 * Name -> String
 * Email -> String 
 * Password -> String
@@ -10,18 +12,23 @@
 * Languages (Spoken) - Tags -> Array 
 * Languages (Technologies) - Tags -> Array 
 
-### Login Form
+#### Login Form
 * Email -> String 
 * Password -> String
 
-### Create New Project
+#### Create New Project
 * Name -> String 
 * Description -> String 
 * Technologies (Tags) -> Array 
 * Url -> String 
 
 
-### Find Collaboratos
+#### Find Collaboratos
 * Title -> String 
 * Description -> String 
 * Roles (Tags) -> Array  
+
+### MMP Features
+* Chat
+* Moderation
+* Roles/Permissions
