@@ -2,10 +2,10 @@
 * Name -> String
 * Email -> String 
 * Password -> String
-* GH URL (Optional) -> String
-* Git Lab (Optional) -> String 
-* LinkedIn (Optional) -> String 
-* Avatar (Use Gravatar) -> String 
+* GH URL -> String --Optional 
+* Git Lab -> String --Optional  
+* LinkedIn -> String --Optional  
+* Avatar (Gravatar) -> String 
 * Bio (Optional) -> String 
-* Languages (Spoken) - Tags - Array -> Array 
-* Languages (Programming) - Tags – Array -> Array 
+* Languages (Spoken) - Tags -> Array 
+* Languages (Technologies) - Tags -> Array 
