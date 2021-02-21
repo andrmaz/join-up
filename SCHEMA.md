@@ -1,4 +1,4 @@
-#### **MVP Features**
+### **MVP Features**
 
 ###### Registration Form
 * Name -> *String*
@@ -23,12 +23,12 @@
 * Url -> *String* 
 
 
-###### Find Collaboratos
+##### Find Collaboratos
 * Title -> *String* 
 * Description -> *String* 
 * Roles _Tags_ -> *Array*  
 
-#### **MMP Features**
+### **MMP Features**
 * Chat
 * Moderation
 * Roles/Permissions
