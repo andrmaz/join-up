@@ -1,11 +1,8 @@
-import {GetServerSideProps, NextPage} from 'next'
+import {NextPage} from 'next'
 import Head from 'next/head'
 
-interface Props {
-    user: {
-        name: string
-    }
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface Props {}
 
 const Home: NextPage<Props> = () => {
     return (
@@ -23,16 +20,3 @@ const Home: NextPage<Props> = () => {
 }
 
 export default Home
-
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-    const response = await fetch('')
-    const data = await response.json()
-    console.log(data)
-    return {
-        props: {
-            user: {
-                name: data.username,
-            },
-        },
-    }
-}
