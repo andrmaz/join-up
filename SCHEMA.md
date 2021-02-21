@@ -1,6 +1,6 @@
 ### **MVP Features**
 
-###### Registration Form
+##### Registration Form
 * Name -> *String*
 * Email -> *String* 
 * Password -> *String*
@@ -12,11 +12,11 @@
 * Languages (Spoken) _Tags_ -> *Array* 
 * Languages (Technologies) -Tags_ -> *Array* 
 
-###### Login Form
+##### Login Form
 * Email -> *String* 
 * Password -> *String*
 
-###### Create New Project
+##### Create New Project
 * Name -> *String* 
 * Description -> *String* 
 * Technologies _Tags_ -> *Array* 
