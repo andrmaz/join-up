@@ -10,7 +10,7 @@
 * Avatar (Gravatar) -> *String* 
 * Bio -> *String* --Optional 
 * Languages (Spoken) _Tags_ -> *Array* 
-* Languages (Technologies) -Tags_ -> *Array* 
+* Languages (Technologies) _Tags_ -> *Array* 
 
 ##### Login Form
 * Email -> *String* 
