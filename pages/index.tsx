@@ -1,21 +1,25 @@
 import {NextPage} from 'next'
 import Head from 'next/head'
 
+import {AuthProvider} from '../app/contexts/auth'
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Props {}
+type Props = Record<string, never>
 
 const Home: NextPage<Props> = () => {
     return (
-        <div>
-            <Head>
-                <title>Project Zone</title>
-                <link rel='icon' href='/favicon.ico' />
-            </Head>
+        <AuthProvider>
+            <div>
+                <Head>
+                    <title>Project Zone</title>
+                    <link rel='icon' href='/favicon.ico' />
+                </Head>
 
-            <main></main>
+                <main></main>
 
-            <footer></footer>
-        </div>
+                <footer></footer>
+            </div>
+        </AuthProvider>
     )
 }
 
