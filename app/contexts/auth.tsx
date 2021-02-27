@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import {createContext, useReducer} from 'react'
 import {UserContextInterface, UserState, UserActions} from '../types/user'
 
 const initialState: UserState = {
     user: null,
+    login: () => {},
+    logout: () => {},
 }
 
-const AuthContext = createContext<typeof initialState>(initialState)
+const AuthContext = createContext<UserState | null>(null)
 
 function authReducer(state: UserState, action: UserActions): UserState {
     switch (action.type) {
@@ -24,21 +27,18 @@ function authReducer(state: UserState, action: UserActions): UserState {
     }
 }
 
-// TODO: Specify a different type
 function AuthProvider(
     props: React.PropsWithChildren<Record<string, unknown>>
 ): JSX.Element {
     const [state, dispatch] = useReducer(authReducer, initialState)
 
     function login(data: UserContextInterface): void {
-        localStorage.setItem('jwtToken', data.token)
         dispatch({
             type: 'login',
             payload: data,
         })
     }
     function logout(): void {
-        localStorage.removeItem('jwtToken')
         dispatch({type: 'logout'})
     }
 
