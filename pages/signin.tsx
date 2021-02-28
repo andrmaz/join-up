@@ -3,6 +3,7 @@ import {useContext, useState} from 'react'
 import {AuthContext} from '../app/contexts/auth'
 import {useRouter} from 'next/router'
 import axios from 'axios'
+import {useCookies} from 'react-cookie'
 
 const SignIn = (): JSX.Element => {
     const [state, setState] = useState({
@@ -11,6 +12,8 @@ const SignIn = (): JSX.Element => {
     })
     const router = useRouter()
     const userContext = useContext(AuthContext)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [cookie, setCookie] = useCookies(['session'])
     const hanldeChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setState((previousState: typeof state) => {
             return {...previousState, [event.target.name]: event.target.value}
@@ -19,11 +22,17 @@ const SignIn = (): JSX.Element => {
     const handleSubmit = (event: React.SyntheticEvent): void => {
         event.preventDefault()
         axios
-            .post('http://localhost:8080/user/login', {user: state})
+            .post('/user/login', {user: state})
             .then(res => {
                 if (res.status === 200) {
-                    console.log(res)
                     userContext?.login(res.data.user)
+                    setCookie('session', JSON.stringify(res.data.token), {
+                        path: '/',
+                        maxAge: 3600, // Expires after 1hr
+                        sameSite: true,
+                        //httpOnly: true,
+                        //secure: true,
+                    })
                     router.push('/')
                 } else {
                     console.log(res.data.error)

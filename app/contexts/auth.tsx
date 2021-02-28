@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import {createContext, useReducer} from 'react'
+import React, {createContext, useReducer} from 'react'
 import {UserContextInterface, UserState, UserActions} from '../types/user'
 
 const initialState: UserState = {
