@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import {useContext, useState} from 'react'
 import {AuthContext} from '../app/contexts/auth'
 import {useRouter} from 'next/router'
@@ -14,7 +15,7 @@ const SignIn = (): JSX.Element => {
     const userContext = useContext(AuthContext)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [cookie, setCookie] = useCookies(['session'])
-    const hanldeChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setState((previousState: typeof state) => {
             return {...previousState, [event.target.name]: event.target.value}
         })
@@ -28,7 +29,8 @@ const SignIn = (): JSX.Element => {
                     userContext?.login(res.data.user)
                     setCookie('session', JSON.stringify(res.data.token), {
                         path: '/',
-                        maxAge: 3600, // Expires after 1hr
+                        // ? expiration date
+                        //maxAge: 3600, // Expires after 1hr
                         sameSite: true,
                         //httpOnly: true,
                         //secure: true,
@@ -48,16 +50,17 @@ const SignIn = (): JSX.Element => {
                 <title>SignIn</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor='email'>Email:</label>
                 <br />
                 <input
-                    type='text'
+                    type='email'
                     id='email'
                     name='email'
+                    size={30}
                     placeholder='please enter your email'
                     value={state.email}
-                    onChange={hanldeChange}
+                    onChange={handleChange}
                 />
                 <br />
                 <label htmlFor='password'>Password:</label>
@@ -66,13 +69,17 @@ const SignIn = (): JSX.Element => {
                     type='password'
                     id='password'
                     name='password'
+                    size={30}
                     placeholder='please enter your password'
                     value={state.password}
-                    onChange={hanldeChange}
+                    onChange={handleChange}
                 />
                 <br />
-                <input type='submit' value='SignIn' onClick={handleSubmit} />
+                <input type='submit' value='SignIn' />
             </form>
+            <Link href='/signup'>
+                <a>Do not have an account? SignUp</a>
+            </Link>
         </div>
     )
 }
