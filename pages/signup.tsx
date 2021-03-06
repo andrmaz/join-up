@@ -62,7 +62,7 @@ const SignUp = (): JSX.Element => {
             .then(res => {
                 if (res.status === 201) {
                     userContext?.login(res.data.user)
-                    setCookie('session', JSON.stringify(res.data.token), {
+                    setCookie('session', res.data.token, {
                         path: '/',
                         // ? expiration date
                         //maxAge: 3600, // Expires after 1hr
