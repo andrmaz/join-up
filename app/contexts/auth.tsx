@@ -1,75 +1,83 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, {createContext, useReducer} from 'react'
-import {UserContextInterface, UserState, UserActions} from '../types/user'
-import {useEffect} from 'react'
+import {createContext, useReducer, useContext, useEffect} from 'react'
+import {
+    UserContextInterface,
+    UserState,
+    UserDispatch,
+    UserActions,
+    UserProviderProps,
+} from '../types/user'
 
-const initialState: UserState = {
-    user: null,
-    login: () => {},
-    logout: () => {},
+const AuthStateContext = createContext<UserState | undefined>(undefined)
+const AuthDispatchContext = createContext<UserDispatch | undefined>(undefined)
+
+function initState(initialValue: UserContextInterface | null): UserState {
+    return {user: initialValue}
 }
-
-const AuthContext = createContext<UserState | null>(null)
 
 function authReducer(state: UserState, action: UserActions): UserState {
     switch (action.type) {
         case 'login':
             return {
-                ...state,
                 user: action.payload,
             }
         case 'logout':
             return {
-                ...state,
                 user: null,
             }
-        default:
-            return state
+        case 'persist':
+            return initState(action.payload)
+        default: {
+            throw new Error(`Unhandled type at ${action} action`)
+        }
     }
 }
 
-function AuthProvider(
-    props: React.PropsWithChildren<Record<string, unknown>>
-): JSX.Element {
-    const [state, dispatch] = useReducer<React.Reducer<UserState, UserActions>>(
-        authReducer,
-        initialState
-    )
+function AuthProvider({children}: UserProviderProps): JSX.Element {
+    const [state, dispatch] = useReducer(authReducer, null, initState)
 
     //* persist State through all the pages
     useEffect(() => {
-        const currentUser = localStorage.getItem('user')
-        //* check if session cookie is set
-        //* check if user value in localStorage is a string - TypeScript validation
-        if (document.cookie && typeof currentUser === 'string') {
-            login(JSON.parse(currentUser))
-        } else {
-            logout()
+        const userInLocalStorage = localStorage.getItem('user')
+        if (userInLocalStorage) {
+            dispatch({
+                type: 'persist',
+                payload: JSON.parse(userInLocalStorage),
+            })
         }
     }, [])
 
-    function login(data: UserContextInterface): void {
-        localStorage.setItem('user', JSON.stringify(data))
-        dispatch({
-            type: 'login',
-            payload: data,
-        })
-    }
-    function logout(): void {
-        localStorage.removeItem('user')
-        dispatch({type: 'logout'})
-    }
+    //* keep updated user state in local storage until session cookie exists
+    useEffect(() => {
+        const {user} = state
+        if (document.cookie) {
+            localStorage.setItem('user', JSON.stringify(user))
+        } else {
+            localStorage.removeItem('user')
+        }
+    }, [state])
 
     return (
-        <AuthContext.Provider
-            value={{
-                user: state.user,
-                login,
-                logout,
-            }}
-            {...props}
-        />
+        <AuthStateContext.Provider value={state}>
+            <AuthDispatchContext.Provider value={dispatch}>
+                {children}
+            </AuthDispatchContext.Provider>
+        </AuthStateContext.Provider>
     )
 }
 
-export {AuthContext, AuthProvider}
+function useAuthState(): UserState {
+    const context = useContext(AuthStateContext)
+    if (context === undefined) {
+        throw new Error('useAuthState must be used within a AuthProvider')
+    }
+    return context
+}
+function useAuthDispatch(): UserDispatch {
+    const context = useContext(AuthDispatchContext)
+    if (context === undefined) {
+        throw new Error('useAuthDispatch must be used within a AuthProvider')
+    }
+    return context
+}
+export {AuthProvider, useAuthState, useAuthDispatch}

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import {useContext, useState} from 'react'
-import {AuthContext} from '../app/contexts/auth'
+import {useState} from 'react'
+import {useAuthDispatch} from '../app/contexts/auth'
 import {useRouter} from 'next/router'
 import axios from 'axios'
 import {useCookies} from 'react-cookie'
@@ -12,7 +12,7 @@ const SignIn = (): JSX.Element => {
         password: '',
     })
     const router = useRouter()
-    const userContext = useContext(AuthContext)
+    const dispatch = useAuthDispatch()
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [cookie, setCookie] = useCookies(['session'])
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -26,7 +26,7 @@ const SignIn = (): JSX.Element => {
             .post('/user/login', {user: state})
             .then(res => {
                 if (res.status === 200) {
-                    userContext?.login(res.data.user)
+                    dispatch({type: 'login', payload: res.data.user})
                     setCookie('session', res.data.token, {
                         path: '/',
                         // ? expiration date

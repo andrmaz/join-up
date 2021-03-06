@@ -13,10 +13,13 @@ export interface UserContextInterface {
 
 export type UserState = {
     user: UserContextInterface | null
-    login: (data: UserContextInterface) => void
-    logout: () => void
 }
 
 export type UserActions =
     | {type: 'login'; payload: UserContextInterface}
     | {type: 'logout'}
+    | {type: 'persist'; payload: UserContextInterface}
+
+export type UserDispatch = (action: UserActions) => void
+
+export type UserProviderProps = {children: React.ReactNode}
