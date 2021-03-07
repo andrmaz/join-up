@@ -1,14 +1,18 @@
 /* eslint-disable jsx-a11y/no-onchange */
-import {useRef} from 'react'
+import {useState, useRef} from 'react'
+
 import Head from 'next/head'
 import Link from 'next/link'
-import {useState} from 'react'
-import {useAuthDispatch} from '../app/contexts/auth'
 import {useRouter} from 'next/router'
+import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
+
+import {useAuthDispatch} from '../app/contexts/auth'
 import axios from 'axios'
 import {useCookies} from 'react-cookie'
 
-const SignUp = (): JSX.Element => {
+const SignUp = ({
+    technologies,
+}: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
     const [state, setState] = useState({
         username: '',
         email: '',
@@ -232,28 +236,19 @@ const SignUp = (): JSX.Element => {
                     value={state.technologies}
                     onChange={handleChange}
                 >
-                    <option value='html'>HTML</option>
-                    <option value='css'>CSS</option>
-                    <option value='javascript'>JavaScript</option>
-                    <option value='python'>Python</option>
-                    <option value='php'>PHP </option>
-                    <option value='java'>Java</option>
-                    <option value='c++'>C++</option>
-                    <option value='go'>Go</option>
-                    <option value='c'>C</option>
-                    <option value='c#'>C#</option>
-                    <option value='ruby'>Ruby</option>
-                    <option value='shell'>Shell</option>
-                    <option value='swift'>Swift</option>
-                    <option value='r'>R</option>
-                    <option value='typeScript'>TypeScript</option>
-                    <option value='sql'>SQL</option>
-                    <option value='typeScript'>TypeScript</option>
-                    <option value='rust'>Rust</option>
-                    <option value='kotlin'>Kotlin</option>
-                    <option value='scala'>Scala</option>
-                    <option value='perl'>Perl</option>
-                    <option value='haskell'>Haskell</option>
+                    {technologies.map(
+                        (technology: {
+                            _id: string
+                            name: string
+                        }): JSX.Element => (
+                            <option
+                                key={technology._id}
+                                value={technology.name}
+                            >
+                                {technology.name}
+                            </option>
+                        )
+                    )}
                 </select>
                 <br />
                 <label htmlFor='bio'>Biography:</label>
@@ -281,3 +276,15 @@ const SignUp = (): JSX.Element => {
 }
 
 export default SignUp
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    const {
+        data: {technologies},
+    } = await axios.get('/technology')
+
+    return {
+        props: {
+            technologies,
+        },
+    }
+}
