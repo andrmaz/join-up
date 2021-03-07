@@ -27,7 +27,6 @@ export default Home
 export const getServerSideProps: GetServerSideProps = async (
     context: GetServerSidePropsContext<ParsedUrlQuery>
 ) => {
-    console.log('SSR')
     //* Get the user's session based on the request
     const {session: token} = parseCookies(context.req)
 
