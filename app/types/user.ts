@@ -1,4 +1,4 @@
-export interface UserContextInterface {
+interface UserContextInterface {
     username: string
     email: string
     github?: string
