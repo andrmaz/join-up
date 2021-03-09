@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import {createContext, useReducer, useContext, useEffect} from 'react'
 import {
-    UserContextInterface,
     UserState,
     UserDispatch,
     UserActions,
@@ -10,10 +9,6 @@ import {
 
 const AuthStateContext = createContext<UserState | undefined>(undefined)
 const AuthDispatchContext = createContext<UserDispatch | undefined>(undefined)
-
-function initState(initialValue: UserContextInterface | null): UserState {
-    return {user: initialValue}
-}
 
 function authReducer(state: UserState, action: UserActions): UserState {
     switch (action.type) {
@@ -26,7 +21,9 @@ function authReducer(state: UserState, action: UserActions): UserState {
                 user: null,
             }
         case 'persist':
-            return initState(action.payload)
+            return {
+                user: action.payload,
+            }
         default: {
             throw new Error(`Unhandled type at ${action} action`)
         }
@@ -34,28 +31,28 @@ function authReducer(state: UserState, action: UserActions): UserState {
 }
 
 function AuthProvider({children}: UserProviderProps): JSX.Element {
-    const [state, dispatch] = useReducer(authReducer, null, initState)
+    const [state, dispatch] = useReducer(authReducer, {user: null})
 
-    //* persist State through all the pages
+    //* create a fresh, new store instance on every request
     useEffect(() => {
-        const userInLocalStorage = localStorage.getItem('user')
+        const userInLocalStorage = window.localStorage.getItem('user')
         if (userInLocalStorage) {
             dispatch({
                 type: 'persist',
                 payload: JSON.parse(userInLocalStorage),
             })
         }
+        return () => dispatch({type: 'logout'})
     }, [])
 
-    //* keep updated user state in local storage until session cookie exists
+    //* and then pass the state along to the client until session cookie exists
     useEffect(() => {
-        const {user} = state
-        if (document.cookie) {
-            localStorage.setItem('user', JSON.stringify(user))
-        } else {
-            localStorage.removeItem('user')
+        if (!document.cookie.includes('session')) {
+            window.localStorage.removeItem('user')
+            return dispatch({type: 'logout'})
         }
-    }, [state])
+        window.localStorage.setItem('user', JSON.stringify(state.user))
+    }, [JSON.stringify(state.user)])
 
     return (
         <AuthStateContext.Provider value={state}>
