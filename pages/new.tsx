@@ -5,11 +5,11 @@ import {parseCookies} from '../app/utils/parseCookies'
 
 import Navbar from '../app/components/Navbar'
 
-const Home: NextPage = () => {
+const New: NextPage = () => {
     return (
         <div className='min-h-screen'>
             <Head>
-                <title>Home Page</title>
+                <title>New</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <Navbar />
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
     )
 }
 
-export default Home
+export default New
 
 export const getServerSideProps: GetServerSideProps = async (
     context: GetServerSidePropsContext<ParsedUrlQuery>
