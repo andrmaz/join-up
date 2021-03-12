@@ -26,7 +26,7 @@ const Navbar = (): JSX.Element => {
                 <Link href='/new'>
                     <a className='flex-initial'>+</a>
                 </Link>
-                <Link href='/' passHref>
+                <Link href='/profile' passHref>
                     <div className='flex-initial w-1/5'>
                         <img
                             className='m-auto rounded-full'
