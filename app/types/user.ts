@@ -1,3 +1,21 @@
+export type SigninInputs = {
+    email: string
+    password: string
+}
+
+export interface ISignupInputs {
+    username: string
+    email: string
+    password: string
+    confirmPassword: string
+    githubURL?: string
+    gitlabURL?: string
+    bitbucketURL?: string
+    linkedinURL?: string
+    languages: string[] | string
+    technologies: string[] | string
+    bio?: string
+}
 interface UserContextInterface {
     username: string
     email: string
@@ -6,7 +24,7 @@ interface UserContextInterface {
     bitbucket?: string
     linkndIn?: string
     avatar: string
-    bio: string
+    bio?: string
     languages: string[]
     technologies: string[]
 }
