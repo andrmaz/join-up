@@ -25,6 +25,7 @@ module.exports = {
                 '4xl': '2rem',
             },
             height: {
+                "10": "10%",
                 "8v": "8vh",
                 "92v": "92vh",
             },

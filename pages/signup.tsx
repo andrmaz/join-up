@@ -4,12 +4,11 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
-import {useAuthDispatch} from '../app/contexts/auth'
 import axios from 'axios'
 import {useCookies} from 'react-cookie'
-
 import {useForm} from 'react-hook-form'
 
+import {useAuthDispatch} from '../app/contexts/auth'
 import {ISignupInputs} from '../app/types/user'
 
 const SignUp = ({
@@ -60,9 +59,12 @@ const SignUp = ({
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <section className='h-5/6 w-4/5 border border-black rounded p-4'>
+                <header className='h-10 text-center'>
+                    <h1 className='text-3xl'>SignUp</h1>
+                </header>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className='flex flex-col h-5/6 justify-between'
+                    className='flex flex-col h-4/5 justify-between'
                 >
                     <article className='w-full h-2/4 flex'>
                         <div className='w-3/6 flex flex-col'>
@@ -277,12 +279,12 @@ const SignUp = ({
                         placeholder='Tell us your story'
                         spellCheck={true}
                         wrap='hard'
-                        className=':resize-none'
+                        className=':resize-none p-1 mb-2'
                     />
                     <input
                         type='submit'
                         value='SignUp'
-                        className='cursor-pointer bg-blue-800 text-white'
+                        className='cursor-pointer bg-blue-800 text-white rounded'
                         disabled={Boolean(
                             errors.username ||
                                 errors.email ||
@@ -293,7 +295,7 @@ const SignUp = ({
                         )}
                     />
                 </form>
-                <aside className='h-1/6 pt-20'>
+                <aside className='h-10 pt-10'>
                     <Link href='/signin'>
                         <a>Already have an account? SignIn</a>
                     </Link>
