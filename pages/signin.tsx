@@ -1,28 +1,30 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import {useAuthDispatch} from '../app/contexts/auth'
 import {useRouter} from 'next/router'
+
 import axios from 'axios'
 import {useCookies} from 'react-cookie'
 import {useForm} from 'react-hook-form'
 
+import {useAuthDispatch} from '../app/contexts/auth'
 import {SigninInputs} from '../app/types/user'
 
 const SignIn = (): JSX.Element => {
-    const {register, handleSubmit, errors} = useForm<SigninInputs>()
-
+    const {register, handleSubmit, errors} = useForm<SigninInputs>({
+        mode: 'onSubmit',
+        reValidateMode: 'onChange',
+        defaultValues: {},
+        resolver: undefined,
+        context: undefined,
+        criteriaMode: 'firstError',
+        shouldFocusError: true,
+        shouldUnregister: true,
+    })
     const router = useRouter()
     const dispatch = useAuthDispatch()
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [cookie, setCookie] = useCookies(['session'])
-    /* const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setState((previousState: typeof state) => {
-            return {...previousState, [event.target.name]: event.target.value}
-        })
-    } */
     const onSubmit = (data: SigninInputs): void => {
-        //event.preventDefault()
-        console.dir(data)
         axios
             .post('/user/login', {user: data})
             .then(res => {
@@ -51,10 +53,13 @@ const SignIn = (): JSX.Element => {
                 <title>SignIn</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
-            <section className='h-2/6 w-3/5 border border-black rounded p-12'>
+            <section className='h-2/5 w-3/6 border border-black rounded py-4 px-24'>
+                <header className='h-1/6 text-center'>
+                    <h1 className='text-3xl'>SignIn</h1>
+                </header>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className='h-4/5 flex flex-col justify-between'
+                    className='h-4/6 flex flex-col justify-between'
                 >
                     <label htmlFor='email'>Email:</label>
                     <input
@@ -102,10 +107,10 @@ const SignIn = (): JSX.Element => {
                         disabled={Boolean(errors.email || errors.password)}
                         type='submit'
                         value='SignIn'
-                        className='cursor-pointer bg-blue-800 text-white'
+                        className='cursor-pointer bg-blue-800 text-white rounded'
                     />
                 </form>
-                <div className='h-1/5 pt-5'>
+                <div className='h-1/6	 pt-5'>
                     <Link href='/signup'>
                         <a>Do not have an account? SignUp</a>
                     </Link>
