@@ -19,10 +19,10 @@ export interface ISignupInputs {
 interface UserContextInterface {
     username: string
     email: string
-    github?: string
-    gitlab?: string
-    bitbucket?: string
-    linkndIn?: string
+    githubURL?: string
+    gitlabURL?: string
+    bitbucketURL?: string
+    linkedinURL?: string
     avatar: string
     bio?: string
     languages: string[]
