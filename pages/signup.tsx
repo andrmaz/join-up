@@ -88,7 +88,7 @@ const SignUp = ({
                                             'username must be at most 20 characters long',
                                     },
                                 })}
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2'
+                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
                             />
                             {errors.username && (
                                 <div role='alert' className='text-red-500'>
@@ -110,7 +110,7 @@ const SignUp = ({
                                             'please enter a valid email address',
                                     },
                                 })}
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2'
+                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
                             />
                             {errors.email && (
                                 <div role='alert' className='text-red-500'>
@@ -132,7 +132,7 @@ const SignUp = ({
                                             'please enter a valid password',
                                     },
                                 })}
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2'
+                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
                             />
                             {errors.password && (
                                 <div role='alert' className='text-red-500'>
@@ -154,7 +154,7 @@ const SignUp = ({
                                         value === watchPassword ||
                                         'passwords must match',
                                 })}
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2'
+                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
                             />
                             {errors.confirmPassword && (
                                 <div role='alert' className='text-red-500'>
@@ -170,7 +170,7 @@ const SignUp = ({
                                 name='githubURL'
                                 size={30}
                                 placeholder='your GitHub username here'
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2'
+                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
                             />
                             <label htmlFor='gitlabURL'>GitLab:</label>
                             <input
@@ -179,7 +179,7 @@ const SignUp = ({
                                 name='gitlabURL'
                                 size={30}
                                 placeholder='your GitLab username here'
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2'
+                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
                             />
                             <label htmlFor='bitbucketURL'>BitBucket:</label>
                             <input
@@ -188,7 +188,7 @@ const SignUp = ({
                                 name='bitbucketURL'
                                 size={30}
                                 placeholder='your BitBucket username here'
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2'
+                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
                             />
                             <label htmlFor='linkedinURL'>LinkedIn:</label>
                             <input
@@ -197,7 +197,7 @@ const SignUp = ({
                                 name='linkedinURL'
                                 size={30}
                                 placeholder='your LinkedIn username here'
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2'
+                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
                             />
                         </div>
                     </article>
@@ -215,6 +215,7 @@ const SignUp = ({
                                     required:
                                         'please select at least one language',
                                 })}
+                                className='border-2 border-black rounded'
                             >
                                 <option value='english'>English</option>
                                 <option value='spanish'>Spanish</option>
@@ -247,6 +248,7 @@ const SignUp = ({
                                     required:
                                         'please select at least one technology',
                                 })}
+                                className='border-2 border-black rounded'
                             >
                                 {technologies.map(
                                     (technology: {
@@ -269,7 +271,9 @@ const SignUp = ({
                             )}
                         </div>
                     </article>
-                    <label htmlFor='bio'>Biography:</label>
+                    <label htmlFor='bio' className='mt-2'>
+                        Biography:
+                    </label>
                     <textarea
                         id='bio'
                         name='bio'
@@ -279,7 +283,7 @@ const SignUp = ({
                         placeholder='Tell us your story'
                         spellCheck={true}
                         wrap='hard'
-                        className=':resize-none p-1 mb-2'
+                        className=':resize-none p-1 mb-2 border-2'
                     />
                     <input
                         type='submit'
@@ -295,7 +299,7 @@ const SignUp = ({
                         )}
                     />
                 </form>
-                <aside className='h-10 pt-10'>
+                <aside className='h-10 pt-10 text-center'>
                     <Link href='/signin'>
                         <a>Already have an account ? SignIn</a>
                     </Link>
