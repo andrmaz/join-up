@@ -297,7 +297,7 @@ const SignUp = ({
                 </form>
                 <aside className='h-10 pt-10'>
                     <Link href='/signin'>
-                        <a>Already have an account? SignIn</a>
+                        <a>Already have an account ? SignIn</a>
                     </Link>
                 </aside>
             </section>
