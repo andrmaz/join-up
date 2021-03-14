@@ -53,7 +53,7 @@ const SignIn = (): JSX.Element => {
                 <title>SignIn</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
-            <section className='h-2/5 w-3/6 border border-black rounded py-4 px-24'>
+            <section className='h-2/5 w-3/5 border border-black rounded py-4 px-16'>
                 <header className='h-1/6 text-center'>
                     <h1 className='text-3xl'>SignIn</h1>
                 </header>
@@ -75,7 +75,7 @@ const SignIn = (): JSX.Element => {
                                 message: 'please enter a valid email address',
                             },
                         })}
-                        className='focus:outline-none focus:ring focus:border-blue-300'
+                        className='focus:outline-none focus:ring focus:border-blue-300 border-2 border-black p-1 rounded'
                     />
                     {errors.email && (
                         <div role='alert' className='text-red-500'>
@@ -96,7 +96,7 @@ const SignIn = (): JSX.Element => {
                                 message: 'please enter a valid password',
                             },
                         })}
-                        className='focus:outline-none focus:ring focus:border-blue-300'
+                        className='focus:outline-none focus:ring focus:border-blue-300 border-2 border-black p-1 rounded'
                     />
                     {errors.password && (
                         <div role='alert' className='text-red-500'>
@@ -110,10 +110,11 @@ const SignIn = (): JSX.Element => {
                         className='cursor-pointer bg-blue-800 text-white rounded'
                     />
                 </form>
-                <div className='h-1/6	 pt-5'>
+                <div className='inline-flex justify-between w-full h-1/6 pt-5'>
                     <Link href='/signup'>
                         <a>Do not have an account? SignUp</a>
                     </Link>
+                    <span className='text-right'>Forgot your password?</span>
                 </div>
             </section>
         </div>
