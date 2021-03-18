@@ -16,7 +16,7 @@ export interface ISignupInputs {
     technologies: string[] | string
     bio?: string
 }
-interface UserContextInterface {
+interface IUserContext {
     username: string
     email: string
     githubURL?: string
@@ -30,13 +30,14 @@ interface UserContextInterface {
 }
 
 export type UserState = {
-    user: UserContextInterface | null
+    user: IUserContext | null
 }
 
 export type UserActions =
-    | {type: 'login'; payload: UserContextInterface}
+    | {type: 'login'; payload: IUserContext}
     | {type: 'logout'}
-    | {type: 'persist'; payload: UserContextInterface}
+    | {type: 'persist'; payload: IUserContext}
+    | {type: 'edit'; payload: IUserContext}
 
 export type UserDispatch = (action: UserActions) => void
 

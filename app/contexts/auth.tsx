@@ -24,6 +24,11 @@ function authReducer(state: UserState, action: UserActions): UserState {
             return {
                 user: action.payload,
             }
+        case 'edit':
+            return {
+                ...state,
+                user: action.payload,
+            }
         default: {
             throw new Error(`Unhandled type at ${action} action`)
         }
@@ -47,11 +52,12 @@ function AuthProvider({children}: UserProviderProps): JSX.Element {
 
     //* and then pass the state along to the client until session cookie exists
     useEffect(() => {
-        if (!document.cookie.includes('session')) {
+        if (document.cookie.includes('session')) {
+            window.localStorage.setItem('user', JSON.stringify(state.user))
+        } else {
             window.localStorage.removeItem('user')
-            return dispatch({type: 'logout'})
+            dispatch({type: 'logout'})
         }
-        window.localStorage.setItem('user', JSON.stringify(state.user))
     }, [JSON.stringify(state.user)])
 
     return (
