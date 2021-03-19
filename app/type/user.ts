@@ -36,8 +36,6 @@ export type UserState = {
 export type UserActions =
     | {type: 'login'; payload: IUserContext}
     | {type: 'logout'}
-    | {type: 'persist'; payload: IUserContext}
-    | {type: 'edit'; payload: IUserContext}
 
 export type UserDispatch = (action: UserActions) => void
 
