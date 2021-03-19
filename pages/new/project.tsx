@@ -7,18 +7,18 @@ import {
 import Head from 'next/head'
 import {useRouter} from 'next/router'
 import {ParsedUrlQuery} from 'querystring'
-import {parseCookies} from '../app/utils/parseCookies'
+import {parseCookies} from '../../app/utils/parseCookies'
 
 import axios from 'axios'
 
 import {useForm} from 'react-hook-form'
 
-import Navbar from '../app/components/Navbar'
-import {useAuthState} from '../app/contexts/auth'
+import Navbar from '../../app/component/Navbar'
+import {useAuthState} from '../../app/hook/useAuthState'
 
-import {INewProject} from '../app/types/project'
+import {INewProject} from '../../app/type/project'
 
-const New: NextPage = ({
+const Project: NextPage = ({
     technologies,
     token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -106,6 +106,7 @@ const New: NextPage = ({
                                 ref={register({
                                     required: 'project name is required',
                                 })}
+                                className='border-gray-400 border-2 rounded p-1'
                             />
                             {errors.name && (
                                 <div role='alert' className='text-red-500'>
@@ -123,6 +124,7 @@ const New: NextPage = ({
                                 name='description'
                                 placeholder='a brief description will help us others find your project'
                                 ref={register}
+                                className='border-gray-400 border-2 rounded p-1'
                             />
                         </div>
                         <div className='h-1/6 flex flex-col mb-6'>
@@ -138,6 +140,7 @@ const New: NextPage = ({
                                     required:
                                         'please select at least one technology',
                                 })}
+                                className='border-gray-400 border-2 rounded p-1'
                             >
                                 {technologies.map(
                                     (technology: {
@@ -160,17 +163,18 @@ const New: NextPage = ({
                             )}
                         </div>
                         <div className='h-1/6 flex flex-col'>
-                            <label htmlFor='url'>Url: (optional)</label>
+                            <label htmlFor='projectURL'>Url: (optional)</label>
                             <input
-                                id='url'
-                                name='url'
+                                id='projectURL'
+                                name='projectURL'
                                 type='url'
                                 pattern='https://.*'
                                 placeholder='connect this to an existing project'
                                 ref={register}
+                                className='border-gray-400 border-2 rounded p-1'
                             />
                         </div>
-                        <div className='h-1/6 flex flex-col'>
+                        <div className='h-1/6 flex flex-col pt-6'>
                             <input
                                 type='submit'
                                 value='Create Project'
@@ -184,7 +188,7 @@ const New: NextPage = ({
     )
 }
 
-export default New
+export default Project
 
 export const getServerSideProps: GetServerSideProps = async (
     context: GetServerSidePropsContext<ParsedUrlQuery>
@@ -197,7 +201,7 @@ export const getServerSideProps: GetServerSideProps = async (
         return {
             props: {},
             redirect: {
-                destination: '/signin',
+                destination: '/user/signin',
                 permanent: false,
             },
         }

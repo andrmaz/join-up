@@ -8,8 +8,8 @@ import axios from 'axios'
 import {useCookies} from 'react-cookie'
 import {useForm} from 'react-hook-form'
 
-import {useAuthDispatch} from '../app/contexts/auth'
-import {ISignupInputs} from '../app/types/user'
+import {useAuthDispatch} from '../../app/hook/useAuthDispatch'
+import {ISignupInputs} from '../../app/type/user'
 
 const SignUp = ({
     technologies,
@@ -27,8 +27,7 @@ const SignUp = ({
     const watchPassword = watch('password')
     const router = useRouter()
     const dispatch = useAuthDispatch()
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [cookie, setCookie] = useCookies(['session'])
+    const [, setCookie] = useCookies(['session'])
     const onSubmit = (data: ISignupInputs): void => {
         axios
             .post('/user/register', {user: data})
@@ -300,7 +299,7 @@ const SignUp = ({
                     />
                 </form>
                 <aside className='h-10 pt-10 text-center'>
-                    <Link href='/signin'>
+                    <Link href='/user/signin'>
                         <a>Already have an account ? SignIn</a>
                     </Link>
                 </aside>

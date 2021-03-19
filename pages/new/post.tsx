@@ -1,15 +1,15 @@
 import {NextPage, GetServerSideProps, GetServerSidePropsContext} from 'next'
 import Head from 'next/head'
 import {ParsedUrlQuery} from 'querystring'
-import {parseCookies} from '../app/utils/parseCookies'
+import {parseCookies} from '../../app/utils/parseCookies'
 
-import Navbar from '../app/components/Navbar'
+import Navbar from '../../app/component/Navbar'
 
-const Collabs: NextPage = () => {
+const Post: NextPage = () => {
     return (
         <div className='min-h-screen'>
             <Head>
-                <title>Collaborators</title>
+                <title>Post</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <Navbar />
@@ -17,7 +17,7 @@ const Collabs: NextPage = () => {
     )
 }
 
-export default Collabs
+export default Post
 
 export const getServerSideProps: GetServerSideProps = async (
     context: GetServerSidePropsContext<ParsedUrlQuery>
@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (
         return {
             props: {},
             redirect: {
-                destination: '/signin',
+                destination: '/user/signin',
                 permanent: false,
             },
         }

@@ -3,7 +3,7 @@ import Head from 'next/head'
 import {ParsedUrlQuery} from 'querystring'
 import {parseCookies} from '../app/utils/parseCookies'
 
-import Navbar from '../app/components/Navbar'
+import Navbar from '../app/component/Navbar'
 
 const Home: NextPage = () => {
     return (
@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (
         return {
             props: {},
             redirect: {
-                destination: '/signin',
+                destination: '/user/signin',
                 permanent: false,
             },
         }
