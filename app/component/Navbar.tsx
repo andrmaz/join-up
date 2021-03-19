@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import {useAuthState} from '../contexts/auth'
+import {useAuthState} from '../hook/useAuthState'
 
 const Navbar = (): JSX.Element => {
     const {user} = useAuthState()
@@ -10,24 +10,19 @@ const Navbar = (): JSX.Element => {
                 <Link href='/'>
                     <a className='flex-initial'>Logo</a>
                 </Link>
-                <Link href='/projects'>
+                <Link href='/list/projects'>
                     <a className='flex-initial'>Projects</a>
                 </Link>
-                <Link href='/collabs'>
+                <Link href='/list/collabs'>
                     <a className='flex-initial'>Collaborators</a>
                 </Link>
             </div>
             <div className='inline-flex justify-around items-center w-2/12 h-full'>
-                <Link href='/post' passHref>
-                    <span role='img' aria-label='job' className='flex-initial'>
-                        👜
-                    </span>
-                </Link>
-                <Link href='/new'>
+                <Link href='/new/project'>
                     <a className='flex-initial'>+</a>
                 </Link>
-                <Link href='/profile' passHref>
-                    <div className='flex-initial w-1/5'>
+                <Link href='/user/profile' passHref>
+                    <div className='flex-initial w-1/6'>
                         <img
                             className='m-auto rounded-full'
                             src={user?.avatar}

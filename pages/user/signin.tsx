@@ -6,8 +6,8 @@ import axios from 'axios'
 import {useCookies} from 'react-cookie'
 import {useForm} from 'react-hook-form'
 
-import {useAuthDispatch} from '../app/contexts/auth'
-import {SigninInputs} from '../app/types/user'
+import {useAuthDispatch} from '../../app/hook/useAuthDispatch'
+import {SigninInputs} from '../../app/type/user'
 
 const SignIn = (): JSX.Element => {
     const {register, handleSubmit, errors} = useForm<SigninInputs>({
@@ -22,8 +22,7 @@ const SignIn = (): JSX.Element => {
     })
     const router = useRouter()
     const dispatch = useAuthDispatch()
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [cookie, setCookie] = useCookies(['session'])
+    const [, setCookie] = useCookies(['session'])
     const onSubmit = (data: SigninInputs): void => {
         axios
             .post('/user/login', {user: data})
@@ -53,7 +52,7 @@ const SignIn = (): JSX.Element => {
                 <title>SignIn</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
-            <section className='h-2/5 w-3/5 border border-black rounded py-4 px-16'>
+            <section className='h-2/5 w-3/6 border border-black rounded py-4 px-16'>
                 <header className='h-1/6 text-center'>
                     <h1 className='text-3xl'>SignIn</h1>
                 </header>
@@ -111,7 +110,7 @@ const SignIn = (): JSX.Element => {
                     />
                 </form>
                 <div className='inline-flex justify-between w-full h-1/6 pt-5'>
-                    <Link href='/signup'>
+                    <Link href='/user/signup'>
                         <a>Do not have an account? SignUp</a>
                     </Link>
                     <span className='text-right'>Forgot your password?</span>

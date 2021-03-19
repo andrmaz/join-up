@@ -8,22 +8,12 @@ import Head from 'next/head'
 
 import {ParsedUrlQuery} from 'querystring'
 
-import {parseCookies} from '../app/utils/parseCookies'
+import {parseCookies} from '../../app/utils/parseCookies'
 import axios from 'axios'
 
-import Navbar from '../app/components/Navbar'
+import Navbar from '../../app/component/Navbar'
 
-interface IProject {
-    _id: string
-    updatedAt: string
-    technologies: string[]
-    sortName: string
-    projectURL: string
-    name: string
-    description: string
-    createdAt: string
-    collaborators: Array<string>
-}
+import {IProject} from '../../app/type/project'
 
 const Projects: NextPage = ({
     projects,
@@ -112,7 +102,7 @@ export const getServerSideProps: GetServerSideProps = async (
         return {
             props: {},
             redirect: {
-                destination: '/signin',
+                destination: '/user/signin',
                 permanent: false,
             },
         }

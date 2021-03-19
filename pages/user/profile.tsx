@@ -5,16 +5,17 @@ import {
     InferGetServerSidePropsType,
 } from 'next'
 import Head from 'next/head'
-import {ParsedUrlQuery} from 'querystring'
-import {parseCookies} from '../app/utils/parseCookies'
 
-import {useAuthState} from '../app/contexts/auth'
+import {ParsedUrlQuery} from 'querystring'
+import {parseCookies} from '../../app/utils/parseCookies'
+
+import {useAuthState} from '../../app/hook/useAuthState'
 
 import axios from 'axios'
 
-import Navbar from '../app/components/Navbar'
+import Navbar from '../../app/component/Navbar'
 
-import {IProject} from '../app/types/project'
+import {IProject} from '../../app/type/project'
 
 const Profile: NextPage = ({
     projects,
@@ -44,7 +45,7 @@ const Profile: NextPage = ({
                     <section className='h-4/5 p-4'>
                         <div className='h-3/6'>
                             <img
-                                className='w-80 rounded-full'
+                                className='w-4/5 rounded-full'
                                 src={avatar}
                                 alt='profile'
                             />
@@ -148,7 +149,7 @@ export const getServerSideProps: GetServerSideProps = async (
         return {
             props: {},
             redirect: {
-                destination: '/signin',
+                destination: '/user/signin',
                 permanent: false,
             },
         }
