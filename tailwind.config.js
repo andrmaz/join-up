@@ -31,6 +31,9 @@ module.exports = {
             },
             width: {
                 "200": "200%",
+            },
+            inset: {
+                "18": "4.5rem",
             }
         },
         screens: {
