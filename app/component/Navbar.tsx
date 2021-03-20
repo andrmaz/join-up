@@ -2,6 +2,10 @@ import Link from 'next/link'
 
 import {useAuthState} from '../hook/useAuthState'
 
+import {Dropdown} from './Dropdown'
+
+import {dropDownProjectList, dropDownUserList} from '../data/dropDownLists'
+
 const Navbar = (): JSX.Element => {
     const {user} = useAuthState()
     return (
@@ -18,18 +22,22 @@ const Navbar = (): JSX.Element => {
                 </Link>
             </div>
             <div className='inline-flex justify-around items-center w-2/12 h-full'>
-                <Link href='/new/project'>
-                    <a className='flex-initial'>+</a>
-                </Link>
-                <Link href='/user/profile' passHref>
-                    <div className='flex-initial w-1/6'>
+                <Dropdown
+                    component={<div>+</div>}
+                    rightPosition={32}
+                    itemList={dropDownProjectList}
+                />
+                <Dropdown
+                    component={
                         <img
                             className='m-auto rounded-full'
                             src={user?.avatar}
                             alt='Profile'
                         />
-                    </div>
-                </Link>
+                    }
+                    rightPosition={8}
+                    itemList={dropDownUserList}
+                />
             </div>
         </nav>
     )
