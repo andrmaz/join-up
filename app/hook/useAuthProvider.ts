@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import {useAuthReducer} from './useAuthReducer'
+import {login} from '../store/action/authActions'
 
 export function useAuthProvider(): ReadonlyArray<any> {
     const [state, dispatch, updateLocalStorage] = useAuthReducer()
@@ -9,9 +10,9 @@ export function useAuthProvider(): ReadonlyArray<any> {
     React.useEffect(() => {
         //* You now have access to `window`
         const userInLocalStorage = window.localStorage.getItem('user')
-        userInLocalStorage &&
-            dispatch({type: 'login', payload: JSON.parse(userInLocalStorage)})
+        userInLocalStorage && login(dispatch, JSON.parse(userInLocalStorage))
         //* dispatch can be ignored since it comes from a reducer
+        //* dispatch must be ignored to ensure the effect will be called
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
