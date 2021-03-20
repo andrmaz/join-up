@@ -9,6 +9,7 @@ export function useAuthReducer(): ReadonlyArray<any> {
         document.cookie.includes('session')
             ? window.localStorage.setItem('user', JSON.stringify(user))
             : window.localStorage.removeItem('user')
+        //? pass a stringify user to the dependencies list
     }, [user])
     return [state, dispatch, updateLocalStorage] as const
 }
