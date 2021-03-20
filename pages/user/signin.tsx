@@ -7,6 +7,7 @@ import {useCookies} from 'react-cookie'
 import {useForm} from 'react-hook-form'
 
 import {useAuthDispatch} from '../../app/hook/useAuthDispatch'
+import {login} from '../../app/store/action/authActions'
 import {SigninInputs} from '../../app/type/user'
 
 const SignIn = (): JSX.Element => {
@@ -28,7 +29,7 @@ const SignIn = (): JSX.Element => {
             .post('/user/login', {user: data})
             .then(res => {
                 if (res.status === 200) {
-                    dispatch({type: 'login', payload: res.data.user})
+                    login(dispatch, res.data.user)
                     setCookie('session', res.data.token, {
                         path: '/',
                         // ? expiration date

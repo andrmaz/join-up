@@ -16,7 +16,7 @@ export interface ISignupInputs {
     technologies: string[] | string
     bio?: string
 }
-interface IUserContext {
+export interface IUserContext {
     username: string
     email: string
     githubURL?: string
