@@ -10,13 +10,13 @@ import {ParsedUrlQuery} from 'querystring'
 import {parseCookies} from '../../app/utils/parseCookies'
 
 import axios from 'axios'
-
-import {useForm} from 'react-hook-form'
+import Select from 'react-select'
+import {useForm, Controller} from 'react-hook-form'
 
 import Navbar from '../../app/component/Navbar'
 import {useAuthState} from '../../app/hook/useAuthState'
 
-import {INewProject} from '../../app/type/project'
+import {IProjectInput} from '../../app/type/project'
 
 const Project: NextPage = ({
     technologies,
@@ -24,7 +24,13 @@ const Project: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const {user} = useAuthState()
     const {avatar, username} = {...user}
-    const {register, handleSubmit, errors} = useForm<INewProject>({
+    const {
+        register,
+        handleSubmit,
+        errors,
+        control,
+        setValue,
+    } = useForm<IProjectInput>({
         mode: 'onChange',
         reValidateMode: 'onChange',
         defaultValues: {},
@@ -35,9 +41,9 @@ const Project: NextPage = ({
         shouldUnregister: true,
     })
     const router = useRouter()
-    const onSubmit = (data: INewProject): void => {
-        axios
-            .post(
+    const onSubmit = async (data: IProjectInput): Promise<any> => {
+        try {
+            const response = await axios.post(
                 '/project',
                 {
                     project: data,
@@ -48,13 +54,11 @@ const Project: NextPage = ({
                     },
                 }
             )
-            .then(function (response) {
-                console.log(response)
-                router.push('/')
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
+            router.push('/')
+            return response
+        } catch (error) {
+            Promise.reject(error)
+        }
     }
     return (
         <div className='min-h-screen'>
@@ -102,7 +106,7 @@ const Project: NextPage = ({
                                 type='text'
                                 id='name'
                                 name='name'
-                                placeholder='choose a unique name for your project'
+                                placeholder='Give a unique and memorable name to your project'
                                 ref={register({
                                     required: 'project name is required',
                                 })}
@@ -122,40 +126,54 @@ const Project: NextPage = ({
                                 type='text'
                                 id='description'
                                 name='description'
-                                placeholder='a brief description will help us others find your project'
+                                placeholder='Consider providing a short description'
                                 ref={register}
                                 className='border-gray-400 border-2 rounded p-1'
                             />
                         </div>
                         <div className='h-1/6 flex flex-col mb-6'>
-                            <label htmlFor='technologies'>
-                                Technologies (use ctrl key):
+                            <label id='technologies' htmlFor='technologies'>
+                                Technologies :
                             </label>
-                            <select
-                                id='technologies'
+                            <Controller
                                 name='technologies'
-                                multiple={true}
-                                size={4}
-                                ref={register({
-                                    required:
-                                        'please select at least one technology',
-                                })}
-                                className='border-gray-400 border-2 rounded p-1'
-                            >
-                                {technologies.map(
-                                    (technology: {
-                                        _id: string
-                                        name: string
-                                    }): JSX.Element => (
-                                        <option
-                                            key={technology._id}
-                                            value={technology.name}
-                                        >
-                                            {technology.name}
-                                        </option>
-                                    )
+                                control={control}
+                                defaultValue=''
+                                rules={{
+                                    required: {
+                                        value: true,
+                                        message:
+                                            'Please select at least one technology',
+                                    },
+                                }}
+                                render={({value, onBlur}) => (
+                                    <Select
+                                        id='searchTechnologies'
+                                        inputId='technologies'
+                                        name='technologies'
+                                        aria-labelledby='technologies'
+                                        defaultValue={value}
+                                        closeMenuOnSelect={false}
+                                        isMulti
+                                        options={technologies}
+                                        placeholder='Choose your tech stack'
+                                        blurInputOnSelect={false}
+                                        onBlur={onBlur}
+                                        onChange={values => {
+                                            setValue(
+                                                'technologies',
+                                                values.map(
+                                                    value => value.label
+                                                ),
+                                                {
+                                                    shouldValidate: true,
+                                                    shouldDirty: true,
+                                                }
+                                            )
+                                        }}
+                                    />
                                 )}
-                            </select>
+                            />
                             {errors.technologies && (
                                 <div role='alert' className='text-red-500'>
                                     {errors.technologies.message}
@@ -169,7 +187,7 @@ const Project: NextPage = ({
                                 name='projectURL'
                                 type='url'
                                 pattern='https://.*'
-                                placeholder='connect this to an existing project'
+                                placeholder='Connect this project to an existing one'
                                 ref={register}
                                 className='border-gray-400 border-2 rounded p-1'
                             />
@@ -207,11 +225,11 @@ export const getServerSideProps: GetServerSideProps = async (
         }
     }
 
+    //* If there is a user, return the technologies
     const {
         data: {technologies},
     } = await axios.get('/technology')
 
-    //* If there is a user, return the technologies
     return {
         props: {
             technologies,

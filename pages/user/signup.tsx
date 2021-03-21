@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-onchange */
 import Head from 'next/head'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
@@ -6,16 +5,26 @@ import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
 import axios from 'axios'
 import {useCookies} from 'react-cookie'
-import {useForm} from 'react-hook-form'
+import Select from 'react-select'
+import {useForm, Controller} from 'react-hook-form'
 
 import {useAuthDispatch} from '../../app/hook/useAuthDispatch'
 import {login} from '../../app/store/action/authActions'
 import {ISignupInputs} from '../../app/type/user'
 
+import {languages} from '../../app/data/languagesOptions'
+
 const SignUp = ({
     technologies,
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
-    const {register, handleSubmit, watch, errors} = useForm<ISignupInputs>({
+    const {
+        register,
+        handleSubmit,
+        watch,
+        errors,
+        control,
+        setValue,
+    } = useForm<ISignupInputs>({
         mode: 'onSubmit',
         reValidateMode: 'onChange',
         defaultValues: {},
@@ -148,7 +157,6 @@ const SignUp = ({
                                 name='confirmPassword'
                                 size={30}
                                 placeholder='please confirm your password'
-                                /* pattern={`^${inputEl?.current?.value}$`} */
                                 ref={register({
                                     validate: value =>
                                         value === watchPassword ||
@@ -203,32 +211,48 @@ const SignUp = ({
                     </article>
                     <article className='h-1/4 w-full flex mb-4'>
                         <div className='w-3/6 flex flex-col m-auto p-2'>
-                            <label htmlFor='languages'>
-                                Languages (use ctrl key):
+                            <label id='languages' htmlFor='languages'>
+                                Languages :
                             </label>
-                            <select
-                                id='languages'
+                            <Controller
                                 name='languages'
-                                multiple={true}
-                                size={6}
-                                ref={register({
-                                    required:
-                                        'please select at least one language',
-                                })}
-                                className='border-2 border-black rounded'
-                            >
-                                <option value='english'>English</option>
-                                <option value='spanish'>Spanish</option>
-                                <option value='french'>French</option>
-                                <option value='italian'>Italian</option>
-                                <option value='mandarin'>Mandarin</option>
-                                <option value='hindi'>Hindi</option>
-                                <option value='arabic'>Arabic</option>
-                                <option value='bengali'>Bengali</option>
-                                <option value='russian'>Russian</option>
-                                <option value='portuguese'>Portuguese</option>
-                                <option value='indonesian'>Indonesian</option>
-                            </select>
+                                control={control}
+                                defaultValue=''
+                                rules={{
+                                    required: {
+                                        value: true,
+                                        message:
+                                            'Please select at least one language',
+                                    },
+                                }}
+                                render={({value, onBlur}) => (
+                                    <Select
+                                        id='selectLanguages'
+                                        inputId='languages'
+                                        name='languages'
+                                        aria-labelledby='languages'
+                                        defaultValue={value}
+                                        closeMenuOnSelect={false}
+                                        isMulti
+                                        options={languages}
+                                        placeholder='Select your language'
+                                        blurInputOnSelect={false}
+                                        onBlur={onBlur}
+                                        onChange={values => {
+                                            setValue(
+                                                'languages',
+                                                values.map(
+                                                    value => value.label
+                                                ),
+                                                {
+                                                    shouldValidate: true,
+                                                    shouldDirty: true,
+                                                }
+                                            )
+                                        }}
+                                    />
+                                )}
+                            />
                             {errors.languages && (
                                 <div role='alert' className='text-red-500'>
                                     {errors.languages.message}
@@ -236,34 +260,48 @@ const SignUp = ({
                             )}
                         </div>
                         <div className='w-3/6 flex flex-col m-auto p-2'>
-                            <label htmlFor='technologies'>
-                                Technologies (use ctrl key):
+                            <label id='technologies' htmlFor='technologies'>
+                                Technologies :
                             </label>
-                            <select
-                                id='technologies'
+                            <Controller
                                 name='technologies'
-                                multiple={true}
-                                size={6}
-                                ref={register({
-                                    required:
-                                        'please select at least one technology',
-                                })}
-                                className='border-2 border-black rounded'
-                            >
-                                {technologies.map(
-                                    (technology: {
-                                        _id: string
-                                        name: string
-                                    }): JSX.Element => (
-                                        <option
-                                            key={technology._id}
-                                            value={technology.name}
-                                        >
-                                            {technology.name}
-                                        </option>
-                                    )
+                                control={control}
+                                defaultValue=''
+                                rules={{
+                                    required: {
+                                        value: true,
+                                        message:
+                                            'Please select at least one technology',
+                                    },
+                                }}
+                                render={({value, onBlur}) => (
+                                    <Select
+                                        id='searchTechnologies'
+                                        inputId='technologies'
+                                        name='technologies'
+                                        aria-labelledby='technologies'
+                                        defaultValue={value}
+                                        closeMenuOnSelect={false}
+                                        isMulti
+                                        options={technologies}
+                                        placeholder='Choose your tech stack'
+                                        blurInputOnSelect={false}
+                                        onBlur={onBlur}
+                                        onChange={values => {
+                                            setValue(
+                                                'technologies',
+                                                values.map(
+                                                    value => value.label
+                                                ),
+                                                {
+                                                    shouldValidate: true,
+                                                    shouldDirty: true,
+                                                }
+                                            )
+                                        }}
+                                    />
                                 )}
-                            </select>
+                            />
                             {errors.technologies && (
                                 <div role='alert' className='text-red-500'>
                                     {errors.technologies.message}

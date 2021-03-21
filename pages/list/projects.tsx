@@ -27,7 +27,7 @@ const Projects: NextPage = ({
             <Navbar />
             <main className='h-92v py-10 px-28'>
                 <section className='w-full h-auto'>
-                    <div className='grid grid-flow-col grid-cols-3 grid-rows-3 gap-4 py-2 px-1'>
+                    <div className='grid grid-cols-3 grid-rows-3 gap-4 py-2 px-1'>
                         {projects.map((project: IProject) => {
                             const {
                                 _id,
@@ -66,14 +66,14 @@ const Projects: NextPage = ({
                                                             1 ? (
                                                         <span
                                                             key={technology}
-                                                            className='text-xs'
+                                                            className='text-xs text-red-500'
                                                         >
                                                             {technology}
                                                         </span>
                                                     ) : (
                                                         <span
                                                             key={technology}
-                                                            className='text-xs'
+                                                            className='text-xs text-red-500'
                                                         >{`${technology}, `}</span>
                                                     )
                                                 })}
