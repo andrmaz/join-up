@@ -1,4 +1,4 @@
-export interface INewProject {
+export interface IProjectInput {
     //? pass project owner for future use cases
     owner: string
     name: string
