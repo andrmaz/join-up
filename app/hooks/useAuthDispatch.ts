@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import {AuthDispatchContext} from '../store/context/authContext'
-import {UserDispatch} from '../type/user'
+import {AuthDispatchContext} from '@context/authContext'
+import type {UserDispatch} from 'app/types/user'
 
 export function useAuthDispatch(): UserDispatch {
     const context = React.useContext(AuthDispatchContext)

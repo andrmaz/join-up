@@ -4,6 +4,6 @@ export const dropDownProjectList = [
 ]
 
 export const dropDownUserList = [
-    {href: '/user/profile', content: 'Profile'},
-    {href: '/user/signin', content: 'Sign Out'},
+    {href: '/user', content: 'Profile'},
+    {href: '/signin', content: 'Sign Out'},
 ]

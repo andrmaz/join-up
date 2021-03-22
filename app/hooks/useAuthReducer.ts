@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {authReducer} from '../store/reducer/authReducer'
+import {authReducer} from '@reducers/authReducer'
 
 export function useAuthReducer(): ReadonlyArray<any> {
     const [state, dispatch] = React.useReducer(authReducer, {user: null})

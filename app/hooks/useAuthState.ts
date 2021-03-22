@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import {AuthStateContext} from '../store/context/authContext'
-import {UserState} from '../type/user'
+import {AuthStateContext} from '@context/authContext'
+import type {UserState} from 'app/types/user'
 
 export function useAuthState(): UserState {
     const context = React.useContext(AuthStateContext)

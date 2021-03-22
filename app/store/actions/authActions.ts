@@ -1,4 +1,4 @@
-import {UserDispatch, IUserContext} from '../../type/user'
+import type {UserDispatch, IUserContext} from 'app/types/user'
 
 export const login = (dispatch: UserDispatch, data: IUserContext): void =>
     dispatch({type: 'login', payload: data})

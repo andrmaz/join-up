@@ -8,11 +8,10 @@ import {useCookies} from 'react-cookie'
 import Select from 'react-select'
 import {useForm, Controller} from 'react-hook-form'
 
-import {useAuthDispatch} from '../../app/hook/useAuthDispatch'
-import {login} from '../../app/store/action/authActions'
-import {ISignupInputs} from '../../app/type/user'
-
-import {languages} from '../../app/data/languagesOptions'
+import {useAuthDispatch} from '@hooks/useAuthDispatch'
+import {login} from '@actions/authActions'
+import {languages} from '@data/languagesOptions'
+import type {ISignupInputs} from 'app/types/user'
 
 const SignUp = ({
     technologies,
@@ -338,7 +337,7 @@ const SignUp = ({
                     />
                 </form>
                 <aside className='h-10 pt-10 text-center'>
-                    <Link href='/user/signin'>
+                    <Link href='/signin'>
                         <a>Already have an account ? SignIn</a>
                     </Link>
                 </aside>

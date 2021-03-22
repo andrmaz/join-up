@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {UserState, UserDispatch} from '../../type/user'
+import type {UserState, UserDispatch} from 'app/types/user'
 
 export const AuthStateContext = React.createContext<UserState | undefined>(
     undefined

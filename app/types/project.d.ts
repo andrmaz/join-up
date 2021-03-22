@@ -7,7 +7,7 @@ export interface IProjectInput {
     url?: string
 }
 
-export interface IProject {
+export interface IProjectData {
     _id: string
     updatedAt: string
     technologies: string[]
@@ -16,6 +16,6 @@ export interface IProject {
     name: string
     description?: string
     createdAt: string
-    //TODO check type of collaborator instead of string
+    //TODO check type of collaborator
     collaborators: Array<string>
 }

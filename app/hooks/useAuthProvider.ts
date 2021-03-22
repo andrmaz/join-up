@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import {useAuthReducer} from './useAuthReducer'
-import {login} from '../store/action/authActions'
+import {useAuthReducer} from '@hooks/useAuthReducer'
+import {login} from '@actions/authActions'
 
 export function useAuthProvider(): ReadonlyArray<any> {
     const [state, dispatch, updateLocalStorage] = useAuthReducer()
