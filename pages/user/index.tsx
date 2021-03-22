@@ -5,17 +5,13 @@ import {
     InferGetServerSidePropsType,
 } from 'next'
 import Head from 'next/head'
-
 import {ParsedUrlQuery} from 'querystring'
-import {parseCookies} from '../../app/utils/parseCookies'
-
-import {useAuthState} from '../../app/hook/useAuthState'
-
 import axios from 'axios'
 
-import Navbar from '../../app/component/Navbar'
-
-import {IProject} from '../../app/type/project'
+import {parseCookies} from '@utils/parseCookies'
+import {useAuthState} from '@hooks/useAuthState'
+import Navbar from '@components/Navbar'
+import type {IProjectData} from 'app/types/project'
 
 const Profile: NextPage = ({
     projects,
@@ -110,10 +106,10 @@ const Profile: NextPage = ({
                                 <div className='grid grid-flow-row grid-cols-2 grid-rows-2 gap-2'>
                                     {projects
                                         .filter(
-                                            (_: IProject, index: number) =>
+                                            (_: IProjectData, index: number) =>
                                                 index < 4
                                         )
-                                        .map((project: IProject) => {
+                                        .map((project: IProjectData) => {
                                             const {_id, name} = project
                                             return (
                                                 <div
@@ -144,17 +140,18 @@ export const getServerSideProps: GetServerSideProps = async (
     //* Get the user's session based on the request
     const {session: token} = parseCookies(context.req)
 
+    //* If no user, redirect to login
     if (!token) {
-        //* If no user, redirect to login
         return {
             props: {},
             redirect: {
-                destination: '/user/signin',
+                destination: '/signin',
                 permanent: false,
             },
         }
     }
 
+    //* If there is a user,
     const {
         data: {projects},
     } = await axios.get('/project/user', {
@@ -163,7 +160,7 @@ export const getServerSideProps: GetServerSideProps = async (
         },
     })
 
-    //* If there is a user, return the current session
+    //* return user projects
     return {
         props: {
             projects,

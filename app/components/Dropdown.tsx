@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import {SignOut} from './SignOut'
+import {SignOut} from '@components/SignOut'
 
 type ListItem = {
     href: string
@@ -36,7 +36,7 @@ export function Dropdown({
                                 </a>
                             </Link>
                         ) : (
-                            <SignOut key={href} content={content} />
+                            <SignOut key={href} href={href} content={content} />
                         )
                     })}
                 </ul>

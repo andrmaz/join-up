@@ -1,6 +1,6 @@
 import type {AppProps} from 'next/app'
 
-import {AuthProvider} from '../app/store/provider/AuthProvider'
+import {AuthProvider} from '@providers/AuthProvider'
 import {CookiesProvider} from 'react-cookie'
 
 import axios from 'axios'

@@ -1,4 +1,4 @@
-import {UserState, UserActions} from '../../type/user'
+import type {UserState, UserActions} from 'app/types/user'
 
 export function authReducer(state: UserState, action: UserActions): UserState {
     switch (action.type) {

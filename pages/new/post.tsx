@@ -1,9 +1,9 @@
 import {NextPage, GetServerSideProps, GetServerSidePropsContext} from 'next'
 import Head from 'next/head'
 import {ParsedUrlQuery} from 'querystring'
-import {parseCookies} from '../../app/utils/parseCookies'
 
-import Navbar from '../../app/component/Navbar'
+import {parseCookies} from '@utils/parseCookies'
+import Navbar from '@components/Navbar'
 
 const Post: NextPage = () => {
     return (
@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (
         return {
             props: {},
             redirect: {
-                destination: '/user/signin',
+                destination: '/signin',
                 permanent: false,
             },
         }

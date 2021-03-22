@@ -7,13 +7,12 @@ import {
 import Head from 'next/head'
 
 import {ParsedUrlQuery} from 'querystring'
-
-import {parseCookies} from '../../app/utils/parseCookies'
 import axios from 'axios'
 
-import Navbar from '../../app/component/Navbar'
+import {parseCookies} from '@utils/parseCookies'
+import Navbar from '@components/Navbar'
 
-import {IProject} from '../../app/type/project'
+import type {IProjectData} from 'app/types/project'
 
 const Projects: NextPage = ({
     projects,
@@ -28,7 +27,7 @@ const Projects: NextPage = ({
             <main className='h-92v py-10 px-28'>
                 <section className='w-full h-auto'>
                     <div className='grid grid-cols-3 grid-rows-3 gap-4 py-2 px-1'>
-                        {projects.map((project: IProject) => {
+                        {projects.map((project: IProjectData) => {
                             const {
                                 _id,
                                 name,
@@ -97,17 +96,18 @@ export const getServerSideProps: GetServerSideProps = async (
     //* Get the user's session based on the request
     const {session: token} = parseCookies(context.req)
 
+    //* If no user, redirect to login
     if (!token) {
-        //* If no user, redirect to login
         return {
             props: {},
             redirect: {
-                destination: '/user/signin',
+                destination: '/signin',
                 permanent: false,
             },
         }
     }
 
+    //* If there is a user,
     const {
         data: {projects},
     } = await axios.get('/project', {
@@ -116,7 +116,7 @@ export const getServerSideProps: GetServerSideProps = async (
         },
     })
 
-    //* If there is a user, return the projects
+    //* return projects
     return {
         props: {
             projects,

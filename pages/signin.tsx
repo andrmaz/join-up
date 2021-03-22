@@ -6,9 +6,9 @@ import axios from 'axios'
 import {useCookies} from 'react-cookie'
 import {useForm} from 'react-hook-form'
 
-import {useAuthDispatch} from '../../app/hook/useAuthDispatch'
-import {login} from '../../app/store/action/authActions'
-import {SigninInputs} from '../../app/type/user'
+import {useAuthDispatch} from '@hooks/useAuthDispatch'
+import {login} from '@actions/authActions'
+import type {SigninInputs} from 'app/types/user'
 
 const SignIn = (): JSX.Element => {
     const {register, handleSubmit, errors} = useForm<SigninInputs>({
@@ -111,7 +111,7 @@ const SignIn = (): JSX.Element => {
                     />
                 </form>
                 <div className='inline-flex justify-between w-full h-1/6 pt-5'>
-                    <Link href='/user/signup'>
+                    <Link href='/signup'>
                         <a>Do not have an account? SignUp</a>
                     </Link>
                     <span className='text-right'>Forgot your password?</span>

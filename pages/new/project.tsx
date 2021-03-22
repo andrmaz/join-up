@@ -7,16 +7,16 @@ import {
 import Head from 'next/head'
 import {useRouter} from 'next/router'
 import {ParsedUrlQuery} from 'querystring'
-import {parseCookies} from '../../app/utils/parseCookies'
 
 import axios from 'axios'
 import Select from 'react-select'
 import {useForm, Controller} from 'react-hook-form'
 
-import Navbar from '../../app/component/Navbar'
-import {useAuthState} from '../../app/hook/useAuthState'
+import {parseCookies} from '@utils/parseCookies'
+import Navbar from '@components/Navbar'
+import {useAuthState} from '@hooks/useAuthState'
 
-import {IProjectInput} from '../../app/type/project'
+import type {IProjectInput} from 'app/types/project'
 
 const Project: NextPage = ({
     technologies,
@@ -214,22 +214,23 @@ export const getServerSideProps: GetServerSideProps = async (
     //* Get the user's session based on the request
     const {session: token} = parseCookies(context.req)
 
+    //* If no user, redirect to login
     if (!token) {
-        //* If no user, redirect to login
         return {
             props: {},
             redirect: {
-                destination: '/user/signin',
+                destination: '/signin',
                 permanent: false,
             },
         }
     }
 
-    //* If there is a user, return the technologies
+    //* If there is a user,
     const {
         data: {technologies},
     } = await axios.get('/technology')
 
+    //* return technologies and user token
     return {
         props: {
             technologies,

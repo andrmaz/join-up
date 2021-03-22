@@ -1,10 +1,8 @@
 import Link from 'next/link'
 
-import {useAuthState} from '../hook/useAuthState'
-
-import {Dropdown} from './Dropdown'
-
-import {dropDownProjectList, dropDownUserList} from '../data/dropDownLists'
+import {useAuthState} from '@hooks/useAuthState'
+import {Dropdown} from '@components/Dropdown'
+import {dropDownProjectList, dropDownUserList} from '@data/dropDownLists'
 
 const Navbar = (): JSX.Element => {
     const {user} = useAuthState()
@@ -14,10 +12,10 @@ const Navbar = (): JSX.Element => {
                 <Link href='/'>
                     <a className='flex-initial'>Logo</a>
                 </Link>
-                <Link href='/list/projects'>
+                <Link href='/projects'>
                     <a className='flex-initial'>Projects</a>
                 </Link>
-                <Link href='/list/collabs'>
+                <Link href='/collabs'>
                     <a className='flex-initial'>Collaborators</a>
                 </Link>
             </div>
