@@ -1,34 +1,55 @@
 ### **MVP Features**
 
-##### Registration Form
+##### SignUp Form
 * Name -> *String*
 * Email -> *String* 
 * Password -> *String*
-* GH URL -> *String* --Optional 
-* Git Lab -> *String* --Optional  
+* confirmPassword -> *String*
+* GitHub -> *String* --Optional 
+* GitLab -> *String* --Optional  
+* Bitbucket -> *String* --Optional  
 * LinkedIn -> *String* --Optional  
-* Avatar (Gravatar) -> *String* 
 * Bio -> *String* --Optional 
-* Languages (Spoken) _Tags_ -> *Array* 
-* Languages (Technologies) _Tags_ -> *Array* 
+* Languages _Tags_ -> *Array* 
+* Technologies _Tags_ -> *Array* 
 
-##### Login Form
+##### SignIn Form
 * Email -> *String* 
 * Password -> *String*
 
-##### Create New Project
+##### New Project Form
 * Name -> *String* 
-* Description -> *String* 
+* Description -> *String* --Optional 
 * Technologies _Tags_ -> *Array* 
-* Url -> *String* 
+* Url -> *String* --Optional 
 
-
-##### Find Collaboratos
+##### New Post Form
 * Title -> *String* 
-* Description -> *String* 
-* Roles _Tags_ -> *Array*  
+* Description -> *String* --Optional 
+* Technologies _Tags_ -> *Array* 
+
+##### User
+* Name -> *String*
+* Email -> *String* 
+* Avatar -> *String*
+* GitHub -> *String* --Optional 
+* GitLab -> *String* --Optional 
+* Bitbucket -> *String* --Optional   
+* LinkedIn -> *String* --Optional  
+* Bio -> *String* --Optional 
+* Languages _Tags_ -> *Array* 
+* Technologies _Tags_ -> *Array* 
+
+##### Project
+* Name -> *String* 
+* Url -> *String* --Optional 
+* Description -> *String* --Optional 
+* Technologies _Tags_ -> *Array* 
+* Posts -> *Array* --Optional 
+* Collaborators -> *Array* --Optional 
 
 ### **MMP Features**
 * Chat
 * Moderation
 * Roles/Permissions
+* Organizations/Ownership
