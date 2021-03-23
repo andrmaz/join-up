@@ -25,7 +25,12 @@ module.exports = {
                 '4xl': '2rem',
             },
             height: {
-                "10": "10%",
+                "1/10": "10%",
+                "3/10": "30%",
+                "1/20": "5%",
+                "3/20": "15%",
+                "14/20": "70%",
+                "18/20": "90%",
                 "8v": "8vh",
                 "92v": "92vh",
             },
@@ -37,14 +42,20 @@ module.exports = {
             }
         },
         screens: {
-            'tablet': '640px',
+            'sm': '640px',
             // => @media (min-width: 640px) { ... }
 
-            'laptop': '1024px',
+            'md': '768px',
+            // => @media (min-width: 768px) { ... }
+
+            'lg': '1024px',
             // => @media (min-width: 1024px) { ... }
 
-            'desktop': '1280px',
+            'xl': '1280px',
             // => @media (min-width: 1280px) { ... }
+
+            '2xl': '1536px',
+            // => @media (min-width: 1536px) { ... }
         },
         container: {
             center: true,

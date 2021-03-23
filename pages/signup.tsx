@@ -66,16 +66,16 @@ const SignUp = ({
                 <title>SignUp</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
-            <section className='h-5/6 w-4/5 border border-black rounded p-4'>
-                <header className='h-10 text-center'>
+            <section className='lg:h-18/20 xl:h-4/5 w-4/5 border border-black rounded p-2'>
+                <header className='h-1/10 text-center'>
                     <h1 className='text-3xl'>SignUp</h1>
                 </header>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className='flex flex-col h-4/5 justify-between'
+                    className='flex flex-col h-18/20 justify-between'
                 >
-                    <article className='w-full h-2/4 flex'>
-                        <div className='w-3/6 flex flex-col'>
+                    <article className='w-full h-2/4 lg:h-1/2 flex'>
+                        <div className='w-3/6 flex flex-col xl:justify-between'>
                             <label htmlFor='username'>Username:</label>
                             <input
                                 type='text'
@@ -169,7 +169,7 @@ const SignUp = ({
                                 </div>
                             )}
                         </div>
-                        <div className='w-3/6 flex flex-col'>
+                        <div className='w-3/6 flex flex-col xl:justify-between'>
                             <label htmlFor='githubURL'>GitHub:</label>
                             <input
                                 type='text'
@@ -208,8 +208,8 @@ const SignUp = ({
                             />
                         </div>
                     </article>
-                    <article className='h-1/4 w-full flex mb-4'>
-                        <div className='w-3/6 flex flex-col m-auto p-2'>
+                    <article className='h-1/3 lg:h-1/5 w-full flex'>
+                        <div className='w-3/6 flex flex-col m-auto p-1'>
                             <label id='languages' htmlFor='languages'>
                                 Languages :
                             </label>
@@ -258,7 +258,7 @@ const SignUp = ({
                                 </div>
                             )}
                         </div>
-                        <div className='w-3/6 flex flex-col m-auto p-2'>
+                        <div className='w-3/6 flex flex-col m-auto p-1'>
                             <label id='technologies' htmlFor='technologies'>
                                 Technologies :
                             </label>
@@ -308,39 +308,45 @@ const SignUp = ({
                             )}
                         </div>
                     </article>
-                    <label htmlFor='bio' className='mt-2'>
-                        Biography:
-                    </label>
-                    <textarea
-                        id='bio'
-                        name='bio'
-                        cols={5}
-                        rows={10}
-                        maxLength={100}
-                        placeholder='Tell us your story'
-                        spellCheck={true}
-                        wrap='hard'
-                        className=':resize-none p-1 mb-2 border-2'
-                    />
-                    <input
-                        type='submit'
-                        value='SignUp'
-                        className='cursor-pointer bg-blue-800 text-white rounded'
-                        disabled={Boolean(
-                            errors.username ||
-                                errors.email ||
-                                errors.password ||
-                                errors.confirmPassword ||
-                                errors.languages ||
-                                errors.technologies
-                        )}
-                    />
+                    <article className='h-2/3 lg:h-3/20 flex flex-col'>
+                        <div className='h-full flex flex-col'>
+                            <label htmlFor='bio'>Biography:</label>
+                            <textarea
+                                id='bio'
+                                name='bio'
+                                cols={5}
+                                rows={10}
+                                maxLength={100}
+                                placeholder='Tell us your story'
+                                spellCheck={true}
+                                wrap='hard'
+                                className=':resize-none p-1 border-2'
+                            />
+                        </div>
+                    </article>
+                    <article className='lg:h-1/20'>
+                        <aside className='flex flex-wrap h-1/3 content-center justify-between'>
+                            <input
+                                type='submit'
+                                value='SignUp'
+                                className='w-2/6 cursor-pointer bg-blue-800 text-white rounded'
+                                disabled={Boolean(
+                                    errors.username ||
+                                        errors.email ||
+                                        errors.password ||
+                                        errors.confirmPassword ||
+                                        errors.languages ||
+                                        errors.technologies
+                                )}
+                            />
+                            <Link href='/signin'>
+                                <a className='text-lg'>
+                                    Already have an account ? SignIn
+                                </a>
+                            </Link>
+                        </aside>
+                    </article>
                 </form>
-                <aside className='h-10 pt-10 text-center'>
-                    <Link href='/signin'>
-                        <a>Already have an account ? SignIn</a>
-                    </Link>
-                </aside>
             </section>
         </div>
     )
