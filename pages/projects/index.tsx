@@ -55,27 +55,10 @@ const Projects: NextPage = ({
                                         <p className='text-sm'>{description}</p>
                                     </article>
                                     <aside className='h-1/6'>
-                                        <div className='h-1/2'>
+                                        <div className='h-1/2 text-xs text-red-400'>
                                             {technologies
                                                 .filter((_, index) => index < 3)
-                                                .map((technology, index) => {
-                                                    return index ===
-                                                        project.technologies
-                                                            .length -
-                                                            1 ? (
-                                                        <span
-                                                            key={technology}
-                                                            className='text-xs text-red-500'
-                                                        >
-                                                            {technology}
-                                                        </span>
-                                                    ) : (
-                                                        <span
-                                                            key={technology}
-                                                            className='text-xs text-red-500'
-                                                        >{`${technology}, `}</span>
-                                                    )
-                                                })}
+                                                .toString()}
                                         </div>
                                     </aside>
                                 </div>

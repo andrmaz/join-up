@@ -25,8 +25,8 @@ export interface IUserContext {
     linkedinURL?: string
     avatar: string
     bio?: string
-    languages: string[]
-    technologies: string[]
+    languages: string[] | string
+    technologies: string[] | string
 }
 
 export type UserState = {
