@@ -30,31 +30,23 @@ const Profile: NextPage = ({
         linkedinURL,
     } = {...user}
     return (
-        <div className='min-h-screen md:container'>
+        <div className='min-h-screen'>
             <Head>
                 <title>Profile</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <Navbar />
-            <main className='h-92v py-20 px-36'>
+            <main className='h-92v py-16 px-32 xl:px-48'>
                 <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
                     <section className='h-4/5 p-4'>
                         <div className='h-3/6'>
                             <img
-                                className='w-4/5 rounded-full'
+                                className='h-full rounded-full'
                                 src={avatar}
                                 alt='profile'
                             />
                         </div>
-                        <div className='relative h-1/6'>
-                            <button
-                                value='Edit Profile'
-                                className='absolute inset-x-0 bottom-0 h-2/6 w-3/5 text-white rounded bg-green-700 mb-2'
-                            >
-                                Edit Profile
-                            </button>
-                        </div>
-                        <div className='h-2/6 flex flex-col justify-around'>
+                        <div className='h-3/6 flex flex-col justify-around'>
                             <span>{username}</span>
                             <span>{email}</span>
                             <p>{bio}</p>
@@ -97,12 +89,11 @@ const Profile: NextPage = ({
                         </div>
                     </section>
                     <article className='w-200 h-full border-2 border-solid rounded'>
-                        <header className='w-max h-12 m-auto text-4xl mb-2'>
-                            <h1>Activities</h1>
+                        <header className='w-max h-12 m-auto text-2xl mb-2'>
+                            <h3>Projects</h3>
                         </header>
                         <main className='w-full h-auto p-1'>
                             <section>
-                                <h2 className='text-2xl mb-1'>Projects</h2>
                                 <div className='grid grid-flow-row grid-cols-2 grid-rows-2 gap-2'>
                                     {projects
                                         .filter(

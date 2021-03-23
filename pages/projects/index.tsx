@@ -18,7 +18,7 @@ const Projects: NextPage = ({
     projects,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
-        <div className='min-h-screen md:container'>
+        <div className='min-h-screen'>
             <Head>
                 <title>Projects</title>
                 <link rel='icon' href='/favicon.ico' />

@@ -68,7 +68,7 @@ const Project: NextPage = ({
             </Head>
             <Navbar />
             <main className='h-92v container flex justify-center items-center'>
-                <section className='w-3/5 h-5/6 p-4 border rounded'>
+                <section className='w-3/5 xl:w-4/6 h-5/6 p-4 xl:p-2 border rounded'>
                     <header className='h-1/6'>
                         <h1 className='h-2/3 text-3xl'>Create a new project</h1>
                         <span>
@@ -100,7 +100,7 @@ const Project: NextPage = ({
                                 </select>
                             </div>
                         </div>
-                        <div className='h-1/6 flex flex-col'>
+                        <div className='h-1/6 flex flex-col xl:mb-2'>
                             <label htmlFor='title'>Name: </label>
                             <input
                                 type='text'
