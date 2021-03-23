@@ -1,11 +1,9 @@
+import * as React from 'react'
 import Link from 'next/link'
-
-import {useAuthState} from '@hooks/useAuthState'
 import {Dropdown} from '@components/Dropdown'
-import {dropDownProjectList, dropDownUserList} from '@data/dropDownLists'
 
 const Navbar = (): JSX.Element => {
-    const {user} = useAuthState()
+    const [tooltip, showTooltip] = React.useState(false)
     return (
         <nav className='flex justify-between items-center h-8v w-screen bg-blue-800 text-white'>
             <div className='inline-flex justify-evenly w-5/12'>
@@ -20,22 +18,22 @@ const Navbar = (): JSX.Element => {
                 </Link>
             </div>
             <div className='inline-flex justify-around items-center w-2/12 h-full'>
-                <Dropdown
-                    component={<div>+</div>}
-                    rightPosition={32}
-                    itemList={dropDownProjectList}
-                />
-                <Dropdown
-                    component={
-                        <img
-                            className='m-auto rounded-full'
-                            src={user?.avatar}
-                            alt='Profile'
-                        />
-                    }
-                    rightPosition={8}
-                    itemList={dropDownUserList}
-                />
+                <Link href='/new/project' passHref>
+                    <div
+                        onMouseEnter={() => showTooltip(true)}
+                        onMouseLeave={() => showTooltip(false)}
+                    >
+                        +
+                    </div>
+                </Link>
+                {tooltip ? (
+                    <span className='absolute top-8 xl:top-12 lg:right-36 xl:right-48 text-center p-2 bg-gray-800 text-white text-xs cursor-pointer'>
+                        New Project
+                    </span>
+                ) : (
+                    ''
+                )}
+                <Dropdown />
             </div>
         </nav>
     )
