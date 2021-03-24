@@ -17,25 +17,25 @@ import {useAuthState} from '@hooks/useAuthState'
 import Navbar from '@components/Navbar'
 import type {IUserContext} from 'app/types/user'
 
-import {languages} from '@data/languagesOptions'
+import {languages as langOptions} from '@data/languagesOptions'
 
 const Profile: NextPage = ({
-    technologies,
+    techOptions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const {user} = useAuthState()
     const {
         avatar,
-        username,
-        email,
         bio,
         bitbucketURL,
         githubURL,
         gitlabURL,
-        linkedinURL,
-    } = {...user}
+        linkedinURL /* technologies, languages */,
+    } = {
+        ...user,
+    }
     const {
-        register,
         handleSubmit,
+        register,
         errors,
         control,
         setValue,
@@ -59,7 +59,7 @@ const Profile: NextPage = ({
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <Navbar />
-            <main className='h-auto py-12 px-32 xl:px-48'>
+            <main className='h-92v py-12 px-32 xl:px-72'>
                 <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
                     <section className='h-4/5 p-4'>
                         <article className='h-3/5 flex flex-col'>
@@ -96,73 +96,10 @@ const Profile: NextPage = ({
                             onSubmit={handleSubmit(onSubmit)}
                             className='flex flex-col h-full justify-between p-1'
                         >
-                            <article className='h-14/20 flex flex-col justify-around'>
+                            <article className='h-3/5 flex flex-col justify-around'>
                                 <div className='flex flex-row'>
                                     <div className='w-3/5'>
                                         <div className='flex flex-col xl:justify-between'>
-                                            <label htmlFor='username'>
-                                                Username:
-                                            </label>
-                                            <input
-                                                type='text'
-                                                id='username'
-                                                name='username'
-                                                size={30}
-                                                defaultValue={username}
-                                                placeholder='please enter your username'
-                                                ref={register({
-                                                    required:
-                                                        'username is required',
-                                                    minLength: {
-                                                        value: 3,
-                                                        message:
-                                                            'username must be at least 3 characters long',
-                                                    },
-                                                    maxLength: {
-                                                        value: 20,
-                                                        message:
-                                                            'username must be at most 20 characters long',
-                                                    },
-                                                })}
-                                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-gray-400 rounded'
-                                            />
-                                            {errors.username && (
-                                                <div
-                                                    role='alert'
-                                                    className='text-red-500'
-                                                >
-                                                    {errors.username.message}
-                                                </div>
-                                            )}
-                                            <label htmlFor='email'>
-                                                Email:
-                                            </label>
-                                            <input
-                                                type='email'
-                                                id='email'
-                                                name='email'
-                                                size={30}
-                                                defaultValue={email}
-                                                placeholder='address@email.domain'
-                                                ref={register({
-                                                    required:
-                                                        'email is required',
-                                                    pattern: {
-                                                        value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                                                        message:
-                                                            'please enter a valid email address',
-                                                    },
-                                                })}
-                                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-gray-400 rounded'
-                                            />
-                                            {errors.email && (
-                                                <div
-                                                    role='alert'
-                                                    className='text-red-500'
-                                                >
-                                                    {errors.email.message}
-                                                </div>
-                                            )}
                                             <label htmlFor='githubURL'>
                                                 GitHub:
                                             </label>
@@ -170,6 +107,7 @@ const Profile: NextPage = ({
                                                 type='text'
                                                 id='githubURL'
                                                 name='githubURL'
+                                                ref={register}
                                                 size={30}
                                                 defaultValue={githubURL}
                                                 placeholder='your GitHub username here'
@@ -182,6 +120,7 @@ const Profile: NextPage = ({
                                                 type='text'
                                                 id='gitlabURL'
                                                 name='gitlabURL'
+                                                ref={register}
                                                 size={30}
                                                 defaultValue={gitlabURL}
                                                 placeholder='your GitLab username here'
@@ -194,6 +133,7 @@ const Profile: NextPage = ({
                                                 type='text'
                                                 id='bitbucketURL'
                                                 name='bitbucketURL'
+                                                ref={register}
                                                 size={30}
                                                 defaultValue={bitbucketURL}
                                                 placeholder='your BitBucket username here'
@@ -206,6 +146,7 @@ const Profile: NextPage = ({
                                                 type='text'
                                                 id='linkedinURL'
                                                 name='linkedinURL'
+                                                ref={register}
                                                 defaultValue={linkedinURL}
                                                 size={30}
                                                 placeholder='your LinkedIn username here'
@@ -214,9 +155,9 @@ const Profile: NextPage = ({
                                         </div>
                                     </div>
                                     <div className='w-2/5'>
-                                        <div className='xl:h-3/4 lg:h-2/4 lg:mt-8'>
+                                        <div className='h-3/4 lg:mt-8'>
                                             <img
-                                                className='h-full rounded-full'
+                                                className='h-full rounded-full ml-auto'
                                                 src={avatar}
                                                 alt='profile'
                                             />
@@ -229,25 +170,39 @@ const Profile: NextPage = ({
                                     </label>
                                     <Controller
                                         name='languages'
-                                        defaultValue=''
-                                        control={control}
-                                        rules={{
-                                            required: {
-                                                value: true,
-                                                message:
-                                                    'Please select at least one language',
+                                        //TODO replace this array with languages
+                                        defaultValue={[
+                                            {
+                                                value: 'english',
+                                                label: 'English',
                                             },
-                                        }}
-                                        render={({value, onBlur}) => (
+                                            {
+                                                value: 'italian',
+                                                label: 'Italian',
+                                            },
+                                        ].map(lang => lang.value)}
+                                        control={control}
+                                        render={({onBlur, ref}) => (
                                             <Select
                                                 id='selectLanguages'
                                                 inputId='languages'
                                                 name='languages'
+                                                inputRef={ref}
                                                 aria-labelledby='languages'
-                                                defaultValue={value}
+                                                //TODO replace array this with languages
+                                                defaultValue={[
+                                                    {
+                                                        value: 'english',
+                                                        label: 'English',
+                                                    },
+                                                    {
+                                                        value: 'italian',
+                                                        label: 'Italian',
+                                                    },
+                                                ]}
                                                 closeMenuOnSelect={false}
                                                 isMulti
-                                                options={languages}
+                                                options={langOptions}
                                                 placeholder='Select your language'
                                                 blurInputOnSelect={false}
                                                 onBlur={onBlur}
@@ -266,14 +221,6 @@ const Profile: NextPage = ({
                                             />
                                         )}
                                     />
-                                    {errors.languages && (
-                                        <div
-                                            role='alert'
-                                            className='text-red-500'
-                                        >
-                                            {errors.languages.message}
-                                        </div>
-                                    )}
                                 </div>
                                 <div className='flex flex-col p-1'>
                                     <label
@@ -284,25 +231,39 @@ const Profile: NextPage = ({
                                     </label>
                                     <Controller
                                         name='technologies'
-                                        defaultValue=''
-                                        control={control}
-                                        rules={{
-                                            required: {
-                                                value: true,
-                                                message:
-                                                    'Please select at least one technology',
+                                        //TODO replace this array with technologies
+                                        defaultValue={[
+                                            {
+                                                value: 'javascript',
+                                                label: 'javascript',
                                             },
-                                        }}
-                                        render={({value, onBlur}) => (
+                                            {
+                                                value: 'react',
+                                                label: 'react',
+                                            },
+                                        ].map(tech => tech.label)}
+                                        control={control}
+                                        render={({onBlur, ref}) => (
                                             <Select
                                                 id='searchTechnologies'
                                                 inputId='technologies'
                                                 name='technologies'
+                                                inputRef={ref}
                                                 aria-labelledby='technologies'
-                                                defaultValue={value}
+                                                //TODO replace this array with technologies
+                                                defaultValue={[
+                                                    {
+                                                        value: 'javascript',
+                                                        label: 'javascript',
+                                                    },
+                                                    {
+                                                        value: 'react',
+                                                        label: 'react',
+                                                    },
+                                                ]}
                                                 closeMenuOnSelect={false}
                                                 isMulti
-                                                options={technologies}
+                                                options={techOptions}
                                                 placeholder='Choose your tech stack'
                                                 blurInputOnSelect={false}
                                                 onBlur={onBlur}
@@ -321,14 +282,6 @@ const Profile: NextPage = ({
                                             />
                                         )}
                                     />
-                                    {errors.technologies && (
-                                        <div
-                                            role='alert'
-                                            className='text-red-500'
-                                        >
-                                            {errors.technologies.message}
-                                        </div>
-                                    )}
                                 </div>
                             </article>
                             <article className='h-1/5'>
@@ -337,6 +290,7 @@ const Profile: NextPage = ({
                                     <textarea
                                         id='bio'
                                         name='bio'
+                                        ref={register}
                                         cols={5}
                                         rows={10}
                                         maxLength={100}
@@ -348,10 +302,10 @@ const Profile: NextPage = ({
                                     />
                                 </div>
                             </article>
-                            <aside className='h-1/10 flex flex-row items-end justify-evenly p-2'>
+                            <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
                                 <button
                                     type='button'
-                                    className='w-2/6 h-2/5 cursor-pointer bg-gray-600 text-white rounded'
+                                    className='w-2/6 h-1/5 cursor-pointer bg-gray-600 text-white rounded m-1'
                                     onClick={() => router.push('/')}
                                 >
                                     Cancel
@@ -359,12 +313,9 @@ const Profile: NextPage = ({
                                 <input
                                     type='submit'
                                     value='Save'
-                                    className='w-2/6 h-2/5 cursor-pointer bg-green-600 text-white rounded'
+                                    className='w-2/6 h-1/5 cursor-pointer bg-green-600 text-white rounded m-1'
                                     disabled={Boolean(
-                                        errors.username ||
-                                            errors.email ||
-                                            errors.languages ||
-                                            errors.technologies
+                                        errors.languages || errors.technologies
                                     )}
                                 />
                             </aside>
@@ -397,7 +348,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
     //* If there is a user,
     const {
-        data: {technologies},
+        data: {technologies: techOptions},
     } = await axios.get('/technology', {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -407,7 +358,7 @@ export const getServerSideProps: GetServerSideProps = async (
     //* return user technologies
     return {
         props: {
-            technologies,
+            techOptions,
         },
     }
 }
