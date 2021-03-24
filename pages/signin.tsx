@@ -53,7 +53,7 @@ const SignIn = (): JSX.Element => {
                 <title>SignIn</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
-            <section className='lg:h-3/6 xl:h-2/5 lg:w-4/6 xl:w-3/6 border border-black rounded py-4 px-16 xl:px-10'>
+            <section className='h-2/6 lg:w-4/6 xl:w-3/6 border border-black rounded py-4 px-16 xl:px-10'>
                 <header className='h-1/6 text-center'>
                     <h1 className='text-3xl'>SignIn</h1>
                 </header>
@@ -61,53 +61,58 @@ const SignIn = (): JSX.Element => {
                     onSubmit={handleSubmit(onSubmit)}
                     className='h-4/6 flex flex-col justify-between'
                 >
-                    <label htmlFor='email'>Email:</label>
-                    <input
-                        type='email'
-                        id='email'
-                        name='email'
-                        size={30}
-                        placeholder='please enter your email'
-                        ref={register({
-                            required: 'email is required',
-                            pattern: {
-                                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                                message: 'please enter a valid email address',
-                            },
-                        })}
-                        className='focus:outline-none focus:ring focus:border-blue-300 border-2 border-black p-1 rounded'
-                    />
-                    {errors.email && (
-                        <div role='alert' className='text-red-500'>
-                            {errors.email.message}
-                        </div>
-                    )}
-                    <label htmlFor='password'>Password:</label>
-                    <input
-                        type='password'
-                        id='password'
-                        name='password'
-                        size={30}
-                        placeholder='please enter your password'
-                        ref={register({
-                            required: 'password is required',
-                            pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                message: 'please enter a valid password',
-                            },
-                        })}
-                        className='focus:outline-none focus:ring focus:border-blue-300 border-2 border-black p-1 rounded'
-                    />
-                    {errors.password && (
-                        <div role='alert' className='text-red-500'>
-                            {errors.password.message}
-                        </div>
-                    )}
+                    <div className='flex flex-col'>
+                        <label htmlFor='email'>Email:</label>
+                        <input
+                            type='email'
+                            id='email'
+                            name='email'
+                            size={30}
+                            placeholder='please enter your email'
+                            ref={register({
+                                required: 'email is required',
+                                pattern: {
+                                    value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                                    message:
+                                        'please enter a valid email address',
+                                },
+                            })}
+                            className='focus:outline-none focus:ring focus:border-blue-300 border-2 border-black p-1 rounded'
+                        />
+                        {errors.email && (
+                            <div role='alert' className='text-red-500'>
+                                {errors.email.message}
+                            </div>
+                        )}
+                    </div>
+                    <div className='flex flex-col'>
+                        <label htmlFor='password'>Password:</label>
+                        <input
+                            type='password'
+                            id='password'
+                            name='password'
+                            size={30}
+                            placeholder='please enter your password'
+                            ref={register({
+                                required: 'password is required',
+                                pattern: {
+                                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                                    message: 'please enter a valid password',
+                                },
+                            })}
+                            className='focus:outline-none focus:ring focus:border-blue-300 border-2 border-black p-1 rounded'
+                        />
+                        {errors.password && (
+                            <div role='alert' className='text-red-500'>
+                                {errors.password.message}
+                            </div>
+                        )}
+                    </div>
                     <input
                         disabled={Boolean(errors.email || errors.password)}
                         type='submit'
                         value='SignIn'
-                        className='cursor-pointer bg-blue-800 text-white rounded'
+                        className='h-8 cursor-pointer bg-blue-800 text-white rounded'
                     />
                 </form>
                 <div className='inline-flex justify-between w-full h-1/6 pt-5'>

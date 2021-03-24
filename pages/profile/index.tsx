@@ -38,15 +38,15 @@ const Profile: NextPage = ({
             <Navbar />
             <main className='h-92v py-16 px-32 xl:px-48'>
                 <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
-                    <section className='h-4/5 p-4'>
-                        <div className='h-3/6'>
+                    <section className='h-4/5 p-2'>
+                        <div className='h-3/6 flex items-end'>
                             <img
-                                className='h-full rounded-full'
+                                className='h-4/5 rounded-full'
                                 src={avatar}
                                 alt='profile'
                             />
                         </div>
-                        <div className='h-3/6 flex flex-col justify-around'>
+                        <div className='h-3/6 flex flex-col justify-around text-xl'>
                             <span>{username}</span>
                             <span>{email}</span>
                             <p>{bio}</p>
