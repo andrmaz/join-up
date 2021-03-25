@@ -1,55 +1,62 @@
 ### **MVP Features**
 
 ##### SignUp Form
-* Name -> *String*
-* Email -> *String* 
-* Password -> *String*
-* confirmPassword -> *String*
-* GitHub -> *String* --Optional 
-* GitLab -> *String* --Optional  
-* Bitbucket -> *String* --Optional  
-* LinkedIn -> *String* --Optional  
-* Bio -> *String* --Optional 
-* Languages _Tags_ -> *Array* 
-* Technologies _Tags_ -> *Array* 
+
+- Name -> _String_
+- Email -> _String_
+- Password -> _String_
+- confirmPassword -> _String_
+- GitHub -> _String_ --Optional
+- GitLab -> _String_ --Optional
+- Bitbucket -> _String_ --Optional
+- LinkedIn -> _String_ --Optional
+- Bio -> _String_ --Optional
+- Languages _Tags_ -> _Array_
+- Technologies _Tags_ -> _Array_
 
 ##### SignIn Form
-* Email -> *String* 
-* Password -> *String*
+
+- Email -> _String_
+- Password -> _String_
 
 ##### New Project Form
-* Name -> *String* 
-* Description -> *String* --Optional 
-* Technologies _Tags_ -> *Array* 
-* Url -> *String* --Optional 
+
+- Name -> _String_
+- Description -> _String_ --Optional
+- Technologies _Tags_ -> _Array_
+- Url -> _String_ --Optional
 
 ##### New Post Form
-* Title -> *String* 
-* Description -> *String* --Optional 
-* Technologies _Tags_ -> *Array* 
+
+- Title -> _String_
+- Description -> _String_ --Optional
+- Technologies _Tags_ -> _Array_
 
 ##### User
-* Name -> *String*
-* Email -> *String* 
-* Avatar -> *String*
-* GitHub -> *String* --Optional 
-* GitLab -> *String* --Optional 
-* Bitbucket -> *String* --Optional   
-* LinkedIn -> *String* --Optional  
-* Bio -> *String* --Optional 
-* Languages _Tags_ -> *Array* 
-* Technologies _Tags_ -> *Array* 
+
+- Name -> _String_
+- Email -> _String_
+- Avatar -> _String_
+- GitHub -> _String_ --Optional
+- GitLab -> _String_ --Optional
+- Bitbucket -> _String_ --Optional
+- LinkedIn -> _String_ --Optional
+- Bio -> _String_ --Optional
+- Languages _Tags_ -> _Array_
+- Technologies _Tags_ -> _Array_
 
 ##### Project
-* Name -> *String* 
-* Url -> *String* --Optional 
-* Description -> *String* --Optional 
-* Technologies _Tags_ -> *Array* 
-* Posts -> *Array* --Optional 
-* Collaborators -> *Array* --Optional 
+
+- Name -> _String_
+- Url -> _String_ --Optional
+- Description -> _String_ --Optional
+- Technologies _Tags_ -> _Array_
+- Posts -> _Array_ --Optional
+- Collaborators -> _Array_ --Optional
 
 ### **MMP Features**
-* Chat
-* Moderation
-* Roles/Permissions
-* Organizations/Ownership
+
+- Chat
+- Moderation
+- Roles/Permissions
+- Organizations/Ownership

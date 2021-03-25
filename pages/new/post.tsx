@@ -6,36 +6,36 @@ import {parseCookies} from '@utils/parseCookies'
 import Navbar from '@components/Navbar'
 
 const Post: NextPage = () => {
-    return (
-        <div className='min-h-screen'>
-            <Head>
-                <title>Post</title>
-                <link rel='icon' href='/favicon.ico' />
-            </Head>
-            <Navbar />
-        </div>
-    )
+  return (
+    <div className='min-h-screen'>
+      <Head>
+        <title>Post</title>
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+      <Navbar />
+    </div>
+  )
 }
 
 export default Post
 
 export const getServerSideProps: GetServerSideProps = async (
-    context: GetServerSidePropsContext<ParsedUrlQuery>
+  context: GetServerSidePropsContext<ParsedUrlQuery>
 ) => {
-    //* Get the user's session based on the request
-    const {session: token} = parseCookies(context.req)
+  //* Get the user's session based on the request
+  const {session: token} = parseCookies(context.req)
 
-    if (!token) {
-        //* If no user, redirect to login
-        return {
-            props: {},
-            redirect: {
-                destination: '/signin',
-                permanent: false,
-            },
-        }
+  if (!token) {
+    //* If no user, redirect to login
+    return {
+      props: {},
+      redirect: {
+        destination: '/signin',
+        permanent: false,
+      },
     }
+  }
 
-    //* If there is a user, return the current session
-    return {props: {}}
+  //* If there is a user, return the current session
+  return {props: {}}
 }
