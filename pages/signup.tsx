@@ -10,11 +10,11 @@ import {useForm, Controller} from 'react-hook-form'
 
 import {useAuthDispatch} from '@hooks/useAuthDispatch'
 import {login} from '@actions/authActions'
-import {languages} from '@data/languagesOptions'
 import type {ISignupInputs} from 'app/types/user'
 
 const SignUp = ({
     technologies,
+    languages,
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
     const {
         register,
@@ -379,10 +379,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
     const {
         data: {technologies},
     } = await axios.get('/technology')
+    const {
+        data: {languages},
+    } = await axios.get('/language')
 
     return {
         props: {
             technologies,
+            languages,
         },
     }
 }

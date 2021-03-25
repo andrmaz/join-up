@@ -50,38 +50,8 @@ const Profile: NextPage = ({
                             <span>{username}</span>
                             <span>{email}</span>
                             <p>{bio}</p>
-                            <div>
-                                {languages?.map((language, index) => {
-                                    {
-                                        return index ===
-                                            languages.length - 1 ? (
-                                            <span key={language}>
-                                                {language}
-                                            </span>
-                                        ) : (
-                                            <span
-                                                key={language}
-                                            >{`${language}, `}</span>
-                                        )
-                                    }
-                                })}
-                            </div>
-                            <div>
-                                {technologies?.map((technology, index) => {
-                                    {
-                                        return index ===
-                                            technologies.length - 1 ? (
-                                            <span key={technology}>
-                                                {technology}
-                                            </span>
-                                        ) : (
-                                            <span
-                                                key={technology}
-                                            >{`${technology}, `}</span>
-                                        )
-                                    }
-                                })}
-                            </div>
+                            <div>{languages?.toString()}</div>
+                            <div>{technologies?.toString()}</div>
                             <span>{bitbucketURL}</span>
                             <span>{githubURL}</span>
                             <span>{gitlabURL}</span>

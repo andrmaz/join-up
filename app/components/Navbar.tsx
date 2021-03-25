@@ -27,7 +27,7 @@ const Navbar = (): JSX.Element => {
                     </div>
                 </Link>
                 {tooltip ? (
-                    <span className='absolute top-8 xl:top-12 lg:right-36 xl:right-48 text-center p-2 bg-gray-800 text-white text-xs cursor-pointer'>
+                    <span className='absolute top-12 lg:right-36 xl:right-48 text-center p-2 bg-gray-800 text-white text-xs cursor-pointer'>
                         New Project
                     </span>
                 ) : (
