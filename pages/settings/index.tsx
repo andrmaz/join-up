@@ -17,10 +17,9 @@ import {useAuthState} from '@hooks/useAuthState'
 import Navbar from '@components/Navbar'
 import type {IUserContext} from 'app/types/user'
 
-import {languages as langOptions} from '@data/languagesOptions'
-
 const Profile: NextPage = ({
     techOptions,
+    langOptions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const {user} = useAuthState()
     const {
@@ -29,7 +28,9 @@ const Profile: NextPage = ({
         bitbucketURL,
         githubURL,
         gitlabURL,
-        linkedinURL /* technologies, languages */,
+        linkedinURL,
+        /* technologies,
+        languages, */
     } = {
         ...user,
     }
@@ -170,18 +171,13 @@ const Profile: NextPage = ({
                                     </label>
                                     <Controller
                                         name='languages'
-                                        //TODO replace this array with languages
-                                        defaultValue={[
-                                            {
-                                                value: 'english',
-                                                label: 'English',
-                                            },
-                                            {
-                                                value: 'italian',
-                                                label: 'Italian',
-                                            },
-                                        ].map(lang => lang.value)}
                                         control={control}
+                                        //TODO default languages must be in this format
+                                        //{ value: 'language', label: 'Language'}
+                                        /* defaultValue={languages.map(
+                                            lang => lang.value
+                                        )} */
+                                        defaultValue=''
                                         render={({onBlur, ref}) => (
                                             <Select
                                                 id='selectLanguages'
@@ -189,17 +185,9 @@ const Profile: NextPage = ({
                                                 name='languages'
                                                 inputRef={ref}
                                                 aria-labelledby='languages'
-                                                //TODO replace array this with languages
-                                                defaultValue={[
-                                                    {
-                                                        value: 'english',
-                                                        label: 'English',
-                                                    },
-                                                    {
-                                                        value: 'italian',
-                                                        label: 'Italian',
-                                                    },
-                                                ]}
+                                                //TODO default languages must be in this format
+                                                //{ value: 'language', label: 'Language'}
+                                                //defaultValue={languages}
                                                 closeMenuOnSelect={false}
                                                 isMulti
                                                 options={langOptions}
@@ -231,18 +219,13 @@ const Profile: NextPage = ({
                                     </label>
                                     <Controller
                                         name='technologies'
-                                        //TODO replace this array with technologies
-                                        defaultValue={[
-                                            {
-                                                value: 'javascript',
-                                                label: 'javascript',
-                                            },
-                                            {
-                                                value: 'react',
-                                                label: 'react',
-                                            },
-                                        ].map(tech => tech.label)}
                                         control={control}
+                                        //TODO default Technologies must be in this format
+                                        //{ value: 'technology', label: 'Technology'}
+                                        /* defaultValue={technologies.map(
+                                            tech => tech.value
+                                        )} */
+                                        defaultValue=''
                                         render={({onBlur, ref}) => (
                                             <Select
                                                 id='searchTechnologies'
@@ -250,17 +233,9 @@ const Profile: NextPage = ({
                                                 name='technologies'
                                                 inputRef={ref}
                                                 aria-labelledby='technologies'
-                                                //TODO replace this array with technologies
-                                                defaultValue={[
-                                                    {
-                                                        value: 'javascript',
-                                                        label: 'javascript',
-                                                    },
-                                                    {
-                                                        value: 'react',
-                                                        label: 'react',
-                                                    },
-                                                ]}
+                                                //TODO default Technologies must be in this format
+                                                //{ value: 'technology', label: 'Technology'}
+                                                //defaultValue={technologies}
                                                 closeMenuOnSelect={false}
                                                 isMulti
                                                 options={techOptions}
@@ -355,10 +330,19 @@ export const getServerSideProps: GetServerSideProps = async (
         },
     })
 
+    const {
+        data: {languages: langOptions},
+    } = await axios.get('/language', {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+
     //* return user technologies
     return {
         props: {
             techOptions,
+            langOptions,
         },
     }
 }
