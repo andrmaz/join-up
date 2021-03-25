@@ -66,149 +66,169 @@ const SignUp = ({
                 <title>SignUp</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
-            <section className='lg:h-18/20 xl:h-4/5 w-4/5 border border-black rounded p-2'>
+            <section className='lg:h-18/20 xl:h-4/5 w-5/6 border border-black rounded p-2'>
                 <header className='h-1/10 text-center'>
                     <h1 className='text-3xl'>SignUp</h1>
                 </header>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className='flex flex-col h-18/20 justify-between'
+                    className='flex flex-col h-18/20 justify-between p-1'
                 >
-                    <article className='w-full h-2/4 lg:h-1/2 flex'>
-                        <div className='w-3/6 flex flex-col xl:justify-between'>
-                            <label htmlFor='username'>Username:</label>
-                            <input
-                                type='text'
-                                id='username'
-                                name='username'
-                                size={30}
-                                placeholder='please enter your username'
-                                ref={register({
-                                    required: 'username is required',
-                                    minLength: {
-                                        value: 3,
-                                        message:
-                                            'username must be at least 3 characters long',
-                                    },
-                                    maxLength: {
-                                        value: 20,
-                                        message:
-                                            'username must be at most 20 characters long',
-                                    },
-                                })}
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                            />
-                            {errors.username && (
-                                <div role='alert' className='text-red-500'>
-                                    {errors.username.message}
-                                </div>
-                            )}
-                            <label htmlFor='email'>Email:</label>
-                            <input
-                                type='email'
-                                id='email'
-                                name='email'
-                                size={30}
-                                placeholder='address@email.domain'
-                                ref={register({
-                                    required: 'email is required',
-                                    pattern: {
-                                        value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                                        message:
-                                            'please enter a valid email address',
-                                    },
-                                })}
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                            />
-                            {errors.email && (
-                                <div role='alert' className='text-red-500'>
-                                    {errors.email.message}
-                                </div>
-                            )}
-                            <label htmlFor='password'>Password:</label>
-                            <input
-                                type='password'
-                                id='password'
-                                name='password'
-                                size={30}
-                                placeholder='min. 8 char, mix letters and numbers'
-                                ref={register({
-                                    required: 'password is required',
-                                    pattern: {
-                                        value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                        message:
-                                            'please enter a valid password',
-                                    },
-                                })}
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                            />
-                            {errors.password && (
-                                <div role='alert' className='text-red-500'>
-                                    {errors.password.message}
-                                </div>
-                            )}
-                            <label htmlFor='confirmPassword'>
-                                Confirm Password:
-                            </label>
-                            <input
-                                type='password'
-                                id='confirmPassword'
-                                name='confirmPassword'
-                                size={30}
-                                placeholder='please confirm your password'
-                                ref={register({
-                                    validate: value =>
-                                        value === watchPassword ||
-                                        'passwords must match',
-                                })}
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                            />
-                            {errors.confirmPassword && (
-                                <div role='alert' className='text-red-500'>
-                                    {errors.confirmPassword.message}
-                                </div>
-                            )}
-                        </div>
-                        <div className='w-3/6 flex flex-col xl:justify-between'>
-                            <label htmlFor='githubURL'>GitHub:</label>
-                            <input
-                                type='text'
-                                id='githubURL'
-                                name='githubURL'
-                                size={30}
-                                placeholder='your GitHub username here'
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                            />
-                            <label htmlFor='gitlabURL'>GitLab:</label>
-                            <input
-                                type='text'
-                                id='gitlabURL'
-                                name='gitlabURL'
-                                size={30}
-                                placeholder='your GitLab username here'
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                            />
-                            <label htmlFor='bitbucketURL'>BitBucket:</label>
-                            <input
-                                type='text'
-                                id='bitbucketURL'
-                                name='bitbucketURL'
-                                size={30}
-                                placeholder='your BitBucket username here'
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                            />
-                            <label htmlFor='linkedinURL'>LinkedIn:</label>
-                            <input
-                                type='text'
-                                id='linkedinURL'
-                                name='linkedinURL'
-                                size={30}
-                                placeholder='your LinkedIn username here'
-                                className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                            />
-                        </div>
+                    <article className='w-full h-2/5 flex'>
+                        <section className='w-3/6 flex flex-col justify-around'>
+                            <div className='flex flex-col'>
+                                <label htmlFor='username'>Username:</label>
+                                <input
+                                    type='text'
+                                    id='username'
+                                    name='username'
+                                    size={30}
+                                    placeholder='please enter your username'
+                                    ref={register({
+                                        required: 'username is required',
+                                        minLength: {
+                                            value: 3,
+                                            message:
+                                                'username must be at least 3 characters long',
+                                        },
+                                        maxLength: {
+                                            value: 20,
+                                            message:
+                                                'username must be at most 20 characters long',
+                                        },
+                                    })}
+                                    className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
+                                />
+                                {errors.username && (
+                                    <div role='alert' className='text-red-500'>
+                                        {errors.username.message}
+                                    </div>
+                                )}
+                            </div>
+                            <div className='flex flex-col'>
+                                <label htmlFor='email'>Email:</label>
+                                <input
+                                    type='email'
+                                    id='email'
+                                    name='email'
+                                    size={30}
+                                    placeholder='address@email.domain'
+                                    ref={register({
+                                        required: 'email is required',
+                                        pattern: {
+                                            value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                                            message:
+                                                'please enter a valid email address',
+                                        },
+                                    })}
+                                    className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
+                                />
+                                {errors.email && (
+                                    <div role='alert' className='text-red-500'>
+                                        {errors.email.message}
+                                    </div>
+                                )}
+                            </div>
+                            <div className='flex flex-col'>
+                                <label htmlFor='password'>Password:</label>
+                                <input
+                                    type='password'
+                                    id='password'
+                                    name='password'
+                                    size={30}
+                                    placeholder='min. 8 char, mix letters and numbers'
+                                    ref={register({
+                                        required: 'password is required',
+                                        pattern: {
+                                            value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                                            message:
+                                                'please enter a valid password',
+                                        },
+                                    })}
+                                    className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
+                                />
+                                {errors.password && (
+                                    <div role='alert' className='text-red-500'>
+                                        {errors.password.message}
+                                    </div>
+                                )}
+                            </div>
+                            <div className='flex flex-col'>
+                                <label htmlFor='confirmPassword'>
+                                    Confirm Password:
+                                </label>
+                                <input
+                                    type='password'
+                                    id='confirmPassword'
+                                    name='confirmPassword'
+                                    size={30}
+                                    placeholder='please confirm your password'
+                                    ref={register({
+                                        validate: value =>
+                                            value === watchPassword ||
+                                            'passwords must match',
+                                    })}
+                                    className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
+                                />
+                                {errors.confirmPassword && (
+                                    <div role='alert' className='text-red-500'>
+                                        {errors.confirmPassword.message}
+                                    </div>
+                                )}
+                            </div>
+                        </section>
+                        <section className='w-3/6 flex flex-col justify-around'>
+                            <div className='flex flex-col'>
+                                <label htmlFor='githubURL'>GitHub:</label>
+                                <input
+                                    type='text'
+                                    id='githubURL'
+                                    name='githubURL'
+                                    ref={register}
+                                    size={30}
+                                    placeholder='your GitHub username here'
+                                    className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
+                                />
+                            </div>
+                            <div className='flex flex-col'>
+                                <label htmlFor='gitlabURL'>GitLab:</label>
+                                <input
+                                    type='text'
+                                    id='gitlabURL'
+                                    name='gitlabURL'
+                                    ref={register}
+                                    size={30}
+                                    placeholder='your GitLab username here'
+                                    className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
+                                />
+                            </div>
+                            <div className='flex flex-col'>
+                                <label htmlFor='bitbucketURL'>BitBucket:</label>
+                                <input
+                                    type='text'
+                                    id='bitbucketURL'
+                                    name='bitbucketURL'
+                                    ref={register}
+                                    size={30}
+                                    placeholder='your BitBucket username here'
+                                    className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
+                                />
+                            </div>
+                            <div className='flex flex-col'>
+                                <label htmlFor='linkedinURL'>LinkedIn:</label>
+                                <input
+                                    type='text'
+                                    id='linkedinURL'
+                                    name='linkedinURL'
+                                    ref={register}
+                                    size={30}
+                                    placeholder='your LinkedIn username here'
+                                    className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
+                                />
+                            </div>
+                        </section>
                     </article>
-                    <article className='h-1/3 lg:h-1/5 w-full flex'>
+                    <article className='h-1/5 w-full flex'>
                         <div className='w-3/6 flex flex-col m-auto p-1'>
                             <label id='languages' htmlFor='languages'>
                                 Languages :
@@ -308,12 +328,13 @@ const SignUp = ({
                             )}
                         </div>
                     </article>
-                    <article className='h-2/3 lg:h-3/20 flex flex-col'>
+                    <article className='h-3/10 flex flex-col'>
                         <div className='h-full flex flex-col'>
                             <label htmlFor='bio'>Biography:</label>
                             <textarea
                                 id='bio'
                                 name='bio'
+                                ref={register}
                                 cols={5}
                                 rows={10}
                                 maxLength={100}
@@ -324,12 +345,12 @@ const SignUp = ({
                             />
                         </div>
                     </article>
-                    <article className='lg:h-1/20'>
-                        <aside className='flex flex-wrap h-1/3 content-center justify-between'>
+                    <article className='h-1/5 flex items-center'>
+                        <aside className='flex flex-row h-1/3 w-full justify-between'>
                             <input
                                 type='submit'
                                 value='SignUp'
-                                className='w-2/6 cursor-pointer bg-blue-800 text-white rounded'
+                                className='w-2/6 h-4/5 cursor-pointer bg-blue-800 text-white rounded'
                                 disabled={Boolean(
                                     errors.username ||
                                         errors.email ||
@@ -340,7 +361,7 @@ const SignUp = ({
                                 )}
                             />
                             <Link href='/signin'>
-                                <a className='text-lg'>
+                                <a className='inline-block align-bottom mr-4 text-lg'>
                                     Already have an account ? SignIn
                                 </a>
                             </Link>
