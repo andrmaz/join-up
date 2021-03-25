@@ -10,13 +10,13 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 import 'tailwindcss/tailwind.css'
 
 function MyApp({Component, pageProps}: AppProps): React.ReactNode {
-    return (
-        <CookiesProvider>
-            <AuthProvider>
-                <Component {...pageProps} />
-            </AuthProvider>
-        </CookiesProvider>
-    )
+  return (
+    <CookiesProvider>
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
+    </CookiesProvider>
+  )
 }
 
 export default MyApp
