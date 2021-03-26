@@ -4,7 +4,7 @@ export interface IProjectInput {
   name: string
   description?: string
   technologies: string[] | string
-  url?: string
+  projectURL?: string
 }
 
 export interface IProjectData {

@@ -13,8 +13,11 @@ import Select from 'react-select'
 import {useForm, Controller} from 'react-hook-form'
 
 import {parseCookies} from '@utils/parseCookies'
-import Navbar from '@components/Navbar'
 import {useAuthState} from '@hooks/useAuthState'
+
+import Input from '@components/Input'
+import Navbar from '@components/Navbar'
+import ErrorMessage from '@components/ErrorMessage'
 
 import type {IProjectInput} from 'app/types/project'
 
@@ -68,7 +71,7 @@ const Project: NextPage = ({
       </Head>
       <Navbar />
       <main className='h-92v container flex justify-center items-center'>
-        <section className='w-3/5 xl:w-4/6 h-5/6 p-4 xl:p-2 border rounded'>
+        <section className='w-3/5 xl:w-4/6 h-5/6 xl:h-4/6 p-4 xl:p-2 border rounded'>
           <header className='h-1/6'>
             <h1 className='h-2/3 text-3xl'>Create a new project</h1>
             <span>
@@ -79,7 +82,7 @@ const Project: NextPage = ({
             onSubmit={handleSubmit(onSubmit)}
             className='flex flex-col h-5/6 justify-evenly'
           >
-            <div className='h-1/6 flex flex-col'>
+            <div className='h-1/6 flex flex-col justify-evenly'>
               <label htmlFor='owner'>Owner: </label>
               <div className='flex flex-row'>
                 <div className='h-full pr-1'>
@@ -95,35 +98,30 @@ const Project: NextPage = ({
                 </select>
               </div>
             </div>
-            <div className='h-1/6 flex flex-col xl:mb-2'>
-              <label htmlFor='title'>Name: </label>
-              <input
-                type='text'
-                id='name'
-                name='name'
-                placeholder='Give a unique and memorable name to your project'
-                ref={register({
-                  required: 'project name is required',
-                })}
-                className='border-gray-400 border-2 rounded p-1'
-              />
-              {errors.name && (
-                <div role='alert' className='text-red-500'>
-                  {errors.name.message}
-                </div>
-              )}
-            </div>
-            <div className='h-1/6 flex flex-col'>
-              <label htmlFor='description'>Description: (optional)</label>
-              <input
-                type='text'
-                id='description'
-                name='description'
-                placeholder='Consider providing a short description'
-                ref={register}
-                className='border-gray-400 border-2 rounded p-1'
-              />
-            </div>
+            <Input
+              type='text'
+              id='name'
+              name='name'
+              label='Name'
+              placeholder='Give a unique and memorable name to your project'
+              register={register({
+                required: 'project name is required',
+              })}
+              errors={
+                errors.name && (
+                  <ErrorMessage>{errors.name.message}</ErrorMessage>
+                )
+              }
+            />
+            <Input
+              type='text'
+              id='description'
+              name='description'
+              label='Description'
+              placeholder='Consider providing a short description'
+              register={register}
+              optional
+            />
             <div className='h-1/6 flex flex-col mb-6'>
               <label id='technologies' htmlFor='technologies'>
                 Technologies :
@@ -165,24 +163,29 @@ const Project: NextPage = ({
                 )}
               />
               {errors.technologies && (
-                <div role='alert' className='text-red-500'>
-                  {errors.technologies.message}
-                </div>
+                <ErrorMessage>{errors.technologies.message}</ErrorMessage>
               )}
             </div>
-            <div className='h-1/6 flex flex-col'>
-              <label htmlFor='projectURL'>Url: (optional)</label>
-              <input
-                id='projectURL'
-                name='projectURL'
-                type='url'
-                pattern='https://.*'
-                placeholder='Connect this project to an existing one'
-                ref={register}
-                className='border-gray-400 border-2 rounded p-1'
-              />
-            </div>
-            <div className='h-1/6 flex flex-col pt-6'>
+            <Input
+              type='url'
+              id='projectURL'
+              name='projectURL'
+              label='Url'
+              placeholder='Connect this project to an existing one'
+              register={register({
+                pattern: {
+                  value: /(https?:\/\/)?([\w-])+\.{1}([a-zA-Z]{2,63})([/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)/,
+                  message: 'Please enter a valid URL',
+                },
+              })}
+              errors={
+                errors.projectURL && (
+                  <ErrorMessage>{errors.projectURL.message}</ErrorMessage>
+                )
+              }
+              optional
+            />
+            <div className='h-1/6 flex flex-col pt-6 justify-end'>
               <input
                 type='submit'
                 value='Create Project'

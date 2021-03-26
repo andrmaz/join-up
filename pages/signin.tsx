@@ -8,6 +8,8 @@ import {useForm} from 'react-hook-form'
 
 import {useAuthDispatch} from '@hooks/useAuthDispatch'
 import {login} from '@actions/authActions'
+import Input from '@components/Input'
+import ErrorMessage from '@components/ErrorMessage'
 import type {SigninInputs} from 'app/types/user'
 
 const SignIn = (): JSX.Element => {
@@ -61,52 +63,44 @@ const SignIn = (): JSX.Element => {
           onSubmit={handleSubmit(onSubmit)}
           className='h-4/6 flex flex-col justify-between'
         >
-          <div className='flex flex-col'>
-            <label htmlFor='email'>Email:</label>
-            <input
-              type='email'
-              id='email'
-              name='email'
-              size={30}
-              placeholder='please enter your email'
-              ref={register({
-                required: 'email is required',
-                pattern: {
-                  value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                  message: 'please enter a valid email address',
-                },
-              })}
-              className='focus:outline-none focus:ring focus:border-blue-300 border-2 border-black p-1 rounded'
-            />
-            {errors.email && (
-              <div role='alert' className='text-red-500'>
-                {errors.email.message}
-              </div>
-            )}
-          </div>
-          <div className='flex flex-col'>
-            <label htmlFor='password'>Password:</label>
-            <input
-              type='password'
-              id='password'
-              name='password'
-              size={30}
-              placeholder='please enter your password'
-              ref={register({
-                required: 'password is required',
-                pattern: {
-                  value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                  message: 'please enter a valid password',
-                },
-              })}
-              className='focus:outline-none focus:ring focus:border-blue-300 border-2 border-black p-1 rounded'
-            />
-            {errors.password && (
-              <div role='alert' className='text-red-500'>
-                {errors.password.message}
-              </div>
-            )}
-          </div>
+          <Input
+            type='email'
+            id='email'
+            name='email'
+            label='Email'
+            placeholder='please enter your email'
+            register={register({
+              required: 'email is required',
+              pattern: {
+                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                message: 'please enter a valid email address',
+              },
+            })}
+            errors={
+              errors.email && (
+                <ErrorMessage>{errors.email.message}</ErrorMessage>
+              )
+            }
+          />
+          <Input
+            type='password'
+            id='password'
+            name='password'
+            label='Password'
+            placeholder='please enter your password'
+            register={register({
+              required: 'password is required',
+              pattern: {
+                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                message: 'please enter a valid password',
+              },
+            })}
+            errors={
+              errors.password && (
+                <ErrorMessage>{errors.password.message}</ErrorMessage>
+              )
+            }
+          />
           <input
             disabled={Boolean(errors.email || errors.password)}
             type='submit'

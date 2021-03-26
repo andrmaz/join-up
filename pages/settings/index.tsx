@@ -15,6 +15,7 @@ import {parseCookies} from '@utils/parseCookies'
 //import {useAuthDispatch} from '@hooks/useAuthDispatch'
 import {useAuthState} from '@hooks/useAuthState'
 import Navbar from '@components/Navbar'
+import Input from '@components/Input'
 import type {IUserContext} from 'app/types/user'
 
 const Profile: NextPage = ({
@@ -97,53 +98,45 @@ const Profile: NextPage = ({
               onSubmit={handleSubmit(onSubmit)}
               className='flex flex-col h-full justify-between p-1'
             >
-              <article className='h-3/5 flex flex-col justify-around'>
+              <article className='h-3/5 flex flex-col justify-evenly'>
                 <div className='flex flex-row'>
                   <div className='w-3/5'>
                     <div className='flex flex-col xl:justify-between'>
-                      <label htmlFor='githubURL'>GitHub:</label>
-                      <input
+                      <Input
                         type='text'
                         id='githubURL'
                         name='githubURL'
-                        ref={register}
-                        size={30}
-                        defaultValue={githubURL}
+                        label='GitHub'
                         placeholder='your GitHub username here'
-                        className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-gray-400 rounded'
+                        register={register}
+                        defaultValue={githubURL}
                       />
-                      <label htmlFor='gitlabURL'>GitLab:</label>
-                      <input
+                      <Input
                         type='text'
                         id='gitlabURL'
                         name='gitlabURL'
-                        ref={register}
-                        size={30}
-                        defaultValue={gitlabURL}
+                        label='GitLab'
                         placeholder='your GitLab username here'
-                        className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-gray-400 rounded'
+                        register={register}
+                        defaultValue={gitlabURL}
                       />
-                      <label htmlFor='bitbucketURL'>BitBucket:</label>
-                      <input
+                      <Input
                         type='text'
                         id='bitbucketURL'
                         name='bitbucketURL'
-                        ref={register}
-                        size={30}
-                        defaultValue={bitbucketURL}
+                        label='BitBucket'
                         placeholder='your BitBucket username here'
-                        className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-gray-400 rounded'
+                        register={register}
+                        defaultValue={bitbucketURL}
                       />
-                      <label htmlFor='linkedinURL'>LinkedIn:</label>
-                      <input
+                      <Input
                         type='text'
                         id='linkedinURL'
                         name='linkedinURL'
-                        ref={register}
-                        defaultValue={linkedinURL}
-                        size={30}
+                        label='LinkedIn'
                         placeholder='your LinkedIn username here'
-                        className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-gray-400 rounded'
+                        register={register}
+                        defaultValue={linkedinURL}
                       />
                     </div>
                   </div>

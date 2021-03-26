@@ -10,6 +10,8 @@ import {useForm, Controller} from 'react-hook-form'
 
 import {useAuthDispatch} from '@hooks/useAuthDispatch'
 import {login} from '@actions/authActions'
+import Input from '@components/Input'
+import ErrorMessage from '@components/ErrorMessage'
 import type {ISignupInputs} from 'app/types/user'
 
 const SignUp = ({
@@ -76,149 +78,119 @@ const SignUp = ({
         >
           <article className='w-full h-2/5 flex'>
             <section className='w-3/6 flex flex-col justify-around'>
-              <div className='flex flex-col'>
-                <label htmlFor='username'>Username:</label>
-                <input
-                  type='text'
-                  id='username'
-                  name='username'
-                  size={30}
-                  placeholder='please enter your username'
-                  ref={register({
-                    required: 'username is required',
-                    minLength: {
-                      value: 3,
-                      message: 'username must be at least 3 characters long',
-                    },
-                    maxLength: {
-                      value: 20,
-                      message: 'username must be at most 20 characters long',
-                    },
-                  })}
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-                {errors.username && (
-                  <div role='alert' className='text-red-500'>
-                    {errors.username.message}
-                  </div>
-                )}
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='email'>Email:</label>
-                <input
-                  type='email'
-                  id='email'
-                  name='email'
-                  size={30}
-                  placeholder='address@email.domain'
-                  ref={register({
-                    required: 'email is required',
-                    pattern: {
-                      value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                      message: 'please enter a valid email address',
-                    },
-                  })}
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-                {errors.email && (
-                  <div role='alert' className='text-red-500'>
-                    {errors.email.message}
-                  </div>
-                )}
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='password'>Password:</label>
-                <input
-                  type='password'
-                  id='password'
-                  name='password'
-                  size={30}
-                  placeholder='min. 8 char, mix letters and numbers'
-                  ref={register({
-                    required: 'password is required',
-                    pattern: {
-                      value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                      message: 'please enter a valid password',
-                    },
-                  })}
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-                {errors.password && (
-                  <div role='alert' className='text-red-500'>
-                    {errors.password.message}
-                  </div>
-                )}
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='confirmPassword'>Confirm Password:</label>
-                <input
-                  type='password'
-                  id='confirmPassword'
-                  name='confirmPassword'
-                  size={30}
-                  placeholder='please confirm your password'
-                  ref={register({
-                    validate: value =>
-                      value === watchPassword || 'passwords must match',
-                  })}
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-                {errors.confirmPassword && (
-                  <div role='alert' className='text-red-500'>
-                    {errors.confirmPassword.message}
-                  </div>
-                )}
-              </div>
+              <Input
+                type='text'
+                id='username'
+                name='username'
+                label='Username'
+                placeholder='please enter your username'
+                register={register({
+                  required: 'username is required',
+                  minLength: {
+                    value: 3,
+                    message: 'username must be at least 3 characters long',
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: 'username must be at most 20 characters long',
+                  },
+                })}
+                errors={
+                  errors.username && (
+                    <ErrorMessage>{errors.username.message}</ErrorMessage>
+                  )
+                }
+              />
+              <Input
+                type='email'
+                id='email'
+                name='email'
+                label='Email'
+                placeholder='please enter your email'
+                register={register({
+                  required: 'email is required',
+                  pattern: {
+                    value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                    message: 'please enter a valid email address',
+                  },
+                })}
+                errors={
+                  errors.email && (
+                    <ErrorMessage>{errors.email.message}</ErrorMessage>
+                  )
+                }
+              />
+              <Input
+                type='password'
+                id='password'
+                name='password'
+                label='Password'
+                placeholder='min. 8 char, mix letters and numbers'
+                register={register({
+                  required: 'password is required',
+                  pattern: {
+                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                    message: 'please enter a valid password',
+                  },
+                })}
+                errors={
+                  errors.password && (
+                    <ErrorMessage>{errors.password.message}</ErrorMessage>
+                  )
+                }
+              />
+              <Input
+                type='password'
+                id='confirmPassword'
+                name='confirmPassword'
+                label='Confirm Password'
+                placeholder='please confirm your password'
+                register={register({
+                  validate: value =>
+                    value === watchPassword || 'passwords must match',
+                })}
+                errors={
+                  errors.confirmPassword && (
+                    <ErrorMessage>
+                      {errors.confirmPassword.message}
+                    </ErrorMessage>
+                  )
+                }
+              />
             </section>
             <section className='w-3/6 flex flex-col justify-around'>
-              <div className='flex flex-col'>
-                <label htmlFor='githubURL'>GitHub:</label>
-                <input
-                  type='text'
-                  id='githubURL'
-                  name='githubURL'
-                  ref={register}
-                  size={30}
-                  placeholder='your GitHub username here'
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='gitlabURL'>GitLab:</label>
-                <input
-                  type='text'
-                  id='gitlabURL'
-                  name='gitlabURL'
-                  ref={register}
-                  size={30}
-                  placeholder='your GitLab username here'
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='bitbucketURL'>BitBucket:</label>
-                <input
-                  type='text'
-                  id='bitbucketURL'
-                  name='bitbucketURL'
-                  ref={register}
-                  size={30}
-                  placeholder='your BitBucket username here'
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='linkedinURL'>LinkedIn:</label>
-                <input
-                  type='text'
-                  id='linkedinURL'
-                  name='linkedinURL'
-                  ref={register}
-                  size={30}
-                  placeholder='your LinkedIn username here'
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-              </div>
+              <Input
+                type='text'
+                id='githubURL'
+                name='githubURL'
+                label='GitHub'
+                placeholder='your GitHub username here'
+                register={register}
+              />
+              <Input
+                type='text'
+                id='gitlabURL'
+                name='gitlabURL'
+                label='GitLab'
+                placeholder='your GitLab username here'
+                register={register}
+              />
+              <Input
+                type='text'
+                id='bitbucketURL'
+                name='bitbucketURL'
+                label='BitBucket'
+                placeholder='your BitBucket username here'
+                register={register}
+              />
+              <Input
+                type='text'
+                id='linkedinURL'
+                name='linkedinURL'
+                label='LinkedIn'
+                placeholder='your LinkedIn username here'
+                register={register}
+              />
             </section>
           </article>
           <article className='h-1/5 w-full flex'>
