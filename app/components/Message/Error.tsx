@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const ErrorMessage = ({children}: Props): JSX.Element => {
+const MessageError = ({children}: Props): JSX.Element => {
   return (
     <div role='alert' className='text-red-500'>
       {children}
@@ -12,4 +12,4 @@ const ErrorMessage = ({children}: Props): JSX.Element => {
   )
 }
 
-export default ErrorMessage
+export default MessageError

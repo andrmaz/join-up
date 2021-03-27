@@ -11,7 +11,7 @@ import {useForm, Controller} from 'react-hook-form'
 import {useAuthDispatch} from '@hooks/useAuthDispatch'
 import {login} from '@actions/authActions'
 import Input from '@components/Input'
-import ErrorMessage from '@components/ErrorMessage'
+import ErrorMessage from '@components/Message/Error'
 import type {ISignupInputs} from 'app/types/user'
 
 const SignUp = ({

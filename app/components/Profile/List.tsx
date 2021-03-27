@@ -1,4 +1,4 @@
-const CardListItem = ({value}: {value?: string[]}): JSX.Element => {
+export const ProfileList = ({value}: {value?: string[]}): JSX.Element => {
   return (
     <li className='text-red-600'>
       {Array.isArray(value) && value.length > 3
@@ -7,5 +7,3 @@ const CardListItem = ({value}: {value?: string[]}): JSX.Element => {
     </li>
   )
 }
-
-export default CardListItem

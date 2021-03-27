@@ -17,7 +17,7 @@ import {useAuthState} from '@hooks/useAuthState'
 
 import Input from '@components/Input'
 import Navbar from '@components/Navbar'
-import ErrorMessage from '@components/ErrorMessage'
+import ErrorMessage from '@components/Message/Error'
 
 import type {IProjectInput} from 'app/types/project'
 

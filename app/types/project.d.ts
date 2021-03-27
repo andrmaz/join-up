@@ -21,4 +21,5 @@ export interface IProjectData {
   createdAt: string
   //TODO check type of collaborator
   collaborators: Array<string>
+  jobsAvailable: boolean
 }

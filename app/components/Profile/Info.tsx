@@ -1,6 +1,4 @@
-import * as React from 'react'
-
-const CardInfoItem = ({value}: {value?: string}): JSX.Element => {
+export const ProfileInfo = ({value}: {value?: string}): JSX.Element => {
   return (
     <li className='font-bold p-1'>
       {typeof value === 'string' && value.length >= 40
@@ -9,5 +7,3 @@ const CardInfoItem = ({value}: {value?: string}): JSX.Element => {
     </li>
   )
 }
-
-export default CardInfoItem
