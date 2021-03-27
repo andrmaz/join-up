@@ -4,7 +4,7 @@ export interface IFormInput {
   type: string
   label: string
   placeholder: string
-  register: React.Ref<T> | undefined
+  register: React.Ref<T>
   defaultValue?: string
   optional?: boolean
   errors?: JSX.Element | undefined
