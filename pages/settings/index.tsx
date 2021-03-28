@@ -8,15 +8,18 @@ import Head from 'next/head'
 import {useRouter} from 'next/router'
 import {ParsedUrlQuery} from 'querystring'
 import axios from 'axios'
-import Select from 'react-select'
-import {useForm, Controller} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 
 import {parseCookies} from '@utils/parseCookies'
 //import {useAuthDispatch} from '@hooks/useAuthDispatch'
 import {useAuthState} from '@hooks/useAuthState'
-import Navbar from '@components/Navbar'
-import Input from '@components/Input'
+import Navbar from '@components/Navigation/Navbar'
+import Input from '@components/Form/Input'
+import FormSelect from '@components/Form/Select'
+import ErrorMessage from '@components/Form/ErrorMessage'
+
 import type {IUserContext} from 'app/types/user'
+import type {SelectOptions} from 'app/types/form'
 
 const Profile: NextPage = ({
   techOptions,
@@ -151,89 +154,55 @@ const Profile: NextPage = ({
                   </div>
                 </div>
                 <div className='flex flex-col p-1'>
-                  <label id='languages' htmlFor='languages'>
-                    Languages :
-                  </label>
-                  <Controller
-                    name='languages'
+                  <FormSelect
+                    id='languages'
+                    label='Languages'
+                    options={langOptions}
+                    placeholder='Select your languages'
+                    message='Please select at least one language'
                     control={control}
-                    //TODO default languages must be in this format
-                    //{ value: 'language', label: 'Language'}
-                    /* defaultValue={languages.map(
-                                            lang => lang.value
-                                        )} */
-                    defaultValue=''
-                    render={({onBlur, ref}) => (
-                      <Select
-                        id='selectLanguages'
-                        inputId='languages'
-                        name='languages'
-                        inputRef={ref}
-                        aria-labelledby='languages'
-                        //TODO default languages must be in this format
-                        //{ value: 'language', label: 'Language'}
-                        //defaultValue={languages}
-                        closeMenuOnSelect={false}
-                        isMulti
-                        options={langOptions}
-                        placeholder='Select your language'
-                        blurInputOnSelect={false}
-                        onBlur={onBlur}
-                        onChange={values => {
-                          setValue(
-                            'languages',
-                            values.map(value => value.label),
-                            {
-                              shouldValidate: true,
-                              shouldDirty: true,
-                            }
-                          )
-                        }}
-                      />
-                    )}
+                    onChange={values => {
+                      setValue(
+                        'languages',
+                        values.map((value: SelectOptions) => value.label),
+                        {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                        }
+                      )
+                    }}
+                    errors={
+                      errors.languages && (
+                        <ErrorMessage>{errors.languages.message}</ErrorMessage>
+                      )
+                    }
                   />
                 </div>
                 <div className='flex flex-col p-1'>
-                  <label id='technologies' htmlFor='technologies'>
-                    Technologies :
-                  </label>
-                  <Controller
-                    name='technologies'
+                  <FormSelect
+                    id='technologies'
+                    label='Technologies'
+                    options={techOptions}
+                    placeholder='Choose your tech stack'
+                    message='Please select at least one technology'
                     control={control}
-                    //TODO default Technologies must be in this format
-                    //{ value: 'technology', label: 'Technology'}
-                    /* defaultValue={technologies.map(
-                                            tech => tech.value
-                                        )} */
-                    defaultValue=''
-                    render={({onBlur, ref}) => (
-                      <Select
-                        id='searchTechnologies'
-                        inputId='technologies'
-                        name='technologies'
-                        inputRef={ref}
-                        aria-labelledby='technologies'
-                        //TODO default Technologies must be in this format
-                        //{ value: 'technology', label: 'Technology'}
-                        //defaultValue={technologies}
-                        closeMenuOnSelect={false}
-                        isMulti
-                        options={techOptions}
-                        placeholder='Choose your tech stack'
-                        blurInputOnSelect={false}
-                        onBlur={onBlur}
-                        onChange={values => {
-                          setValue(
-                            'technologies',
-                            values.map(value => value.label),
-                            {
-                              shouldValidate: true,
-                              shouldDirty: true,
-                            }
-                          )
-                        }}
-                      />
-                    )}
+                    onChange={values => {
+                      setValue(
+                        'technologies',
+                        values.map((value: SelectOptions) => value.label),
+                        {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                        }
+                      )
+                    }}
+                    errors={
+                      errors.technologies && (
+                        <ErrorMessage>
+                          {errors.technologies.message}
+                        </ErrorMessage>
+                      )
+                    }
                   />
                 </div>
               </article>

@@ -9,17 +9,18 @@ import {useRouter} from 'next/router'
 import {ParsedUrlQuery} from 'querystring'
 
 import axios from 'axios'
-import Select from 'react-select'
-import {useForm, Controller} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 
 import {parseCookies} from '@utils/parseCookies'
 import {useAuthState} from '@hooks/useAuthState'
 
-import Input from '@components/Input'
-import Navbar from '@components/Navbar'
-import ErrorMessage from '@components/Message/Error'
+import Input from '@components/Form/Input'
+import Navbar from '@components/Navigation/Navbar'
+import ErrorMessage from '@components/Form/ErrorMessage'
+import FormSelect from '@components/Form/Select'
 
 import type {IProjectInput} from 'app/types/project'
+import type {SelectOptions} from 'app/types/form'
 
 const Project: NextPage = ({
   technologies,
@@ -123,48 +124,29 @@ const Project: NextPage = ({
               optional
             />
             <div className='h-1/6 flex flex-col mb-6'>
-              <label id='technologies' htmlFor='technologies'>
-                Technologies :
-              </label>
-              <Controller
-                name='technologies'
+              <FormSelect
+                id='technologies'
+                label='Technologies'
+                options={technologies}
+                placeholder='Choose your tech stack'
+                message='Please select at least one technology'
                 control={control}
-                defaultValue=''
-                rules={{
-                  required: {
-                    value: true,
-                    message: 'Please select at least one technology',
-                  },
+                onChange={values => {
+                  setValue(
+                    'technologies',
+                    values.map((value: SelectOptions) => value.label),
+                    {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    }
+                  )
                 }}
-                render={({value, onBlur}) => (
-                  <Select
-                    id='searchTechnologies'
-                    inputId='technologies'
-                    name='technologies'
-                    aria-labelledby='technologies'
-                    defaultValue={value}
-                    closeMenuOnSelect={false}
-                    isMulti
-                    options={technologies}
-                    placeholder='Choose your tech stack'
-                    blurInputOnSelect={false}
-                    onBlur={onBlur}
-                    onChange={values => {
-                      setValue(
-                        'technologies',
-                        values.map(value => value.label),
-                        {
-                          shouldValidate: true,
-                          shouldDirty: true,
-                        }
-                      )
-                    }}
-                  />
-                )}
+                errors={
+                  errors.technologies && (
+                    <ErrorMessage>{errors.technologies.message}</ErrorMessage>
+                  )
+                }
               />
-              {errors.technologies && (
-                <ErrorMessage>{errors.technologies.message}</ErrorMessage>
-              )}
             </div>
             <Input
               type='url'

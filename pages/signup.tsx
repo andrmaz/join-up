@@ -5,14 +5,16 @@ import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
 import axios from 'axios'
 import {useCookies} from 'react-cookie'
-import Select from 'react-select'
-import {useForm, Controller} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 
 import {useAuthDispatch} from '@hooks/useAuthDispatch'
 import {login} from '@actions/authActions'
-import Input from '@components/Input'
-import ErrorMessage from '@components/Message/Error'
+import Input from '@components/Form/Input'
+import FormSelect from '@components/Form/Select'
+import ErrorMessage from '@components/Form/ErrorMessage'
+
 import type {ISignupInputs} from 'app/types/user'
+import type {SelectOptions} from 'app/types/form'
 
 const SignUp = ({
   technologies,
@@ -195,96 +197,54 @@ const SignUp = ({
           </article>
           <article className='h-1/5 w-full flex'>
             <div className='w-3/6 flex flex-col m-auto p-1'>
-              <label id='languages' htmlFor='languages'>
-                Languages :
-              </label>
-              <Controller
-                name='languages'
+              <FormSelect
+                id='languages'
+                label='Languages'
+                options={languages}
+                placeholder='Select your languages'
+                message='Please select at least one language'
                 control={control}
-                defaultValue=''
-                rules={{
-                  required: {
-                    value: true,
-                    message: 'Please select at least one language',
-                  },
+                onChange={values => {
+                  setValue(
+                    'languages',
+                    values.map((value: SelectOptions) => value.label),
+                    {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    }
+                  )
                 }}
-                render={({value, onBlur}) => (
-                  <Select
-                    id='selectLanguages'
-                    inputId='languages'
-                    name='languages'
-                    aria-labelledby='languages'
-                    defaultValue={value}
-                    closeMenuOnSelect={false}
-                    isMulti
-                    options={languages}
-                    placeholder='Select your language'
-                    blurInputOnSelect={false}
-                    onBlur={onBlur}
-                    onChange={values => {
-                      setValue(
-                        'languages',
-                        values.map(value => value.label),
-                        {
-                          shouldValidate: true,
-                          shouldDirty: true,
-                        }
-                      )
-                    }}
-                  />
-                )}
+                errors={
+                  errors.languages && (
+                    <ErrorMessage>{errors.languages.message}</ErrorMessage>
+                  )
+                }
               />
-              {errors.languages && (
-                <div role='alert' className='text-red-500'>
-                  {errors.languages.message}
-                </div>
-              )}
             </div>
             <div className='w-3/6 flex flex-col m-auto p-1'>
-              <label id='technologies' htmlFor='technologies'>
-                Technologies :
-              </label>
-              <Controller
-                name='technologies'
+              <FormSelect
+                id='technologies'
+                label='Technologies'
+                options={technologies}
+                placeholder='Choose your tech stack'
+                message='Please select at least one technology'
                 control={control}
-                defaultValue=''
-                rules={{
-                  required: {
-                    value: true,
-                    message: 'Please select at least one technology',
-                  },
+                onChange={values => {
+                  setValue(
+                    'technologies',
+                    values.map((value: SelectOptions) => value.label),
+                    {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    }
+                  )
                 }}
-                render={({value, onBlur}) => (
-                  <Select
-                    id='searchTechnologies'
-                    inputId='technologies'
-                    name='technologies'
-                    aria-labelledby='technologies'
-                    defaultValue={value}
-                    closeMenuOnSelect={false}
-                    isMulti
-                    options={technologies}
-                    placeholder='Choose your tech stack'
-                    blurInputOnSelect={false}
-                    onBlur={onBlur}
-                    onChange={values => {
-                      setValue(
-                        'technologies',
-                        values.map(value => value.label),
-                        {
-                          shouldValidate: true,
-                          shouldDirty: true,
-                        }
-                      )
-                    }}
-                  />
-                )}
+                errors={
+                  errors.technologies && (
+                    <ErrorMessage>{errors.technologies.message}</ErrorMessage>
+                  )
+                }
               />
-              {errors.technologies && (
-                <div role='alert' className='text-red-500'>
-                  {errors.technologies.message}
-                </div>
-              )}
             </div>
           </article>
           <article className='h-3/10 flex flex-col'>

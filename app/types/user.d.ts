@@ -28,8 +28,9 @@ export interface IUserContext {
   linkedinURL?: string
   avatar: string
   bio?: string
-  languages: string[]
-  technologies: string[]
+  // refer to https://github.com/react-hook-form/react-hook-form/issues/987
+  languages: NestedValue<string[]>
+  technologies: NestedValue<string[]>
 }
 
 export type UserState = {

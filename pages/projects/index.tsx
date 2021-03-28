@@ -10,7 +10,7 @@ import {ParsedUrlQuery} from 'querystring'
 import axios from 'axios'
 
 import {parseCookies} from '@utils/parseCookies'
-import Navbar from '@components/Navbar'
+import Navbar from '@components/Navigation/Navbar'
 import ProjectCard from '@components/Project/Card'
 
 import type {IProjectData} from 'app/types/project'
