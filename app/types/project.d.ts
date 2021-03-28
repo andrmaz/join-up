@@ -12,6 +12,8 @@ export interface IProjectInput {
 
 export interface IProjectData {
   _id: string
+  //? pass project owner for future use cases
+  //owner: string
   updatedAt: string
   technologies: string[]
   sortName: string

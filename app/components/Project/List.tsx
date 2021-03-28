@@ -1,5 +1,5 @@
 import ProjectCard from '@components/Project/Item'
-import {MessageEmpty} from '@components/Message/Empty'
+import {EmptyMessage} from '@components/Project/EmptyMessage'
 import type {IProjectData} from 'app/types/project'
 
 const ProjectsList = ({
@@ -16,7 +16,7 @@ const ProjectsList = ({
           ))}
         </ul>
       ) : (
-        <MessageEmpty />
+        <EmptyMessage />
       )}
     </section>
   )

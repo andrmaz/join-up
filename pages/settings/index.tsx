@@ -17,6 +17,7 @@ import Navbar from '@components/Navigation/Navbar'
 import Input from '@components/Form/Input'
 import FormSelect from '@components/Form/Select'
 import ErrorMessage from '@components/Form/ErrorMessage'
+import ProfileMenu from '@components/Menu/Menu'
 
 import type {IUserContext} from 'app/types/user'
 import type {SelectOptions} from 'app/types/form'
@@ -66,36 +67,7 @@ const Profile: NextPage = ({
       <Navbar />
       <main className='h-92v py-12 px-32 xl:px-72'>
         <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
-          <section className='h-4/5 p-4'>
-            <article className='h-3/5 flex flex-col'>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Account Settings</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Profile</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Account</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Emails</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Notifications</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Security Logs</span>
-              </div>
-            </article>
-            <article className='h-2/5 flex flex-col'>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Moderation settings</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Blocked users</span>
-              </div>
-            </article>
-          </section>
+          <ProfileMenu />
           <section className='w-200 h-auto border-2 border-solid rounded'>
             <form
               onSubmit={handleSubmit(onSubmit)}

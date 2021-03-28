@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export const MessageEmpty = (): JSX.Element => (
+export const EmptyMessage = (): JSX.Element => (
   <div className='w-full flex justify-center'>
     <span className='text-lg xl:text-2xl text-center tracking-wide'>
       It seems there is not any project yet. <br />
