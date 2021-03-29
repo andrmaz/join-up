@@ -55,13 +55,13 @@ const SignIn = (): JSX.Element => {
         <title>SignIn</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <section className='h-2/6 lg:w-4/6 xl:w-3/6 border border-black rounded py-4 px-16 xl:px-10'>
+      <section className='h-2/6 lg:h-2/5 w-3/6 border border-black rounded py-4 px-10'>
         <header className='h-1/6 text-center'>
           <h1 className='text-3xl'>SignIn</h1>
         </header>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='h-4/6 flex flex-col justify-between'
+          className='h-4/6 flex flex-col justify-between  xl:justify-evenly'
         >
           <Input
             type='email'
@@ -105,10 +105,10 @@ const SignIn = (): JSX.Element => {
             disabled={Boolean(errors.email || errors.password)}
             type='submit'
             value='SignIn'
-            className='h-8 cursor-pointer bg-blue-800 text-white rounded'
+            className='h-6 cursor-pointer bg-blue-800 text-white rounded disabled:opacity-50'
           />
         </form>
-        <div className='inline-flex justify-between w-full h-1/6 pt-5'>
+        <div className='inline-flex justify-between w-full h-1/6 pt-5 lg:text-xs'>
           <Link href='/signup'>
             <a>Do not have an account? SignUp</a>
           </Link>

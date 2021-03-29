@@ -70,7 +70,7 @@ const SignUp = ({
         <title>SignUp</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <section className='lg:h-18/20 xl:h-4/5 w-5/6 border border-black rounded p-2'>
+      <section className='lg:h-18/20 xl:h-4/5 w-5/6 lg:w-4/5 border border-black rounded p-2'>
         <header className='h-1/10 text-center'>
           <h1 className='text-3xl'>SignUp</h1>
         </header>
@@ -78,7 +78,7 @@ const SignUp = ({
           onSubmit={handleSubmit(onSubmit)}
           className='flex flex-col h-18/20 justify-between p-1'
         >
-          <article className='w-full h-2/5 flex'>
+          <article className='w-full h-1/2 flex'>
             <section className='w-3/6 flex flex-col justify-around'>
               <Input
                 type='text'
@@ -195,8 +195,8 @@ const SignUp = ({
               />
             </section>
           </article>
-          <article className='h-1/5 w-full flex'>
-            <div className='w-3/6 flex flex-col m-auto p-1'>
+          <article className='h-1/5 w-full flex mt-2'>
+            <div className='w-3/6 flex flex-col m-auto p-0.5'>
               <FormSelect
                 id='languages'
                 label='Languages'
@@ -221,7 +221,7 @@ const SignUp = ({
                 }
               />
             </div>
-            <div className='w-3/6 flex flex-col m-auto p-1'>
+            <div className='w-3/6 flex flex-col m-auto p-0.5'>
               <FormSelect
                 id='technologies'
                 label='Technologies'
@@ -247,7 +247,7 @@ const SignUp = ({
               />
             </div>
           </article>
-          <article className='h-3/10 flex flex-col'>
+          <article className='h-1/5 flex flex-col'>
             <div className='h-full flex flex-col'>
               <label htmlFor='bio'>Biography:</label>
               <textarea
@@ -269,7 +269,7 @@ const SignUp = ({
               <input
                 type='submit'
                 value='SignUp'
-                className='w-2/6 h-4/5 cursor-pointer bg-blue-800 text-white rounded'
+                className='w-72 h-6 cursor-pointer bg-blue-800 text-white rounded disabled:opacity-50'
                 disabled={Boolean(
                   errors.username ||
                     errors.email ||
@@ -280,7 +280,7 @@ const SignUp = ({
                 )}
               />
               <Link href='/signin'>
-                <a className='inline-block align-bottom mr-4 text-lg'>
+                <a className='inline-block align-bottom mr-4 text-sm'>
                   Already have an account ? SignIn
                 </a>
               </Link>

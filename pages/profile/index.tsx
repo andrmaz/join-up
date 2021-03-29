@@ -11,7 +11,7 @@ import axios from 'axios'
 
 import {parseCookies} from '@utils/parseCookies'
 import Navbar from '@components/Navigation/Navbar'
-import Card from '@components/Profile/Card'
+import UserCard from '@components/User/Card'
 import ProjectsList from '@components/Project/List'
 
 const Profile: NextPage = ({
@@ -26,7 +26,7 @@ const Profile: NextPage = ({
       <Navbar />
       <main className='h-auto py-16 px-32 xl:px-48'>
         <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
-          <Card />
+          <UserCard />
           <article className='w-200 h-full border-2 border-solid rounded'>
             <header className='w-max h-12 text-2xl mb-2 px-4'>
               <h3>Projects</h3>

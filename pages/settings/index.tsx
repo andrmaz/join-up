@@ -18,6 +18,7 @@ import Input from '@components/Form/Input'
 import FormSelect from '@components/Form/Select'
 import ErrorMessage from '@components/Form/ErrorMessage'
 import ProfileMenu from '@components/Menu/Menu'
+import {SubmitButton} from '@components/Form/SubmitButton'
 
 import type {IUserContext} from 'app/types/user'
 import type {SelectOptions} from 'app/types/form'
@@ -125,7 +126,7 @@ const Profile: NextPage = ({
                     </div>
                   </div>
                 </div>
-                <div className='flex flex-col p-1'>
+                <div className='flex flex-col p-0.5'>
                   <FormSelect
                     id='languages'
                     label='Languages'
@@ -150,7 +151,7 @@ const Profile: NextPage = ({
                     }
                   />
                 </div>
-                <div className='flex flex-col p-1'>
+                <div className='flex flex-col p-0.5'>
                   <FormSelect
                     id='technologies'
                     label='Technologies'
@@ -199,16 +200,14 @@ const Profile: NextPage = ({
               <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
                 <button
                   type='button'
-                  className='w-2/6 h-1/5 cursor-pointer bg-gray-600 text-white rounded m-1'
+                  className='w-2/6 h-6 cursor-pointer bg-gray-600 text-white rounded m-1'
                   onClick={() => router.push('/')}
                 >
                   Cancel
                 </button>
-                <input
-                  type='submit'
+                <SubmitButton
                   value='Save'
-                  className='w-2/6 h-1/5 cursor-pointer bg-green-600 text-white rounded m-1'
-                  disabled={Boolean(errors.languages || errors.technologies)}
+                  errors={Boolean(errors.languages || errors.technologies)}
                 />
               </aside>
             </form>

@@ -18,6 +18,7 @@ import Input from '@components/Form/Input'
 import Navbar from '@components/Navigation/Navbar'
 import ErrorMessage from '@components/Form/ErrorMessage'
 import FormSelect from '@components/Form/Select'
+import {SubmitButton} from '@components/Form/SubmitButton'
 
 import type {IProjectInput} from 'app/types/project'
 import type {SelectOptions} from 'app/types/form'
@@ -167,11 +168,10 @@ const Project: NextPage = ({
               }
               optional
             />
-            <div className='h-1/6 flex flex-col pt-6 justify-end'>
-              <input
-                type='submit'
+            <div className='h-1/6 flex flex-col justify-end'>
+              <SubmitButton
                 value='Create Project'
-                className='w-2/6 bg-green-800 text-white rounded'
+                errors={Boolean(errors.name || errors.technologies)}
               />
             </div>
           </form>

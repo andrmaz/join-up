@@ -1,9 +1,9 @@
 import {useAuthState} from '@hooks/useAuthState'
-import {ProfileInfo} from '@components/Profile/Info'
-import {ProfileList} from '@components/Profile/List'
-import {ProfileLink} from '@components/Profile/Link'
+import {ProfileInfo} from '@components/User/Info'
+import {ProfileList} from '@components/User/List'
+import {ProfileLink} from '@components/User/Link'
 
-const ProfileCard = (): JSX.Element => {
+const UserCard = (): JSX.Element => {
   const {user} = useAuthState()
   const {
     avatar,
@@ -37,4 +37,4 @@ const ProfileCard = (): JSX.Element => {
   )
 }
 
-export default ProfileCard
+export default UserCard
