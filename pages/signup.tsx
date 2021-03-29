@@ -12,6 +12,7 @@ import {login} from '@actions/authActions'
 import Input from '@components/Form/Input'
 import FormSelect from '@components/Form/Select'
 import ErrorMessage from '@components/Form/ErrorMessage'
+import {Biography} from '@components/Form/Biography'
 
 import type {ISignupInputs} from 'app/types/user'
 import type {SelectOptions} from 'app/types/form'
@@ -247,23 +248,7 @@ const SignUp = ({
               />
             </div>
           </article>
-          <article className='h-1/5 flex flex-col'>
-            <div className='h-full flex flex-col'>
-              <label htmlFor='bio'>Biography:</label>
-              <textarea
-                id='bio'
-                name='bio'
-                ref={register}
-                cols={5}
-                rows={10}
-                maxLength={100}
-                placeholder='Tell us your story'
-                spellCheck={true}
-                wrap='hard'
-                className=':resize-none p-1 border-2'
-              />
-            </div>
-          </article>
+          <Biography register={register} />
           <article className='h-1/5 flex items-center'>
             <aside className='flex flex-row h-1/3 w-full justify-between'>
               <input

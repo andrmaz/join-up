@@ -19,6 +19,7 @@ import FormSelect from '@components/Form/Select'
 import ErrorMessage from '@components/Form/ErrorMessage'
 import ProfileMenu from '@components/Menu/Menu'
 import {SubmitButton} from '@components/Form/SubmitButton'
+import {Biography} from '@components/Form/Biography'
 
 import type {IUserContext} from 'app/types/user'
 import type {SelectOptions} from 'app/types/form'
@@ -74,7 +75,7 @@ const Profile: NextPage = ({
               onSubmit={handleSubmit(onSubmit)}
               className='flex flex-col h-full justify-between p-1'
             >
-              <article className='h-3/5 flex flex-col justify-evenly'>
+              <article className='h-3/5 flex flex-col justify-evenly mb-8'>
                 <div className='flex flex-row'>
                   <div className='w-3/5'>
                     <div className='flex flex-col xl:justify-between'>
@@ -179,24 +180,7 @@ const Profile: NextPage = ({
                   />
                 </div>
               </article>
-              <article className='h-1/5'>
-                <div className='h-full flex flex-col mt-8'>
-                  <label htmlFor='bio'>Biography:</label>
-                  <textarea
-                    id='bio'
-                    name='bio'
-                    ref={register}
-                    cols={5}
-                    rows={10}
-                    maxLength={100}
-                    placeholder='Tell us your story'
-                    defaultValue={bio}
-                    spellCheck={true}
-                    wrap='hard'
-                    className=':resize-none p-1 border-2'
-                  />
-                </div>
-              </article>
+              <Biography register={register} defaultValue={bio} />
               <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
                 <button
                   type='button'
