@@ -8,14 +8,21 @@ import Head from 'next/head'
 import {useRouter} from 'next/router'
 import {ParsedUrlQuery} from 'querystring'
 import axios from 'axios'
-import Select from 'react-select'
-import {useForm, Controller} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 
 import {parseCookies} from '@utils/parseCookies'
 //import {useAuthDispatch} from '@hooks/useAuthDispatch'
 import {useAuthState} from '@hooks/useAuthState'
-import Navbar from '@components/Navbar'
+import Navbar from '@components/Navigation/Navbar'
+import Input from '@components/Form/Input'
+import FormSelect from '@components/Form/Select'
+import ErrorMessage from '@components/Form/ErrorMessage'
+import ProfileMenu from '@components/Menu/Menu'
+import {SubmitButton} from '@components/Form/SubmitButton'
+import {Biography} from '@components/Form/Biography'
+
 import type {IUserContext} from 'app/types/user'
+import type {SelectOptions} from 'app/types/form'
 
 const Profile: NextPage = ({
   techOptions,
@@ -62,88 +69,51 @@ const Profile: NextPage = ({
       <Navbar />
       <main className='h-92v py-12 px-32 xl:px-72'>
         <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
-          <section className='h-4/5 p-4'>
-            <article className='h-3/5 flex flex-col'>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Account Settings</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Profile</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Account</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Emails</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Notifications</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Security Logs</span>
-              </div>
-            </article>
-            <article className='h-2/5 flex flex-col'>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Moderation settings</span>
-              </div>
-              <div className='h-12 border-gray-400 border-2 p-2'>
-                <span>Blocked users</span>
-              </div>
-            </article>
-          </section>
+          <ProfileMenu />
           <section className='w-200 h-auto border-2 border-solid rounded'>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className='flex flex-col h-full justify-between p-1'
             >
-              <article className='h-3/5 flex flex-col justify-around'>
+              <article className='h-3/5 flex flex-col justify-evenly mb-8'>
                 <div className='flex flex-row'>
                   <div className='w-3/5'>
                     <div className='flex flex-col xl:justify-between'>
-                      <label htmlFor='githubURL'>GitHub:</label>
-                      <input
+                      <Input
                         type='text'
                         id='githubURL'
                         name='githubURL'
-                        ref={register}
-                        size={30}
-                        defaultValue={githubURL}
+                        label='GitHub'
                         placeholder='your GitHub username here'
-                        className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-gray-400 rounded'
+                        register={register}
+                        defaultValue={githubURL}
                       />
-                      <label htmlFor='gitlabURL'>GitLab:</label>
-                      <input
+                      <Input
                         type='text'
                         id='gitlabURL'
                         name='gitlabURL'
-                        ref={register}
-                        size={30}
-                        defaultValue={gitlabURL}
+                        label='GitLab'
                         placeholder='your GitLab username here'
-                        className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-gray-400 rounded'
+                        register={register}
+                        defaultValue={gitlabURL}
                       />
-                      <label htmlFor='bitbucketURL'>BitBucket:</label>
-                      <input
+                      <Input
                         type='text'
                         id='bitbucketURL'
                         name='bitbucketURL'
-                        ref={register}
-                        size={30}
-                        defaultValue={bitbucketURL}
+                        label='BitBucket'
                         placeholder='your BitBucket username here'
-                        className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-gray-400 rounded'
+                        register={register}
+                        defaultValue={bitbucketURL}
                       />
-                      <label htmlFor='linkedinURL'>LinkedIn:</label>
-                      <input
+                      <Input
                         type='text'
                         id='linkedinURL'
                         name='linkedinURL'
-                        ref={register}
-                        defaultValue={linkedinURL}
-                        size={30}
+                        label='LinkedIn'
                         placeholder='your LinkedIn username here'
-                        className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-gray-400 rounded'
+                        register={register}
+                        defaultValue={linkedinURL}
                       />
                     </div>
                   </div>
@@ -157,124 +127,71 @@ const Profile: NextPage = ({
                     </div>
                   </div>
                 </div>
-                <div className='flex flex-col p-1'>
-                  <label id='languages' htmlFor='languages'>
-                    Languages :
-                  </label>
-                  <Controller
-                    name='languages'
+                <div className='flex flex-col p-0.5'>
+                  <FormSelect
+                    id='languages'
+                    label='Languages'
+                    options={langOptions}
+                    placeholder='Select your languages'
+                    message='Please select at least one language'
                     control={control}
-                    //TODO default languages must be in this format
-                    //{ value: 'language', label: 'Language'}
-                    /* defaultValue={languages.map(
-                                            lang => lang.value
-                                        )} */
-                    defaultValue=''
-                    render={({onBlur, ref}) => (
-                      <Select
-                        id='selectLanguages'
-                        inputId='languages'
-                        name='languages'
-                        inputRef={ref}
-                        aria-labelledby='languages'
-                        //TODO default languages must be in this format
-                        //{ value: 'language', label: 'Language'}
-                        //defaultValue={languages}
-                        closeMenuOnSelect={false}
-                        isMulti
-                        options={langOptions}
-                        placeholder='Select your language'
-                        blurInputOnSelect={false}
-                        onBlur={onBlur}
-                        onChange={values => {
-                          setValue(
-                            'languages',
-                            values.map(value => value.label),
-                            {
-                              shouldValidate: true,
-                              shouldDirty: true,
-                            }
-                          )
-                        }}
-                      />
-                    )}
+                    onChange={values => {
+                      setValue(
+                        'languages',
+                        values.map((value: SelectOptions) => value.label),
+                        {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                        }
+                      )
+                    }}
+                    errors={
+                      errors.languages && (
+                        <ErrorMessage>{errors.languages.message}</ErrorMessage>
+                      )
+                    }
                   />
                 </div>
-                <div className='flex flex-col p-1'>
-                  <label id='technologies' htmlFor='technologies'>
-                    Technologies :
-                  </label>
-                  <Controller
-                    name='technologies'
+                <div className='flex flex-col p-0.5'>
+                  <FormSelect
+                    id='technologies'
+                    label='Technologies'
+                    options={techOptions}
+                    placeholder='Choose your tech stack'
+                    message='Please select at least one technology'
                     control={control}
-                    //TODO default Technologies must be in this format
-                    //{ value: 'technology', label: 'Technology'}
-                    /* defaultValue={technologies.map(
-                                            tech => tech.value
-                                        )} */
-                    defaultValue=''
-                    render={({onBlur, ref}) => (
-                      <Select
-                        id='searchTechnologies'
-                        inputId='technologies'
-                        name='technologies'
-                        inputRef={ref}
-                        aria-labelledby='technologies'
-                        //TODO default Technologies must be in this format
-                        //{ value: 'technology', label: 'Technology'}
-                        //defaultValue={technologies}
-                        closeMenuOnSelect={false}
-                        isMulti
-                        options={techOptions}
-                        placeholder='Choose your tech stack'
-                        blurInputOnSelect={false}
-                        onBlur={onBlur}
-                        onChange={values => {
-                          setValue(
-                            'technologies',
-                            values.map(value => value.label),
-                            {
-                              shouldValidate: true,
-                              shouldDirty: true,
-                            }
-                          )
-                        }}
-                      />
-                    )}
+                    onChange={values => {
+                      setValue(
+                        'technologies',
+                        values.map((value: SelectOptions) => value.label),
+                        {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                        }
+                      )
+                    }}
+                    errors={
+                      errors.technologies && (
+                        <ErrorMessage>
+                          {errors.technologies.message}
+                        </ErrorMessage>
+                      )
+                    }
                   />
                 </div>
               </article>
-              <article className='h-1/5'>
-                <div className='h-full flex flex-col mt-8'>
-                  <label htmlFor='bio'>Biography:</label>
-                  <textarea
-                    id='bio'
-                    name='bio'
-                    ref={register}
-                    cols={5}
-                    rows={10}
-                    maxLength={100}
-                    placeholder='Tell us your story'
-                    defaultValue={bio}
-                    spellCheck={true}
-                    wrap='hard'
-                    className=':resize-none p-1 border-2'
-                  />
-                </div>
-              </article>
+              <Biography register={register} defaultValue={bio} />
               <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
                 <button
                   type='button'
-                  className='w-2/6 h-1/5 cursor-pointer bg-gray-600 text-white rounded m-1'
+                  className='w-2/6 h-6 cursor-pointer bg-gray-600 text-white rounded m-1'
                   onClick={() => router.push('/')}
                 >
                   Cancel
                 </button>
-                <input
-                  type='submit'
+                <SubmitButton
                   value='Save'
-                  className='w-2/6 h-1/5 cursor-pointer bg-green-600 text-white rounded m-1'
-                  disabled={Boolean(errors.languages || errors.technologies)}
+                  errors={Boolean(errors.languages || errors.technologies)}
                 />
               </aside>
             </form>

@@ -5,12 +5,17 @@ import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
 import axios from 'axios'
 import {useCookies} from 'react-cookie'
-import Select from 'react-select'
-import {useForm, Controller} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 
 import {useAuthDispatch} from '@hooks/useAuthDispatch'
 import {login} from '@actions/authActions'
+import Input from '@components/Form/Input'
+import FormSelect from '@components/Form/Select'
+import ErrorMessage from '@components/Form/ErrorMessage'
+import {Biography} from '@components/Form/Biography'
+
 import type {ISignupInputs} from 'app/types/user'
+import type {SelectOptions} from 'app/types/form'
 
 const SignUp = ({
   technologies,
@@ -66,7 +71,7 @@ const SignUp = ({
         <title>SignUp</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <section className='lg:h-18/20 xl:h-4/5 w-5/6 border border-black rounded p-2'>
+      <section className='lg:h-18/20 xl:h-4/5 w-5/6 lg:w-4/5 border border-black rounded p-2'>
         <header className='h-1/10 text-center'>
           <h1 className='text-3xl'>SignUp</h1>
         </header>
@@ -74,270 +79,182 @@ const SignUp = ({
           onSubmit={handleSubmit(onSubmit)}
           className='flex flex-col h-18/20 justify-between p-1'
         >
-          <article className='w-full h-2/5 flex'>
+          <article className='w-full h-1/2 flex'>
             <section className='w-3/6 flex flex-col justify-around'>
-              <div className='flex flex-col'>
-                <label htmlFor='username'>Username:</label>
-                <input
-                  type='text'
-                  id='username'
-                  name='username'
-                  size={30}
-                  placeholder='please enter your username'
-                  ref={register({
-                    required: 'username is required',
-                    minLength: {
-                      value: 3,
-                      message: 'username must be at least 3 characters long',
-                    },
-                    maxLength: {
-                      value: 20,
-                      message: 'username must be at most 20 characters long',
-                    },
-                  })}
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-                {errors.username && (
-                  <div role='alert' className='text-red-500'>
-                    {errors.username.message}
-                  </div>
-                )}
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='email'>Email:</label>
-                <input
-                  type='email'
-                  id='email'
-                  name='email'
-                  size={30}
-                  placeholder='address@email.domain'
-                  ref={register({
-                    required: 'email is required',
-                    pattern: {
-                      value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                      message: 'please enter a valid email address',
-                    },
-                  })}
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-                {errors.email && (
-                  <div role='alert' className='text-red-500'>
-                    {errors.email.message}
-                  </div>
-                )}
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='password'>Password:</label>
-                <input
-                  type='password'
-                  id='password'
-                  name='password'
-                  size={30}
-                  placeholder='min. 8 char, mix letters and numbers'
-                  ref={register({
-                    required: 'password is required',
-                    pattern: {
-                      value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                      message: 'please enter a valid password',
-                    },
-                  })}
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-                {errors.password && (
-                  <div role='alert' className='text-red-500'>
-                    {errors.password.message}
-                  </div>
-                )}
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='confirmPassword'>Confirm Password:</label>
-                <input
-                  type='password'
-                  id='confirmPassword'
-                  name='confirmPassword'
-                  size={30}
-                  placeholder='please confirm your password'
-                  ref={register({
-                    validate: value =>
-                      value === watchPassword || 'passwords must match',
-                  })}
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-                {errors.confirmPassword && (
-                  <div role='alert' className='text-red-500'>
-                    {errors.confirmPassword.message}
-                  </div>
-                )}
-              </div>
+              <Input
+                type='text'
+                id='username'
+                name='username'
+                label='Username'
+                placeholder='please enter your username'
+                register={register({
+                  required: 'username is required',
+                  minLength: {
+                    value: 3,
+                    message: 'username must be at least 3 characters long',
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: 'username must be at most 20 characters long',
+                  },
+                })}
+                errors={
+                  errors.username && (
+                    <ErrorMessage>{errors.username.message}</ErrorMessage>
+                  )
+                }
+              />
+              <Input
+                type='email'
+                id='email'
+                name='email'
+                label='Email'
+                placeholder='please enter your email'
+                register={register({
+                  required: 'email is required',
+                  pattern: {
+                    value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                    message: 'please enter a valid email address',
+                  },
+                })}
+                errors={
+                  errors.email && (
+                    <ErrorMessage>{errors.email.message}</ErrorMessage>
+                  )
+                }
+              />
+              <Input
+                type='password'
+                id='password'
+                name='password'
+                label='Password'
+                placeholder='min. 8 char, mix letters and numbers'
+                register={register({
+                  required: 'password is required',
+                  pattern: {
+                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                    message: 'please enter a valid password',
+                  },
+                })}
+                errors={
+                  errors.password && (
+                    <ErrorMessage>{errors.password.message}</ErrorMessage>
+                  )
+                }
+              />
+              <Input
+                type='password'
+                id='confirmPassword'
+                name='confirmPassword'
+                label='Confirm Password'
+                placeholder='please confirm your password'
+                register={register({
+                  validate: value =>
+                    value === watchPassword || 'passwords must match',
+                })}
+                errors={
+                  errors.confirmPassword && (
+                    <ErrorMessage>
+                      {errors.confirmPassword.message}
+                    </ErrorMessage>
+                  )
+                }
+              />
             </section>
             <section className='w-3/6 flex flex-col justify-around'>
-              <div className='flex flex-col'>
-                <label htmlFor='githubURL'>GitHub:</label>
-                <input
-                  type='text'
-                  id='githubURL'
-                  name='githubURL'
-                  ref={register}
-                  size={30}
-                  placeholder='your GitHub username here'
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='gitlabURL'>GitLab:</label>
-                <input
-                  type='text'
-                  id='gitlabURL'
-                  name='gitlabURL'
-                  ref={register}
-                  size={30}
-                  placeholder='your GitLab username here'
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='bitbucketURL'>BitBucket:</label>
-                <input
-                  type='text'
-                  id='bitbucketURL'
-                  name='bitbucketURL'
-                  ref={register}
-                  size={30}
-                  placeholder='your BitBucket username here'
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor='linkedinURL'>LinkedIn:</label>
-                <input
-                  type='text'
-                  id='linkedinURL'
-                  name='linkedinURL'
-                  ref={register}
-                  size={30}
-                  placeholder='your LinkedIn username here'
-                  className='focus:outline-none focus:ring focus:border-blue-300 p-0.5 mr-2 border-2 border-black rounded'
-                />
-              </div>
+              <Input
+                type='text'
+                id='githubURL'
+                name='githubURL'
+                label='GitHub'
+                placeholder='your GitHub username here'
+                register={register}
+              />
+              <Input
+                type='text'
+                id='gitlabURL'
+                name='gitlabURL'
+                label='GitLab'
+                placeholder='your GitLab username here'
+                register={register}
+              />
+              <Input
+                type='text'
+                id='bitbucketURL'
+                name='bitbucketURL'
+                label='BitBucket'
+                placeholder='your BitBucket username here'
+                register={register}
+              />
+              <Input
+                type='text'
+                id='linkedinURL'
+                name='linkedinURL'
+                label='LinkedIn'
+                placeholder='your LinkedIn username here'
+                register={register}
+              />
             </section>
           </article>
-          <article className='h-1/5 w-full flex'>
-            <div className='w-3/6 flex flex-col m-auto p-1'>
-              <label id='languages' htmlFor='languages'>
-                Languages :
-              </label>
-              <Controller
-                name='languages'
+          <article className='h-1/5 w-full flex mt-2'>
+            <div className='w-3/6 flex flex-col m-auto p-0.5'>
+              <FormSelect
+                id='languages'
+                label='Languages'
+                options={languages}
+                placeholder='Select your languages'
+                message='Please select at least one language'
                 control={control}
-                defaultValue=''
-                rules={{
-                  required: {
-                    value: true,
-                    message: 'Please select at least one language',
-                  },
+                onChange={values => {
+                  setValue(
+                    'languages',
+                    values.map((value: SelectOptions) => value.label),
+                    {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    }
+                  )
                 }}
-                render={({value, onBlur}) => (
-                  <Select
-                    id='selectLanguages'
-                    inputId='languages'
-                    name='languages'
-                    aria-labelledby='languages'
-                    defaultValue={value}
-                    closeMenuOnSelect={false}
-                    isMulti
-                    options={languages}
-                    placeholder='Select your language'
-                    blurInputOnSelect={false}
-                    onBlur={onBlur}
-                    onChange={values => {
-                      setValue(
-                        'languages',
-                        values.map(value => value.label),
-                        {
-                          shouldValidate: true,
-                          shouldDirty: true,
-                        }
-                      )
-                    }}
-                  />
-                )}
+                errors={
+                  errors.languages && (
+                    <ErrorMessage>{errors.languages.message}</ErrorMessage>
+                  )
+                }
               />
-              {errors.languages && (
-                <div role='alert' className='text-red-500'>
-                  {errors.languages.message}
-                </div>
-              )}
             </div>
-            <div className='w-3/6 flex flex-col m-auto p-1'>
-              <label id='technologies' htmlFor='technologies'>
-                Technologies :
-              </label>
-              <Controller
-                name='technologies'
+            <div className='w-3/6 flex flex-col m-auto p-0.5'>
+              <FormSelect
+                id='technologies'
+                label='Technologies'
+                options={technologies}
+                placeholder='Choose your tech stack'
+                message='Please select at least one technology'
                 control={control}
-                defaultValue=''
-                rules={{
-                  required: {
-                    value: true,
-                    message: 'Please select at least one technology',
-                  },
+                onChange={values => {
+                  setValue(
+                    'technologies',
+                    values.map((value: SelectOptions) => value.label),
+                    {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    }
+                  )
                 }}
-                render={({value, onBlur}) => (
-                  <Select
-                    id='searchTechnologies'
-                    inputId='technologies'
-                    name='technologies'
-                    aria-labelledby='technologies'
-                    defaultValue={value}
-                    closeMenuOnSelect={false}
-                    isMulti
-                    options={technologies}
-                    placeholder='Choose your tech stack'
-                    blurInputOnSelect={false}
-                    onBlur={onBlur}
-                    onChange={values => {
-                      setValue(
-                        'technologies',
-                        values.map(value => value.label),
-                        {
-                          shouldValidate: true,
-                          shouldDirty: true,
-                        }
-                      )
-                    }}
-                  />
-                )}
-              />
-              {errors.technologies && (
-                <div role='alert' className='text-red-500'>
-                  {errors.technologies.message}
-                </div>
-              )}
-            </div>
-          </article>
-          <article className='h-3/10 flex flex-col'>
-            <div className='h-full flex flex-col'>
-              <label htmlFor='bio'>Biography:</label>
-              <textarea
-                id='bio'
-                name='bio'
-                ref={register}
-                cols={5}
-                rows={10}
-                maxLength={100}
-                placeholder='Tell us your story'
-                spellCheck={true}
-                wrap='hard'
-                className=':resize-none p-1 border-2'
+                errors={
+                  errors.technologies && (
+                    <ErrorMessage>{errors.technologies.message}</ErrorMessage>
+                  )
+                }
               />
             </div>
           </article>
+          <Biography register={register} />
           <article className='h-1/5 flex items-center'>
             <aside className='flex flex-row h-1/3 w-full justify-between'>
               <input
                 type='submit'
                 value='SignUp'
-                className='w-2/6 h-4/5 cursor-pointer bg-blue-800 text-white rounded'
+                className='w-72 h-6 cursor-pointer bg-blue-800 text-white rounded disabled:opacity-50'
                 disabled={Boolean(
                   errors.username ||
                     errors.email ||
@@ -348,7 +265,7 @@ const SignUp = ({
                 )}
               />
               <Link href='/signin'>
-                <a className='inline-block align-bottom mr-4 text-lg'>
+                <a className='inline-block align-bottom mr-4 text-sm'>
                   Already have an account ? SignIn
                 </a>
               </Link>

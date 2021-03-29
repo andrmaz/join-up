@@ -10,7 +10,8 @@ import {ParsedUrlQuery} from 'querystring'
 import axios from 'axios'
 
 import {parseCookies} from '@utils/parseCookies'
-import Navbar from '@components/Navbar'
+import Navbar from '@components/Navigation/Navbar'
+import ProjectCard from '@components/Project/Card'
 
 import type {IProjectData} from 'app/types/project'
 
@@ -27,39 +28,9 @@ const Projects: NextPage = ({
       <main className='h-92v py-10 px-28'>
         <section className='w-full h-auto'>
           <div className='grid grid-cols-3 grid-rows-3 gap-4 py-2 px-1'>
-            {projects.map((project: IProjectData) => {
-              const {
-                _id,
-                name,
-                updatedAt,
-                projectURL,
-                description,
-                technologies,
-              } = project
-              return (
-                <div
-                  key={_id}
-                  className='h-48 w-full border-2 border-black p-1 rounded'
-                >
-                  <header className='h-1/6 w-full inline-flex flex-row justify-between'>
-                    <h3>{name}</h3>
-                    <span className='text-xs'>
-                      Last update:
-                      {updatedAt.slice(0, 7)}
-                    </span>
-                  </header>
-                  <article className='h-4/6'>
-                    <span className='text-xs'>{projectURL}</span>
-                    <p className='text-sm'>{description}</p>
-                  </article>
-                  <aside className='h-1/6'>
-                    <div className='h-1/2 text-xs text-red-400'>
-                      {technologies.filter((_, index) => index < 3).toString()}
-                    </div>
-                  </aside>
-                </div>
-              )
-            })}
+            {projects.map((project: IProjectData) => (
+              <ProjectCard key={project._id} {...project} />
+            ))}
           </div>
         </section>
       </main>
