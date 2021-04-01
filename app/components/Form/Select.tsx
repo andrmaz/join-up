@@ -11,6 +11,7 @@ const FormSelect = ({
   control,
   onChange,
   errors,
+  disabled,
 }: IFormSelect): React.ReactElement => {
   return (
     <>
@@ -49,6 +50,7 @@ const FormSelect = ({
             blurInputOnSelect={false}
             onBlur={onBlur}
             onChange={onChange}
+            isDisabled={disabled}
           />
         )}
       />
