@@ -12,6 +12,7 @@ import axios from 'axios'
 import {useForm} from 'react-hook-form'
 
 import {useAuthState} from '@hooks/useAuthState'
+import {useAsyncReducer} from '@hooks/useAsyncReducer'
 
 import {parseCookies} from '@utils/parseCookies'
 import Navbar from '@components/Navigation/Navbar'
@@ -19,35 +20,26 @@ import ProjectCard from '@components/Project/Card'
 import FormSelect from '@components/Form/Select'
 
 import type {IProjectData} from 'app/types/project'
-import type {SelectOptions, AsyncState} from 'app/types/form'
+import type {SelectOptions} from 'app/types/form'
 
 const Projects: NextPage = ({
   token,
   techOptions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [state, setState] = React.useState<AsyncState>({
-    status: 'idle', // 'pending', 'resolved','rejected'
-    // set data to empty array to avoid undefined value 'No match found'
-    data: [],
-    error: null,
-  })
+  const [state, dispatch] = useAsyncReducer()
   const {user} = useAuthState()
   const {control, register, watch, setValue} = useForm()
-  // watching every fields in the form
+  //* watching every fields in the form
   const {date, match, /* available ,*/ technologies} = watch()
   const fetchProjectsData = React.useCallback(() => {
-    // technologies field is the only one with no default value
-    // it must be checked before each fetching
+    //* technologies field is the only one with no default value
+    //* it must be checked before each fetching
     const tech =
       technologies && technologies.length
         ? `&technologies=${technologies.toString()},`
         : ''
-    setState({
-      data: [],
-      error: null,
-      status: 'pending',
-    })
-    //TODO: Test job field with future projects
+    dispatch({type: 'pending'})
+    //TODO: Test job field
     axios
       .get(`/project?sort=${date}&match=${match}${tech}`, {
         //&job=${available}
@@ -55,28 +47,20 @@ const Projects: NextPage = ({
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(response => {
-        setState({
-          data: response.data.projects,
-          error: null,
-          status: 'resolved',
-        })
-      })
-      .catch(err => {
-        setState({
-          data: [],
-          error: err.response.data.message,
-          status: 'rejected',
-        })
-        throw new Error(err)
-      })
-    //TODO: Add 'available' to dependencies list as soon as we have job field tested
-  }, [date, match, technologies, token])
+      .then(response =>
+        dispatch({type: 'resolved', payload: response.data.projects})
+      )
+      .catch(err =>
+        dispatch({type: 'rejected', payload: err.response.data.message})
+      )
+    //TODO: Add 'available' to dependencies list
+  }, [date, match, technologies, token, dispatch])
   React.useEffect(() => {
     fetchProjectsData()
   }, [fetchProjectsData])
-  const {status, data} = state
-  //TODO: Replace status with async reducer
+  // State
+  const {status, data /* ,error */} = state
+  // Status
   const isPending = status === 'pending'
   const isResolved = status === 'resolved'
   const isRejected = status === 'rejected'

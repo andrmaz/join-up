@@ -24,9 +24,3 @@ export interface IFormSelect {
   errors?: JSX.Element | undefined
   disabled?: boolean
 }
-
-export type AsyncState = {
-  status: string
-  data: [] | undefined
-  error: string | null
-}
