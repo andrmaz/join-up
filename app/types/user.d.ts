@@ -34,8 +34,10 @@ export interface IUserContext {
   technologies: NestedValue<string[]>
 }
 
+export type UserData = IUserContext | null
+
 export type UserState = {
-  user: IUserContext | null
+  user: UserData
 }
 
 export type UserActions =
