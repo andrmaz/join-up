@@ -1,6 +1,6 @@
 import {IProjectData} from 'app/types/project'
 
-type AsyncData = IProjectData[] | undefined
+export type AsyncData = IProjectData[] | undefined
 
 export type AsyncState = {
   status: string
