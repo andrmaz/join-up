@@ -22,4 +22,5 @@ export interface IFormSelect {
   control: Control
   onChange: (values: any) => void
   errors?: JSX.Element | undefined
+  disabled?: boolean
 }

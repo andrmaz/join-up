@@ -1,3 +1,4 @@
+import * as React from 'react'
 import {
   NextPage,
   GetServerSideProps,
@@ -11,6 +12,7 @@ import axios from 'axios'
 import {useForm} from 'react-hook-form'
 
 import {useAuthState} from '@hooks/useAuthState'
+import {useAsyncReducer} from '@hooks/useAsyncReducer'
 
 import {parseCookies} from '@utils/parseCookies'
 import Navbar from '@components/Navigation/Navbar'
@@ -21,11 +23,47 @@ import type {IProjectData} from 'app/types/project'
 import type {SelectOptions} from 'app/types/form'
 
 const Projects: NextPage = ({
-  projects,
-  technologies,
+  token,
+  techOptions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [state, dispatch] = useAsyncReducer()
   const {user} = useAuthState()
-  const {control, setValue} = useForm()
+  const {control, register, watch, setValue} = useForm()
+  //* watching every fields in the form
+  const {date, match, /* available ,*/ technologies} = watch()
+  const fetchProjectsData = React.useCallback(() => {
+    //* technologies field is the only one with no default value
+    //* it must be checked before each fetching
+    const tech =
+      technologies && technologies.length
+        ? `&technologies=${technologies.toString()},`
+        : ''
+    dispatch({type: 'pending'})
+    //TODO: Test job field
+    axios
+      .get(`/project?sort=${date}&match=${match}${tech}`, {
+        //&job=${available}
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response =>
+        dispatch({type: 'resolved', payload: response.data.projects})
+      )
+      .catch(err =>
+        dispatch({type: 'rejected', payload: err.response.data.message})
+      )
+    //TODO: Add 'available' to dependencies list
+  }, [date, match, technologies, token, dispatch])
+  React.useEffect(() => {
+    fetchProjectsData()
+  }, [fetchProjectsData])
+  // State
+  const {status, data /* ,error */} = state
+  // Status
+  const isPending = status === 'pending'
+  const isResolved = status === 'resolved'
+  const isRejected = status === 'rejected'
   return (
     <div className='min-h-screen'>
       <Head>
@@ -45,11 +83,13 @@ const Projects: NextPage = ({
                   name='date'
                   id='sort-by-date'
                   className='border-2 border-gray-200	w-24'
+                  ref={register}
+                  disabled={isPending ? true : false}
                 >
-                  <option value='newest' defaultChecked>
+                  <option value='-date' defaultChecked>
                     Newest
                   </option>
-                  <option value='oldest'>Oldest</option>
+                  <option value='+date'>Oldest</option>
                 </select>
               </div>
               <div className='mt-4'>
@@ -64,11 +104,20 @@ const Projects: NextPage = ({
                       name='match'
                       value='any'
                       defaultChecked
+                      ref={register}
+                      disabled={isPending ? true : false}
                     />
                     <label htmlFor='any'>Any</label>
                   </div>
                   <div className='m-1'>
-                    <input type='radio' id='all' name='match' value='all' />
+                    <input
+                      type='radio'
+                      id='all'
+                      name='match'
+                      value='all'
+                      ref={register}
+                      disabled={isPending ? true : false}
+                    />
                     <label htmlFor='all'>All</label>
                   </div>
                 </div>
@@ -78,16 +127,23 @@ const Projects: NextPage = ({
                   Check if you want to only see available positions:
                 </p>
                 <div>
-                  <input type='checkbox' id='available' name='available' />
+                  <input
+                    type='checkbox'
+                    id='available'
+                    name='available'
+                    ref={register}
+                    disabled={isPending ? true : false}
+                  />
                   <label htmlFor='available'>Available</label>
                 </div>
               </div>
               <FormSelect
                 id='technologies'
                 label='Technologies'
-                options={technologies}
+                options={techOptions}
                 placeholder='Choose your tech stack'
                 message='Please select at least one technology'
+                disabled={isPending ? true : false}
                 control={control}
                 onChange={values => {
                   setValue(
@@ -104,11 +160,22 @@ const Projects: NextPage = ({
           </section>
           <section className='w-200 h-auto'>
             <div className='grid grid-cols-2 xl:grid-cols-3 gap-4 py-2 px-1'>
-              {projects
-                .filter((project: IProjectData) => project.owner !== user?._id)
-                .map((project: IProjectData) => (
-                  <ProjectCard key={project._id} {...project} />
-                ))}
+              {!data ? (
+                <span>No match found</span>
+              ) : isResolved ? (
+                data
+                  /*//TODO: Move filtering projects on server side */
+                  .filter(
+                    (project: IProjectData) => project.owner !== user?._id
+                  )
+                  .map((project: IProjectData) => (
+                    <ProjectCard key={project._id} {...project} />
+                  ))
+              ) : isPending ? (
+                <span>Loading ...</span>
+              ) : (
+                isRejected && <span>Something went wrong</span>
+              )}
             </div>
           </section>
         </article>
@@ -137,16 +204,9 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 
   //* If there is a user,
-  const {
-    data: {projects},
-  } = await axios.get('/project', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
 
   const {
-    data: {technologies},
+    data: {technologies: techOptions},
   } = await axios.get('/technology', {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -156,8 +216,8 @@ export const getServerSideProps: GetServerSideProps = async (
   //* return projects
   return {
     props: {
-      projects,
-      technologies,
+      token,
+      techOptions,
     },
   }
 }
