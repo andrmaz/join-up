@@ -68,7 +68,7 @@ const Projects: NextPage = ({
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar />
-      <main className='h-92v py-10 px-10'>
+      <main className='h-auto mt-28 py-10 px-10'>
         <article className='h-auto grid grid-cols-3 divide-x divide-black-500'>
           <Drawer
             register={register}

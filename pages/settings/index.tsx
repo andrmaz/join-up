@@ -67,136 +67,140 @@ const Profile: NextPage = ({
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar />
-      <main className='h-92v py-12 px-32 xl:px-72'>
-        <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
-          <ProfileMenu />
-          <section className='w-200 h-auto border-2 border-solid rounded'>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className='flex flex-col h-full justify-between p-1'
-            >
-              <article className='h-3/5 flex flex-col justify-evenly mb-8'>
-                <div className='flex flex-row'>
-                  <div className='w-3/5'>
-                    <div className='flex flex-col xl:justify-between'>
-                      <Input
-                        type='text'
-                        id='githubURL'
-                        name='githubURL'
-                        label='GitHub'
-                        placeholder='your GitHub username here'
-                        register={register}
-                        defaultValue={githubURL}
-                      />
-                      <Input
-                        type='text'
-                        id='gitlabURL'
-                        name='gitlabURL'
-                        label='GitLab'
-                        placeholder='your GitLab username here'
-                        register={register}
-                        defaultValue={gitlabURL}
-                      />
-                      <Input
-                        type='text'
-                        id='bitbucketURL'
-                        name='bitbucketURL'
-                        label='BitBucket'
-                        placeholder='your BitBucket username here'
-                        register={register}
-                        defaultValue={bitbucketURL}
-                      />
-                      <Input
-                        type='text'
-                        id='linkedinURL'
-                        name='linkedinURL'
-                        label='LinkedIn'
-                        placeholder='your LinkedIn username here'
-                        register={register}
-                        defaultValue={linkedinURL}
-                      />
+      <main className='h-screen pt-28 container'>
+        <section className='h-full p-12'>
+          <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
+            <ProfileMenu />
+            <section className='w-200 h-auto border-2 border-solid rounded'>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className='flex flex-col h-full justify-between p-1'
+              >
+                <article className='h-3/5 flex flex-col justify-evenly mb-8'>
+                  <div className='flex flex-row'>
+                    <div className='w-3/5'>
+                      <div className='flex flex-col xl:justify-between'>
+                        <Input
+                          type='text'
+                          id='githubURL'
+                          name='githubURL'
+                          label='GitHub'
+                          placeholder='your GitHub username here'
+                          register={register}
+                          defaultValue={githubURL}
+                        />
+                        <Input
+                          type='text'
+                          id='gitlabURL'
+                          name='gitlabURL'
+                          label='GitLab'
+                          placeholder='your GitLab username here'
+                          register={register}
+                          defaultValue={gitlabURL}
+                        />
+                        <Input
+                          type='text'
+                          id='bitbucketURL'
+                          name='bitbucketURL'
+                          label='BitBucket'
+                          placeholder='your BitBucket username here'
+                          register={register}
+                          defaultValue={bitbucketURL}
+                        />
+                        <Input
+                          type='text'
+                          id='linkedinURL'
+                          name='linkedinURL'
+                          label='LinkedIn'
+                          placeholder='your LinkedIn username here'
+                          register={register}
+                          defaultValue={linkedinURL}
+                        />
+                      </div>
+                    </div>
+                    <div className='w-2/5'>
+                      <div className='h-3/4 lg:mt-8'>
+                        <img
+                          className='h-full rounded-full ml-auto'
+                          src={avatar}
+                          alt='profile'
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className='w-2/5'>
-                    <div className='h-3/4 lg:mt-8'>
-                      <img
-                        className='h-full rounded-full ml-auto'
-                        src={avatar}
-                        alt='profile'
-                      />
-                    </div>
+                  <div className='flex flex-col p-0.5'>
+                    <FormSelect
+                      id='languages'
+                      label='Languages'
+                      options={langOptions}
+                      placeholder='Select your languages'
+                      message='Please select at least one language'
+                      control={control}
+                      onChange={values => {
+                        setValue(
+                          'languages',
+                          values.map((value: SelectOptions) => value.label),
+                          {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                          }
+                        )
+                      }}
+                      errors={
+                        errors.languages && (
+                          <ErrorMessage>
+                            {errors.languages.message}
+                          </ErrorMessage>
+                        )
+                      }
+                    />
                   </div>
-                </div>
-                <div className='flex flex-col p-0.5'>
-                  <FormSelect
-                    id='languages'
-                    label='Languages'
-                    options={langOptions}
-                    placeholder='Select your languages'
-                    message='Please select at least one language'
-                    control={control}
-                    onChange={values => {
-                      setValue(
-                        'languages',
-                        values.map((value: SelectOptions) => value.label),
-                        {
-                          shouldValidate: true,
-                          shouldDirty: true,
-                        }
-                      )
-                    }}
-                    errors={
-                      errors.languages && (
-                        <ErrorMessage>{errors.languages.message}</ErrorMessage>
-                      )
-                    }
+                  <div className='flex flex-col p-0.5'>
+                    <FormSelect
+                      id='technologies'
+                      label='Technologies'
+                      options={techOptions}
+                      placeholder='Choose your tech stack'
+                      message='Please select at least one technology'
+                      control={control}
+                      onChange={values => {
+                        setValue(
+                          'technologies',
+                          values.map((value: SelectOptions) => value.label),
+                          {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                          }
+                        )
+                      }}
+                      errors={
+                        errors.technologies && (
+                          <ErrorMessage>
+                            {errors.technologies.message}
+                          </ErrorMessage>
+                        )
+                      }
+                    />
+                  </div>
+                </article>
+                <Biography register={register} defaultValue={bio} />
+                <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
+                  <button
+                    type='button'
+                    className='w-2/6 h-6 cursor-pointer bg-gray-600 text-white rounded m-1'
+                    onClick={() => router.push('/')}
+                  >
+                    Cancel
+                  </button>
+                  <SubmitButton
+                    value='Save'
+                    errors={Boolean(errors.languages || errors.technologies)}
                   />
-                </div>
-                <div className='flex flex-col p-0.5'>
-                  <FormSelect
-                    id='technologies'
-                    label='Technologies'
-                    options={techOptions}
-                    placeholder='Choose your tech stack'
-                    message='Please select at least one technology'
-                    control={control}
-                    onChange={values => {
-                      setValue(
-                        'technologies',
-                        values.map((value: SelectOptions) => value.label),
-                        {
-                          shouldValidate: true,
-                          shouldDirty: true,
-                        }
-                      )
-                    }}
-                    errors={
-                      errors.technologies && (
-                        <ErrorMessage>
-                          {errors.technologies.message}
-                        </ErrorMessage>
-                      )
-                    }
-                  />
-                </div>
-              </article>
-              <Biography register={register} defaultValue={bio} />
-              <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
-                <button
-                  type='button'
-                  className='w-2/6 h-6 cursor-pointer bg-gray-600 text-white rounded m-1'
-                  onClick={() => router.push('/')}
-                >
-                  Cancel
-                </button>
-                <SubmitButton
-                  value='Save'
-                  errors={Boolean(errors.languages || errors.technologies)}
-                />
-              </aside>
-            </form>
-          </section>
-        </div>
+                </aside>
+              </form>
+            </section>
+          </div>
+        </section>
       </main>
     </div>
   )

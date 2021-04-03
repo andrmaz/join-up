@@ -18,24 +18,26 @@ const Profile: NextPage = ({
   projects,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <div className='min-h-screen'>
+    <div className='h-screen'>
       <Head>
         <title>Profile</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar />
-      <main className='h-auto py-16 px-32 xl:px-48'>
-        <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
-          <UserCard />
-          <article className='w-200 h-full border-2 border-solid rounded'>
-            <header className='w-max h-12 text-2xl mb-2 px-4'>
-              <h3>Projects</h3>
-            </header>
-            <main className='w-full h-auto p-1'>
-              <ProjectsList projects={projects} />
-            </main>
-          </article>
-        </div>
+      <main className='h-screen pt-28'>
+        <section className='h-full py-12 px-32'>
+          <div className='grid grid-cols-3 divide-x divide-black-500'>
+            <UserCard />
+            <article className='w-200 min-h-1/2 border-2 border-solid rounded'>
+              <header className='fixed top-28 z-30 w-full h-26 p-4 pt-12 text-2xl bg-white'>
+                <h3>Your Projects</h3>
+              </header>
+              <main className='w-full p-1'>
+                <ProjectsList projects={projects} />
+              </main>
+            </article>
+          </div>
+        </section>
       </main>
     </div>
   )

@@ -55,7 +55,7 @@ const SignIn = (): JSX.Element => {
         <title>SignIn</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <section className='h-2/6 lg:h-2/5 w-3/6 border border-black rounded py-4 px-10'>
+      <section className='h-2/5 w-3/6 xl:w-2/6 border border-black rounded py-4 px-10'>
         <header className='h-1/6 text-center'>
           <h1 className='text-3xl'>SignIn</h1>
         </header>

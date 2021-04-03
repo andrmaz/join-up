@@ -71,7 +71,7 @@ const SignUp = ({
         <title>SignUp</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <section className='lg:h-18/20 xl:h-4/5 w-5/6 lg:w-4/5 border border-black rounded p-2'>
+      <section className='h-18/20 xl:h-4/5 w-5/6 xl:w-3/5 border border-black rounded p-2'>
         <header className='h-1/10 text-center'>
           <h1 className='text-3xl'>SignUp</h1>
         </header>

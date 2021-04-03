@@ -72,8 +72,8 @@ const Project: NextPage = ({
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar />
-      <main className='h-92v container flex justify-center items-center'>
-        <section className='w-3/5 xl:w-4/6 h-5/6 xl:h-4/6 p-4 xl:p-2 border rounded'>
+      <main className='h-screen pt-28 flex justify-center items-center'>
+        <section className='w-3/5 h-5/6 p-4 border rounded xl:px-12'>
           <header className='h-1/6'>
             <h1 className='h-2/3 text-3xl'>Create a new project</h1>
             <span>
