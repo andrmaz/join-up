@@ -85,6 +85,7 @@ const Projects: NextPage = ({
               )
             }}
             control={control}
+            technologies={technologies}
           />
           <ProjectsGrid status={status} projects={data} currentUser={user} />
         </article>
