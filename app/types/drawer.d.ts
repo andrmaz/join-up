@@ -1,4 +1,4 @@
-import {Control} from 'react-hook-form'
+import {Control, NestedValue} from 'react-hook-form'
 import type {SelectOptions} from 'app/types/form'
 
 export interface IDrawerProps {
@@ -7,6 +7,7 @@ export interface IDrawerProps {
   options: SelectOptions[]
   onChange: (values: any) => void
   control: Control
+  technologies: NestedValue<string[]>
 }
 
 export type DrawerInputsProps = {
