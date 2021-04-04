@@ -8,7 +8,7 @@ const ProjectsList = ({
   projects: IProjectData[]
 }): React.ReactElement => {
   return (
-    <section>
+    <section className='pt-12'>
       {projects.length ? (
         <ul className='flex flex-col'>
           {projects.map((project: IProjectData) => (

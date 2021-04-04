@@ -5,7 +5,7 @@ import {Dropdown} from '@components/Navigation/Dropdown'
 const Navbar = (): JSX.Element => {
   const [tooltip, showTooltip] = React.useState(false)
   return (
-    <nav className='flex justify-between items-center h-8v w-screen bg-blue-800 text-white'>
+    <nav className='fixed top-0 flex justify-between items-center h-28 w-screen bg-blue-800 text-white z-50'>
       <div className='inline-flex justify-evenly w-5/12'>
         <Link href='/'>
           <a className='flex-initial'>Logo</a>

@@ -18,7 +18,7 @@ const UserCard = (): JSX.Element => {
     linkedinURL,
   } = {...user}
   return (
-    <section className='h-70v p-1'>
+    <section className='sticky top-44 h-70v p-1'>
       <div className='h-3/6 flex items-end'>
         <img className='h-4/5 rounded-full' src={avatar} alt='profile' />
       </div>

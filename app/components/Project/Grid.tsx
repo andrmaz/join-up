@@ -12,7 +12,7 @@ const ProjectsGrid = ({
   projects: AsyncData
   currentUser: UserData
 }): JSX.Element => (
-  <section className='w-200 h-auto'>
+  <section className='w-200 min-h-screen h-auto'>
     <div className='grid grid-cols-2 xl:grid-cols-3 gap-4 py-2 px-1'>
       {!projects ? (
         <span>No match found</span>
