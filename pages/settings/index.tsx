@@ -67,7 +67,7 @@ const Profile: NextPage = ({
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar />
-      <main className='h-screen pt-28 container'>
+      <main className='h-screen pt-20 container'>
         <section className='h-full p-12'>
           <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
             <ProfileMenu />
