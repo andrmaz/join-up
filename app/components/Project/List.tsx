@@ -1,5 +1,6 @@
-import ProjectCard from '@components/Project/Item'
-import {EmptyMessage} from '@components/Project/EmptyMessage'
+import Link from 'next/link'
+import ProjectCard from '@components/Project/Preview'
+import {EmptyMessage} from '@components/Message/EmptyMessage'
 import type {IProjectData} from 'app/types/project'
 
 const ProjectsList = ({
@@ -16,7 +17,14 @@ const ProjectsList = ({
           ))}
         </ul>
       ) : (
-        <EmptyMessage />
+        <EmptyMessage>
+          It seems there is not any project yet. <br />
+          Click{' '}
+          <Link href='/new/project'>
+            <a className='underline'>here</a>
+          </Link>{' '}
+          to create your first project
+        </EmptyMessage>
       )}
     </section>
   )
