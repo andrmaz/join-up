@@ -6,7 +6,7 @@ import axios from 'axios'
 import {useCookies} from 'react-cookie'
 import {useForm} from 'react-hook-form'
 
-import {useAuthDispatch} from '@hooks/useAuthDispatch'
+import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {login} from '@actions/authActions'
 import Input from '@components/Form/Input'
 import ErrorMessage from '@components/Message/Error'

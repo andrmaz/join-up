@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import {useAuthState} from '@hooks/useAuthState'
+import {useAuthState} from '@hooks/auth/useAuthState'
 import {SignOutButton} from '@components/Button/SignOut'
 
 export function Dropdown(): JSX.Element {

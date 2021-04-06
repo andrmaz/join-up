@@ -12,7 +12,7 @@ import {useForm} from 'react-hook-form'
 
 import {parseCookies} from '@utils/parseCookies'
 //import {useAuthDispatch} from '@hooks/useAuthDispatch'
-import {useAuthState} from '@hooks/useAuthState'
+import {useAuthState} from '@hooks/auth/useAuthState'
 import Navbar from '@components/Navbar/Navbar'
 import Input from '@components/Form/Input'
 import FormSelect from '@components/Form/Select'

@@ -1,5 +1,5 @@
 import ProjectCard from '@components/Card/Card'
-import {useAuthState} from '@hooks/useAuthState'
+import {useAuthState} from '@hooks/auth/useAuthState'
 import {SubmitButton} from '@components/Button/Submit'
 import {EmptyMessage} from '../Message/Empty'
 import type {IProjectData} from 'app/types/project'

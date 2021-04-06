@@ -1,7 +1,7 @@
 import {useRouter} from 'next/router'
 import {useCookies} from 'react-cookie'
 
-import {useAuthDispatch} from '@hooks/useAuthDispatch'
+import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {logout} from '@actions/authActions'
 
 export const SignOutButton = (): JSX.Element => {

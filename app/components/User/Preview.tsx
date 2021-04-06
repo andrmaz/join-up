@@ -1,4 +1,4 @@
-import {useAuthState} from '@hooks/useAuthState'
+import {useAuthState} from '@hooks/auth/useAuthState'
 import {UserInfo} from '@components/User/Info'
 import {UserSkills} from '@components/User/Skills'
 import {UserLink} from '@components/User/Link'
