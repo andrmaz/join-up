@@ -11,7 +11,7 @@ import {useAuthDispatch} from '@hooks/useAuthDispatch'
 import {login} from '@actions/authActions'
 import Input from '@components/Form/Input'
 import FormSelect from '@components/Form/Select'
-import ErrorMessage from '@components/Form/ErrorMessage'
+import ErrorMessage from '@components/Message/Error'
 import {Biography} from '@components/Form/Biography'
 
 import type {ISignupInputs} from 'app/types/user'

@@ -9,7 +9,7 @@ import {useForm} from 'react-hook-form'
 import {useAuthDispatch} from '@hooks/useAuthDispatch'
 import {login} from '@actions/authActions'
 import Input from '@components/Form/Input'
-import ErrorMessage from '@components/Form/ErrorMessage'
+import ErrorMessage from '@components/Message/Error'
 import type {SigninInputs} from 'app/types/user'
 
 const SignIn = (): JSX.Element => {

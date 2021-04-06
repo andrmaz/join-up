@@ -1,7 +1,7 @@
-import ProjectCard from '@components/Project/Card'
+import ProjectCard from '@components/Card/Card'
 import {useAuthState} from '@hooks/useAuthState'
-import {SubmitButton} from '@components/Form/SubmitButton'
-import {EmptyMessage} from '../Message/EmptyMessage'
+import {SubmitButton} from '@components/Button/Submit'
+import {EmptyMessage} from '../Message/Empty'
 import type {IProjectData} from 'app/types/project'
 
 const ProjectOverview = ({project}: {project: IProjectData}): JSX.Element => {
@@ -15,7 +15,7 @@ const ProjectOverview = ({project}: {project: IProjectData}): JSX.Element => {
         {project.collaborators.length ? (
           <span>Posts</span>
         ) : (
-          <EmptyMessage>This projects has no posts available.</EmptyMessage>
+          <EmptyMessage>This project has no posts available.</EmptyMessage>
         )}
         <div className='w-full flex justify-end'>
           {project.owner === user?._id && (

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import ProjectCard from '@components/Project/Preview'
-import {EmptyMessage} from '@components/Message/EmptyMessage'
+import {EmptyMessage} from '@components/Message/Empty'
 import type {IProjectData} from 'app/types/project'
 
 const ProjectsList = ({

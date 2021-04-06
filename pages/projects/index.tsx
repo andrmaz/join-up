@@ -15,7 +15,7 @@ import {useAuthState} from '@hooks/useAuthState'
 import {useAsyncReducer} from '@hooks/useAsyncReducer'
 
 import {parseCookies} from '@utils/parseCookies'
-import Navbar from '@components/Navigation/Navbar'
+import Navbar from '@components/Navbar/Navbar'
 import ProjectsGrid from '@components/Project/Grid'
 import Drawer from '@components/Drawer/Drawer'
 

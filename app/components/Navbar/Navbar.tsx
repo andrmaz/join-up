@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import {Dropdown} from '@components/Navigation/Dropdown'
+import {Dropdown} from '@components/Dropdown/Dropdown'
 
 const Navbar = (): JSX.Element => {
   const [tooltip, showTooltip] = React.useState(false)
