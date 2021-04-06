@@ -1,4 +1,4 @@
-export const ProfileList = ({value}: {value?: string[]}): JSX.Element => {
+export const UserSkills = ({value}: {value?: string[]}): JSX.Element => {
   return (
     <li className='text-red-600'>
       {Array.isArray(value) && value.length > 3

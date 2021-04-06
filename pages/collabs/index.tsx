@@ -3,7 +3,7 @@ import Head from 'next/head'
 import {ParsedUrlQuery} from 'querystring'
 
 import {parseCookies} from '@utils/parseCookies'
-import Navbar from '@components/Navigation/Navbar'
+import Navbar from '@components/Navbar/Navbar'
 
 const Collabs: NextPage = () => {
   return (

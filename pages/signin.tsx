@@ -6,10 +6,10 @@ import axios from 'axios'
 import {useCookies} from 'react-cookie'
 import {useForm} from 'react-hook-form'
 
-import {useAuthDispatch} from '@hooks/useAuthDispatch'
+import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {login} from '@actions/authActions'
 import Input from '@components/Form/Input'
-import ErrorMessage from '@components/Form/ErrorMessage'
+import ErrorMessage from '@components/Message/Error'
 import type {SigninInputs} from 'app/types/user'
 
 const SignIn = (): JSX.Element => {

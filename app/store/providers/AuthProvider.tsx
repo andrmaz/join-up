@@ -1,4 +1,4 @@
-import {useAuthProvider} from '@hooks/useAuthProvider'
+import {useAuthProvider} from '@hooks/auth/useAuthProvider'
 import {AuthStateContext, AuthDispatchContext} from '@context/authContext'
 import type {UserProviderProps} from 'app/types/user'
 

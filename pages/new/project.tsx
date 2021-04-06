@@ -12,13 +12,13 @@ import axios from 'axios'
 import {useForm} from 'react-hook-form'
 
 import {parseCookies} from '@utils/parseCookies'
-import {useAuthState} from '@hooks/useAuthState'
+import {useAuthState} from '@hooks/auth/useAuthState'
 
 import Input from '@components/Form/Input'
-import Navbar from '@components/Navigation/Navbar'
-import ErrorMessage from '@components/Form/ErrorMessage'
+import Navbar from '@components/Navbar/Navbar'
+import ErrorMessage from '@components/Message/Error'
 import FormSelect from '@components/Form/Select'
-import {SubmitButton} from '@components/Form/SubmitButton'
+import {SubmitButton} from '@components/Button/Submit'
 
 import type {IProjectInput} from 'app/types/project'
 import type {SelectOptions} from 'app/types/form'

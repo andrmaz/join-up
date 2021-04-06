@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {useAuthReducer} from '@hooks/useAuthReducer'
+import {useAuthReducer} from '@hooks/auth/useAuthReducer'
 import {login} from '@actions/authActions'
 
 export function useAuthProvider(): ReadonlyArray<any> {

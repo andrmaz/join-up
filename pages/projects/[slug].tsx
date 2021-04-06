@@ -4,7 +4,7 @@ import axios from 'axios'
 import {parseCookies} from '@utils/parseCookies'
 import {Params} from 'next/dist/next-server/server/router'
 import ProjectOverview from '@components/Project/Overview'
-import Navbar from '@components/Navigation/Navbar'
+import Navbar from '@components/Navbar/Navbar'
 
 const Slug: NextPage = ({
   project,

@@ -1,11 +1,11 @@
 import FormSelect from '@components/Form/Select'
-import {DateSelect} from '@components/Drawer/DateSelect'
-import {MatchRadio} from '@components/Drawer/MatchRadio'
-import {JobCheckbox} from '@components/Drawer/JobCheckbox'
+import {DateSelect} from '@components/Filter/DateSelect'
+import {MatchRadio} from '@components/Filter/MatchRadio'
+import {JobCheckbox} from '@components/Filter/JobCheckbox'
 
 import {IDrawerProps} from 'app/types/drawer'
 
-const Drawer = ({
+const ProjectDrawer = ({
   register,
   isPending,
   options,
@@ -36,4 +36,4 @@ const Drawer = ({
   </section>
 )
 
-export default Drawer
+export default ProjectDrawer

@@ -1,4 +1,4 @@
-import ProjectCard from '@components/Project/Card'
+import ProjectCard from '@components/Card/Card'
 import type {AsyncData} from 'app/types/async'
 import type {UserData} from 'app/types/user'
 import type {IProjectData} from 'app/types/project'

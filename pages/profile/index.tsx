@@ -10,8 +10,8 @@ import {ParsedUrlQuery} from 'querystring'
 import axios from 'axios'
 
 import {parseCookies} from '@utils/parseCookies'
-import Navbar from '@components/Navigation/Navbar'
-import UserCard from '@components/User/Card'
+import Navbar from '@components/Navbar/Navbar'
+import UserPreview from '@components/User/Preview'
 import ProjectsList from '@components/Project/List'
 
 const Profile: NextPage = ({
@@ -27,7 +27,7 @@ const Profile: NextPage = ({
       <main className='h-screen pt-20'>
         <section className='h-full py-12 px-24 xl:px-32'>
           <div className='grid grid-cols-3 divide-x divide-black-500'>
-            <UserCard />
+            <UserPreview />
             <article className='w-200 min-h-1/2 border-2 border-solid rounded'>
               <header className='fixed top-20 z-30 w-full h-26 p-4 pt-12 text-2xl bg-white'>
                 <h3>Your Projects</h3>
