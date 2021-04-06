@@ -1,7 +1,7 @@
 import type {IProjectData} from 'app/types/project'
 import Link from 'next/link'
 
-const ProjectItem = ({
+const ProjectPreview = ({
   _id,
   name,
   jobsAvailable,
@@ -34,4 +34,4 @@ const ProjectItem = ({
   )
 }
 
-export default ProjectItem
+export default ProjectPreview

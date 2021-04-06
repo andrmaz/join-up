@@ -3,23 +3,22 @@ import Head from 'next/head'
 import axios from 'axios'
 import {parseCookies} from '@utils/parseCookies'
 import {Params} from 'next/dist/next-server/server/router'
-import {useAuthState} from '@hooks/useAuthState'
+import ProjectOverview from '@components/Project/Overview'
+import Navbar from '@components/Navigation/Navbar'
 
 const Slug: NextPage = ({
   project,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log('%cProject Data', 'color: tomato', project.owner)
-  const {user} = useAuthState()
-  console.log('%cUser Info', 'color: green', user?._id)
   return (
     <div className='min-h-screen'>
       <Head>
         <title>Project</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
+      <Navbar />
       <main className='h-screen pt-20 container'>
         <section className='h-full p-12'>
-          {project.owner === user?._id && <span>Add a new Post</span>}
+          <ProjectOverview project={project} />
         </section>
       </main>
     </div>
