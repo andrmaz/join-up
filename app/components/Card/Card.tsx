@@ -21,7 +21,9 @@ const ProjectCard = ({
         </span>
       </header>
       <article className='h-4/6'>
-        <span className='text-xs'>{projectURL}</span>
+        <a className='text-xs' href={projectURL}>
+          {projectURL}
+        </a>
         <p className='text-sm'>{description}</p>
       </article>
       <aside className='h-1/6'>
