@@ -1,9 +1,12 @@
-export const UserSkills = ({value}: {value?: string[]}): JSX.Element => {
+import type {NestedOptions} from 'app/types/form'
+
+export const UserSkills = ({value}: {value: NestedOptions}): JSX.Element => {
   return (
     <li className='text-red-600'>
-      {Array.isArray(value) && value.length > 3
-        ? `${value?.filter((_, i: number) => i < 3).toString()}, ...`
-        : value?.toString()}
+      {value &&
+        (value.length > 3
+          ? `${value.filter((_, i: number) => i < 4).map(v => v.label)}, ...`
+          : `${value.map(v => v.label)}`)}
     </li>
   )
 }

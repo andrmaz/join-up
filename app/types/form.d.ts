@@ -1,4 +1,5 @@
-import {Control} from 'react-hook-form'
+import {Control, NestedValue} from 'react-hook-form'
+
 export interface IFormInput {
   id: string
   name: string
@@ -12,6 +13,7 @@ export interface IFormInput {
 }
 
 export type SelectOptions = {value: string; label: string}
+export type NestedOptions = NestedValue<SelectOptions[]> | undefined
 
 export interface IFormSelect {
   id: string
@@ -23,4 +25,6 @@ export interface IFormSelect {
   onChange: (values: any) => void
   errors?: JSX.Element | undefined
   disabled?: boolean
+  defaultValues?: NestedOptions
+  defaultValue?: NestedOptions
 }
