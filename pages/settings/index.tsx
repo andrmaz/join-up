@@ -6,13 +6,18 @@ import {
 } from 'next'
 import Head from 'next/head'
 import {useRouter} from 'next/router'
+
 import {ParsedUrlQuery} from 'querystring'
+import {useCookies} from 'react-cookie'
 import axios from 'axios'
 import {useForm} from 'react-hook-form'
 
+import {edit} from '@actions/authActions'
+
 import {parseCookies} from '@utils/parseCookies'
-//import {useAuthDispatch} from '@hooks/useAuthDispatch'
+import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {useAuthState} from '@hooks/auth/useAuthState'
+
 import Navbar from '@components/Navbar/Navbar'
 import Input from '@components/Form/Input'
 import FormSelect from '@components/Form/Select'
@@ -25,6 +30,7 @@ import type {IUserContext} from 'app/types/user'
 import type {SelectOptions} from 'app/types/form'
 
 const Profile: NextPage = ({
+  token,
   techOptions,
   langOptions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -36,8 +42,8 @@ const Profile: NextPage = ({
     githubURL,
     gitlabURL,
     linkedinURL,
-    /* technologies,
-        languages, */
+    technologies,
+    languages,
   } = {
     ...user,
   }
@@ -58,8 +64,34 @@ const Profile: NextPage = ({
     shouldUnregister: true,
   })
   const router = useRouter()
-  //const dispatch = useAuthDispatch()
-  const onSubmit = (data: IUserContext): void => console.log(data)
+  const dispatch = useAuthDispatch()
+  const [, setCookie] = useCookies(['session'])
+  const onSubmit = async (data: IUserContext): Promise<any> => {
+    try {
+      const response = await axios.patch(
+        '/user',
+        {user: data},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      edit(dispatch, response.data.user)
+      setCookie('session', response.data.token, {
+        path: '/',
+        // ? expiration date
+        //maxAge: 3600, // Expires after 1hr
+        sameSite: true,
+        //httpOnly: true,
+        //secure: true,
+      })
+      router.push('/profile')
+      return
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
   return (
     <div className='min-h-screen'>
       <Head>
@@ -87,7 +119,7 @@ const Profile: NextPage = ({
                           label='GitHub'
                           placeholder='your GitHub username here'
                           register={register}
-                          defaultValue={githubURL}
+                          defaultValue={githubURL?.slice(19, githubURL.length)}
                         />
                         <Input
                           type='text'
@@ -96,7 +128,7 @@ const Profile: NextPage = ({
                           label='GitLab'
                           placeholder='your GitLab username here'
                           register={register}
-                          defaultValue={gitlabURL}
+                          defaultValue={gitlabURL?.slice(19, gitlabURL.length)}
                         />
                         <Input
                           type='text'
@@ -105,7 +137,10 @@ const Profile: NextPage = ({
                           label='BitBucket'
                           placeholder='your BitBucket username here'
                           register={register}
-                          defaultValue={bitbucketURL}
+                          defaultValue={bitbucketURL?.slice(
+                            22,
+                            bitbucketURL.length - 1
+                          )}
                         />
                         <Input
                           type='text'
@@ -114,7 +149,10 @@ const Profile: NextPage = ({
                           label='LinkedIn'
                           placeholder='your LinkedIn username here'
                           register={register}
-                          defaultValue={linkedinURL}
+                          defaultValue={linkedinURL?.slice(
+                            28,
+                            linkedinURL.length - 1
+                          )}
                         />
                       </div>
                     </div>
@@ -136,6 +174,8 @@ const Profile: NextPage = ({
                       placeholder='Select your languages'
                       message='Please select at least one language'
                       control={control}
+                      defaultValue={languages}
+                      defaultValues={languages}
                       onChange={values => {
                         setValue(
                           'languages',
@@ -163,6 +203,8 @@ const Profile: NextPage = ({
                       placeholder='Choose your tech stack'
                       message='Please select at least one technology'
                       control={control}
+                      defaultValue={technologies}
+                      defaultValues={technologies}
                       onChange={values => {
                         setValue(
                           'technologies',
@@ -245,6 +287,7 @@ export const getServerSideProps: GetServerSideProps = async (
   //* return user technologies
   return {
     props: {
+      token,
       techOptions,
       langOptions,
     },

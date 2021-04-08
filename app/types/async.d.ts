@@ -1,4 +1,4 @@
-import {IProjectData} from 'app/types/project'
+import type {IProjectData} from 'app/types/project'
 
 export type AsyncData = IProjectData[] | undefined
 

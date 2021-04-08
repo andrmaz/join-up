@@ -12,6 +12,8 @@ const FormSelect = ({
   onChange,
   errors,
   disabled,
+  defaultValues,
+  defaultValue,
 }: IFormSelect): React.ReactElement => {
   return (
     <>
@@ -21,17 +23,10 @@ const FormSelect = ({
       <Controller
         name={id}
         control={control}
-        //TODO default value must be in this format inside the setting page
-        //{ value: 'technology', label: 'Technology'}
-        /* defaultValue={technologies.map(
-                                            tech => tech.value
-                                        )} */
-        defaultValue=''
+        defaultValue={defaultValues ? defaultValues.map(v => v.label) : ''}
         rules={{
-          required: {
-            value: true,
-            message,
-          },
+          //* recommended for object or array input data
+          validate: value => value.length || message,
         }}
         render={({value, onBlur}) => (
           <Select
@@ -39,10 +34,7 @@ const FormSelect = ({
             inputId={id}
             name={id}
             aria-labelledby={id}
-            //TODO default value must be in this format inside the setting page
-            //{ value: 'technology', label: 'Technology'}
-            //defaultValue={technologies}
-            defaultValue={value}
+            defaultValue={defaultValue ? defaultValue : value}
             closeMenuOnSelect={false}
             isMulti
             options={options}

@@ -1,4 +1,5 @@
-import {NestedValue} from 'react-hook-form'
+import type {NestedOptions} from 'app/types/form'
+import type {NestedStrings} from 'app/types/project'
 
 export type SigninInputs = {
   email: string
@@ -14,9 +15,8 @@ export interface ISignupInputs {
   gitlabURL?: string
   bitbucketURL?: string
   linkedinURL?: string
-  // refer to https://github.com/react-hook-form/react-hook-form/issues/987
-  languages: NestedValue<string[]>
-  technologies: NestedValue<string[]>
+  languages: NestedStrings
+  technologies: NestedStrings
   bio?: string
 }
 export interface IUserContext {
@@ -29,9 +29,8 @@ export interface IUserContext {
   linkedinURL?: string
   avatar: string
   bio?: string
-  // refer to https://github.com/react-hook-form/react-hook-form/issues/987
-  languages: NestedValue<string[]>
-  technologies: NestedValue<string[]>
+  languages: NestedOptions
+  technologies: NestedOptions
 }
 
 export type UserData = IUserContext | null
