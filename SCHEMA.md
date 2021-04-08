@@ -54,6 +54,15 @@
 - Posts -> _Array_ --Optional
 - Collaborators -> _Array_ --Optional
 
+##### Post
+
+- Title -> _String_
+- Description -> _String_ --Optional
+- Technologies _Tags_ -> _Array_
+- Project -> _String_
+- Positions -> _Number_
+
+
 ### **MMP Features**
 
 - Chat
