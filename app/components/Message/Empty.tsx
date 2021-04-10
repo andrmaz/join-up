@@ -6,7 +6,7 @@ type Props = {
 
 export const EmptyMessage = ({children}: Props): JSX.Element => (
   <div className='w-full flex justify-center'>
-    <span className='text-lg xl:text-2xl text-center tracking-wide'>
+    <span className='xl:text-xl text-center tracking-wide text-blue-500'>
       {children}
     </span>
   </div>

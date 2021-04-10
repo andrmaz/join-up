@@ -8,6 +8,7 @@ import Navbar from '@components/Navbar/Navbar'
 
 const Slug: NextPage = ({
   project,
+  jobs,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <div className='min-h-screen'>
@@ -16,9 +17,9 @@ const Slug: NextPage = ({
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar />
-      <main className='h-screen pt-20 container'>
-        <section className='h-full p-12'>
-          <ProjectOverview project={project} />
+      <main className='min-h-screen pt-20 container'>
+        <section className='h-auto p-12'>
+          <ProjectOverview project={project} positions={jobs} />
         </section>
       </main>
     </div>
@@ -54,10 +55,19 @@ export const getServerSideProps: GetServerSideProps<Params> = async context => {
     },
   })
 
+  const {
+    data: {jobs},
+  } = await axios.get(`/job/project/${slug}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
   //* return project data
   return {
     props: {
       project,
+      jobs,
     },
   }
 }

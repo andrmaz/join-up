@@ -1,30 +1,35 @@
-import ProjectCard from '@components/Card/Card'
-import {useAuthState} from '@hooks/auth/useAuthState'
-import {EmptyMessage} from '../Message/Empty'
+import ProjectBadge from '@components/Project/Badge'
+import {EmptyMessage} from '@components/Message/Empty'
+import PositionPreview from '@components/Position/Preview'
 import type {IProjectData} from 'app/types/project'
+import type {IPosistionData} from 'app/types/position'
 
-const ProjectOverview = ({project}: {project: IProjectData}): JSX.Element => {
-  const {user} = useAuthState()
+const ProjectOverview = ({
+  project,
+  positions,
+}: {
+  project: IProjectData
+  positions: IPosistionData[]
+}): JSX.Element => {
   return (
-    <div className='w-full h-full border-2 border-black p-4'>
+    <div className='w-full min-h-full p-4'>
       <article className='w-full h-auto'>
-        <ProjectCard {...project} />
+        <ProjectBadge {...project} />
       </article>
-      <article className='w-full h-1/2'>
-        {project.jobsAvailable ? (
-          //* Map through posts list
-          <ul>Posts</ul>
-        ) : (
-          <EmptyMessage>This project has no posts available.</EmptyMessage>
-        )}
-        <div className='w-full flex justify-end'>
-          {project.owner === user?._id && (
-            <button onClick={() => console.log('Adding a new post')}>
-              Add a new post
-            </button>
-          )}
-        </div>
-      </article>
+      {project.jobsAvailable ? (
+        <article className='grid grid-cols-2 divide-x divide-black-500'>
+          <section className='w-full h-auto p-1'>
+            <ul className='h-auto'>
+              {positions.map(position => (
+                <PositionPreview key={position._id} {...position} />
+              ))}
+            </ul>
+          </section>
+          <section className='w-full'></section>
+        </article>
+      ) : (
+        <EmptyMessage>This project has no posts available.</EmptyMessage>
+      )}
     </div>
   )
 }
