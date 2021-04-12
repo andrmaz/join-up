@@ -1,4 +1,4 @@
-export const UserLink = ({value}: {value?: string}): JSX.Element => {
+export const ProfileLink = ({value}: {value?: string}): JSX.Element => {
   return (
     <li>
       <a href={value} className='text-blue-600'>
