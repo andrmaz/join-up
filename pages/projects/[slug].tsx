@@ -1,14 +1,24 @@
+import * as React from 'react'
 import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
 import axios from 'axios'
 import {parseCookies} from '@utils/parseCookies'
 import {Params} from 'next/dist/next-server/server/router'
-import ProjectOverview from '@components/Project/Overview'
 import Navbar from '@components/Navbar/Navbar'
+import ProjectBadge from '@components/Project/Badge'
+import PositionTabs from '@components/Position/Tabs'
+import PositionPanel from '@components/Position/Panel'
+import {EmptyMessage} from '@components/Message/Empty'
+import type {IPosistionData} from 'app/types/position'
 
 const Slug: NextPage = ({
   project,
+  jobs,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [
+    selectedPosition,
+    setSelectedPosition,
+  ] = React.useState<IPosistionData>(jobs[0])
   return (
     <div className='min-h-screen'>
       <Head>
@@ -16,9 +26,24 @@ const Slug: NextPage = ({
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar />
-      <main className='h-screen pt-20 container'>
-        <section className='h-full p-12'>
-          <ProjectOverview project={project} />
+      <main className='min-h-screen pt-20 container'>
+        <section className='h-auto p-12'>
+          <div className='w-full min-h-full p-4'>
+            <article className='w-full h-auto'>
+              <ProjectBadge {...project} />
+            </article>
+            {project.jobsAvailable ? (
+              <article className='grid grid-cols-2 divide-x divide-black-500'>
+                <PositionTabs
+                  positions={jobs}
+                  setSelectedPosition={setSelectedPosition}
+                />
+                <PositionPanel {...selectedPosition} />
+              </article>
+            ) : (
+              <EmptyMessage>This project has no posts available.</EmptyMessage>
+            )}
+          </div>
         </section>
       </main>
     </div>
@@ -54,10 +79,19 @@ export const getServerSideProps: GetServerSideProps<Params> = async context => {
     },
   })
 
+  const {
+    data: {jobs},
+  } = await axios.get(`/job/project/${slug}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
   //* return project data
   return {
     props: {
       project,
+      jobs,
     },
   }
 }
