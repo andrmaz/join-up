@@ -1,6 +1,6 @@
 import type {IPosistionData} from 'app/types/position'
 
-const PositionPreview = ({
+const PositionTab = ({
   title,
   positions,
   createdAt,
@@ -20,4 +20,4 @@ const PositionPreview = ({
   </li>
 )
 
-export default PositionPreview
+export default PositionTab
