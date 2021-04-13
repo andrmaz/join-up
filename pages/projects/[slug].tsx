@@ -23,7 +23,7 @@ const Slug: NextPage = ({
       </Head>
       <Navbar />
       <main className='min-h-screen pt-20 container'>
-        <section className='h-auto p-12'>
+        <section className='h-auto p-10'>
           <div className='w-full min-h-full p-4'>
             <article className='w-full h-auto'>
               <ProjectBadge {...project} />

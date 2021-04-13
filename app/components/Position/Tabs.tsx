@@ -17,12 +17,12 @@ const PositionTabs = ({
     setSelectedTab
   )
   return (
-    <section className='w-full h-70v p-1 overflow-y-auto'>
+    <section className='w-full h-70v p-1'>
       <ul
         role='tablist'
         aria-label='tabs'
         onKeyDown={handleKeyPress}
-        className='h-auto'
+        className='h-auto overflow-y-auto'
       >
         {positions.map((position, index) => (
           <button
