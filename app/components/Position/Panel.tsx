@@ -1,7 +1,6 @@
 import type {IPosistionData} from 'app/types/position'
 
 const PositionPanel = ({
-  _id,
   title,
   description,
   technologies,
@@ -10,13 +9,7 @@ const PositionPanel = ({
   updatedAt,
 }: IPosistionData): JSX.Element => {
   return (
-    <section
-      id='panel'
-      role='tabpanel'
-      tabIndex={0}
-      aria-labelledby={_id}
-      className='h-144 w-full border-2 border-black p-2 rounded'
-    >
+    <div className='h-full w-full border-2 border-black p-2 rounded'>
       <header className='h-1/10 w-full'>
         <h1 className='font-extrabold text-xl'>{title}</h1>
       </header>
@@ -32,7 +25,7 @@ const PositionPanel = ({
           {updatedAt.slice(0, 7)}
         </span>
       </aside>
-    </section>
+    </div>
   )
 }
 

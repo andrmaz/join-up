@@ -1,34 +1,39 @@
-import * as React from 'react'
 import PositionTab from '@components/Position/Tab'
+import {useTabsKey} from '@hooks/tabs/useTabsKey'
 import type {IPosistionData} from 'app/types/position'
 
 const PositionTabs = ({
   positions,
-  setSelectedPosition,
+  selectedTab,
+  setSelectedTab,
 }: {
   positions: IPosistionData[]
-  setSelectedPosition: (position: IPosistionData) => void
+  selectedTab: number
+  setSelectedTab: (position: number) => void
 }): React.ReactElement => {
-  //const tabRef = React.useRef(null)
+  const [handleKeyPress, tabRef] = useTabsKey(
+    positions,
+    selectedTab,
+    setSelectedTab
+  )
   return (
-    <section className='w-full h-auto p-1'>
+    <section className='w-full h-70v p-1 overflow-y-auto'>
       <ul
         role='tablist'
         aria-label='tabs'
-        //TODO: Improve accessibility
-        //onKeyDown={e => {}}
+        onKeyDown={handleKeyPress}
         className='h-auto'
       >
-        {positions.map(position => (
+        {positions.map((position, index) => (
           <button
             key={position._id}
             role='tab'
-            aria-selected={true}
-            aria-controls='panel'
-            id={position._id}
-            //tabIndex={selectedPosition._id === position._id ? 0 : -1}
-            //ref={tabRef}
-            onClick={() => setSelectedPosition(position)}
+            aria-selected={selectedTab === index}
+            aria-controls={`panel-${index}`}
+            id={`tab-${index}`}
+            tabIndex={selectedTab === index ? 0 : -1}
+            ref={selectedTab === index ? tabRef : null}
+            onClick={() => setSelectedTab(index)}
             className='w-full'
           >
             <PositionTab {...position} />
