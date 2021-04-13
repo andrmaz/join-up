@@ -7,18 +7,14 @@ import {Params} from 'next/dist/next-server/server/router'
 import Navbar from '@components/Navbar/Navbar'
 import ProjectBadge from '@components/Project/Badge'
 import PositionTabs from '@components/Position/Tabs'
-import PositionPanel from '@components/Position/Panel'
+import PositionPanels from '@components/Position/Panels'
 import {EmptyMessage} from '@components/Message/Empty'
-import type {IPosistionData} from 'app/types/position'
 
 const Slug: NextPage = ({
   project,
   jobs,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [
-    selectedPosition,
-    setSelectedPosition,
-  ] = React.useState<IPosistionData>(jobs[0])
+  const [selectedTab, setSelectedTab] = React.useState<number>(0)
   return (
     <div className='min-h-screen'>
       <Head>
@@ -36,9 +32,10 @@ const Slug: NextPage = ({
               <article className='grid grid-cols-2 divide-x divide-black-500'>
                 <PositionTabs
                   positions={jobs}
-                  setSelectedPosition={setSelectedPosition}
+                  selectedTab={selectedTab}
+                  setSelectedTab={setSelectedTab}
                 />
-                <PositionPanel {...selectedPosition} />
+                <PositionPanels positions={jobs} selectedTab={selectedTab} />
               </article>
             ) : (
               <EmptyMessage>This project has no posts available.</EmptyMessage>
