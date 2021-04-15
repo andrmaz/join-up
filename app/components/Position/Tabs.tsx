@@ -12,7 +12,7 @@ const PositionTabs = ({
   setSelectedTab: (position: number) => void
 }): React.ReactElement => {
   const [handleKeyPress, tabRef] = useTabsKey(
-    positions,
+    positions.length - 1,
     selectedTab,
     setSelectedTab
   )

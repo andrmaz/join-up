@@ -1,8 +1,7 @@
 import * as React from 'react'
-import type {IPosistionData} from 'app/types/position'
 
 export const useTabsKey = (
-  array: IPosistionData[],
+  tabCount: number,
   state: number,
   setState: (position: number) => void
 ): ReadonlyArray<any> => {
@@ -28,8 +27,6 @@ export const useTabsKey = (
   }
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleKeyPress = (event: React.KeyboardEvent) => {
-    const tabCount = array.length - 1
-
     if (event.key === 'ArrowUp') {
       const last = tabCount
       const next = state - 1
