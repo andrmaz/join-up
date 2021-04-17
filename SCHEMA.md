@@ -26,11 +26,14 @@
 - Technologies _Tags_ -> _Array_
 - Url -> _String_ --Optional
 
-##### New Post Form
+##### New Position Form
 
 - Title -> _String_
 - Description -> _String_ --Optional
 - Technologies _Tags_ -> _Array_
+- Vacancy -> _Number_
+- Level -> _Array_
+- Role _Tags_ -> _Array_
 
 ##### User
 
@@ -51,16 +54,19 @@
 - Url -> _String_ --Optional
 - Description -> _String_ --Optional
 - Technologies _Tags_ -> _Array_
-- Posts -> _Array_ --Optional
+- Positions -> _Array_ --Optional
 - Collaborators -> _Array_ --Optional
+- Owner -> _Id_
 
-##### Post
+##### Position
 
 - Title -> _String_
 - Description -> _String_ --Optional
 - Technologies _Tags_ -> _Array_
-- Project -> _String_
-- Positions -> _Number_
+- Vacancy -> _Number_
+- Level -> _String_
+- Role _Tags_ -> _String_
+- Project -> _Id_
 
 
 ### **MMP Features**
