@@ -9,11 +9,10 @@ import {useForm} from 'react-hook-form'
 
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {login} from '@actions/authActions'
-import Input from '@components/Form/Input'
+import FormInput from '@components/Input/Form'
 import LangSelect from '@components/Select/Lang'
 import TechSelect from '@components/Select/Tech'
-import ErrorMessage from '@components/Message/Error'
-import {Biography} from '@components/Form/Biography'
+import Textarea from '@components/Textarea/Textarea'
 
 import type {ISignupInputs} from 'app/types/user'
 import {SubmitButton} from '@components/Button/Submit'
@@ -82,7 +81,7 @@ const SignUp = ({
         >
           <article className='w-full h-1/2 flex'>
             <section className='w-3/6 flex flex-col justify-around'>
-              <Input
+              <FormInput
                 type='text'
                 id='username'
                 name='username'
@@ -99,13 +98,9 @@ const SignUp = ({
                     message: 'username must be at most 20 characters long',
                   },
                 })}
-                errors={
-                  errors.username && (
-                    <ErrorMessage>{errors.username.message}</ErrorMessage>
-                  )
-                }
+                errors={errors}
               />
-              <Input
+              <FormInput
                 type='email'
                 id='email'
                 name='email'
@@ -118,13 +113,9 @@ const SignUp = ({
                     message: 'please enter a valid email address',
                   },
                 })}
-                errors={
-                  errors.email && (
-                    <ErrorMessage>{errors.email.message}</ErrorMessage>
-                  )
-                }
+                errors={errors}
               />
-              <Input
+              <FormInput
                 type='password'
                 id='password'
                 name='password'
@@ -137,13 +128,9 @@ const SignUp = ({
                     message: 'please enter a valid password',
                   },
                 })}
-                errors={
-                  errors.password && (
-                    <ErrorMessage>{errors.password.message}</ErrorMessage>
-                  )
-                }
+                errors={errors}
               />
-              <Input
+              <FormInput
                 type='password'
                 id='confirmPassword'
                 name='confirmPassword'
@@ -153,17 +140,11 @@ const SignUp = ({
                   validate: value =>
                     value === watchPassword || 'passwords must match',
                 })}
-                errors={
-                  errors.confirmPassword && (
-                    <ErrorMessage>
-                      {errors.confirmPassword.message}
-                    </ErrorMessage>
-                  )
-                }
+                errors={errors}
               />
             </section>
             <section className='w-3/6 flex flex-col justify-around'>
-              <Input
+              <FormInput
                 type='text'
                 id='githubURL'
                 name='githubURL'
@@ -171,7 +152,7 @@ const SignUp = ({
                 placeholder='your GitHub username here'
                 register={register}
               />
-              <Input
+              <FormInput
                 type='text'
                 id='gitlabURL'
                 name='gitlabURL'
@@ -179,7 +160,7 @@ const SignUp = ({
                 placeholder='your GitLab username here'
                 register={register}
               />
-              <Input
+              <FormInput
                 type='text'
                 id='bitbucketURL'
                 name='bitbucketURL'
@@ -187,7 +168,7 @@ const SignUp = ({
                 placeholder='your BitBucket username here'
                 register={register}
               />
-              <Input
+              <FormInput
                 type='text'
                 id='linkedinURL'
                 name='linkedinURL'
@@ -215,7 +196,7 @@ const SignUp = ({
               />
             </div>
           </article>
-          <Biography register={register} />
+          <Textarea register={register} />
           <article className='h-1/5 flex items-center'>
             <aside className='flex flex-row h-1/3 w-full justify-between'>
               <div className='h-full w-1/3'>

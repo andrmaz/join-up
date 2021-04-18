@@ -9,7 +9,7 @@ export interface IFormInput {
   register: React.Ref<T>
   defaultValue?: string
   optional?: boolean
-  errors?: JSX.Element | undefined
+  errors?: Record<string, any>
 }
 
 export type SelectOptions = {value: string; label: string}

@@ -1,6 +1,6 @@
 import {DrawerInputsProps} from 'app/types/drawer'
 
-export const JobCheckbox = ({
+export const CheckboxInput = ({
   register,
   isPending,
 }: DrawerInputsProps): JSX.Element => (

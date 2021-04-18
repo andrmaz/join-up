@@ -1,4 +1,4 @@
-export const Biography = ({
+const Textarea = ({
   register,
   defaultValue,
 }: {
@@ -24,3 +24,5 @@ export const Biography = ({
     </div>
   </article>
 )
+
+export default Textarea
