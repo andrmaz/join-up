@@ -8,8 +8,7 @@ import {useForm} from 'react-hook-form'
 
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {login} from '@actions/authActions'
-import Input from '@components/Form/Input'
-import ErrorMessage from '@components/Message/Error'
+import FormInput from '@components/Input/Form'
 import type {SigninInputs} from 'app/types/user'
 import {SubmitButton} from '@components/Button/Submit'
 
@@ -64,7 +63,7 @@ const SignIn = (): JSX.Element => {
           onSubmit={handleSubmit(onSubmit)}
           className='h-4/6 flex flex-col justify-between  xl:justify-evenly'
         >
-          <Input
+          <FormInput
             type='email'
             id='email'
             name='email'
@@ -77,13 +76,9 @@ const SignIn = (): JSX.Element => {
                 message: 'please enter a valid email address',
               },
             })}
-            errors={
-              errors.email && (
-                <ErrorMessage>{errors.email.message}</ErrorMessage>
-              )
-            }
+            errors={errors}
           />
-          <Input
+          <FormInput
             type='password'
             id='password'
             name='password'
@@ -96,11 +91,7 @@ const SignIn = (): JSX.Element => {
                 message: 'please enter a valid password',
               },
             })}
-            errors={
-              errors.password && (
-                <ErrorMessage>{errors.password.message}</ErrorMessage>
-              )
-            }
+            errors={errors}
           />
           <SubmitButton
             value='SignIn'

@@ -14,9 +14,8 @@ import {useForm} from 'react-hook-form'
 import {parseCookies} from '@utils/parseCookies'
 import {useAuthState} from '@hooks/auth/useAuthState'
 
-import Input from '@components/Form/Input'
+import FormInput from '@components/Input/Form'
 import Navbar from '@components/Navbar/Navbar'
-import ErrorMessage from '@components/Message/Error'
 import TechSelect from '@components/Select/Tech'
 import {ConfirmButton} from '@components/Button/Confirm'
 
@@ -99,7 +98,7 @@ const Project: NextPage = ({
                 </select>
               </div>
             </div>
-            <Input
+            <FormInput
               type='text'
               id='name'
               name='name'
@@ -108,13 +107,9 @@ const Project: NextPage = ({
               register={register({
                 required: 'project name is required',
               })}
-              errors={
-                errors.name && (
-                  <ErrorMessage>{errors.name.message}</ErrorMessage>
-                )
-              }
+              errors={errors}
             />
-            <Input
+            <FormInput
               type='text'
               id='description'
               name='description'
@@ -131,7 +126,7 @@ const Project: NextPage = ({
                 errors={errors}
               />
             </div>
-            <Input
+            <FormInput
               type='url'
               id='projectURL'
               name='projectURL'
@@ -143,11 +138,7 @@ const Project: NextPage = ({
                   message: 'Please enter a valid URL',
                 },
               })}
-              errors={
-                errors.projectURL && (
-                  <ErrorMessage>{errors.projectURL.message}</ErrorMessage>
-                )
-              }
+              errors={errors}
               optional
             />
             <div className='h-1/6 flex flex-col justify-end'>

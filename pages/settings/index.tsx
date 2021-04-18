@@ -19,12 +19,12 @@ import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {useAuthState} from '@hooks/auth/useAuthState'
 
 import Navbar from '@components/Navbar/Navbar'
-import Input from '@components/Form/Input'
+import FormInput from '@components/Input/Form'
 import LangSelect from '@components/Select/Lang'
 import TechSelect from '@components/Select/Tech'
 import ProfileMenu from '@components/Menu/List'
 import {ConfirmButton} from '@components/Button/Confirm'
-import {Biography} from '@components/Form/Biography'
+import Textarea from '@components/Textarea/Textarea'
 
 import type {IUserContext} from 'app/types/user'
 
@@ -111,7 +111,7 @@ const Profile: NextPage = ({
                   <div className='flex flex-row'>
                     <div className='w-3/5'>
                       <div className='flex flex-col xl:justify-between'>
-                        <Input
+                        <FormInput
                           type='text'
                           id='githubURL'
                           name='githubURL'
@@ -120,7 +120,7 @@ const Profile: NextPage = ({
                           register={register}
                           defaultValue={githubURL?.slice(19, githubURL.length)}
                         />
-                        <Input
+                        <FormInput
                           type='text'
                           id='gitlabURL'
                           name='gitlabURL'
@@ -129,7 +129,7 @@ const Profile: NextPage = ({
                           register={register}
                           defaultValue={gitlabURL?.slice(19, gitlabURL.length)}
                         />
-                        <Input
+                        <FormInput
                           type='text'
                           id='bitbucketURL'
                           name='bitbucketURL'
@@ -141,7 +141,7 @@ const Profile: NextPage = ({
                             bitbucketURL.length - 1
                           )}
                         />
-                        <Input
+                        <FormInput
                           type='text'
                           id='linkedinURL'
                           name='linkedinURL'
@@ -186,7 +186,7 @@ const Profile: NextPage = ({
                     />
                   </div>
                 </article>
-                <Biography register={register} defaultValue={bio} />
+                <Textarea register={register} defaultValue={bio} />
                 <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
                   <button
                     type='button'

@@ -1,6 +1,6 @@
 import {DrawerInputsProps} from 'app/types/drawer'
 
-export const MatchRadio = ({
+export const RadioInput = ({
   register,
   isPending,
 }: DrawerInputsProps): JSX.Element => (

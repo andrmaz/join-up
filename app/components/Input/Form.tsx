@@ -1,7 +1,8 @@
 import * as React from 'react'
+import ErrorMessage from '@components/Message/Error'
 import type {IFormInput} from 'app/types/form'
 
-const Input = ({
+const FormInput = ({
   name,
   optional,
   label,
@@ -26,9 +27,9 @@ const Input = ({
         className='focus:outline-none focus:ring focus:border-blue-300 border-2 border-gray-400 p-0.5 mr-2 rounded'
         ref={register}
       />
-      {errors}
+      {errors?.[name] && <ErrorMessage>{errors?.[name]?.message}</ErrorMessage>}
     </div>
   )
 }
 
-export default Input
+export default FormInput
