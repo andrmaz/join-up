@@ -6,7 +6,11 @@ export interface IDrawerProps {
   register: (Ref: any) => void
   isPending: boolean
   options: SelectOptions[]
-  onChange: (values: any) => void
+  setValue: (
+    name: any,
+    value: unknown,
+    config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
+  ) => void
   control: Control
   technologies: NestedStrings
 }

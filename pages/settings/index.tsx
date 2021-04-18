@@ -20,14 +20,13 @@ import {useAuthState} from '@hooks/auth/useAuthState'
 
 import Navbar from '@components/Navbar/Navbar'
 import Input from '@components/Form/Input'
-import FormSelect from '@components/Form/Select'
-import ErrorMessage from '@components/Message/Error'
+import LangSelect from '@components/Select/Lang'
+import TechSelect from '@components/Select/Tech'
 import ProfileMenu from '@components/Menu/List'
 import {ConfirmButton} from '@components/Button/Confirm'
 import {Biography} from '@components/Form/Biography'
 
 import type {IUserContext} from 'app/types/user'
-import type {SelectOptions} from 'app/types/form'
 
 const Profile: NextPage = ({
   token,
@@ -167,61 +166,23 @@ const Profile: NextPage = ({
                     </div>
                   </div>
                   <div className='flex flex-col p-0.5'>
-                    <FormSelect
-                      id='languages'
-                      label='Languages'
+                    <LangSelect
                       options={langOptions}
-                      placeholder='Select your languages'
-                      message='Please select at least one language'
                       control={control}
                       defaultValue={languages}
                       defaultValues={languages}
-                      onChange={values => {
-                        setValue(
-                          'languages',
-                          values.map((value: SelectOptions) => value.label),
-                          {
-                            shouldValidate: true,
-                            shouldDirty: true,
-                          }
-                        )
-                      }}
-                      errors={
-                        errors.languages && (
-                          <ErrorMessage>
-                            {errors.languages.message}
-                          </ErrorMessage>
-                        )
-                      }
+                      setValue={setValue}
+                      errors={errors}
                     />
                   </div>
                   <div className='flex flex-col p-0.5'>
-                    <FormSelect
-                      id='technologies'
-                      label='Technologies'
+                    <TechSelect
                       options={techOptions}
-                      placeholder='Choose your tech stack'
-                      message='Please select at least one technology'
                       control={control}
                       defaultValue={technologies}
                       defaultValues={technologies}
-                      onChange={values => {
-                        setValue(
-                          'technologies',
-                          values.map((value: SelectOptions) => value.label),
-                          {
-                            shouldValidate: true,
-                            shouldDirty: true,
-                          }
-                        )
-                      }}
-                      errors={
-                        errors.technologies && (
-                          <ErrorMessage>
-                            {errors.technologies.message}
-                          </ErrorMessage>
-                        )
-                      }
+                      setValue={setValue}
+                      errors={errors}
                     />
                   </div>
                 </article>

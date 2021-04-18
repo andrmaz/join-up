@@ -19,8 +19,6 @@ import Navbar from '@components/Navbar/Navbar'
 import ProjectsGrid from '@components/Project/Grid'
 import Drawer from '@components/Drawer/Drawer'
 
-import type {SelectOptions} from 'app/types/form'
-
 const Projects: NextPage = ({
   token,
   techOptions,
@@ -74,16 +72,7 @@ const Projects: NextPage = ({
             register={register}
             isPending={isPending}
             options={techOptions}
-            onChange={values => {
-              setValue(
-                'technologies',
-                values.map((value: SelectOptions) => value.label),
-                {
-                  shouldValidate: true,
-                  shouldDirty: true,
-                }
-              )
-            }}
+            setValue={setValue}
             control={control}
             technologies={technologies}
           />

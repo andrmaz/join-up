@@ -1,5 +1,5 @@
-import FormSelect from '@components/Form/Select'
-import {DateSelect} from '@components/Filter/DateSelect'
+import TechSelect from '@components/Select/Tech'
+import {DateSelect} from '@components/Select/Date'
 import {MatchRadio} from '@components/Filter/MatchRadio'
 import {JobCheckbox} from '@components/Filter/JobCheckbox'
 
@@ -9,7 +9,7 @@ const ProjectDrawer = ({
   register,
   isPending,
   options,
-  onChange,
+  setValue,
   control,
   technologies,
 }: IDrawerProps): JSX.Element => (
@@ -22,15 +22,11 @@ const ProjectDrawer = ({
         ''
       )}
       <JobCheckbox register={register} isPending={isPending} />
-      <FormSelect
-        id='technologies'
-        label='Technologies'
+      <TechSelect
         options={options}
-        placeholder='Choose your tech stack'
-        message='Please select at least one technology'
         disabled={Boolean(isPending)}
         control={control}
-        onChange={onChange}
+        setValue={setValue}
       />
     </form>
   </section>

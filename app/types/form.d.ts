@@ -16,14 +16,14 @@ export type SelectOptions = {value: string; label: string}
 export type NestedOptions = NestedValue<SelectOptions[]> | undefined
 
 export interface IFormSelect {
-  id: string
-  label: string
   options: SelectOptions[]
-  placeholder: string
-  message: string
   control: Control
-  onChange: (values: any) => void
-  errors?: JSX.Element | undefined
+  setValue: (
+    name: any,
+    value: unknown,
+    config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
+  ) => void
+  errors?: Record<string, any>
   disabled?: boolean
   defaultValues?: NestedOptions
   defaultValue?: NestedOptions
