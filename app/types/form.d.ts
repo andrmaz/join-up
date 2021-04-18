@@ -28,3 +28,5 @@ export interface IFormSelect {
   defaultValues?: NestedOptions
   defaultValue?: NestedOptions
 }
+
+export type FormButton = {value?: string; errors: boolean}
