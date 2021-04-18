@@ -3,7 +3,7 @@ import {ProfileInfo} from '@components/Profile/Info'
 import {ProfileSkills} from '@components/Profile/Skills'
 import {ProfileLink} from '@components/Profile/Link'
 
-const UserCard = (): JSX.Element => {
+const ProfileCard = (): JSX.Element => {
   const {user} = useAuthState()
   const {
     avatar,
@@ -37,4 +37,4 @@ const UserCard = (): JSX.Element => {
   )
 }
 
-export default UserCard
+export default ProfileCard
