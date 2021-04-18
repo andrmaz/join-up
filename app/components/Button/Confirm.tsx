@@ -1,13 +1,13 @@
 import type {FormButton} from 'app/types/form'
 
-export const SubmitButton = ({
-  value = 'Submit',
+export const ConfirmButton = ({
+  value = 'Save',
   errors = false,
 }: FormButton): JSX.Element => (
   <input
     type='submit'
     value={value}
+    className='w-2/6 h-6 cursor-pointer bg-green-600 text-white rounded m-1 disabled:opacity-50'
     disabled={errors}
-    className='h-auto w-full py-1 cursor-pointer bg-blue-800 text-white rounded disabled:opacity-50'
   />
 )

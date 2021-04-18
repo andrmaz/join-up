@@ -23,7 +23,7 @@ import Input from '@components/Form/Input'
 import FormSelect from '@components/Form/Select'
 import ErrorMessage from '@components/Message/Error'
 import ProfileMenu from '@components/Menu/List'
-import {SubmitButton} from '@components/Button/Submit'
+import {ConfirmButton} from '@components/Button/Confirm'
 import {Biography} from '@components/Form/Biography'
 
 import type {IUserContext} from 'app/types/user'
@@ -234,8 +234,7 @@ const Profile: NextPage = ({
                   >
                     Cancel
                   </button>
-                  <SubmitButton
-                    value='Save'
+                  <ConfirmButton
                     errors={Boolean(errors.languages || errors.technologies)}
                   />
                 </aside>

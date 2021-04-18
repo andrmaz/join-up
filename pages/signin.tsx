@@ -11,6 +11,7 @@ import {login} from '@actions/authActions'
 import Input from '@components/Form/Input'
 import ErrorMessage from '@components/Message/Error'
 import type {SigninInputs} from 'app/types/user'
+import {SubmitButton} from '@components/Button/Submit'
 
 const SignIn = (): JSX.Element => {
   const {register, handleSubmit, errors} = useForm<SigninInputs>({
@@ -101,11 +102,9 @@ const SignIn = (): JSX.Element => {
               )
             }
           />
-          <input
-            disabled={Boolean(errors.email || errors.password)}
-            type='submit'
+          <SubmitButton
             value='SignIn'
-            className='h-6 cursor-pointer bg-blue-800 text-white rounded disabled:opacity-50'
+            errors={Boolean(errors.email || errors.password)}
           />
         </form>
         <div className='inline-flex justify-between w-full h-1/6 pt-5 lg:text-xs'>

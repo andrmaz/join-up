@@ -16,6 +16,7 @@ import {Biography} from '@components/Form/Biography'
 
 import type {ISignupInputs} from 'app/types/user'
 import type {SelectOptions} from 'app/types/form'
+import {SubmitButton} from '@components/Button/Submit'
 
 const SignUp = ({
   technologies,
@@ -251,19 +252,19 @@ const SignUp = ({
           <Biography register={register} />
           <article className='h-1/5 flex items-center'>
             <aside className='flex flex-row h-1/3 w-full justify-between'>
-              <input
-                type='submit'
-                value='SignUp'
-                className='w-72 h-6 cursor-pointer bg-blue-800 text-white rounded disabled:opacity-50'
-                disabled={Boolean(
-                  errors.username ||
-                    errors.email ||
-                    errors.password ||
-                    errors.confirmPassword ||
-                    errors.languages ||
-                    errors.technologies
-                )}
-              />
+              <div className='h-full w-1/3'>
+                <SubmitButton
+                  value='SignUp'
+                  errors={Boolean(
+                    errors.username ||
+                      errors.email ||
+                      errors.password ||
+                      errors.confirmPassword ||
+                      errors.languages ||
+                      errors.technologies
+                  )}
+                />
+              </div>
               <Link href='/signin'>
                 <a className='inline-block align-bottom mr-4 text-sm'>
                   Already have an account ? SignIn
