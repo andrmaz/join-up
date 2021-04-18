@@ -11,7 +11,7 @@ import axios from 'axios'
 
 import {parseCookies} from '@utils/parseCookies'
 import Navbar from '@components/Navbar/Navbar'
-import UserCard from '@components/User/Card'
+import UserCard from '@components/Profile/Card'
 import ProjectsList from '@components/Project/List'
 
 const Profile: NextPage = ({

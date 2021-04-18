@@ -22,7 +22,7 @@ import Navbar from '@components/Navbar/Navbar'
 import FormInput from '@components/Input/Form'
 import LangSelect from '@components/Select/Lang'
 import TechSelect from '@components/Select/Tech'
-import ProfileMenu from '@components/Menu/List'
+import ProfileMenu from '@components/Menu/Menu'
 import {ConfirmButton} from '@components/Button/Confirm'
 import Textarea from '@components/Textarea/Textarea'
 
