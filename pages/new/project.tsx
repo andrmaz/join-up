@@ -17,11 +17,10 @@ import {useAuthState} from '@hooks/auth/useAuthState'
 import Input from '@components/Form/Input'
 import Navbar from '@components/Navbar/Navbar'
 import ErrorMessage from '@components/Message/Error'
-import FormSelect from '@components/Form/Select'
+import TechSelect from '@components/Select/Tech'
 import {ConfirmButton} from '@components/Button/Confirm'
 
 import type {IProjectInput} from 'app/types/project'
-import type {SelectOptions} from 'app/types/form'
 
 const Project: NextPage = ({
   technologies,
@@ -125,28 +124,11 @@ const Project: NextPage = ({
               optional
             />
             <div className='h-1/6 flex flex-col mb-6'>
-              <FormSelect
-                id='technologies'
-                label='Technologies'
+              <TechSelect
                 options={technologies}
-                placeholder='Choose your tech stack'
-                message='Please select at least one technology'
                 control={control}
-                onChange={values => {
-                  setValue(
-                    'technologies',
-                    values.map((value: SelectOptions) => value.label),
-                    {
-                      shouldValidate: true,
-                      shouldDirty: true,
-                    }
-                  )
-                }}
-                errors={
-                  errors.technologies && (
-                    <ErrorMessage>{errors.technologies.message}</ErrorMessage>
-                  )
-                }
+                setValue={setValue}
+                errors={errors}
               />
             </div>
             <Input

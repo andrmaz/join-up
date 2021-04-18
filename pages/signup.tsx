@@ -10,12 +10,12 @@ import {useForm} from 'react-hook-form'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {login} from '@actions/authActions'
 import Input from '@components/Form/Input'
-import FormSelect from '@components/Form/Select'
+import LangSelect from '@components/Select/Lang'
+import TechSelect from '@components/Select/Tech'
 import ErrorMessage from '@components/Message/Error'
 import {Biography} from '@components/Form/Biography'
 
 import type {ISignupInputs} from 'app/types/user'
-import type {SelectOptions} from 'app/types/form'
 import {SubmitButton} from '@components/Button/Submit'
 
 const SignUp = ({
@@ -199,53 +199,19 @@ const SignUp = ({
           </article>
           <article className='h-1/5 w-full flex mt-2'>
             <div className='w-3/6 flex flex-col m-auto p-0.5'>
-              <FormSelect
-                id='languages'
-                label='Languages'
+              <LangSelect
                 options={languages}
-                placeholder='Select your languages'
-                message='Please select at least one language'
                 control={control}
-                onChange={values => {
-                  setValue(
-                    'languages',
-                    values.map((value: SelectOptions) => value.label),
-                    {
-                      shouldValidate: true,
-                      shouldDirty: true,
-                    }
-                  )
-                }}
-                errors={
-                  errors.languages && (
-                    <ErrorMessage>{errors.languages.message}</ErrorMessage>
-                  )
-                }
+                setValue={setValue}
+                errors={errors}
               />
             </div>
             <div className='w-3/6 flex flex-col m-auto p-0.5'>
-              <FormSelect
-                id='technologies'
-                label='Technologies'
+              <TechSelect
                 options={technologies}
-                placeholder='Choose your tech stack'
-                message='Please select at least one technology'
                 control={control}
-                onChange={values => {
-                  setValue(
-                    'technologies',
-                    values.map((value: SelectOptions) => value.label),
-                    {
-                      shouldValidate: true,
-                      shouldDirty: true,
-                    }
-                  )
-                }}
-                errors={
-                  errors.technologies && (
-                    <ErrorMessage>{errors.technologies.message}</ErrorMessage>
-                  )
-                }
+                setValue={setValue}
+                errors={errors}
               />
             </div>
           </article>
