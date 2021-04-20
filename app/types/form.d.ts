@@ -29,4 +29,23 @@ export interface IFormSelect {
   defaultValue?: NestedOptions
 }
 
+export interface IDefaultSelect {
+  id: string
+  name: string
+  options: SelectOptions[]
+  control: Control
+  setValue: (
+    name: any,
+    value: unknown,
+    config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
+  ) => void
+}
+
 export type FormButton = {value?: string; errors: boolean}
+
+export interface INumberInput {
+  id: string
+  name: string
+  label: string
+  register: React.Ref<T>
+}
