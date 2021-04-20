@@ -1,5 +1,8 @@
 import * as React from 'react'
+import {useRouter} from 'next/router'
+
 import {useForm} from 'react-hook-form'
+import {useCookies} from 'react-cookie'
 import axios from 'axios'
 
 import Portal from '@components/Portal/Portal'
@@ -26,6 +29,9 @@ const PositionModal = ({
   setShowModal: (state: boolean) => void
 }): JSX.Element => {
   const [options, setOptions] = React.useState<SelectOptions[] | undefined>()
+  //* Get user token from session cookie
+  const [cookies] = useCookies(['session'])
+  const {session: token} = cookies
   const {
     register,
     handleSubmit,
@@ -42,6 +48,7 @@ const PositionModal = ({
     shouldFocusError: true,
     shouldUnregister: true,
   })
+  //* Set technologies options to State as soon as the modal is shown
   React.useEffect(() => {
     ;(async () => {
       const {
@@ -52,13 +59,33 @@ const PositionModal = ({
   }, [])
   //* ref will be a callback function instead of a Ref Object
   const [ref] = useRefCallback()
-  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>): void => {
+  const onCancel = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault()
     setShowModal(false)
   }
-  const onSubmit = (data: IPositionInput): void => console.log(data)
+  const router = useRouter()
+  const onSubmit = async (data: IPositionInput): Promise<any> => {
+    data.projectId = window.location.pathname.slice(10)
+    try {
+      const response = await axios.post(
+        '/position',
+        {
+          position: data,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      router.push('/profile')
+      return response
+    } catch (error) {
+      Promise.reject(error)
+    }
+  }
   return (
-    <>
+    <React.Fragment>
       {showModal && (
         <Portal>
           <section
@@ -142,7 +169,7 @@ const PositionModal = ({
                   />
                 </div>
                 <div className='h-1/10 flex'>
-                  <CancelButton action={handleCancel} />
+                  <CancelButton action={onCancel} />
                   <ConfirmButton
                     value='Add'
                     errors={Boolean(
@@ -155,7 +182,7 @@ const PositionModal = ({
           </section>
         </Portal>
       )}
-    </>
+    </React.Fragment>
   )
 }
 

@@ -1,6 +1,7 @@
 import type {NestedOptions} from 'app/types/form'
 
 export interface IPositionInput {
+  projectId: string
   title: string
   description: string
   technologies: NestedOptions
