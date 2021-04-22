@@ -6,7 +6,7 @@
 
 ## General info
 
-A platform which allows you to find Coding Projects or Collaborators
+A platform to help developers grow by finding project and collaborators to work with
 
 ## Technologies
 
