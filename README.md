@@ -6,7 +6,7 @@
 
 ## General info
 
-A platform to help developers grow by finding project and collaborators to work with
+A platform to help developers find projects and collaborators to work with
 
 ## Technologies
 
