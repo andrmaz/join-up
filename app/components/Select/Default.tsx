@@ -9,6 +9,7 @@ const DefaultSelect = ({
   options,
   control,
   setValue,
+  focusRef,
 }: IDefaultSelect): React.ReactElement => {
   return (
     <React.Fragment>
@@ -24,6 +25,7 @@ const DefaultSelect = ({
             id={id}
             inputId={id}
             name={name}
+            ref={focusRef ? focusRef : undefined}
             aria-labelledby={name}
             defaultValue={options[0]}
             closeMenuOnSelect={true}

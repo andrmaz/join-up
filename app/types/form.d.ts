@@ -39,6 +39,7 @@ export interface IDefaultSelect {
     value: unknown,
     config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
   ) => void
+  focusRef?: React.RefObject
 }
 
 export type FormButton = {value?: string; errors: boolean}
