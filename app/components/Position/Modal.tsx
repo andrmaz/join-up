@@ -103,7 +103,7 @@ const PositionModal = ({
               aria-labelledby='dialog_label'
               aria-modal={true}
               aria-describedby='dialog_label'
-              className='fixed h-3/4 xl:h-4/6 w-1/2 top-40 xl:top-1/4 right-1/4 bg-white border-black border-2 rounded p-4'
+              className='fixed h-4/5 w-1/2 top-32 right-1/4 bg-white border-black border-2 rounded p-4'
             >
               <div className='h-1/10'>
                 <h2

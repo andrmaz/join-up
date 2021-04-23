@@ -20,6 +20,7 @@ import TechSelect from '@components/Select/Tech'
 import {ConfirmButton} from '@components/Button/Confirm'
 
 import type {IProjectInput} from 'app/types/project'
+import CancelButton from '@components/Button/Cancel'
 
 const Project: NextPage = ({
   technologies,
@@ -71,7 +72,7 @@ const Project: NextPage = ({
       </Head>
       <Navbar />
       <main className='h-screen pt-20 flex justify-center items-center'>
-        <section className='w-3/5 h-5/6 p-4 border rounded xl:px-12'>
+        <section className='w-2/5 h-4/5 p-4 border rounded xl:px-12'>
           <header className='h-1/6'>
             <h1 className='h-2/3 text-3xl'>Create a new project</h1>
             <span>
@@ -141,10 +142,11 @@ const Project: NextPage = ({
               errors={errors}
               optional
             />
-            <div className='h-1/6 flex flex-col justify-end'>
+            <div className='h-1/6 flex items-end'>
               <ConfirmButton
                 errors={Boolean(errors.name || errors.technologies)}
               />
+              <CancelButton onClickAction={() => router.push('/')} />
             </div>
           </form>
         </section>
