@@ -27,6 +27,7 @@ import {ConfirmButton} from '@components/Button/Confirm'
 import Textarea from '@components/Textarea/Textarea'
 
 import type {IUserContext} from 'app/types/user'
+import CancelButton from '@components/Button/Cancel'
 
 const Profile: NextPage = ({
   token,
@@ -188,13 +189,7 @@ const Profile: NextPage = ({
                 </article>
                 <Textarea register={register} defaultValue={bio} />
                 <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
-                  <button
-                    type='button'
-                    className='w-2/6 h-6 cursor-pointer bg-gray-600 text-white rounded m-1'
-                    onClick={() => router.push('/')}
-                  >
-                    Cancel
-                  </button>
+                  <CancelButton onClickAction={() => router.push('/')} />
                   <ConfirmButton
                     errors={Boolean(errors.languages || errors.technologies)}
                   />
