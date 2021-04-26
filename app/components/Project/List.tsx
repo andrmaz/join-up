@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import ProjectCard from '@components/Project/Preview'
+import ProjectPreview from '@components/Project/Preview'
 import {EmptyMessage} from '@components/Message/Empty'
 import type {IProjectData} from 'app/types/project'
 
@@ -13,7 +13,7 @@ const ProjectsList = ({
       {projects.length ? (
         <ul className='flex flex-col'>
           {projects.map((project: IProjectData) => (
-            <ProjectCard key={project._id} {...project} />
+            <ProjectPreview key={project.id} {...project} />
           ))}
         </ul>
       ) : (

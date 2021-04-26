@@ -2,7 +2,7 @@ import type {IProjectData} from 'app/types/project'
 import Link from 'next/link'
 
 const ProjectPreview = ({
-  _id,
+  id,
   name,
   jobsAvailable,
   description,
@@ -12,15 +12,15 @@ const ProjectPreview = ({
   return (
     <li className='h-40 p-1 mx-2 border-gray-300 border-2 rounded'>
       <header className='h-1/5 font-extrabold'>
-        <Link href={`/projects/${_id}`}>
+        <Link href={`/projects/${id}`}>
           <a className='cursor-pointer hover:opacity-60'>{name}</a>
         </Link>
       </header>
       <article className='h-2/5 text-sm'>
-        <p>{description}</p>
+        <p>{description?.slice(0, 200)}</p>
       </article>
-      <article className='h-1/5'>
-        <span>{technologies.toString()}</span>
+      <article className='h-1/5 overflow-x-scroll'>
+        <span className='text-red-600'>{technologies.toString()}</span>
       </article>
       <article className='h-1/5 flex flex-row justify-start'>
         {jobsAvailable ? (

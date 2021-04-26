@@ -32,7 +32,6 @@ export interface IFormSelect {
 export interface IDefaultSelect {
   id: string
   name: string
-  options: SelectOptions[]
   control: Control
   setValue: (
     name: any,

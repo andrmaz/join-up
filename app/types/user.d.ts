@@ -20,7 +20,7 @@ export interface ISignupInputs {
   bio?: string
 }
 export interface IUserContext {
-  _id: number
+  id: number
   username: string
   email: string
   githubURL?: string
