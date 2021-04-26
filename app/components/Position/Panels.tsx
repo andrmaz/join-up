@@ -9,10 +9,10 @@ const PositionPanels = ({
   selectedTab: number
 }): React.ReactElement => {
   return (
-    <main className='h-144 w-full'>
+    <main className='h-full w-full'>
       {positions.map((position, index) => (
         <section
-          key={position._id}
+          key={position.id}
           id={`panel-${index}`}
           role='tabpanel'
           tabIndex={0}
