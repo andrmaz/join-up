@@ -8,7 +8,6 @@ import Head from 'next/head'
 import {useRouter} from 'next/router'
 
 import {ParsedUrlQuery} from 'querystring'
-import {useCookies} from 'react-cookie'
 import axios from 'axios'
 import {useForm} from 'react-hook-form'
 
@@ -65,7 +64,6 @@ const Profile: NextPage = ({
   })
   const router = useRouter()
   const dispatch = useAuthDispatch()
-  const [, setCookie] = useCookies(['session'])
   const onSubmit = async (data: IUserContext): Promise<any> => {
     try {
       const response = await axios.patch(
@@ -78,14 +76,6 @@ const Profile: NextPage = ({
         }
       )
       edit(dispatch, response.data.user)
-      setCookie('session', response.data.token, {
-        path: '/',
-        // ? expiration date
-        //maxAge: 3600, // Expires after 1hr
-        sameSite: true,
-        //httpOnly: true,
-        //secure: true,
-      })
       router.push('/profile')
       return
     } catch (error) {
