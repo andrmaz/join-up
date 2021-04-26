@@ -12,7 +12,7 @@ import {EmptyMessage} from '@components/Message/Empty'
 
 const Slug: NextPage = ({
   project,
-  jobs,
+  positions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [selectedTab, setSelectedTab] = React.useState<number>(0)
   return (
@@ -22,25 +22,23 @@ const Slug: NextPage = ({
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar />
-      <main className='min-h-screen pt-20 container'>
-        <section className='h-auto p-10'>
-          <div className='w-full min-h-full p-4'>
-            <article className='w-full h-auto'>
-              <ProjectBadge {...project} />
+      <main className='h-screen pt-20'>
+        <section className='h-full py-12 px-24 xl:px-40'>
+          <article className='w-full h-1/5'>
+            <ProjectBadge {...project} />
+          </article>
+          {project.jobsAvailable ? (
+            <article className='h-4/5 grid grid-cols-2 divide-x divide-black-500'>
+              <PositionTabs
+                positions={positions}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
+              <PositionPanels positions={positions} selectedTab={selectedTab} />
             </article>
-            {project.jobsAvailable ? (
-              <article className='grid grid-cols-2 divide-x divide-black-500'>
-                <PositionTabs
-                  positions={jobs}
-                  selectedTab={selectedTab}
-                  setSelectedTab={setSelectedTab}
-                />
-                <PositionPanels positions={jobs} selectedTab={selectedTab} />
-              </article>
-            ) : (
-              <EmptyMessage>This project has no posts available.</EmptyMessage>
-            )}
-          </div>
+          ) : (
+            <EmptyMessage>This project has no posts available.</EmptyMessage>
+          )}
         </section>
       </main>
     </div>
@@ -77,8 +75,8 @@ export const getServerSideProps: GetServerSideProps<Params> = async context => {
   })
 
   const {
-    data: {jobs},
-  } = await axios.get(`/job/project/${slug}`, {
+    data: {positions},
+  } = await axios.get(`/position/project/${slug}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -88,7 +86,7 @@ export const getServerSideProps: GetServerSideProps<Params> = async context => {
   return {
     props: {
       project,
-      jobs,
+      positions,
     },
   }
 }
