@@ -11,7 +11,6 @@ import {ParsedUrlQuery} from 'querystring'
 import axios from 'axios'
 import {useForm} from 'react-hook-form'
 
-import {useAuthState} from '@hooks/auth/useAuthState'
 import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
 
 import {parseCookies} from '@utils/parseCookies'
@@ -24,10 +23,9 @@ const Projects: NextPage = ({
   techOptions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [state, dispatch] = useAsyncReducer()
-  const {user} = useAuthState()
   const {control, register, watch, setValue} = useForm()
   //* watching every fields in the form
-  const {date, match, /* available ,*/ technologies} = watch()
+  const {date, match, available, technologies} = watch()
   const fetchProjectsData = React.useCallback(() => {
     //* technologies field is the only one with no default value
     //* it must be checked before each fetching
@@ -35,11 +33,10 @@ const Projects: NextPage = ({
       technologies && technologies.length
         ? `&technologies=${technologies.toString()},`
         : ''
+    const matchs = match ? `&match=${match}` : ''
     dispatch({type: 'pending'})
-    //TODO: Test job field
     axios
-      .get(`/project?sort=${date}&match=${match}${tech}`, {
-        //&job=${available}
+      .get(`/project?sort=${date}${matchs}&positions=${available}${tech}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,8 +47,7 @@ const Projects: NextPage = ({
       .catch(err =>
         dispatch({type: 'rejected', payload: err.response.data.message})
       )
-    //TODO: Add 'available' to dependencies list
-  }, [date, match, technologies, token, dispatch])
+  }, [technologies, match, dispatch, date, available, token])
   React.useEffect(() => {
     fetchProjectsData()
   }, [fetchProjectsData])
@@ -76,7 +72,7 @@ const Projects: NextPage = ({
             control={control}
             technologies={technologies}
           />
-          <ProjectsGrid status={status} projects={data} currentUser={user} />
+          <ProjectsGrid status={status} projects={data} />
         </article>
       </main>
     </div>
