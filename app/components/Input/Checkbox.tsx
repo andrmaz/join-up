@@ -15,6 +15,7 @@ export const CheckboxInput = ({
         name='available'
         ref={register}
         disabled={Boolean(isPending)}
+        defaultChecked
       />
       <label htmlFor='available'>Available</label>
     </div>
