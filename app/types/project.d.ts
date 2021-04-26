@@ -13,7 +13,7 @@ export interface IProjectInput {
 }
 
 export interface IProjectData {
-  _id: string
+  id: string
   owner: number
   updatedAt: string
   technologies: string[]

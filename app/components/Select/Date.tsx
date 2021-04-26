@@ -15,10 +15,10 @@ export const DateSelect = ({
       ref={register}
       disabled={Boolean(isPending)}
     >
-      <option value='-date' defaultChecked>
+      <option value='datedesc' defaultChecked>
         Newest
       </option>
-      <option value='+date'>Oldest</option>
+      <option value='dateasc'>Oldest</option>
     </select>
   </div>
 )

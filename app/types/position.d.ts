@@ -10,13 +10,15 @@ export interface IPositionInput {
   role: string
 }
 export interface IPosistionData {
-  _id: string
+  id: string
   title: string
   sortTitle: string
   description: string
   technologies: NestedOptions
   project: string
-  positions: number
+  vacancy: number
+  level: string
+  role: string
   createdAt: string
   updatedAt: string
 }
