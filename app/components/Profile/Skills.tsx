@@ -5,7 +5,7 @@ export const ProfileSkills = ({value}: {value: NestedOptions}): JSX.Element => {
     <li className='text-red-600'>
       {value &&
         (value.length > 3
-          ? `${value.filter((_, i: number) => i < 4).map(v => v.label)}, ...`
+          ? `${value.filter((_, i: number) => i < 3).map(v => v.label)}, ...`
           : `${value.map(v => v.label)}`)}
     </li>
   )
