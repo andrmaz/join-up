@@ -18,9 +18,6 @@ import useRefCallback from '@hooks/ref/useRefCallback'
 import type {SelectOptions} from 'app/types/form'
 import type {IPositionInput} from 'app/types/position'
 
-import {Roles} from '@data/roles'
-import {Levels} from '@data/levels'
-
 const PositionModal = ({
   showModal,
   setShowModal,
@@ -120,7 +117,6 @@ const PositionModal = ({
                   <DefaultSelect
                     id='role-select'
                     name='role'
-                    options={Roles}
                     control={control}
                     setValue={setValue}
                     focusRef={focusTrapRef}
@@ -156,7 +152,6 @@ const PositionModal = ({
                   <DefaultSelect
                     id='level-select'
                     name='level'
-                    options={Levels}
                     control={control}
                     setValue={setValue}
                   />
