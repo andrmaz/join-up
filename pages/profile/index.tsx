@@ -13,6 +13,7 @@ import {parseCookies} from '@utils/parseCookies'
 import Navbar from '@components/Navbar/Navbar'
 import UserCard from '@components/Profile/Card'
 import ProjectsList from '@components/Project/List'
+import Wrapper from '@components/Wrapper/Wrapper'
 
 const Profile: NextPage = ({
   projects,
@@ -25,7 +26,7 @@ const Profile: NextPage = ({
       </Head>
       <Navbar />
       <main className='h-screen pt-20'>
-        <section className='h-full py-12 px-24 xl:px-32'>
+        <Wrapper>
           <div className='grid grid-cols-3 divide-x divide-black-500'>
             <UserCard />
             <article className='w-200 min-h-1/2 border-2 border-solid rounded'>
@@ -37,7 +38,7 @@ const Profile: NextPage = ({
               </main>
             </article>
           </div>
-        </section>
+        </Wrapper>
       </main>
     </div>
   )

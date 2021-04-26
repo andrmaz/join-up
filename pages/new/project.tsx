@@ -72,7 +72,7 @@ const Project: NextPage = ({
       </Head>
       <Navbar />
       <main className='h-screen pt-20 flex justify-center items-center'>
-        <section className='w-2/5 h-4/5 p-4 border rounded xl:px-12'>
+        <article className='w-3/5 xl:w-1/2 h-4/5 p-4 border rounded xl:px-12'>
           <header className='h-1/6'>
             <h1 className='h-2/3 text-3xl'>Create a new project</h1>
             <span>
@@ -149,7 +149,7 @@ const Project: NextPage = ({
               <CancelButton onClickAction={() => router.push('/')} />
             </div>
           </form>
-        </section>
+        </article>
       </main>
     </div>
   )

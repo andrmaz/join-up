@@ -9,6 +9,7 @@ import ProjectBadge from '@components/Project/Badge'
 import PositionTabs from '@components/Position/Tabs'
 import PositionPanels from '@components/Position/Panels'
 import {EmptyMessage} from '@components/Message/Empty'
+import Wrapper from '@components/Wrapper/Wrapper'
 
 const Slug: NextPage = ({
   project,
@@ -23,7 +24,7 @@ const Slug: NextPage = ({
       </Head>
       <Navbar />
       <main className='h-screen pt-20'>
-        <section className='h-full py-12 px-24 xl:px-40'>
+        <Wrapper>
           <article className='w-full h-1/5'>
             <ProjectBadge {...project} />
           </article>
@@ -39,7 +40,7 @@ const Slug: NextPage = ({
           ) : (
             <EmptyMessage>This project has no posts available.</EmptyMessage>
           )}
-        </section>
+        </Wrapper>
       </main>
     </div>
   )
