@@ -28,7 +28,7 @@ const Slug: NextPage = ({
           <article className='w-full h-1/5'>
             <ProjectBadge {...project} />
           </article>
-          {project.jobsAvailable ? (
+          {project.hasPositions ? (
             <article className='h-4/5 grid grid-cols-2 divide-x divide-black-500'>
               <PositionTabs
                 positions={positions}

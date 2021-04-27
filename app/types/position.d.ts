@@ -5,20 +5,19 @@ export interface IPositionInput {
   title: string
   description: string
   technologies: NestedOptions
-  vacancy: number
+  vacancies: number
   level: string
   role: string
 }
 export interface IPosistionData {
   id: string
   title: string
-  sortTitle: string
   description: string
   technologies: NestedOptions
-  project: string
-  vacancy: number
+  vacancies: number
   level: string
   role: string
   createdAt: string
   updatedAt: string
+  projectId: string
 }

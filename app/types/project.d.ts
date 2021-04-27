@@ -14,15 +14,14 @@ export interface IProjectInput {
 
 export interface IProjectData {
   id: string
-  owner: number
-  updatedAt: string
-  technologies: string[]
-  sortName: string
-  projectURL?: string
   name: string
   description?: string
-  createdAt: string
+  technologies: string[]
+  projectURL?: string
+  owner: number
   //TODO check type of collaborator
   collaborators: Array<string>
-  jobsAvailable: boolean
+  hasPositions: boolean
+  createdAt: string
+  updatedAt: string
 }

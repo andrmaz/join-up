@@ -4,10 +4,10 @@ import type {IProjectData} from 'app/types/project'
 const ProjectCard = ({
   id,
   name,
-  updatedAt,
-  projectURL,
   description,
+  projectURL,
   technologies,
+  updatedAt,
 }: IProjectData): JSX.Element => {
   return (
     <div className='h-48 w-full border-2 border-black p-1 rounded'>

@@ -2,7 +2,7 @@ import type {IPosistionData} from 'app/types/position'
 
 const PositionTab = ({
   title,
-  //positions,
+  vacancies,
   createdAt,
   updatedAt,
 }: IPosistionData): JSX.Element => (
@@ -14,7 +14,7 @@ const PositionTab = ({
       <span>Created at: {createdAt.slice(0, 7)}</span>
     </article>
     <article className='h-2/5 flex flex-col justify-start'>
-      <span className='text-xs'>Positions available: {/* {positions} */}</span>
+      <span className='text-xs'>Positions available: {vacancies}</span>
       <span className='text-xs'>Last update: {updatedAt.slice(0, 7)}</span>
     </article>
   </li>

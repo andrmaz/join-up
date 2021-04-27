@@ -5,8 +5,8 @@ import type {IProjectData} from 'app/types/project'
 
 const ProjectBadge = ({
   name,
-  projectURL,
   description,
+  projectURL,
   owner,
 }: IProjectData): JSX.Element => {
   const {user} = useAuthState()
