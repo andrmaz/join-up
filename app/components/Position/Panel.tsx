@@ -4,7 +4,7 @@ const PositionPanel = ({
   title,
   description,
   technologies,
-  vacancy,
+  vacancies,
   level,
   role,
   createdAt,
@@ -17,7 +17,7 @@ const PositionPanel = ({
       </header>
       <article className='h-4/5 flex flex-col justify-evenly text-lg'>
         <span className='h-1/10'>Created at: {createdAt.slice(0, 7)}</span>
-        <span className='h-1/10'>Positions available: {vacancy}</span>
+        <span className='h-1/10'>Positions available: {vacancies}</span>
         <span className='h-1/10'>Level: {level}</span>
         <span className='h-1/10'>Role: {role}</span>
         <p className='h-1/2'>{description.slice(0, 300)}</p>

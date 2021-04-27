@@ -4,7 +4,7 @@ import Link from 'next/link'
 const ProjectPreview = ({
   id,
   name,
-  jobsAvailable,
+  hasPositions,
   description,
   technologies,
   collaborators,
@@ -23,7 +23,7 @@ const ProjectPreview = ({
         <span className='text-red-600'>{technologies.toString()}</span>
       </article>
       <article className='h-1/5 flex flex-row justify-start'>
-        {jobsAvailable ? (
+        {hasPositions ? (
           <div className='h-3 w-3 bg-green-800 rounded-full' />
         ) : (
           <div className='h-3 w-3 bg-red-600 rounded-full' />

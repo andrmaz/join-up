@@ -157,7 +157,7 @@ const PositionModal = ({
                   />
                   <NumberInput
                     id='vacancy-select'
-                    name='vacancy'
+                    name='vacancies'
                     label='Vacancy'
                     register={register}
                   />

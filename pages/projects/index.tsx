@@ -27,8 +27,7 @@ const Projects: NextPage = ({
   //* watching every fields in the form
   const {date, match, available, technologies} = watch()
   const fetchProjectsData = React.useCallback(() => {
-    //* technologies field is the only one with no default value
-    //* it must be checked before each fetching
+    //* technologies and match must be checked before each fetching
     const tech =
       technologies && technologies.length
         ? `&technologies=${technologies.toString()},`
@@ -36,7 +35,7 @@ const Projects: NextPage = ({
     const matchs = match ? `&match=${match}` : ''
     dispatch({type: 'pending'})
     axios
-      .get(`/project?sort=${date}${matchs}&positions=${available}${tech}`, {
+      .get(`/project?sort=${date}${matchs}&hasPositions=${available}${tech}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
