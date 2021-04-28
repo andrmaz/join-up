@@ -41,7 +41,7 @@ const DefaultSelect = ({
             options={options}
             blurInputOnSelect={false}
             onChange={value => {
-              setValue(name, value?.label, {
+              setValue(name, value?.value, {
                 shouldValidate: true,
                 shouldDirty: true,
               })

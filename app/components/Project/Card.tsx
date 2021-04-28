@@ -29,7 +29,7 @@ const ProjectCard = ({
         <p className='text-sm'>{description?.slice(0, 100)}</p>
       </article>
       <aside className='h-1/6'>
-        <div className='h-1/2 text-xs text-red-400 overflow-x-scroll'>
+        <div className='h-1/2 text-xs text-red-400 overflow-hidden'>
           {technologies.toString()}
         </div>
       </aside>

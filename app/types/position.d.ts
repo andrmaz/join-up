@@ -17,7 +17,8 @@ export interface IPosistionData {
   vacancies: number
   level: string
   role: string
+  projectId: number
+  userId: number
   createdAt: string
   updatedAt: string
-  projectId: string
 }

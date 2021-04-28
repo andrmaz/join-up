@@ -1,3 +1,5 @@
+import {ActionButton} from '@components/Button/Action'
+import {useAuthState} from '@hooks/auth/useAuthState'
 import type {IPosistionData} from 'app/types/position'
 
 const PositionPanel = ({
@@ -7,9 +9,11 @@ const PositionPanel = ({
   vacancies,
   level,
   role,
+  userId,
   createdAt,
   updatedAt,
 }: IPosistionData): JSX.Element => {
+  const {user} = useAuthState()
   return (
     <div className='h-5/6 w-full border-2 border-black p-2 rounded'>
       <header className='h-1/10 w-full'>
@@ -25,11 +29,18 @@ const PositionPanel = ({
           {technologies?.toString()}
         </p>
       </article>
-      <aside className='h-1/10 flex justify-end'>
+      <aside className='h-1/10 flex justify-between'>
         <span>
           Last update:
           {updatedAt.slice(0, 7)}
         </span>
+        <div className='w-1/4'>
+          {userId !== user?.id && (
+            <ActionButton action={() => console.log('Applying')}>
+              Apply
+            </ActionButton>
+          )}
+        </div>
       </aside>
     </div>
   )
