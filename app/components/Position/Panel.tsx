@@ -1,8 +1,14 @@
-import {ActionButton} from '@components/Button/Action'
+import * as React from 'react'
 import {useAuthState} from '@hooks/auth/useAuthState'
+
+import {ActionButton} from '@components/Button/Action'
+import Portal from '@components/Portal/Portal'
+import ConfirmDialog from '@components/Dialog/Confirm'
+
 import type {IPosistionData} from 'app/types/position'
 
 const PositionPanel = ({
+  id,
   title,
   description,
   technologies,
@@ -14,6 +20,7 @@ const PositionPanel = ({
   updatedAt,
 }: IPosistionData): JSX.Element => {
   const {user} = useAuthState()
+  const [showDialog, setShowDialog] = React.useState<boolean>(false)
   return (
     <div className='h-full w-full border-2 border-black p-2 rounded'>
       <header className='h-1/10 w-full'>
@@ -36,12 +43,22 @@ const PositionPanel = ({
         </span>
         <div className='w-1/4'>
           {userId !== user?.id && (
-            <ActionButton action={() => console.log('Applying')}>
+            <ActionButton action={() => setShowDialog(true)}>
               Apply
             </ActionButton>
           )}
         </div>
       </aside>
+      {showDialog && (
+        <Portal>
+          <ConfirmDialog
+            uid={id}
+            title='Please confirm your application'
+            message='Are you sure you want to apply to this position?'
+            onClose={() => setShowDialog(false)}
+          />
+        </Portal>
+      )}
     </div>
   )
 }

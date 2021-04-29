@@ -41,7 +41,7 @@ export interface IDefaultSelect {
   focusRef?: React.RefObject
 }
 
-export type FormButton = {value?: string; errors: boolean}
+export type FormButton = {value?: string; errors?: boolean}
 
 export interface INumberInput {
   id: string

@@ -10,7 +10,7 @@ export interface IPositionInput {
   role: string
 }
 export interface IPosistionData {
-  id: string
+  id: number
   title: string
   description: string
   technologies: NestedOptions
