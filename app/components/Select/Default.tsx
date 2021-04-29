@@ -40,8 +40,8 @@ const DefaultSelect = ({
             closeMenuOnSelect={true}
             options={options}
             blurInputOnSelect={false}
-            onChange={value => {
-              setValue(name, value?.value, {
+            onChange={(value: SelectOptions) => {
+              setValue(name, value.id, {
                 shouldValidate: true,
                 shouldDirty: true,
               })

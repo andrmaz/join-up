@@ -42,7 +42,7 @@ const TechSelect = ({
             onChange={values => {
               setValue(
                 'technologies',
-                values.map((value: SelectOptions) => value.label),
+                values.map((value: SelectOptions) => value.id),
                 {
                   shouldValidate: true,
                   shouldDirty: true,

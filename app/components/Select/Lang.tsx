@@ -42,7 +42,7 @@ const LangSelect = ({
             onChange={values => {
               setValue(
                 'languages',
-                values.map((value: SelectOptions) => value.label),
+                values.map((value: SelectOptions) => value.id),
                 {
                   shouldValidate: true,
                   shouldDirty: true,

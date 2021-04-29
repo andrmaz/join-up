@@ -15,7 +15,7 @@ const PositionPanel = ({
 }: IPosistionData): JSX.Element => {
   const {user} = useAuthState()
   return (
-    <div className='h-5/6 w-full border-2 border-black p-2 rounded'>
+    <div className='h-full w-full border-2 border-black p-2 rounded'>
       <header className='h-1/10 w-full'>
         <h1 className='font-extrabold text-xl'>{title}</h1>
       </header>
@@ -24,8 +24,8 @@ const PositionPanel = ({
         <span className='h-1/10'>Positions available: {vacancies}</span>
         <span className='h-1/10'>Level: {level}</span>
         <span className='h-1/10'>Role: {role}</span>
-        <p className='h-1/2'>{description.slice(0, 300)}</p>
-        <p className='h-1/10 text-red-400 break-words'>
+        <p className='h-2/5'>{description.slice(0, 300)}</p>
+        <p className='h-1/5 text-red-400 break-words'>
           {technologies?.toString()}
         </p>
       </article>
