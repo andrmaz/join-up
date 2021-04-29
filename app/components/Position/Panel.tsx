@@ -55,7 +55,7 @@ const PositionPanel = ({
             uid={id}
             title='Please confirm your application'
             message='Are you sure you want to apply to this position?'
-            onClose={() => setShowDialog(false)}
+            setShowDialog={setShowDialog}
           />
         </Portal>
       )}

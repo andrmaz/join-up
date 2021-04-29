@@ -1,26 +1,57 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import * as React from 'react'
+
+import {useCookies} from 'react-cookie'
+
 import useRefCallback from '@hooks/ref/useRefCallback'
 
 import CancelButton from '@components/Button/Cancel'
 import {ConfirmButton} from '@components/Button/Confirm'
 
+import axios from 'axios'
+
 const ConfirmDialog = ({
   uid,
   title = 'Confirm your choice',
   message,
-  onClose,
+  setShowDialog,
 }: {
   uid: number
   title?: string
   message: string
-  onClose: () => void
+  setShowDialog: (state: boolean) => void
 }): JSX.Element => {
+  //* Get user token from session cookie
+  const [cookies] = useCookies(['session'])
+  const {session: token} = cookies
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
-  console.info(uid)
+  const handleConfirm = async (): Promise<any> => {
+    try {
+      const response = await axios.post(
+        '/application',
+        {
+          position: uid,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      if (response.status === 201) {
+        setTimeout(function () {
+          setShowDialog(false)
+        }, 2000)
+        console.info(response.data.message)
+        return response.data.message
+      }
+    } catch (error) {
+      Promise.reject(error)
+    }
+  }
   return (
     <section
       id='dialog_layer'
@@ -55,9 +86,9 @@ const ConfirmDialog = ({
             </span>
           </div>
           <div className='w-full h-1/3 flex'>
-            <ConfirmButton value='Confirm' />
+            <ConfirmButton onClickAction={handleConfirm}>Confirm</ConfirmButton>
             <CancelButton
-              onClickAction={onClose}
+              onClickAction={() => setShowDialog(false)}
               onKeyDownAction={() => focusTrapRef.current?.focus()}
             />
           </div>

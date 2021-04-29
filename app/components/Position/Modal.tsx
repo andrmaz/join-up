@@ -170,11 +170,12 @@ const PositionModal = ({
                 </div>
                 <div className='h-1/10 flex'>
                   <ConfirmButton
-                    value='Add'
                     errors={Boolean(
                       errors.title || errors.description || errors.technologies
                     )}
-                  />
+                  >
+                    Add
+                  </ConfirmButton>
                   <CancelButton
                     onClickAction={handleCancel}
                     onKeyDownAction={() => focusTrapRef.current?.focus()}
