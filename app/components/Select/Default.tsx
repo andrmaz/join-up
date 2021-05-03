@@ -39,6 +39,7 @@ const DefaultSelect = ({
             defaultValue={options ? options[0] : value}
             closeMenuOnSelect={true}
             options={options}
+            getOptionValue={option => option['id']}
             blurInputOnSelect={false}
             onChange={(value: SelectOptions) => {
               setValue(name, value.id, {

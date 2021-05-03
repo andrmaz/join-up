@@ -36,6 +36,7 @@ const LangSelect = ({
             closeMenuOnSelect={false}
             isMulti
             options={options}
+            getOptionValue={option => option['id']}
             placeholder='Select your languages'
             blurInputOnSelect={false}
             onBlur={onBlur}

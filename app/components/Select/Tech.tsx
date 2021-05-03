@@ -36,6 +36,7 @@ const TechSelect = ({
             closeMenuOnSelect={false}
             isMulti
             options={options}
+            getOptionValue={option => option['id']}
             placeholder='Choose your tech stack'
             blurInputOnSelect={false}
             onBlur={onBlur}

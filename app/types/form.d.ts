@@ -12,7 +12,7 @@ export interface IFormInput {
   errors?: Record<string, any>
 }
 
-export type SelectOptions = {id: number; value: string; label: string}
+export type SelectOptions = {id: number; label: string}
 export type NestedOptions = NestedValue<SelectOptions[]> | undefined
 
 export interface IFormSelect {
