@@ -6,7 +6,7 @@ import {useCookies} from 'react-cookie'
 import axios from 'axios'
 
 import Portal from '@components/Portal/Portal'
-import {ConfirmButton} from '@components/Button/Confirm'
+import {SubmitButton} from '@components/Button/Submit'
 import CancelButton from '@components/Button/Cancel'
 import FormInput from '@components/Input/Form'
 import TechSelect from '@components/Select/Tech'
@@ -114,11 +114,11 @@ const PositionModal = ({
               </div>
               <form className='h-18/20' onSubmit={handleSubmit(onSubmit)}>
                 <div className='h-18/20 flex flex-col justify-evenly pb-6'>
-                  <DefaultSelect
-                    id='role-select'
-                    name='role'
-                    control={control}
-                    setValue={setValue}
+                  <NumberInput
+                    id='vacancy-select'
+                    name='vacancies'
+                    label='Vacancy'
+                    register={register}
                     focusRef={focusTrapRef}
                   />
                   <FormInput
@@ -154,12 +154,14 @@ const PositionModal = ({
                     name='level'
                     control={control}
                     setValue={setValue}
+                    errors={errors}
                   />
-                  <NumberInput
-                    id='vacancy-select'
-                    name='vacancies'
-                    label='Vacancy'
-                    register={register}
+                  <DefaultSelect
+                    id='role-select'
+                    name='role'
+                    control={control}
+                    setValue={setValue}
+                    errors={errors}
                   />
                   <TechSelect
                     options={options!}
@@ -169,13 +171,16 @@ const PositionModal = ({
                   />
                 </div>
                 <div className='h-1/10 flex'>
-                  <ConfirmButton
+                  <SubmitButton
+                    value='Add'
                     errors={Boolean(
-                      errors.title || errors.description || errors.technologies
+                      errors.title ||
+                        errors.description ||
+                        errors.level ||
+                        errors.role ||
+                        errors.technologies
                     )}
-                  >
-                    Add
-                  </ConfirmButton>
+                  />
                   <CancelButton
                     onClickAction={handleCancel}
                     onKeyDownAction={() => focusTrapRef.current?.focus()}

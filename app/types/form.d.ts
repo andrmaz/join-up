@@ -38,7 +38,7 @@ export interface IDefaultSelect {
     value: unknown,
     config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
   ) => void
-  focusRef?: React.RefObject
+  errors?: Record<string, any>
 }
 export type FormButton = {
   value?: string
@@ -56,4 +56,5 @@ export interface INumberInput {
   name: string
   label: string
   register: React.Ref<T>
+  focusRef?: React.RefObject
 }

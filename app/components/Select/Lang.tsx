@@ -20,7 +20,7 @@ const LangSelect = ({
       <Controller
         name='languages'
         control={control}
-        defaultValue={defaultValues ? defaultValues.map(v => v.label) : ''}
+        defaultValue={defaultValues ? defaultValues.map(v => v.id) : ''}
         rules={{
           //* recommended for object or array input data
           validate: value =>
