@@ -46,17 +46,25 @@ const PositionModal = ({
     shouldFocusError: true,
     shouldUnregister: true,
   })
+  //* Store project id in useRef Hook
+  const id = React.useRef<string | null>(null)
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* Set technologies options to State as soon as the modal is shown
   React.useEffect(() => {
+    //* You now have access to `window`
+    id.current = window.location.pathname.slice(10)
     ;(async () => {
       const {
         data: {technologies},
-      } = await axios.get('/technology')
+      } = await axios.get(`/technology/project/${id.current}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setOptions(technologies)
     })()
-  }, [])
+  }, [token])
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
   //* Reset the entire form state and close the modal
@@ -66,7 +74,7 @@ const PositionModal = ({
   }
   const router = useRouter()
   const onSubmit = async (data: IPositionInput): Promise<any> => {
-    data.projectId = window.location.pathname.slice(10)
+    data.projectId = id.current
     try {
       const response = await axios.post(
         '/position',
