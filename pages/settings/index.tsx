@@ -180,10 +180,12 @@ const Profile: NextPage = ({
                 <Textarea register={register} defaultValue={bio} />
                 <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
                   <CancelButton onClickAction={() => router.push('/')} />
-                  <SubmitButton
-                    value='Save'
-                    errors={Boolean(errors.languages || errors.technologies)}
-                  />
+                  <div className='w-16 p-1'>
+                    <SubmitButton
+                      value='Save'
+                      errors={Boolean(errors.languages || errors.technologies)}
+                    />
+                  </div>
                 </aside>
               </form>
             </section>

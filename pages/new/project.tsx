@@ -143,10 +143,12 @@ const Project: NextPage = ({
               optional
             />
             <div className='h-1/6 flex items-end'>
-              <SubmitButton
-                value='Create'
-                errors={Boolean(errors.name || errors.technologies)}
-              />
+              <div className='w-16 p-1'>
+                <SubmitButton
+                  value='Create'
+                  errors={Boolean(errors.name || errors.technologies)}
+                />
+              </div>
               <CancelButton onClickAction={() => router.push('/')} />
             </div>
           </form>

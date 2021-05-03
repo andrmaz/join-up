@@ -179,16 +179,18 @@ const PositionModal = ({
                   />
                 </div>
                 <div className='h-1/10 flex'>
-                  <SubmitButton
-                    value='Add'
-                    errors={Boolean(
-                      errors.title ||
-                        errors.description ||
-                        errors.level ||
-                        errors.role ||
-                        errors.technologies
-                    )}
-                  />
+                  <div className='w-16 p-1'>
+                    <SubmitButton
+                      value='Add'
+                      errors={Boolean(
+                        errors.title ||
+                          errors.description ||
+                          errors.level ||
+                          errors.role ||
+                          errors.technologies
+                      )}
+                    />
+                  </div>
                   <CancelButton
                     onClickAction={handleCancel}
                     onKeyDownAction={() => focusTrapRef.current?.focus()}
