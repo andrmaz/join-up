@@ -6,12 +6,16 @@ import {useCookies} from 'react-cookie'
 import axios from 'axios'
 
 import Portal from '@components/Portal/Portal'
-import {SubmitButton} from '@components/Button/Submit'
-import CancelButton from '@components/Button/Cancel'
+
 import FormInput from '@components/Input/Form'
 import TechSelect from '@components/Select/Tech'
 import NumberInput from '@components/Input/Number'
 import DefaultSelect from '@components/Select/Default'
+
+// buttons
+import {SubmitButton} from '@components/Button/Submit'
+import CancelButton from '@components/Button/Cancel'
+import CloseModalButton from '@components/Button/Close'
 
 import useRefCallback from '@hooks/ref/useRefCallback'
 
@@ -123,18 +127,10 @@ const PositionModal = ({
                 >
                   Add a new position
                 </h2>
-                <button
-                  className='h-6 items-start'
-                  onClick={() => setShowModal(false)}
-                >
-                  <span
-                    aria-label='dialog_close'
-                    tabIndex={-1}
-                    ref={focusTrapRef}
-                  >
-                    &times;
-                  </span>
-                </button>
+                <CloseModalButton
+                  onClickAction={() => setShowModal(false)}
+                  focusRef={focusTrapRef}
+                />
               </div>
               <form className='h-18/20' onSubmit={handleSubmit(onSubmit)}>
                 <div className='h-18/20 flex flex-col justify-evenly pb-6'>

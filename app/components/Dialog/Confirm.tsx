@@ -7,6 +7,7 @@ import useRefCallback from '@hooks/ref/useRefCallback'
 
 import CancelButton from '@components/Button/Cancel'
 import {ConfirmButton} from '@components/Button/Confirm'
+import CloseButton from '@components/Button/Close'
 
 import axios from 'axios'
 
@@ -68,20 +69,21 @@ const ConfirmDialog = ({
       >
         <div className='h-full w-full'>
           <div className='w-full h-2/3'>
-            <h2
-              id='dialog_label'
-              tabIndex={-1}
-              ref={setRef}
-              className='h-1/2 focus:ring-2 focus:ring-yellow-600 text-xl'
-            >
-              {title}
-            </h2>
-            <span
-              ref={focusTrapRef}
-              role='article'
-              tabIndex={0}
-              className='h-1/2'
-            >
+            <header className='h-1/2 flex justify-between'>
+              <h2
+                id='dialog_label'
+                tabIndex={-1}
+                ref={setRef}
+                className='focus:ring-2 focus:ring-yellow-600 text-xl'
+              >
+                {title}
+              </h2>
+              <CloseButton
+                onClickAction={() => setShowDialog(false)}
+                focusRef={focusTrapRef}
+              />
+            </header>
+            <span role='article' tabIndex={0} className='h-1/2'>
               {message}
             </span>
           </div>

@@ -40,6 +40,14 @@ export interface IDefaultSelect {
   ) => void
   errors?: Record<string, any>
 }
+
+export interface INumberInput {
+  id: string
+  name: string
+  label: string
+  register: React.Ref<T>
+}
+
 export type FormButton = {
   value?: string
   errors?: boolean
@@ -51,9 +59,7 @@ export type SaveButton = {
   onClickAction?: () => void
 }
 
-export interface INumberInput {
-  id: string
-  name: string
-  label: string
-  register: React.Ref<T>
+export type CloseDialogButton = {
+  onClickAction: () => void
+  focusRef: React.Ref<T>
 }
