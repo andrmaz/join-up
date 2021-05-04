@@ -6,7 +6,6 @@ const NumberInput = ({
   name,
   label,
   register,
-  focusRef,
 }: INumberInput): JSX.Element => {
   return (
     <div className='flex'>
@@ -22,7 +21,7 @@ const NumberInput = ({
         min={1}
         max={20}
         className='w-12 focus:outline-none focus:ring focus:border-blue-300 border-2 border-gray-400 p-0.5 mr-2 rounded'
-        ref={focusRef ? focusRef : register}
+        ref={register}
       />
     </div>
   )

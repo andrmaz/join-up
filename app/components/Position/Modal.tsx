@@ -64,7 +64,11 @@ const PositionModal = ({
       })
       setOptions(technologies)
     })()
-  }, [token])
+    return () => {
+      id.current = null
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
   //* Reset the entire form state and close the modal
@@ -110,7 +114,7 @@ const PositionModal = ({
               aria-describedby='dialog_label'
               className='fixed h-4/5 w-1/2 top-32 right-1/4 bg-white border-black border-2 rounded p-4'
             >
-              <div className='h-1/10'>
+              <div className='h-1/10 flex justify-between'>
                 <h2
                   id='dialog_label'
                   tabIndex={-1}
@@ -119,6 +123,18 @@ const PositionModal = ({
                 >
                   Add a new position
                 </h2>
+                <button
+                  className='h-6 items-start'
+                  onClick={() => setShowModal(false)}
+                >
+                  <span
+                    aria-label='dialog_close'
+                    tabIndex={-1}
+                    ref={focusTrapRef}
+                  >
+                    &times;
+                  </span>
+                </button>
               </div>
               <form className='h-18/20' onSubmit={handleSubmit(onSubmit)}>
                 <div className='h-18/20 flex flex-col justify-evenly pb-6'>
@@ -127,7 +143,6 @@ const PositionModal = ({
                     name='vacancies'
                     label='Vacancy'
                     register={register}
-                    focusRef={focusTrapRef}
                   />
                   <FormInput
                     id='title'

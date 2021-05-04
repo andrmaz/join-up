@@ -56,5 +56,4 @@ export interface INumberInput {
   name: string
   label: string
   register: React.Ref<T>
-  focusRef?: React.RefObject
 }
