@@ -8,6 +8,7 @@ import useRefCallback from '@hooks/ref/useRefCallback'
 import CancelButton from '@components/Button/Cancel'
 import {ConfirmButton} from '@components/Button/Confirm'
 import CloseButton from '@components/Button/Close'
+import SnackBar from '@components/SnackBar/SnackBar'
 
 import axios from 'axios'
 
@@ -22,6 +23,9 @@ const ConfirmDialog = ({
   message: string
   setShowDialog: (state: boolean) => void
 }): JSX.Element => {
+  //* Toast Component Status
+  const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
+  const [successMessage, setSuccessMessage] = React.useState<string>('')
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
@@ -45,13 +49,17 @@ const ConfirmDialog = ({
       if (response.status === 201) {
         setTimeout(function () {
           setShowDialog(false)
-        }, 2000)
-        console.info(response.data.message)
+        }, 3000)
+        setIsSuccess(true)
+        setSuccessMessage(response.data.message)
         return response.data.message
       }
     } catch (error) {
       Promise.reject(error)
     }
+  }
+  if (isSuccess) {
+    return <SnackBar color='green' message={successMessage} />
   }
   return (
     <section
