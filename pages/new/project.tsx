@@ -17,7 +17,7 @@ import {useAuthState} from '@hooks/auth/useAuthState'
 import FormInput from '@components/Input/Form'
 import Navbar from '@components/Navbar/Navbar'
 import TechSelect from '@components/Select/Tech'
-import {ConfirmButton} from '@components/Button/Confirm'
+import {SubmitButton} from '@components/Button/Submit'
 
 import type {IProjectInput} from 'app/types/project'
 import CancelButton from '@components/Button/Cancel'
@@ -143,9 +143,12 @@ const Project: NextPage = ({
               optional
             />
             <div className='h-1/6 flex items-end'>
-              <ConfirmButton
-                errors={Boolean(errors.name || errors.technologies)}
-              />
+              <div className='w-16 p-1'>
+                <SubmitButton
+                  value='Create'
+                  errors={Boolean(errors.name || errors.technologies)}
+                />
+              </div>
               <CancelButton onClickAction={() => router.push('/')} />
             </div>
           </form>

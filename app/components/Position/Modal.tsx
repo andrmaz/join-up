@@ -6,12 +6,16 @@ import {useCookies} from 'react-cookie'
 import axios from 'axios'
 
 import Portal from '@components/Portal/Portal'
-import {ConfirmButton} from '@components/Button/Confirm'
-import CancelButton from '@components/Button/Cancel'
+
 import FormInput from '@components/Input/Form'
 import TechSelect from '@components/Select/Tech'
 import NumberInput from '@components/Input/Number'
 import DefaultSelect from '@components/Select/Default'
+
+// buttons
+import {SubmitButton} from '@components/Button/Submit'
+import CancelButton from '@components/Button/Cancel'
+import CloseModalButton from '@components/Button/Close'
 
 import useRefCallback from '@hooks/ref/useRefCallback'
 
@@ -46,16 +50,28 @@ const PositionModal = ({
     shouldFocusError: true,
     shouldUnregister: true,
   })
+  //* Store project id in useRef Hook
+  const id = React.useRef<string | null>(null)
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* Set technologies options to State as soon as the modal is shown
   React.useEffect(() => {
+    //* You now have access to `window`
+    id.current = window.location.pathname.slice(10)
     ;(async () => {
       const {
         data: {technologies},
-      } = await axios.get('/technology')
+      } = await axios.get(`/technology/project/${id.current}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setOptions(technologies)
     })()
+    return () => {
+      id.current = null
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
@@ -66,7 +82,7 @@ const PositionModal = ({
   }
   const router = useRouter()
   const onSubmit = async (data: IPositionInput): Promise<any> => {
-    data.projectId = window.location.pathname.slice(10)
+    data.projectId = id.current
     try {
       const response = await axios.post(
         '/position',
@@ -102,7 +118,7 @@ const PositionModal = ({
               aria-describedby='dialog_label'
               className='fixed h-4/5 w-1/2 top-32 right-1/4 bg-white border-black border-2 rounded p-4'
             >
-              <div className='h-1/10'>
+              <div className='h-1/10 flex justify-between'>
                 <h2
                   id='dialog_label'
                   tabIndex={-1}
@@ -111,15 +127,18 @@ const PositionModal = ({
                 >
                   Add a new position
                 </h2>
+                <CloseModalButton
+                  onClickAction={() => setShowModal(false)}
+                  focusRef={focusTrapRef}
+                />
               </div>
               <form className='h-18/20' onSubmit={handleSubmit(onSubmit)}>
                 <div className='h-18/20 flex flex-col justify-evenly pb-6'>
-                  <DefaultSelect
-                    id='role-select'
-                    name='role'
-                    control={control}
-                    setValue={setValue}
-                    focusRef={focusTrapRef}
+                  <NumberInput
+                    id='vacancy-select'
+                    name='vacancies'
+                    label='Vacancy'
+                    register={register}
                   />
                   <FormInput
                     id='title'
@@ -154,12 +173,14 @@ const PositionModal = ({
                     name='level'
                     control={control}
                     setValue={setValue}
+                    errors={errors}
                   />
-                  <NumberInput
-                    id='vacancy-select'
-                    name='vacancies'
-                    label='Vacancy'
-                    register={register}
+                  <DefaultSelect
+                    id='role-select'
+                    name='role'
+                    control={control}
+                    setValue={setValue}
+                    errors={errors}
                   />
                   <TechSelect
                     options={options!}
@@ -169,12 +190,18 @@ const PositionModal = ({
                   />
                 </div>
                 <div className='h-1/10 flex'>
-                  <ConfirmButton
-                    value='Add'
-                    errors={Boolean(
-                      errors.title || errors.description || errors.technologies
-                    )}
-                  />
+                  <div className='w-16 p-1'>
+                    <SubmitButton
+                      value='Add'
+                      errors={Boolean(
+                        errors.title ||
+                          errors.description ||
+                          errors.level ||
+                          errors.role ||
+                          errors.technologies
+                      )}
+                    />
+                  </div>
                   <CancelButton
                     onClickAction={handleCancel}
                     onKeyDownAction={() => focusTrapRef.current?.focus()}

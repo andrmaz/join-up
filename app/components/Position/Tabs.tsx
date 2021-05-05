@@ -17,7 +17,7 @@ const PositionTabs = ({
     setSelectedTab
   )
   return (
-    <section className='w-full h-5/6 p-1 overflow-y-scroll'>
+    <section className='w-full h-full p-1 overflow-y-scroll'>
       <ul
         role='tablist'
         aria-label='tabs'

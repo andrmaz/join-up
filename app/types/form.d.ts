@@ -12,7 +12,7 @@ export interface IFormInput {
   errors?: Record<string, any>
 }
 
-export type SelectOptions = {value: string; label: string}
+export type SelectOptions = {id: number; label: string}
 export type NestedOptions = NestedValue<SelectOptions[]> | undefined
 
 export interface IFormSelect {
@@ -38,14 +38,28 @@ export interface IDefaultSelect {
     value: unknown,
     config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
   ) => void
-  focusRef?: React.RefObject
+  errors?: Record<string, any>
 }
-
-export type FormButton = {value?: string; errors: boolean}
 
 export interface INumberInput {
   id: string
   name: string
   label: string
   register: React.Ref<T>
+}
+
+export type FormButton = {
+  value?: string
+  errors?: boolean
+}
+
+export type SaveButton = {
+  children?: string
+  errors?: boolean
+  onClickAction?: () => void
+}
+
+export type CloseDialogButton = {
+  onClickAction: () => void
+  focusRef: React.Ref<T>
 }

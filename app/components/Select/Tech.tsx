@@ -20,7 +20,7 @@ const TechSelect = ({
       <Controller
         name='technologies'
         control={control}
-        defaultValue={defaultValues ? defaultValues.map(v => v.label) : ''}
+        defaultValue={defaultValues ? defaultValues.map(v => v.id) : ''}
         rules={{
           //* recommended for object or array input data
           validate: value =>
@@ -36,13 +36,14 @@ const TechSelect = ({
             closeMenuOnSelect={false}
             isMulti
             options={options}
+            getOptionValue={option => option['id']}
             placeholder='Choose your tech stack'
             blurInputOnSelect={false}
             onBlur={onBlur}
             onChange={values => {
               setValue(
                 'technologies',
-                values.map((value: SelectOptions) => value.label),
+                values.map((value: SelectOptions) => value.id),
                 {
                   shouldValidate: true,
                   shouldDirty: true,

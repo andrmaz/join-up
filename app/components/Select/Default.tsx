@@ -2,6 +2,8 @@ import * as React from 'react'
 import axios from 'axios'
 import Select from 'react-select'
 import {Controller} from 'react-hook-form'
+import ErrorMessage from '@components/Message/Error'
+
 import type {IDefaultSelect, SelectOptions} from 'app/types/form'
 
 const DefaultSelect = ({
@@ -9,7 +11,7 @@ const DefaultSelect = ({
   name,
   control,
   setValue,
-  focusRef,
+  errors,
 }: IDefaultSelect): React.ReactElement => {
   const [options, setOptions] = React.useState<SelectOptions[] | undefined>()
   //* Set technologies options to State as soon as the modal is shown
@@ -28,20 +30,26 @@ const DefaultSelect = ({
       <Controller
         name={name}
         control={control}
-        defaultValue={options ? options[0].label : ''}
+        defaultValue={options ? options[0].id : ''}
+        rules={{
+          required: {
+            value: true,
+            message: `Please select at least one ${name}`,
+          },
+        }}
         render={({onBlur, value}) => (
           <Select
             id={id}
             inputId={id}
             name={name}
-            ref={focusRef ? focusRef : undefined}
             aria-labelledby={name}
             defaultValue={options ? options[0] : value}
             closeMenuOnSelect={true}
             options={options}
+            getOptionValue={option => option['id']}
             blurInputOnSelect={false}
-            onChange={value => {
-              setValue(name, value?.label, {
+            onChange={(value: SelectOptions) => {
+              setValue(name, value.id, {
                 shouldValidate: true,
                 shouldDirty: true,
               })
@@ -50,6 +58,7 @@ const DefaultSelect = ({
           />
         )}
       />
+      {errors?.[name] && <ErrorMessage>{errors?.[name]?.message}</ErrorMessage>}
     </React.Fragment>
   )
 }

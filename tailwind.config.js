@@ -77,6 +77,7 @@ module.exports = {
       borderColor: ['focus-visible'],
       opacity: ['disabled'],
       accessibility: ['hover', 'active'],
+      backgroundColor: ['active'],
     },
   },
 }

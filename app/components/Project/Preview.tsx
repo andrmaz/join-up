@@ -19,7 +19,7 @@ const ProjectPreview = ({
       <article className='h-2/5 text-sm'>
         <p>{description?.slice(0, 200)}</p>
       </article>
-      <article className='h-1/5 overflow-x-scroll'>
+      <article className='h-1/5 overflow-hidden'>
         <span className='text-red-600'>{technologies.toString()}</span>
       </article>
       <article className='h-1/5 flex flex-row justify-start'>

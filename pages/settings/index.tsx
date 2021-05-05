@@ -22,7 +22,7 @@ import FormInput from '@components/Input/Form'
 import LangSelect from '@components/Select/Lang'
 import TechSelect from '@components/Select/Tech'
 import ProfileMenu from '@components/Menu/Menu'
-import {ConfirmButton} from '@components/Button/Confirm'
+import {SubmitButton} from '@components/Button/Submit'
 import Textarea from '@components/Textarea/Textarea'
 
 import type {IUserContext} from 'app/types/user'
@@ -180,9 +180,12 @@ const Profile: NextPage = ({
                 <Textarea register={register} defaultValue={bio} />
                 <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
                   <CancelButton onClickAction={() => router.push('/')} />
-                  <ConfirmButton
-                    errors={Boolean(errors.languages || errors.technologies)}
-                  />
+                  <div className='w-16 p-1'>
+                    <SubmitButton
+                      value='Save'
+                      errors={Boolean(errors.languages || errors.technologies)}
+                    />
+                  </div>
                 </aside>
               </form>
             </section>
