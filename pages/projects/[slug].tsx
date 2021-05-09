@@ -5,7 +5,7 @@ import axios from 'axios'
 import {parseCookies} from '@utils/parseCookies'
 import {Params} from 'next/dist/next-server/server/router'
 import Navbar from '@components/Navbar/Navbar'
-import ProjectBadge from '@components/Project/Badge'
+import ProjectOverview from '@components/Project/Overview'
 import PositionTabs from '@components/Position/Tabs'
 import PositionPanels from '@components/Position/Panels'
 import {EmptyMessage} from '@components/Message/Empty'
@@ -26,7 +26,7 @@ const Slug: NextPage = ({
       <main className='h-screen pt-20'>
         <Wrapper>
           <article className='w-full h-1/5'>
-            <ProjectBadge {...project} />
+            <ProjectOverview {...project} />
           </article>
           {project.hasPositions ? (
             <article className='h-4/5 grid grid-cols-2 divide-x divide-black-500'>

@@ -4,12 +4,12 @@ import PositionModal from '@components/Position/Modal'
 import {ActionButton} from '@components/Button/Action'
 import type {IProjectData} from 'app/types/project'
 
-const ProjectBadge = ({
+function ProjectOverview({
   name,
   description,
   projectURL,
   owner,
-}: IProjectData): JSX.Element => {
+}: IProjectData): React.ReactElement {
   const {user} = useAuthState()
   const [showModal, setShowModal] = React.useState<boolean>(false)
   return (
@@ -35,4 +35,4 @@ const ProjectBadge = ({
   )
 }
 
-export default ProjectBadge
+export default React.memo(ProjectOverview)
