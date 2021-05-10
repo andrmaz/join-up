@@ -1,3 +1,4 @@
+import * as React from 'react'
 import TechSelect from '@components/Select/Tech'
 import {DateSelect} from '@components/Select/Date'
 import {RadioInput} from '@components/Input/Radio'
@@ -30,4 +31,17 @@ const ProjectDrawer = ({
   </section>
 )
 
-export default ProjectDrawer
+export default React.memo(ProjectDrawer, (prevProps, nextProps) => {
+  /*
+  return true if passing nextProps to render would return
+  the same result as passing prevProps to render,
+  otherwise return false
+  */
+  if (prevProps.isPending !== nextProps.isPending) return false
+  if (prevProps.options !== nextProps.options) return false
+  if (prevProps.setValue !== nextProps.setValue) return false
+  if (prevProps.control !== nextProps.control) return false
+  if (prevProps.technologies !== nextProps.technologies) return false
+  //! Do not include register Prop
+  return true
+})

@@ -1,3 +1,4 @@
+import * as React from 'react'
 import Link from 'next/link'
 import type {IProjectData} from 'app/types/project'
 
@@ -37,4 +38,4 @@ const ProjectCard = ({
   )
 }
 
-export default ProjectCard
+export default React.memo(ProjectCard)

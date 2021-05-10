@@ -1,3 +1,4 @@
+import * as React from 'react'
 import PositionTab from '@components/Position/Tab'
 import {useTabsKey} from '@hooks/tabs/useTabsKey'
 import type {IPosistionData} from 'app/types/position'
@@ -25,23 +26,18 @@ const PositionTabs = ({
         className='h-full'
       >
         {positions.map((position, index) => (
-          <button
+          <PositionTab
             key={position.id}
-            role='tab'
-            aria-selected={selectedTab === index}
-            aria-controls={`panel-${index}`}
-            id={`tab-${index}`}
-            tabIndex={selectedTab === index ? 0 : -1}
-            ref={selectedTab === index ? tabRef : null}
-            onClick={() => setSelectedTab(index)}
-            className='w-full'
-          >
-            <PositionTab {...position} />
-          </button>
+            index={index}
+            isSelectedTab={selectedTab === index}
+            setSelectedTab={setSelectedTab}
+            tabRef={tabRef}
+            position={position}
+          />
         ))}
       </ul>
     </section>
   )
 }
 
-export default PositionTabs
+export default React.memo(PositionTabs)

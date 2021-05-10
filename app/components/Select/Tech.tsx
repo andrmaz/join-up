@@ -1,3 +1,4 @@
+import * as React from 'react'
 import Select from 'react-select'
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@components/Message/Error'
@@ -61,4 +62,4 @@ const TechSelect = ({
   )
 }
 
-export default TechSelect
+export default React.memo(TechSelect)
