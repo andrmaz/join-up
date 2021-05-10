@@ -1,3 +1,4 @@
+import * as React from 'react'
 import ProjectCard from '@components/Project/Card'
 import type {AsyncData} from 'app/types/async'
 import type {IProjectData} from 'app/types/project'
@@ -26,4 +27,4 @@ const ProjectsGrid = ({
   </section>
 )
 
-export default ProjectsGrid
+export default React.memo(ProjectsGrid)
