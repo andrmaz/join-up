@@ -1,3 +1,4 @@
+import * as React from 'react'
 import PositionPanel from '@components/Position/Panel'
 import type {IPosistionData} from 'app/types/position'
 
@@ -11,20 +12,15 @@ const PositionPanels = ({
   return (
     <main className='h-full w-full'>
       {positions.map((position, index) => (
-        <section
+        <PositionPanel
           key={position.id}
-          id={`panel-${index}`}
-          role='tabpanel'
-          tabIndex={0}
-          aria-labelledby={`tab-${index}`}
-          className='h-full w-full'
-          hidden={selectedTab !== index}
-        >
-          <PositionPanel {...position} />
-        </section>
+          isSelectedTab={selectedTab === index}
+          index={index}
+          position={position}
+        />
       ))}
     </main>
   )
 }
 
-export default PositionPanels
+export default React.memo(PositionPanels)
