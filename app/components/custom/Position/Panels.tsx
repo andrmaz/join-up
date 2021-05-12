@@ -1,5 +1,5 @@
 import * as React from 'react'
-import PositionPanel from '@components/Position/Panel'
+import PositionPanel from '@components/custom/Position/Panel'
 import type {IPosistionData} from 'app/types/position'
 
 const PositionPanels = ({

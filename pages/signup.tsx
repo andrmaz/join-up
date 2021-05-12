@@ -9,13 +9,13 @@ import {useForm} from 'react-hook-form'
 
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {login} from '@actions/authActions'
-import FormInput from '@components/Input/Form'
-import LangSelect from '@components/Select/Lang'
-import TechSelect from '@components/Select/Tech'
-import Textarea from '@components/Textarea/Textarea'
+import FormInput from '@components/form/Input/Form'
+import LangSelect from '@components/form/Select/Lang'
+import TechSelect from '@components/form/Select/Tech'
+import Textarea from '@components/form/Textarea/Textarea'
 
 import type {ISignupInputs} from 'app/types/user'
-import {SubmitButton} from '@components/Button/Submit'
+import {SubmitButton} from '@components/form/Button/Submit'
 
 const SignUp = ({
   technologies,

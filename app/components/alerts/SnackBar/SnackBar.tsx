@@ -1,4 +1,4 @@
-import {CheckCircle} from '@components/Icon/CheckCircle'
+import {CheckCircle} from '@components/custom/Icon/CheckCircle'
 
 const SnackBar = ({
   color,

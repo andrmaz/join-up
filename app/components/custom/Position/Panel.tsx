@@ -1,9 +1,9 @@
 import * as React from 'react'
 import {useAuthState} from '@hooks/auth/useAuthState'
 
-import {ActionButton} from '@components/Button/Action'
-import Portal from '@components/Portal/Portal'
-import ConfirmDialog from '@components/Dialog/Confirm'
+import {ActionButton} from '@components/form/Button/Action'
+import Portal from '@components/containers/Portal/Portal'
+import ConfirmDialog from '@components/containers/Dialog/Confirm'
 
 import type {IPosistionData} from 'app/types/position'
 

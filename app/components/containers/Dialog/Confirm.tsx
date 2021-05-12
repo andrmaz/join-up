@@ -5,10 +5,10 @@ import {useCookies} from 'react-cookie'
 
 import useRefCallback from '@hooks/ref/useRefCallback'
 
-import CancelButton from '@components/Button/Cancel'
-import {ConfirmButton} from '@components/Button/Confirm'
-import CloseButton from '@components/Button/Close'
-import SnackBar from '@components/SnackBar/SnackBar'
+import CancelButton from '@components/form/Button/Cancel'
+import {ConfirmButton} from '@components/form/Button/Confirm'
+import CloseButton from '@components/form/Button/Close'
+import SnackBar from '@components/alerts/SnackBar/SnackBar'
 
 import axios from 'axios'
 

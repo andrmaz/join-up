@@ -8,9 +8,9 @@ import {useForm} from 'react-hook-form'
 
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {login} from '@actions/authActions'
-import FormInput from '@components/Input/Form'
+import FormInput from '@components/form/Input/Form'
 import type {SigninInputs} from 'app/types/user'
-import {SubmitButton} from '@components/Button/Submit'
+import {SubmitButton} from '@components/form/Button/Submit'
 
 const SignIn = (): JSX.Element => {
   const {register, handleSubmit, errors} = useForm<SigninInputs>({

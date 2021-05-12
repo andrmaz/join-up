@@ -10,10 +10,10 @@ import {ParsedUrlQuery} from 'querystring'
 import axios from 'axios'
 
 import {parseCookies} from '@utils/parseCookies'
-import Navbar from '@components/Navbar/Navbar'
-import UserCard from '@components/Profile/Card'
-import ProjectsList from '@components/Project/List'
-import Wrapper from '@components/Wrapper/Wrapper'
+import Navbar from '@components/navigation/Navbar/Navbar'
+import UserCard from '@components/custom/Profile/Card'
+import ProjectsList from '@components/custom/Project/List'
+import Wrapper from '@components/containers/Wrapper/Wrapper'
 
 const Profile: NextPage = ({
   projects,

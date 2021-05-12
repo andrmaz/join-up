@@ -11,7 +11,9 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 import 'tailwindcss/tailwind.css'
 
 //* the module will be dynamically loaded by the page in the browser
-const DynamicComponent = dynamic(() => import('@components/Root/Modal'))
+const DynamicComponent = dynamic(
+  () => import('@components/containers/Root/Modal')
+)
 
 function MyApp({Component, pageProps}: AppProps): React.ReactNode {
   return (
