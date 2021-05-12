@@ -1,9 +1,10 @@
+import * as React from 'react'
 import Select from 'react-select'
 import {Controller} from 'react-hook-form'
-import ErrorMessage from '@components/Message/Error'
+import ErrorMessage from '@components/alerts/Message/Error'
 import type {IFormSelect, SelectOptions} from 'app/types/form'
 
-const LangSelect = ({
+const TechSelect = ({
   options,
   control,
   setValue,
@@ -14,35 +15,35 @@ const LangSelect = ({
 }: IFormSelect): React.ReactElement => {
   return (
     <>
-      <label id='languages' htmlFor='languages'>
-        Languages :
+      <label id='technologies' htmlFor='technologies'>
+        Technologies :
       </label>
       <Controller
-        name='languages'
+        name='technologies'
         control={control}
         defaultValue={defaultValues ? defaultValues.map(v => v.id) : ''}
         rules={{
           //* recommended for object or array input data
           validate: value =>
-            value.length || 'Please select at least one language',
+            value.length || 'Please select at least one technology',
         }}
         render={({value, onBlur}) => (
           <Select
-            id='languages'
-            inputId='languages'
-            name='languages'
-            aria-labelledby='languages'
+            id='technologies'
+            inputId='technologies'
+            name='technologies'
+            aria-labelledby='technologies'
             defaultValue={defaultValue ? defaultValue : value}
             closeMenuOnSelect={false}
             isMulti
             options={options}
             getOptionValue={option => option['id']}
-            placeholder='Select your languages'
+            placeholder='Choose your tech stack'
             blurInputOnSelect={false}
             onBlur={onBlur}
             onChange={values => {
               setValue(
-                'languages',
+                'technologies',
                 values.map((value: SelectOptions) => value.id),
                 {
                   shouldValidate: true,
@@ -54,11 +55,11 @@ const LangSelect = ({
           />
         )}
       />
-      {errors?.languages && (
-        <ErrorMessage>{errors?.languages?.message}</ErrorMessage>
+      {errors?.technologies && (
+        <ErrorMessage>{errors?.technologies?.message}</ErrorMessage>
       )}
     </>
   )
 }
 
-export default LangSelect
+export default React.memo(TechSelect)

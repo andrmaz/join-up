@@ -1,5 +1,5 @@
 import * as React from 'react'
-import PositionTab from '@components/Position/Tab'
+import PositionTab from '@components/custom/Position/Tab'
 import {useTabsKey} from '@hooks/tabs/useTabsKey'
 import type {IPosistionData} from 'app/types/position'
 

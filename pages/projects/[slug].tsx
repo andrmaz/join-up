@@ -4,12 +4,12 @@ import Head from 'next/head'
 import axios from 'axios'
 import {parseCookies} from '@utils/parseCookies'
 import {Params} from 'next/dist/next-server/server/router'
-import Navbar from '@components/Navbar/Navbar'
-import ProjectOverview from '@components/Project/Overview'
-import PositionTabs from '@components/Position/Tabs'
-import PositionPanels from '@components/Position/Panels'
-import {EmptyMessage} from '@components/Message/Empty'
-import Wrapper from '@components/Wrapper/Wrapper'
+import Navbar from '@components/navigation/Navbar/Navbar'
+import ProjectOverview from '@components/custom/Project/Overview'
+import PositionTabs from '@components/custom/Position/Tabs'
+import PositionPanels from '@components/custom/Position/Panels'
+import {EmptyMessage} from '@components/alerts/Message/Empty'
+import Wrapper from '@components/containers/Wrapper/Wrapper'
 
 const Slug: NextPage = ({
   project,

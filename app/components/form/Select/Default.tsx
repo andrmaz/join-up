@@ -2,7 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import Select from 'react-select'
 import {Controller} from 'react-hook-form'
-import ErrorMessage from '@components/Message/Error'
+import ErrorMessage from '@components/alerts/Message/Error'
 
 import type {IDefaultSelect, SelectOptions} from 'app/types/form'
 

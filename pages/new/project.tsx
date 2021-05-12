@@ -14,13 +14,13 @@ import {useForm} from 'react-hook-form'
 import {parseCookies} from '@utils/parseCookies'
 import {useAuthState} from '@hooks/auth/useAuthState'
 
-import FormInput from '@components/Input/Form'
-import Navbar from '@components/Navbar/Navbar'
-import TechSelect from '@components/Select/Tech'
-import {SubmitButton} from '@components/Button/Submit'
+import FormInput from '@components/form/Input/Form'
+import Navbar from '@components/navigation/Navbar/Navbar'
+import TechSelect from '@components/form/Select/Tech'
+import {SubmitButton} from '@components/form/Button/Submit'
 
 import type {IProjectInput} from 'app/types/project'
-import CancelButton from '@components/Button/Cancel'
+import CancelButton from '@components/form/Button/Cancel'
 
 const Project: NextPage = ({
   technologies,

@@ -17,16 +17,16 @@ import {parseCookies} from '@utils/parseCookies'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {useAuthState} from '@hooks/auth/useAuthState'
 
-import Navbar from '@components/Navbar/Navbar'
-import FormInput from '@components/Input/Form'
-import LangSelect from '@components/Select/Lang'
-import TechSelect from '@components/Select/Tech'
-import ProfileMenu from '@components/Menu/Menu'
-import {SubmitButton} from '@components/Button/Submit'
-import Textarea from '@components/Textarea/Textarea'
+import Navbar from '@components/navigation/Navbar/Navbar'
+import FormInput from '@components/form/Input/Form'
+import LangSelect from '@components/form/Select/Lang'
+import TechSelect from '@components/form/Select/Tech'
+import ProfileMenu from '@components/navigation/Menu/Menu'
+import {SubmitButton} from '@components/form/Button/Submit'
+import Textarea from '@components/form/Textarea/Textarea'
 
 import type {IUserContext} from 'app/types/user'
-import CancelButton from '@components/Button/Cancel'
+import CancelButton from '@components/form/Button/Cancel'
 
 const Profile: NextPage = ({
   token,

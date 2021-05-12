@@ -14,9 +14,9 @@ import {useForm} from 'react-hook-form'
 import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
 
 import {parseCookies} from '@utils/parseCookies'
-import Navbar from '@components/Navbar/Navbar'
-import ProjectsGrid from '@components/Project/Grid'
-import Drawer from '@components/Drawer/Drawer'
+import Navbar from '@components/navigation/Navbar/Navbar'
+import ProjectsGrid from '@components/custom/Project/Grid'
+import Drawer from '@components/navigation/Drawer/Drawer'
 
 const Projects: NextPage = ({
   token,

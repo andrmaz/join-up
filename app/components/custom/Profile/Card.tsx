@@ -1,7 +1,7 @@
 import {useAuthState} from '@hooks/auth/useAuthState'
-import {ProfileInfo} from '@components/Profile/Info'
-import {ProfileSkills} from '@components/Profile/Skills'
-import {ProfileLink} from '@components/Profile/Link'
+import {ProfileInfo} from '@components/custom/Profile/Info'
+import {ProfileSkills} from '@components/custom/Profile/Skills'
+import {ProfileLink} from '@components/custom/Profile/Link'
 
 const ProfileCard = (): JSX.Element => {
   const {user} = useAuthState()

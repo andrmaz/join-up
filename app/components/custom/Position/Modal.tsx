@@ -5,17 +5,17 @@ import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
 import axios from 'axios'
 
-import Portal from '@components/Portal/Portal'
+import Portal from '@components/containers/Portal/Portal'
 
-import FormInput from '@components/Input/Form'
-import TechSelect from '@components/Select/Tech'
-import NumberInput from '@components/Input/Number'
-import DefaultSelect from '@components/Select/Default'
+import FormInput from '@components/form/Input/Form'
+import TechSelect from '@components/form/Select/Tech'
+import NumberInput from '@components/form/Input/Number'
+import DefaultSelect from '@components/form/Select/Default'
 
 // buttons
-import {SubmitButton} from '@components/Button/Submit'
-import CancelButton from '@components/Button/Cancel'
-import CloseModalButton from '@components/Button/Close'
+import {SubmitButton} from '@components/form/Button/Submit'
+import CancelButton from '@components/form/Button/Cancel'
+import CloseModalButton from '@components/form/Button/Close'
 
 import useRefCallback from '@hooks/ref/useRefCallback'
 
