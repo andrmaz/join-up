@@ -51,6 +51,7 @@ export interface INumberInput {
 export type FormButton = {
   value?: string
   errors?: boolean
+  bgColor?: string
 }
 
 export type SaveButton = {
