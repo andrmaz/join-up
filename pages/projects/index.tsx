@@ -14,7 +14,6 @@ import {useForm} from 'react-hook-form'
 import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
 
 import {parseCookies} from '@utils/parseCookies'
-import Navbar from '@components/navigation/Navbar/Navbar'
 import ProjectsGrid from '@components/custom/Project/Grid'
 import Drawer from '@components/navigation/Drawer/Drawer'
 
@@ -55,13 +54,12 @@ const Projects: NextPage = ({
   // Status
   const isPending = status === 'pending'
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen pt-20'>
       <Head>
         <title>Projects</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Navbar />
-      <main className='h-auto mt-20 py-10 px-10'>
+      <main className='h-auto py-10 px-10'>
         <article className='h-auto grid grid-cols-3 divide-x divide-black-500'>
           <Drawer
             register={register}

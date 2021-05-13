@@ -4,7 +4,6 @@ import Head from 'next/head'
 import axios from 'axios'
 import {parseCookies} from '@utils/parseCookies'
 import {Params} from 'next/dist/next-server/server/router'
-import Navbar from '@components/navigation/Navbar/Navbar'
 import ProjectOverview from '@components/custom/Project/Overview'
 import PositionTabs from '@components/custom/Position/Tabs'
 import PositionPanels from '@components/custom/Position/Panels'
@@ -17,13 +16,12 @@ const Slug: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [selectedTab, setSelectedTab] = React.useState<number>(0)
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen pt-20'>
       <Head>
         <title>Project</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Navbar />
-      <main className='h-screen pt-20'>
+      <main className='h-92v'>
         <Wrapper>
           <article className='w-full h-1/5'>
             <ProjectOverview {...project} />
