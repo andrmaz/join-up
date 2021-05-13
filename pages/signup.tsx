@@ -2,20 +2,21 @@ import Head from 'next/head'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
-
 import axios from 'axios'
+
 import {useCookies} from 'react-cookie'
 import {useForm} from 'react-hook-form'
-
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {login} from '@actions/authActions'
+
+import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
 import LangSelect from '@components/form/Select/Lang'
 import TechSelect from '@components/form/Select/Tech'
 import Textarea from '@components/form/Textarea/Textarea'
+import {SubmitButton} from '@components/form/Button/Submit'
 
 import type {ISignupInputs} from 'app/types/user'
-import {SubmitButton} from '@components/form/Button/Submit'
 
 const SignUp = ({
   technologies,
@@ -66,7 +67,7 @@ const SignUp = ({
       })
   }
   return (
-    <div className='min-h-screen pt-20'>
+    <Container>
       <Head>
         <title>SignUp</title>
         <link rel='icon' href='/favicon.ico' />
@@ -223,7 +224,7 @@ const SignUp = ({
           </form>
         </section>
       </main>
-    </div>
+    </Container>
   )
 }
 

@@ -10,15 +10,17 @@ import {ParsedUrlQuery} from 'querystring'
 import axios from 'axios'
 
 import {parseCookies} from '@utils/parseCookies'
+
+import Container from '@components/containers/Container/Container'
+import Wrapper from '@components/containers/Wrapper/Wrapper'
 import UserCard from '@components/custom/Profile/Card'
 import ProjectsList from '@components/custom/Project/List'
-import Wrapper from '@components/containers/Wrapper/Wrapper'
 
 const Profile: NextPage = ({
   projects,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <div className='h-screen pt-20'>
+    <Container>
       <Head>
         <title>Profile</title>
         <link rel='icon' href='/favicon.ico' />
@@ -38,7 +40,7 @@ const Profile: NextPage = ({
           </div>
         </Wrapper>
       </main>
-    </div>
+    </Container>
   )
 }
 

@@ -6,14 +6,14 @@ import {
   InferGetServerSidePropsType,
 } from 'next'
 import Head from 'next/head'
-
 import {ParsedUrlQuery} from 'querystring'
 import axios from 'axios'
+
 import {useForm} from 'react-hook-form'
-
 import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
-
 import {parseCookies} from '@utils/parseCookies'
+
+import Container from '@components/containers/Container/Container'
 import ProjectsGrid from '@components/custom/Project/Grid'
 import Drawer from '@components/navigation/Drawer/Drawer'
 
@@ -54,7 +54,7 @@ const Projects: NextPage = ({
   // Status
   const isPending = status === 'pending'
   return (
-    <div className='min-h-screen pt-20'>
+    <Container>
       <Head>
         <title>Projects</title>
         <link rel='icon' href='/favicon.ico' />
@@ -72,7 +72,7 @@ const Projects: NextPage = ({
           <ProjectsGrid status={status} projects={data} />
         </article>
       </main>
-    </div>
+    </Container>
   )
 }
 

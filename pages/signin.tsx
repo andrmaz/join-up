@@ -1,16 +1,19 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import {useRouter} from 'next/router'
-
 import axios from 'axios'
+
+import {useRouter} from 'next/router'
 import {useCookies} from 'react-cookie'
 import {useForm} from 'react-hook-form'
 
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {login} from '@actions/authActions'
+
+import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
-import type {SigninInputs} from 'app/types/user'
 import {SubmitButton} from '@components/form/Button/Submit'
+
+import type {SigninInputs} from 'app/types/user'
 
 const SignIn = (): JSX.Element => {
   const {register, handleSubmit, errors} = useForm<SigninInputs>({
@@ -50,7 +53,7 @@ const SignIn = (): JSX.Element => {
       })
   }
   return (
-    <main className='min-h-screnn pt-20'>
+    <Container>
       <Head>
         <title>SignIn</title>
         <link rel='icon' href='/favicon.ico' />
@@ -107,7 +110,7 @@ const SignIn = (): JSX.Element => {
           </div>
         </section>
       </div>
-    </main>
+    </Container>
   )
 }
 

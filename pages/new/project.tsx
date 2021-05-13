@@ -14,6 +14,7 @@ import {useForm} from 'react-hook-form'
 import {parseCookies} from '@utils/parseCookies'
 import {useAuthState} from '@hooks/auth/useAuthState'
 
+import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
 import TechSelect from '@components/form/Select/Tech'
 import {SubmitButton} from '@components/form/Button/Submit'
@@ -64,7 +65,7 @@ const Project: NextPage = ({
     }
   }
   return (
-    <div className='min-h-screen pt-20'>
+    <Container>
       <Head>
         <title>New</title>
         <link rel='icon' href='/favicon.ico' />
@@ -152,7 +153,7 @@ const Project: NextPage = ({
           </form>
         </article>
       </main>
-    </div>
+    </Container>
   )
 }
 
