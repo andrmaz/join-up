@@ -182,6 +182,7 @@ const Profile: NextPage = ({
                   <div className='w-16 p-1'>
                     <SubmitButton
                       value='Save'
+                      bgColor='green-600'
                       errors={Boolean(errors.languages || errors.technologies)}
                     />
                   </div>

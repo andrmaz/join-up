@@ -145,6 +145,7 @@ const Project: NextPage = ({
               <div className='w-16 p-1'>
                 <SubmitButton
                   value='Create'
+                  bgColor='green-600'
                   errors={Boolean(errors.name || errors.technologies)}
                 />
               </div>

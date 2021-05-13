@@ -193,6 +193,7 @@ const PositionModal = ({
                   <div className='w-16 p-1'>
                     <SubmitButton
                       value='Add'
+                      bgColor='green-600'
                       errors={Boolean(
                         errors.title ||
                           errors.description ||
