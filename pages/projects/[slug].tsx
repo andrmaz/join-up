@@ -2,14 +2,16 @@ import * as React from 'react'
 import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
 import axios from 'axios'
+
 import {parseCookies} from '@utils/parseCookies'
 import {Params} from 'next/dist/next-server/server/router'
-import Navbar from '@components/navigation/Navbar/Navbar'
+
+import Container from '@components/containers/Container/Container'
+import Wrapper from '@components/containers/Wrapper/Wrapper'
 import ProjectOverview from '@components/custom/Project/Overview'
 import PositionTabs from '@components/custom/Position/Tabs'
 import PositionPanels from '@components/custom/Position/Panels'
 import {EmptyMessage} from '@components/alerts/Message/Empty'
-import Wrapper from '@components/containers/Wrapper/Wrapper'
 
 const Slug: NextPage = ({
   project,
@@ -17,13 +19,12 @@ const Slug: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [selectedTab, setSelectedTab] = React.useState<number>(0)
   return (
-    <div className='min-h-screen'>
+    <Container>
       <Head>
         <title>Project</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Navbar />
-      <main className='h-screen pt-20'>
+      <main className='h-92v'>
         <Wrapper>
           <article className='w-full h-1/5'>
             <ProjectOverview {...project} />
@@ -42,7 +43,7 @@ const Slug: NextPage = ({
           )}
         </Wrapper>
       </main>
-    </div>
+    </Container>
   )
 }
 

@@ -14,8 +14,8 @@ import {useForm} from 'react-hook-form'
 import {parseCookies} from '@utils/parseCookies'
 import {useAuthState} from '@hooks/auth/useAuthState'
 
+import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
-import Navbar from '@components/navigation/Navbar/Navbar'
 import TechSelect from '@components/form/Select/Tech'
 import {SubmitButton} from '@components/form/Button/Submit'
 
@@ -65,13 +65,12 @@ const Project: NextPage = ({
     }
   }
   return (
-    <div className='min-h-screen'>
+    <Container>
       <Head>
         <title>New</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Navbar />
-      <main className='h-screen pt-20 flex justify-center items-center'>
+      <main className='h-92v flex justify-center items-center'>
         <article className='w-3/5 xl:w-1/2 h-4/5 p-4 border rounded xl:px-12'>
           <header className='h-1/6'>
             <h1 className='h-2/3 text-3xl'>Create a new project</h1>
@@ -154,7 +153,7 @@ const Project: NextPage = ({
           </form>
         </article>
       </main>
-    </div>
+    </Container>
   )
 }
 

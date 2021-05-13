@@ -17,7 +17,7 @@ import {parseCookies} from '@utils/parseCookies'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {useAuthState} from '@hooks/auth/useAuthState'
 
-import Navbar from '@components/navigation/Navbar/Navbar'
+import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
 import LangSelect from '@components/form/Select/Lang'
 import TechSelect from '@components/form/Select/Tech'
@@ -83,13 +83,12 @@ const Profile: NextPage = ({
     }
   }
   return (
-    <div className='min-h-screen'>
+    <Container>
       <Head>
         <title>Settings</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Navbar />
-      <main className='h-screen pt-20 container'>
+      <main className='h-92v container'>
         <section className='h-full p-12'>
           <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
             <ProfileMenu />
@@ -192,7 +191,7 @@ const Profile: NextPage = ({
           </div>
         </section>
       </main>
-    </div>
+    </Container>
   )
 }
 
