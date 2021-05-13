@@ -21,8 +21,8 @@ const Navbar = (): JSX.Element => {
       </div>
       {user ? (
         <div className='inline-flex justify-around items-center w-2/12 h-full'>
-          <Link href='/new/project' passHref>
-            <div className='cursor-pointer'>+</div>
+          <Link href='/new/project'>
+            <a className='cursor-pointer'>&#43;</a>
           </Link>
           <Dropdown />
         </div>
