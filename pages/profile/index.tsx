@@ -13,7 +13,7 @@ import {parseCookies} from '@utils/parseCookies'
 
 import Container from '@components/containers/Container/Container'
 import Wrapper from '@components/containers/Wrapper/Wrapper'
-import UserCard from '@components/custom/Profile/Card'
+import UserCard from '@components/custom/User/Card'
 import ProjectsList from '@components/custom/Project/List'
 
 const Profile: NextPage = ({
