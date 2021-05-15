@@ -1,3 +1,4 @@
+import * as React from 'react'
 import {
   NextPage,
   GetServerSideProps,
@@ -33,6 +34,7 @@ const Profile: NextPage = ({
   techOptions,
   langOptions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [selectedTab, setSelectedTab] = React.useState<number>(0)
   const {user} = useAuthState()
   const {
     avatar,
@@ -91,7 +93,10 @@ const Profile: NextPage = ({
       <main className='h-92v container'>
         <section className='h-full p-12'>
           <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
-            <ProfileMenu />
+            <ProfileMenu
+              selectedTab={selectedTab}
+              setSelectedTab={setSelectedTab}
+            />
             <section className='w-200 h-auto border-2 border-solid rounded'>
               <form
                 onSubmit={handleSubmit(onSubmit)}
