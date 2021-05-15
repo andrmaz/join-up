@@ -14,6 +14,7 @@ const Panel = ({
     tabIndex={0}
     aria-labelledby={`tab-${index}`}
     hidden={!isSelectedTab}
+    className='h-full'
     {...className}
   >
     {children}
