@@ -3,7 +3,6 @@ import axios from 'axios'
 
 import {useRouter} from 'next/router'
 import {useForm} from 'react-hook-form'
-import {useCookies} from 'react-cookie'
 
 import FormInput from '@components/form/Input/Form'
 import {SubmitButton} from '@components/form/Button/Submit'
@@ -12,7 +11,6 @@ import CancelButton from '@components/form/Button/Cancel'
 import type {IEditPassword} from 'app/types/edit'
 
 const Password = ({token}: {token: string}): JSX.Element => {
-  const [, setCookie] = useCookies(['session'])
   const {handleSubmit, register, errors, watch} = useForm<IEditPassword>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
@@ -25,7 +23,7 @@ const Password = ({token}: {token: string}): JSX.Element => {
   })
   const watchPassword = watch('newPassword')
   const router = useRouter()
-  const onSubmit = async (data: IEditPassword): Promise<any> => {
+  const onSubmit = async (data: IEditPassword): Promise<unknown> => {
     try {
       const response = await axios.patch(
         '/user/password',
@@ -37,14 +35,6 @@ const Password = ({token}: {token: string}): JSX.Element => {
         }
       )
       if (response.status === 200) {
-        setCookie('session', response.data.token, {
-          path: '/',
-          // ? expiration date
-          //maxAge: 3600, // Expires after 1hr
-          sameSite: true,
-          //httpOnly: true,
-          //secure: true,
-        })
         router.push('/profile')
         return
       }
@@ -91,8 +81,8 @@ const Password = ({token}: {token: string}): JSX.Element => {
         />
         <FormInput
           type='password'
-          id='confirmNewPassword'
-          name='confirmNewPassword'
+          id='newPasswordConfirm'
+          name='newPasswordConfirm'
           label='Confirm New Password'
           placeholder='please confirm your new password'
           register={register({
@@ -111,7 +101,7 @@ const Password = ({token}: {token: string}): JSX.Element => {
             errors={Boolean(
               errors.currentPassword ||
                 errors.newPassword ||
-                errors.confirmNewPassword
+                errors.newPasswordConfirm
             )}
           />
         </div>

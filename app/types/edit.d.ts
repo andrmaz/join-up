@@ -9,5 +9,5 @@ export interface IEditEmail {
 export interface IEditPassword {
   currentPassword: string
   newPassword: string
-  confirmNewPassword: string
+  newPasswordConfirm: string
 }
