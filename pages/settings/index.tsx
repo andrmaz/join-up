@@ -17,6 +17,7 @@ import Panel from '@components/navigation/Tablist/Panel'
 
 import Profile from '@components/custom/Edit/Profile'
 import Username from '@components/custom/Edit/Username'
+import Email from '@components/custom/Edit/Email'
 
 const Settings: NextPage = ({
   token,
@@ -40,7 +41,7 @@ const Settings: NextPage = ({
                 <Username token={token} />
               </Panel>
               <Panel index={2} isSelectedTab={selectedTab === 2}>
-                <span>Edit Email</span>
+                <Email token={token} />
               </Panel>
               <Panel index={3} isSelectedTab={selectedTab === 3}>
                 <span>Edit Password</span>

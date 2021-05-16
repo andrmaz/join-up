@@ -12,12 +12,12 @@ import FormInput from '@components/form/Input/Form'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
-import type {IEditUsername} from 'app/types/edit'
+import type {IEditEmail} from 'app/types/edit'
 
-const Username = ({token}: {token: string}): JSX.Element => {
+const Email = ({token}: {token: string}): JSX.Element => {
   const dispatch = useAuthDispatch()
   const [, setCookie] = useCookies(['session'])
-  const {handleSubmit, register, errors} = useForm<IEditUsername>({
+  const {handleSubmit, register, errors} = useForm<IEditEmail>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: {},
@@ -28,10 +28,10 @@ const Username = ({token}: {token: string}): JSX.Element => {
     shouldUnregister: true,
   })
   const router = useRouter()
-  const onSubmit = async (data: IEditUsername): Promise<unknown> => {
+  const onSubmit = async (data: IEditEmail): Promise<unknown> => {
     try {
       const response = await axios.patch(
-        '/user/username',
+        '/user/email',
         {user: data},
         {
           headers: {
@@ -61,30 +61,26 @@ const Username = ({token}: {token: string}): JSX.Element => {
       onSubmit={handleSubmit(onSubmit)}
       className='flex flex-col h-auto justify-between p-1'
     >
-      <h2 className='text-2xl mb-4'>Change username</h2>
+      <h2 className='text-2xl mb-4'>Change email</h2>
       <article className='h-auto flex flex-col justify-evenly mb-8'>
         <FormInput
-          type='text'
-          id='username'
-          name='newUsername'
-          label='Username'
-          placeholder='please enter a new username'
+          type='email'
+          id='email'
+          name='newEmail'
+          label='Email'
+          placeholder='please enter a new email'
           register={register({
-            required: 'username is required',
-            minLength: {
-              value: 3,
-              message: 'username must be at least 3 characters long',
-            },
-            maxLength: {
-              value: 20,
-              message: 'username must be at most 20 characters long',
+            required: 'email is required',
+            pattern: {
+              value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+              message: 'please enter a valid email address',
             },
           })}
           errors={errors}
         />
         <FormInput
           type='password'
-          id='password-username'
+          id='password-email'
           name='password'
           label='Password'
           placeholder='please enter your password'
@@ -104,7 +100,7 @@ const Username = ({token}: {token: string}): JSX.Element => {
           <SubmitButton
             value='Save'
             bgColor='green-600'
-            errors={Boolean(errors.newUsername || errors.password)}
+            errors={Boolean(errors.newEmail || errors.password)}
           />
         </div>
       </aside>
@@ -112,4 +108,4 @@ const Username = ({token}: {token: string}): JSX.Element => {
   )
 }
 
-export default Username
+export default Email
