@@ -18,7 +18,7 @@ const PositionTabs = ({
     setSelectedTab
   )
   return (
-    <section className='w-full h-full p-1 overflow-y-scroll'>
+    <nav className='w-full h-full p-1 overflow-y-scroll'>
       <ul
         role='tablist'
         aria-label='tabs'
@@ -36,7 +36,7 @@ const PositionTabs = ({
           />
         ))}
       </ul>
-    </section>
+    </nav>
   )
 }
 

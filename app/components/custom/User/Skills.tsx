@@ -1,6 +1,6 @@
 import type {NestedOptions} from 'app/types/form'
 
-export const ProfileSkills = ({value}: {value: NestedOptions}): JSX.Element => {
+export const UserSkills = ({value}: {value: NestedOptions}): JSX.Element => {
   return (
     <li className='text-red-600'>
       {value &&
