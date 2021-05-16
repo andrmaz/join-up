@@ -52,7 +52,7 @@ const ConfirmDialog = ({
         }, 3000)
         setIsSuccess(true)
         setSuccessMessage(response.data.message)
-        return response.data.message
+        return
       }
     } catch (error) {
       Promise.reject(error)

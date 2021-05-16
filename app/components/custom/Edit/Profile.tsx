@@ -1,17 +1,21 @@
 import * as React from 'react'
 import axios from 'axios'
+
 import {useRouter} from 'next/router'
 import {useForm} from 'react-hook-form'
-import {edit} from '@actions/authActions'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {useAuthState} from '@hooks/auth/useAuthState'
+
+import {edit} from '@actions/authActions'
+
 import FormInput from '@components/form/Input/Form'
 import LangSelect from '@components/form/Select/Lang'
 import TechSelect from '@components/form/Select/Tech'
 import {SubmitButton} from '@components/form/Button/Submit'
 import Textarea from '@components/form/Textarea/Textarea'
-import type {IUserContext} from 'app/types/user'
 import CancelButton from '@components/form/Button/Cancel'
+
+import type {IUserContext} from 'app/types/user'
 import type {SelectOptions} from 'app/types/form'
 
 const Profile = ({token}: {token: string}): JSX.Element => {
@@ -76,7 +80,7 @@ const Profile = ({token}: {token: string}): JSX.Element => {
   }, [token])
   const router = useRouter()
   const dispatch = useAuthDispatch()
-  const onSubmit = async (data: IUserContext): Promise<any> => {
+  const onSubmit = async (data: IUserContext): Promise<unknown> => {
     try {
       const response = await axios.patch(
         '/user',

@@ -14,7 +14,9 @@ import {parseCookies} from '@utils/parseCookies'
 import Container from '@components/containers/Container/Container'
 import Menu from '@components/navigation/Menu/Menu'
 import Panel from '@components/navigation/Tablist/Panel'
+
 import Profile from '@components/custom/Edit/Profile'
+import Username from '@components/custom/Edit/Username'
 
 const Settings: NextPage = ({
   token,
@@ -35,7 +37,7 @@ const Settings: NextPage = ({
                 <Profile token={token} />
               </Panel>
               <Panel index={1} isSelectedTab={selectedTab === 1}>
-                <span>Edit Username</span>
+                <Username token={token} />
               </Panel>
               <Panel index={2} isSelectedTab={selectedTab === 2}>
                 <span>Edit Email</span>
