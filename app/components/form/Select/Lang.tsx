@@ -1,3 +1,4 @@
+import * as React from 'react'
 import Select from 'react-select'
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@components/alerts/Message/Error'
@@ -13,7 +14,7 @@ const LangSelect = ({
   defaultValue,
 }: IFormSelect): React.ReactElement => {
   return (
-    <>
+    <React.Fragment>
       <label id='languages' htmlFor='languages'>
         Languages :
       </label>
@@ -57,8 +58,8 @@ const LangSelect = ({
       {errors?.languages && (
         <ErrorMessage>{errors?.languages?.message}</ErrorMessage>
       )}
-    </>
+    </React.Fragment>
   )
 }
 
-export default LangSelect
+export default React.memo(LangSelect)

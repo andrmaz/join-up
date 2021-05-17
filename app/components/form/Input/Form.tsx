@@ -32,4 +32,4 @@ const FormInput = ({
   )
 }
 
-export default FormInput
+export default React.memo(FormInput)
