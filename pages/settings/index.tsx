@@ -1,4 +1,5 @@
 import * as React from 'react'
+import dynamic from 'next/dynamic'
 import {
   NextPage,
   GetServerSideProps,
@@ -16,9 +17,9 @@ import Menu from '@components/navigation/Menu/Menu'
 import Panel from '@components/navigation/Tablist/Panel'
 
 import Profile from '@components/custom/Edit/Profile'
-import Username from '@components/custom/Edit/Username'
-import Email from '@components/custom/Edit/Email'
-import Password from '@components/custom/Edit/Password'
+const Username = dynamic(() => import('@components/custom/Edit/Username'))
+const Email = dynamic(() => import('@components/custom/Edit/Email'))
+const Password = dynamic(() => import('@components/custom/Edit/Password'))
 
 const Settings: NextPage = ({
   token,
@@ -35,22 +36,23 @@ const Settings: NextPage = ({
           <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
             <Menu selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
             <div className='w-200 h-auto border-2 border-solid rounded'>
-              <Panel index={0} isSelectedTab={selectedTab === 0}>
-                <Profile token={token} />
-              </Panel>
-              <Panel index={1} isSelectedTab={selectedTab === 1}>
-                <Username token={token} />
-              </Panel>
-              <Panel index={2} isSelectedTab={selectedTab === 2}>
-                <Email token={token} />
-              </Panel>
-              <Panel index={3} isSelectedTab={selectedTab === 3}>
-                <Password token={token} />
-              </Panel>
-              <Panel index={4} isSelectedTab={selectedTab === 4}>
+              <Profile
+                token={token}
+                isSelectedTab={Boolean(selectedTab === 0)}
+              />
+              <Username
+                token={token}
+                isSelectedTab={Boolean(selectedTab === 1)}
+              />
+              <Email token={token} isSelectedTab={Boolean(selectedTab === 2)} />
+              <Password
+                token={token}
+                isSelectedTab={Boolean(selectedTab === 3)}
+              />
+              <Panel index={4} isSelectedTab={Boolean(selectedTab === 4)}>
                 <span>Notifications</span>
               </Panel>
-              <Panel index={5} isSelectedTab={selectedTab === 5}>
+              <Panel index={5} isSelectedTab={Boolean(selectedTab === 5)}>
                 <span>Security Logs</span>
               </Panel>
             </div>
@@ -80,7 +82,7 @@ export const getServerSideProps: GetServerSideProps = async (
     }
   }
 
-  //* return user technologies
+  //* return user token
   return {
     props: {
       token,
