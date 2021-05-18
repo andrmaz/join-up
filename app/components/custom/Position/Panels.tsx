@@ -1,5 +1,5 @@
 import * as React from 'react'
-import PositionPanel from '@components/custom/Position/Panel'
+import PositionOverview from '@components/custom/Position/Overview'
 import type {IPosistionData} from 'app/types/position'
 
 const PositionPanels = ({
@@ -12,7 +12,7 @@ const PositionPanels = ({
   return (
     <main className='h-full w-full'>
       {positions.map((position, index) => (
-        <PositionPanel
+        <PositionOverview
           key={position.id}
           isSelectedTab={selectedTab === index}
           index={index}

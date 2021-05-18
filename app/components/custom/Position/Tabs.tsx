@@ -1,5 +1,5 @@
 import * as React from 'react'
-import PositionTab from '@components/custom/Position/Tab'
+import PositionPreview from '@components/custom/Position/Preview'
 import {useTabsKey} from '@hooks/tabs/useTabsKey'
 import type {IPosistionData} from 'app/types/position'
 
@@ -26,7 +26,7 @@ const PositionTabs = ({
         className='h-full'
       >
         {positions.map((position, index) => (
-          <PositionTab
+          <PositionPreview
             key={position.id}
             index={index}
             isSelectedTab={selectedTab === index}
