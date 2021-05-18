@@ -10,7 +10,7 @@ const PositionPanels = ({
   selectedTab: number
 }): React.ReactElement => {
   return (
-    <main className='h-full w-full'>
+    <main className='h-full w-full overflow-y-scroll'>
       {positions.map((position, index) => (
         <PositionOverview
           key={position.id}

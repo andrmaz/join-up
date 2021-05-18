@@ -19,6 +19,7 @@ export interface IPosistionData {
   role: string
   projectId: number
   userId: number
+  applicants: number
   createdAt: string
   updatedAt: string
 }
