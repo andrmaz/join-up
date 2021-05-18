@@ -2,7 +2,6 @@ const Panel = ({
   children,
   index,
   isSelectedTab,
-  ...className
 }: {
   children: React.ReactNode
   index: number
@@ -15,7 +14,6 @@ const Panel = ({
     aria-labelledby={`tab-${index}`}
     hidden={!isSelectedTab}
     className='h-full'
-    {...className}
   >
     {children}
   </section>

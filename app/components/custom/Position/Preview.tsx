@@ -1,7 +1,8 @@
 import * as React from 'react'
 import type {IPosistionData} from 'app/types/position'
+import Tab from '@components/navigation/Tablist/Tab'
 
-const PositionTab = ({
+const PositionPreview = ({
   index,
   isSelectedTab,
   setSelectedTab,
@@ -14,15 +15,11 @@ const PositionTab = ({
   tabRef: React.Ref<never>
   position: IPosistionData
 }): React.ReactElement => (
-  <button
-    role='tab'
-    aria-selected={isSelectedTab}
-    aria-controls={`panel-${index}`}
-    id={`tab-${index}`}
-    tabIndex={isSelectedTab ? 0 : -1}
-    ref={isSelectedTab ? tabRef : null}
-    onClick={() => setSelectedTab(index)}
-    className='w-full'
+  <Tab
+    isSelectedTab={isSelectedTab}
+    index={index}
+    tabRef={tabRef}
+    setSelectedTab={setSelectedTab}
   >
     <li className='h-28 p-1 mx-2 border-gray-300 border-2 rounded'>
       <header className='h-2/5'>
@@ -36,7 +33,7 @@ const PositionTab = ({
         <span className='text-xs'>Last update: {updatedAt.slice(0, 7)}</span>
       </article>
     </li>
-  </button>
+  </Tab>
 )
 
-export default React.memo(PositionTab)
+export default React.memo(PositionPreview)

@@ -6,8 +6,9 @@ import Portal from '@components/containers/Portal/Portal'
 import ConfirmDialog from '@components/containers/Dialog/Confirm'
 
 import type {IPosistionData} from 'app/types/position'
+import Panel from '@components/navigation/Tablist/Panel'
 
-const PositionPanel = ({
+const PositionOverview = ({
   isSelectedTab,
   index,
   position: {
@@ -15,12 +16,10 @@ const PositionPanel = ({
     title,
     description,
     technologies,
-    vacancies,
     level,
     role,
     userId,
-    createdAt,
-    updatedAt,
+    applicants,
   },
 }: {
   isSelectedTab: boolean
@@ -30,32 +29,24 @@ const PositionPanel = ({
   const {user} = useAuthState()
   const [showDialog, setShowDialog] = React.useState<boolean>(false)
   return (
-    <section
-      id={`panel-${index}`}
-      role='tabpanel'
-      tabIndex={0}
-      aria-labelledby={`tab-${index}`}
-      className='h-full w-full'
-      hidden={!isSelectedTab}
-    >
-      <div className='h-full w-full border-2 border-black p-2 rounded'>
-        <header className='h-1/10 w-full'>
+    <Panel index={index} isSelectedTab={isSelectedTab}>
+      <div className='h-auto w-full border-2 border-black p-2 rounded'>
+        <header className='h-16 w-full'>
           <h1 className='font-extrabold text-xl'>{title}</h1>
         </header>
-        <article className='h-4/5 flex flex-col justify-evenly text-lg'>
-          <span className='h-1/10'>Created at: {createdAt.slice(0, 7)}</span>
-          <span className='h-1/10'>Positions available: {vacancies}</span>
-          <span className='h-1/10'>Level: {level}</span>
-          <span className='h-1/10'>Role: {role}</span>
-          <p className='h-2/5'>{description.slice(0, 300)}</p>
-          <p className='h-1/5 text-red-400 break-words'>
-            {technologies?.toString()}
-          </p>
+        <article className='h-22 flex flex-col justify-evenly text-lg'>
+          <span className='h-1/2'>Level: {level}</span>
+          <span className='h-1/2'>Role: {role}</span>
         </article>
-        <aside className='h-1/10 flex justify-between'>
+        <main>
+          <p className='h-auto py-2'>{description}</p>
+        </main>
+        <article className='h-auto py-2'>
+          <p className='text-red-400 break-words'>{technologies?.toString()}</p>
+        </article>
+        <section className='h-1/10 flex justify-between'>
           <span>
-            Last update:
-            {updatedAt.slice(0, 7)}
+            {applicants > 0 && `This position has ${applicants} applicant/s`}
           </span>
           <div className='w-1/4'>
             {userId !== user?.id && (
@@ -64,7 +55,7 @@ const PositionPanel = ({
               </ActionButton>
             )}
           </div>
-        </aside>
+        </section>
         {showDialog && (
           <Portal>
             <ConfirmDialog
@@ -76,8 +67,8 @@ const PositionPanel = ({
           </Portal>
         )}
       </div>
-    </section>
+    </Panel>
   )
 }
 
-export default React.memo(PositionPanel)
+export default React.memo(PositionOverview)
