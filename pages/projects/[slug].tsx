@@ -26,11 +26,11 @@ const Slug: NextPage = ({
       </Head>
       <main className='h-92v'>
         <Wrapper>
-          <article className='w-full h-1/5'>
+          <article className='w-full h-2/6'>
             <ProjectOverview {...project} />
           </article>
           {project.hasPositions ? (
-            <article className='h-4/5 grid grid-cols-2 divide-x divide-black-500'>
+            <article className='h-4/6 grid grid-cols-2 divide-x divide-black-500'>
               <PositionTabs
                 positions={positions}
                 selectedTab={selectedTab}
