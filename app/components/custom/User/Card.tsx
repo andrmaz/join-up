@@ -1,14 +1,15 @@
 import {useAuthState} from '@hooks/auth/useAuthState'
-import {UserInfo} from '@components/custom/User/Info'
-import {UserSkills} from '@components/custom/User/Skills'
-import {UserLink} from '@components/custom/User/Link'
+import {FaUser, FaBitbucket, FaLinkedin} from 'react-icons/fa'
+import {FiGitlab} from 'react-icons/fi'
+import {GiOpenBook, GiTechnoHeart} from 'react-icons/gi'
+import {BsFillChatFill} from 'react-icons/bs'
+import {GrGithub} from 'react-icons/gr'
 
 const UserCard = (): JSX.Element => {
   const {user} = useAuthState()
   const {
     avatar,
     username,
-    email,
     bio,
     languages,
     technologies,
@@ -19,19 +20,70 @@ const UserCard = (): JSX.Element => {
   } = {...user}
   return (
     <section className='sticky top-44 h-70v p-1'>
-      <div className='h-3/6 flex items-end'>
-        <img className='h-4/5 rounded-full' src={avatar} alt='user' />
+      <div className='h-60 xl:h-72 w-60 xl:w-72 mb-10'>
+        <img
+          className='h-full w-full rounded-full object-cover'
+          src={avatar}
+          alt='user'
+        />
       </div>
-      <ul className='h-3/6 flex flex-col justify-around text-lg xl:text-xl'>
-        <UserInfo value={username} />
-        <UserInfo value={email} />
-        <UserInfo value={bio} />
-        <UserSkills value={languages} />
-        <UserSkills value={technologies} />
-        <UserLink value={bitbucketURL} />
-        <UserLink value={githubURL} />
-        <UserLink value={gitlabURL} />
-        <UserLink value={linkedinURL} />
+      <ul className='h-auto w-full flex flex-col justify-around text-lg xl:text-xl'>
+        <li className='flex py-1 my-1'>
+          <FaUser className='mr-1' />
+          <span className='font-bold truncate'>{username}</span>
+        </li>
+        <li className='flex py-1 my-1'>
+          <GiOpenBook className='mr-1' />
+          <span className='font-bold truncate'>{bio}</span>
+        </li>
+        <li className='flex py-1 my-1'>
+          <BsFillChatFill className='mr-1' />
+          <span className='text-red-600 truncate'>
+            {languages?.map(v => `${v.label} `)}
+          </span>
+        </li>
+        <li className='flex py-1 my-1'>
+          <GiTechnoHeart className='mr-1' />
+          <span className='text-red-600 truncate'>
+            {technologies?.map(v => `${v.label} `)}
+          </span>
+        </li>
+
+        {bitbucketURL && (
+          <li className='flex py-1 my-1'>
+            <FaBitbucket className='mr-1' />
+            <a href={bitbucketURL} className='text-blue-600 truncate'>
+              {bitbucketURL}
+            </a>
+          </li>
+        )}
+
+        {githubURL && (
+          <li className='flex py-1 my-1'>
+            <GrGithub className='mr-1' />
+            <a href={githubURL} className='text-blue-600 truncate'>
+              {githubURL}
+            </a>
+          </li>
+        )}
+
+        {gitlabURL && (
+          <li className='flex py-1 my-1'>
+            <FiGitlab className='mr-1' />
+            <a href={gitlabURL} className='text-blue-600 truncate'>
+              {gitlabURL}
+            </a>
+          </li>
+        )}
+
+        {linkedinURL && (
+          <li className='flex py-1 my-1'>
+            <FaLinkedin className='mr-1' />
+            <a href={linkedinURL} className='text-blue-600 truncate'>
+              {linkedinURL}
+            </a>
+          </li>
+        )}
       </ul>
     </section>
   )
