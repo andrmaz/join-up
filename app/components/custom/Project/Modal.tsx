@@ -2,6 +2,8 @@ import * as React from 'react'
 import axios from 'axios'
 
 import {useForm} from 'react-hook-form'
+import {useCookies} from 'react-cookie'
+import {useRouter} from 'next/router'
 import useRefCallback from '@hooks/ref/useRefCallback'
 
 import Portal from '@components/containers/Portal/Portal'
@@ -17,12 +19,16 @@ import {IProjectData} from 'app/types/project'
 const ProjectModal = ({
   showModal,
   setShowModal,
-  project: {name, description, technologies, collaborators, projectURL},
+  project: {id, name, description, technologies, collaborators, projectURL},
 }: {
   showModal: boolean
   setShowModal: (state: boolean) => void
   project: IProjectData
 }): React.ReactElement => {
+  const router = useRouter()
+  //* Get user token from session cookie
+  const [cookies] = useCookies(['session'])
+  const {session: token} = cookies
   const [options, setOptions] = React.useState<SelectOptions[] | undefined>()
   //* Set technologies options to State as soon as the modal is shown
   React.useEffect(() => {
@@ -42,6 +48,7 @@ const ProjectModal = ({
     setValue,
     reset,
   } = useForm<IProjectData>()
+  //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
@@ -49,7 +56,30 @@ const ProjectModal = ({
     reset()
     setShowModal(false)
   }
-  const onSubmit = (data: IProjectData): void => console.dir(data)
+  const onSubmit = async (data: IProjectData): Promise<any> => {
+    console.dir(data)
+    try {
+      const response = await axios.patch(
+        `/project/${id}`,
+        {
+          project: data,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      if (response.status === 200) {
+        console.info(response.data.message)
+        setShowModal(false)
+        router.push('/profile')
+        return response
+      }
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
   return (
     <React.Fragment>
       {showModal && (
@@ -121,7 +151,7 @@ const ProjectModal = ({
                 />
                 <div className='h-1/6 flex flex-col mb-6'>
                   <TechSelect
-                    options={options || []}
+                    options={options!}
                     control={control}
                     defaultValues={technologies}
                     defaultValue={technologies}
@@ -137,7 +167,9 @@ const ProjectModal = ({
                   id='projectURL'
                   name='projectURL'
                   label='Url'
-                  placeholder={projectURL || ''}
+                  placeholder={
+                    projectURL || 'Connect this project to an existing one'
+                  }
                   defaultValue={projectURL}
                   register={register({
                     pattern: {
