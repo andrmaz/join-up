@@ -45,8 +45,10 @@ const PositionOverview = ({
           <p className='text-red-400 break-words'>{technologies?.toString()}</p>
         </article>
         <section className='h-1/10 flex justify-between'>
-          <span>
-            {applicants > 0 && `This position has ${applicants} applicant/s`}
+          <span className='text-xs'>
+            {applicants > 0
+              ? `This position has ${applicants} applicant/s`
+              : userId !== user?.id && 'Be the first to apply this position'}
           </span>
           <div className='w-1/4'>
             {userId !== user?.id && (

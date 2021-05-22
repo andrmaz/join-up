@@ -1,4 +1,5 @@
 import {NestedValue} from 'react-hook-form'
+import {IUserContext} from 'app/types/user'
 
 // refer to https://github.com/react-hook-form/react-hook-form/issues/987
 export type NestedStrings = NestedValue<string[]>
@@ -16,11 +17,10 @@ export interface IProjectData {
   id: string
   name: string
   description?: string
-  technologies: string[]
+  technologies: NestedValue<SelectOptions[]>
   projectURL?: string
   owner: number
-  //TODO check type of collaborator
-  collaborators: Array<string>
+  collaborators: Array<IUserContext>
   hasPositions: boolean
   createdAt: string
   updatedAt: string
