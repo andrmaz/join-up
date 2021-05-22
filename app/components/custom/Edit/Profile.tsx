@@ -151,15 +151,15 @@ const Profile = ({token, isSelectedTab}: SettingPanelProps): JSX.Element => {
                 />
               </div>
             </div>
-            <div className='w-2/5'>
-              <div className='h-3/4 lg:mt-8'>
+            <section className='w-2/5'>
+              <div className='h-52 xl:h-60 w-52 xl:w-60 my-auto'>
                 <img
-                  className='h-full rounded-full ml-auto'
+                  className='w-full h-full m-auto rounded-full object-cover'
                   src={avatar}
-                  alt='profile'
+                  alt='user'
                 />
               </div>
-            </div>
+            </section>
           </div>
           <div className='flex flex-col p-0.5'>
             <LangSelect

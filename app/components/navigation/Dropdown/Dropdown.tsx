@@ -27,11 +27,11 @@ export function Dropdown(): JSX.Element {
   return (
     <nav role='navigation' className='w-1/6' ref={ref}>
       <button className='flex-initial' onClick={toggleVisibility}>
-        <div className='w-full h-full'>
+        <div className='w-8 h-8'>
           <img
-            className='m-auto rounded-full'
+            className='w-full h-full m-auto rounded-full object-cover'
             src={user?.avatar}
-            alt='Profile'
+            alt='user'
           />
         </div>
       </button>

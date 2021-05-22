@@ -18,9 +18,9 @@ import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
 import TechSelect from '@components/form/Select/Tech'
 import {SubmitButton} from '@components/form/Button/Submit'
+import CancelButton from '@components/form/Button/Cancel'
 
 import type {IProjectInput} from 'app/types/project'
-import CancelButton from '@components/form/Button/Cancel'
 
 const Project: NextPage = ({
   technologies,
@@ -71,7 +71,7 @@ const Project: NextPage = ({
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='h-92v flex justify-center items-center'>
-        <article className='w-3/5 xl:w-1/2 h-4/5 p-4 border rounded xl:px-12'>
+        <article className='w-3/5 xl:w-1/2 h-4/5 p-4 xl:px-12 rounded border-black border-2 shadow-2xl'>
           <header className='h-1/6'>
             <h1 className='h-2/3 text-3xl'>Create a new project</h1>
             <span>
@@ -85,8 +85,12 @@ const Project: NextPage = ({
             <div className='h-1/6 flex flex-col justify-evenly'>
               <label htmlFor='owner'>Owner: </label>
               <div className='flex flex-row'>
-                <div className='h-full pr-1'>
-                  <img src={avatar} alt='user' className='w-6 rounded-full' />
+                <div className='h-6 w-6 pr-1'>
+                  <img
+                    src={avatar}
+                    alt='user'
+                    className='w-full h-full m-auto rounded-full object-cover'
+                  />
                 </div>
                 <select
                   id='owner'
