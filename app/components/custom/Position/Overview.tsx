@@ -1,12 +1,14 @@
 import * as React from 'react'
+import dynamic from 'next/dynamic'
 import {useAuthState} from '@hooks/auth/useAuthState'
 
 import {ActionButton} from '@components/form/Button/Action'
-import Portal from '@components/containers/Portal/Portal'
-import ConfirmDialog from '@components/containers/Dialog/Confirm'
+import Panel from '@components/navigation/Tablist/Panel'
+const ConfirmDialog = dynamic(
+  () => import('@components/containers/Dialog/Confirmation')
+)
 
 import type {IPosistionData} from 'app/types/position'
-import Panel from '@components/navigation/Tablist/Panel'
 
 const PositionOverview = ({
   isSelectedTab,
@@ -58,16 +60,13 @@ const PositionOverview = ({
             )}
           </div>
         </section>
-        {showDialog && (
-          <Portal>
-            <ConfirmDialog
-              uid={id}
-              title='Please confirm your application'
-              message='Are you sure you want to apply to this position?'
-              setShowDialog={setShowDialog}
-            />
-          </Portal>
-        )}
+        <ConfirmDialog
+          uid={id}
+          title='Please confirm your application'
+          message='Are you sure you want to apply to this position?'
+          showDialog={showDialog}
+          setShowDialog={setShowDialog}
+        />
       </div>
     </Panel>
   )
