@@ -13,7 +13,7 @@ const ProjectsList = ({
       {projects.length ? (
         <ul className='flex flex-col'>
           {projects.map((project: IProjectData) => (
-            <ProjectPreview key={project.id} {...project} />
+            <ProjectPreview key={project.id} project={project} />
           ))}
         </ul>
       ) : (

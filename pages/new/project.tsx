@@ -110,6 +110,11 @@ const Project: NextPage = ({
               placeholder='Give a unique and memorable name to your project'
               register={register({
                 required: 'project name is required',
+                minLength: {
+                  value: 3,
+                  message: 'please provide a longer name',
+                },
+                maxLength: 255,
               })}
               errors={errors}
             />
@@ -119,8 +124,15 @@ const Project: NextPage = ({
               name='description'
               label='Description'
               placeholder='Consider providing a short description'
-              register={register}
-              optional
+              register={register({
+                required: 'project description is required',
+                minLength: {
+                  value: 10,
+                  message: 'please provide a longer description',
+                },
+                maxLength: 65535,
+              })}
+              errors={errors}
             />
             <div className='h-1/6 flex flex-col mb-6'>
               <TechSelect
@@ -150,7 +162,9 @@ const Project: NextPage = ({
                 <SubmitButton
                   value='Create'
                   bgColor='green-600'
-                  errors={Boolean(errors.name || errors.technologies)}
+                  errors={Boolean(
+                    errors.name || errors.description || errors.technologies
+                  )}
                 />
               </div>
               <CancelButton onClickAction={() => router.push('/')} />

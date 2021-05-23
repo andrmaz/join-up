@@ -28,7 +28,7 @@ const ProjectCard = ({
       </article>
       <aside className='h-2/6 w-full pt-2 overflow-hidden'>
         <span className='text-xs break-words text-red-400'>
-          {technologies.toString()}
+          {technologies?.map(technology => `${technology.label},`)}
         </span>
       </aside>
     </div>

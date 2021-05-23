@@ -3,6 +3,8 @@ import {useRouter} from 'next/router'
 
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
+import useRefCallback from '@hooks/ref/useRefCallback'
+
 import axios from 'axios'
 
 import Portal from '@components/containers/Portal/Portal'
@@ -16,8 +18,6 @@ import DefaultSelect from '@components/form/Select/Default'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 import CloseModalButton from '@components/form/Button/Close'
-
-import useRefCallback from '@hooks/ref/useRefCallback'
 
 import type {SelectOptions} from 'app/types/form'
 import type {IPositionInput} from 'app/types/position'
@@ -95,8 +95,10 @@ const PositionModal = ({
           },
         }
       )
-      router.push('/profile')
-      return response
+      if (response.status === 201) {
+        router.push('/profile')
+        return response
+      }
     } catch (error) {
       Promise.reject(error)
     }
