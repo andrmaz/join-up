@@ -57,10 +57,11 @@ export type FormButton = {
 export type SaveButton = {
   children?: string
   errors?: boolean
+  bgColor?: string
   onClickAction?: () => void
 }
 
 export type CloseDialogButton = {
   onClickAction: () => void
-  focusRef: React.Ref<T>
+  focusRef?: React.Ref<T>
 }

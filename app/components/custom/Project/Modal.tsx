@@ -3,7 +3,6 @@ import axios from 'axios'
 
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
-import {useRouter} from 'next/router'
 import useRefCallback from '@hooks/ref/useRefCallback'
 
 import Portal from '@components/containers/Portal/Portal'
@@ -25,7 +24,6 @@ const ProjectModal = ({
   setShowModal: (state: boolean) => void
   project: IProjectData
 }): React.ReactElement => {
-  const router = useRouter()
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
@@ -73,7 +71,6 @@ const ProjectModal = ({
       if (response.status === 200) {
         console.info(response.data.message)
         setShowModal(false)
-        router.push('/profile')
         return response
       }
     } catch (error) {
