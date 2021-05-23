@@ -1,5 +1,4 @@
 import * as React from 'react'
-import {useRouter} from 'next/router'
 
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
@@ -80,7 +79,6 @@ const PositionModal = ({
     reset()
     setShowModal(false)
   }
-  const router = useRouter()
   const onSubmit = async (data: IPositionInput): Promise<any> => {
     data.projectId = id.current
     try {
@@ -96,7 +94,7 @@ const PositionModal = ({
         }
       )
       if (response.status === 201) {
-        router.push('/profile')
+        setShowModal(false)
         return response
       }
     } catch (error) {
