@@ -1,6 +1,6 @@
 import * as React from 'react'
-import type {IPosistionData} from 'app/types/position'
 import Tab from '@components/navigation/Tablist/Tab'
+import type {IPosistionData} from 'app/types/position'
 
 const PositionPreview = ({
   index,

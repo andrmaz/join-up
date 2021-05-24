@@ -1,30 +1,32 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import * as React from 'react'
+import axios from 'axios'
 
 import {useCookies} from 'react-cookie'
-
 import useRefCallback from '@hooks/ref/useRefCallback'
 
 import Portal from '@components/containers/Portal/Portal'
 import CancelButton from '@components/form/Button/Cancel'
 import {ConfirmButton} from '@components/form/Button/Confirm'
 import CloseButton from '@components/form/Button/Close'
+import SnackBar from '@components/notifications/SnackBar/SnackBar'
 
-import axios from 'axios'
-
-const AlertDialog = ({
-  id,
+const ConfirmDialog = ({
+  uid,
   title = 'Confirm your choice',
   message,
   showDialog,
   setShowDialog,
 }: {
-  id: string
+  uid: number
   title?: string
   message: string
   showDialog: boolean
   setShowDialog: (state: boolean) => void
 }): JSX.Element => {
+  //* Toast Component Status
+  const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
+  const [successMessage, setSuccessMessage] = React.useState<string>('')
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
@@ -34,12 +36,20 @@ const AlertDialog = ({
   const [setRef] = useRefCallback()
   const handleConfirm = async (): Promise<any> => {
     try {
-      const response = await axios.delete(`/project/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.post(
+        '/application',
+        {
+          position: uid,
         },
-      })
-      if (response.status === 200) {
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      if (response.status === 201) {
+        setIsSuccess(true)
+        setSuccessMessage(response.data.message)
         setShowDialog(false)
         return
       }
@@ -47,6 +57,14 @@ const AlertDialog = ({
       Promise.reject(error)
     }
   }
+  if (isSuccess)
+    return (
+      <SnackBar
+        color='green'
+        message={successMessage}
+        onClose={() => setIsSuccess(false)}
+      />
+    )
   return (
     <React.Fragment>
       {showDialog && (
@@ -62,7 +80,7 @@ const AlertDialog = ({
               aria-labelledby='dialog_label'
               aria-modal={true}
               aria-describedby='dialog_label'
-              className='fixed h-1/6 w-2/4 top-1/4 right-1/4 bg-white border-red-600 border-2 rounded p-4'
+              className='fixed h-1/6 w-2/4 top-1/4 right-1/4 bg-white border-black border-2 rounded p-4'
             >
               <div className='h-full w-full'>
                 <div className='w-full h-2/3'>
@@ -71,7 +89,7 @@ const AlertDialog = ({
                       id='dialog_label'
                       tabIndex={-1}
                       ref={setRef}
-                      className='h-1/2 focus:ring-2 focus:ring-yellow-600 text-xl font-bold'
+                      className='h-1/2 focus:ring-2 focus:ring-yellow-600 text-xl'
                     >
                       {title}
                     </h2>
@@ -85,7 +103,7 @@ const AlertDialog = ({
                   </span>
                 </div>
                 <div className='w-full h-1/3 flex'>
-                  <ConfirmButton bgColor='red' onClickAction={handleConfirm}>
+                  <ConfirmButton onClickAction={handleConfirm}>
                     Confirm
                   </ConfirmButton>
                   <CancelButton
@@ -102,4 +120,4 @@ const AlertDialog = ({
   )
 }
 
-export default AlertDialog
+export default ConfirmDialog

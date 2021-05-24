@@ -19,3 +19,8 @@ export type DrawerInputsProps = {
   register: (Ref: any) => void
   isPending: boolean
 }
+
+export type SettingPanelProps = {
+  token: string
+  isSelectedTab: boolean
+}

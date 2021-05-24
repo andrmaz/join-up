@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Select from 'react-select'
 import {Controller} from 'react-hook-form'
-import ErrorMessage from '@components/alerts/Message/Error'
+import ErrorMessage from '@components/notifications/Message/Error'
 import type {IFormSelect, SelectOptions} from 'app/types/form'
 
 const TechSelect = ({

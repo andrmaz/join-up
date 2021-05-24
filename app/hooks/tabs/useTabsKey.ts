@@ -11,7 +11,7 @@ export const useTabsKey = (
     tabRef.current?.focus()
   }, [state])
 
-  //*** Credits https://dev.to/eevajonnapanula/keyboard-accessible-tabs-with-react-5ch4 */
+  //*** https://dev.to/eevajonnapanula/keyboard-accessible-tabs-with-react-5ch4 */
   //* helper function to handle focusing the correct tab
   /** * @param firstTabInRound The number of the tab that is "first" in the round */
   /** * @param nextTab The tab where the focus should go next if the selected tab is not the last in the round */

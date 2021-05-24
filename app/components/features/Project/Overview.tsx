@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useAuthState} from '@hooks/auth/useAuthState'
-import PositionModal from '@components/custom/Position/Modal'
+import PositionModal from '@components/features/Add/Position'
 import {ActionButton} from '@components/form/Button/Action'
 import type {IProjectData} from 'app/types/project'
 

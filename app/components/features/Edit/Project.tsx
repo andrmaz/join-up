@@ -13,9 +13,9 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
 import type {SelectOptions} from 'app/types/form'
-import {IProjectData} from 'app/types/project'
+import type {IProjectData} from 'app/types/project'
 
-const ProjectModal = ({
+const EditProject = ({
   showModal,
   setShowModal,
   project: {id, name, description, technologies, collaborators, projectURL},
@@ -201,4 +201,4 @@ const ProjectModal = ({
   )
 }
 
-export default ProjectModal
+export default EditProject

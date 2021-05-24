@@ -16,10 +16,10 @@ import Container from '@components/containers/Container/Container'
 import Menu from '@components/navigation/Menu/Menu'
 import Panel from '@components/navigation/Tablist/Panel'
 
-import Profile from '@components/custom/Edit/Profile'
-const Username = dynamic(() => import('@components/custom/Edit/Username'))
-const Email = dynamic(() => import('@components/custom/Edit/Email'))
-const Password = dynamic(() => import('@components/custom/Edit/Password'))
+import EditProfile from '@components/features/Edit/Profile'
+const EditUsername = dynamic(() => import('@components/features/Edit/Username'))
+const EditEmail = dynamic(() => import('@components/features/Edit/Email'))
+const EditPassword = dynamic(() => import('@components/features/Edit/Password'))
 
 const Settings: NextPage = ({
   token,
@@ -36,16 +36,19 @@ const Settings: NextPage = ({
           <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
             <Menu selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
             <div className='w-200 h-auto border-2 border-solid rounded'>
-              <Profile
+              <EditProfile
                 token={token}
                 isSelectedTab={Boolean(selectedTab === 0)}
               />
-              <Username
+              <EditUsername
                 token={token}
                 isSelectedTab={Boolean(selectedTab === 1)}
               />
-              <Email token={token} isSelectedTab={Boolean(selectedTab === 2)} />
-              <Password
+              <EditEmail
+                token={token}
+                isSelectedTab={Boolean(selectedTab === 2)}
+              />
+              <EditPassword
                 token={token}
                 isSelectedTab={Boolean(selectedTab === 3)}
               />

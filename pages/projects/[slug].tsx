@@ -8,10 +8,10 @@ import {Params} from 'next/dist/next-server/server/router'
 
 import Container from '@components/containers/Container/Container'
 import Wrapper from '@components/containers/Wrapper/Wrapper'
-import ProjectOverview from '@components/custom/Project/Overview'
-import PositionTabs from '@components/custom/Position/Tabs'
-import PositionPanels from '@components/custom/Position/Panels'
-import {EmptyMessage} from '@components/alerts/Message/Empty'
+import ProjectOverview from '@components/features/Project/Overview'
+import PositionTabs from '@components/features/Position/Tabs'
+import PositionPanels from '@components/features/Position/Panels'
+import {EmptyMessage} from '@components/notifications/Message/Empty'
 
 const Slug: NextPage = ({
   project,

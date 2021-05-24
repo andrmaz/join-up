@@ -14,7 +14,7 @@ import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
 import {parseCookies} from '@utils/parseCookies'
 
 import Container from '@components/containers/Container/Container'
-import ProjectsGrid from '@components/custom/Project/Grid'
+import ProjectsGrid from '@components/features/Project/Grid'
 import Drawer from '@components/navigation/Drawer/Drawer'
 
 const Projects: NextPage = ({

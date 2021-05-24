@@ -4,7 +4,7 @@ import {DateSelect} from '@components/form/Select/Date'
 import {RadioInput} from '@components/form/Input/Radio'
 import {CheckboxInput} from '@components/form/Input/Checkbox'
 
-import {IDrawerProps} from 'app/types/drawer'
+import {IDrawerProps} from 'app/types/navigation'
 
 const ProjectDrawer = ({
   register,

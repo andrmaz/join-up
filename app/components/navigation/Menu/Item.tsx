@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import Tab from '@components/navigation/Tablist/Tab'
 
 const Item = ({

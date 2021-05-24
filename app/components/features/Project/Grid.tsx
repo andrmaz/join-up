@@ -1,6 +1,6 @@
 import * as React from 'react'
-import ProjectCard from '@components/custom/Project/Card'
-import type {AsyncData} from 'app/types/async'
+import ProjectCard from '@components/features/Project/Card'
+import type {AsyncData} from 'app/types/project'
 import type {IProjectData} from 'app/types/project'
 
 const ProjectsGrid = ({
