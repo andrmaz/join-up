@@ -5,9 +5,9 @@ import Link from 'next/link'
 import {FiEdit2} from 'react-icons/fi'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 
-const ProjectModal = dynamic(() => import('@components/custom/Project/Modal'))
+const ProjectModal = dynamic(() => import('@components/features/Edit/Project'))
 const DeleteDialog = dynamic(
-  () => import('@components/containers/Dialog/Alert')
+  () => import('@components/notifications/Dialog/Alert')
 )
 
 import type {IProjectData} from 'app/types/project'

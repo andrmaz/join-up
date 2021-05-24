@@ -9,10 +9,13 @@ import FormInput from '@components/form/Input/Form'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
-import type {SettingPanelProps} from 'app/types/tablist'
+import type {SettingPanelProps} from 'app/types/navigation'
 import type {IEditPassword} from 'app/types/edit'
 
-const Password = ({token, isSelectedTab}: SettingPanelProps): JSX.Element => {
+const EditPassword = ({
+  token,
+  isSelectedTab,
+}: SettingPanelProps): JSX.Element => {
   const {handleSubmit, register, errors, watch} = useForm<IEditPassword>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
@@ -114,4 +117,4 @@ const Password = ({token, isSelectedTab}: SettingPanelProps): JSX.Element => {
   )
 }
 
-export default React.memo(Password)
+export default React.memo(EditPassword)

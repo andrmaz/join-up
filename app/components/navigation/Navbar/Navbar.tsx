@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
-import {Dropdown} from '@components/navigation/Dropdown/Dropdown'
 import {useAuthState} from '@hooks/auth/useAuthState'
+import {Dropdown} from '@components/navigation/Dropdown/Dropdown'
 
 const Navbar = (): JSX.Element => {
   const {user} = useAuthState()

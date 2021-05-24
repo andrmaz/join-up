@@ -1,4 +1,4 @@
-import type {AsyncState, AsyncActions} from 'app/types/async'
+import type {AsyncState, AsyncActions} from 'app/types/project'
 
 export function asyncReducer(
   state: AsyncState,

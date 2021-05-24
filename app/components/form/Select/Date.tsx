@@ -1,4 +1,4 @@
-import {DrawerInputsProps} from 'app/types/drawer'
+import {DrawerInputsProps} from 'app/types/navigation'
 
 export const DateSelect = ({
   register,

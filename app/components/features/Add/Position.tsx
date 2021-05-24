@@ -21,7 +21,7 @@ import CloseModalButton from '@components/form/Button/Close'
 import type {SelectOptions} from 'app/types/form'
 import type {IPositionInput} from 'app/types/position'
 
-const PositionModal = ({
+const AddPosition = ({
   showModal,
   setShowModal,
 }: {
@@ -217,4 +217,4 @@ const PositionModal = ({
   )
 }
 
-export default PositionModal
+export default AddPosition

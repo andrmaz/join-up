@@ -16,11 +16,14 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import Textarea from '@components/form/Textarea/Textarea'
 import CancelButton from '@components/form/Button/Cancel'
 
-import type {SettingPanelProps} from 'app/types/tablist'
+import type {SettingPanelProps} from 'app/types/navigation'
 import type {IUserContext} from 'app/types/user'
 import type {SelectOptions} from 'app/types/form'
 
-const Profile = ({token, isSelectedTab}: SettingPanelProps): JSX.Element => {
+const EditProfile = ({
+  token,
+  isSelectedTab,
+}: SettingPanelProps): JSX.Element => {
   const [techOptions, setTechOptions] = React.useState<
     SelectOptions[] | undefined
   >()
@@ -198,4 +201,4 @@ const Profile = ({token, isSelectedTab}: SettingPanelProps): JSX.Element => {
   )
 }
 
-export default React.memo(Profile)
+export default React.memo(EditProfile)

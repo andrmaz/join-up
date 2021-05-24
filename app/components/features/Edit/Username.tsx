@@ -13,13 +13,16 @@ import FormInput from '@components/form/Input/Form'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
-import type {SettingPanelProps} from 'app/types/tablist'
-import type {IEditEmail} from 'app/types/edit'
+import type {SettingPanelProps} from 'app/types/navigation'
+import type {IEditUsername} from 'app/types/edit'
 
-const Email = ({token, isSelectedTab}: SettingPanelProps): JSX.Element => {
+const EditUsername = ({
+  token,
+  isSelectedTab,
+}: SettingPanelProps): JSX.Element => {
   const dispatch = useAuthDispatch()
   const [, setCookie] = useCookies(['session'])
-  const {handleSubmit, register, errors} = useForm<IEditEmail>({
+  const {handleSubmit, register, errors} = useForm<IEditUsername>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: {},
@@ -30,10 +33,10 @@ const Email = ({token, isSelectedTab}: SettingPanelProps): JSX.Element => {
     shouldUnregister: true,
   })
   const router = useRouter()
-  const onSubmit = async (data: IEditEmail): Promise<unknown> => {
+  const onSubmit = async (data: IEditUsername): Promise<unknown> => {
     try {
       const response = await axios.patch(
-        '/user/email',
+        '/user/username',
         {user: data},
         {
           headers: {
@@ -59,31 +62,35 @@ const Email = ({token, isSelectedTab}: SettingPanelProps): JSX.Element => {
     }
   }
   return (
-    <Panel index={2} isSelectedTab={isSelectedTab}>
+    <Panel index={1} isSelectedTab={isSelectedTab}>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col h-auto justify-between p-1'
       >
-        <h2 className='text-2xl mb-4'>Change email</h2>
+        <h2 className='text-2xl mb-4'>Change username</h2>
         <article className='h-auto flex flex-col justify-evenly mb-8'>
           <FormInput
-            type='email'
-            id='email'
-            name='newEmail'
-            label='Email'
-            placeholder='please enter a new email'
+            type='text'
+            id='username'
+            name='newUsername'
+            label='Username'
+            placeholder='please enter a new username'
             register={register({
-              required: 'email is required',
-              pattern: {
-                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                message: 'please enter a valid email address',
+              required: 'username is required',
+              minLength: {
+                value: 3,
+                message: 'username must be at least 3 characters long',
+              },
+              maxLength: {
+                value: 20,
+                message: 'username must be at most 20 characters long',
               },
             })}
             errors={errors}
           />
           <FormInput
             type='password'
-            id='password-email'
+            id='password-username'
             name='password'
             label='Password'
             placeholder='please enter your password'
@@ -103,7 +110,7 @@ const Email = ({token, isSelectedTab}: SettingPanelProps): JSX.Element => {
             <SubmitButton
               value='Save'
               bgColor='green-600'
-              errors={Boolean(errors.newEmail || errors.password)}
+              errors={Boolean(errors.newUsername || errors.password)}
             />
           </div>
         </aside>
@@ -112,4 +119,4 @@ const Email = ({token, isSelectedTab}: SettingPanelProps): JSX.Element => {
   )
 }
 
-export default React.memo(Email)
+export default React.memo(EditUsername)
