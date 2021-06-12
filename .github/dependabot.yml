@@ -10,3 +10,12 @@ updates:
     # Check the npm registry for updates every day (weekdays)
     schedule:
       interval: "weekly"
+    commit-message:
+    # Prefix all commit messages with "npm"
+      prefix: "npm"
+    # Specify labels for npm pull requests
+    labels:
+      - "npm"
+      - "dependencies"
+    # Allow up to 10 open pull requests for pip dependencies
+    open-pull-requests-limit: 10
