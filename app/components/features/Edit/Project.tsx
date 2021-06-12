@@ -4,6 +4,7 @@ import axios from 'axios'
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
+import {useProjectContext} from '@hooks/project/useProjectContext'
 
 import Portal from '@components/containers/Portal/Portal'
 import CloseModalButton from '@components/form/Button/Close'
@@ -24,6 +25,7 @@ const EditProject = ({
   setShowModal: (state: boolean) => void
   project: IProjectData
 }): React.ReactElement => {
+  const {edit} = useProjectContext()
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
@@ -55,7 +57,6 @@ const EditProject = ({
     setShowModal(false)
   }
   const onSubmit = async (data: IProjectData): Promise<any> => {
-    console.dir(data)
     try {
       const response = await axios.patch(
         `/project/${id}`,
@@ -69,9 +70,9 @@ const EditProject = ({
         }
       )
       if (response.status === 200) {
-        console.info(response.data.message)
+        edit(response.data.project)
         setShowModal(false)
-        return response
+        return
       }
     } catch (error) {
       return Promise.reject(error)
