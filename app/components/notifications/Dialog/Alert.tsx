@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
+import {useProjectContext} from '@hooks/project/useProjectContext'
 
 import Portal from '@components/containers/Portal/Portal'
 import CancelButton from '@components/form/Button/Cancel'
@@ -23,6 +24,7 @@ const AlertDialog = ({
   showDialog: boolean
   setShowDialog: (state: boolean) => void
 }): JSX.Element => {
+  const {remove} = useProjectContext()
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
@@ -30,7 +32,7 @@ const AlertDialog = ({
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
-  const handleConfirm = async (): Promise<any> => {
+  const handleConfirm: () => Promise<undefined> = async () => {
     try {
       const response = await axios.delete(`/project/${id}`, {
         headers: {
@@ -39,10 +41,11 @@ const AlertDialog = ({
       })
       if (response.status === 200) {
         setShowDialog(false)
+        remove(response.data.project.id)
         return
       }
     } catch (error) {
-      Promise.reject(error)
+      return Promise.reject(error)
     }
   }
   return (

@@ -7,12 +7,13 @@ import {
 import Head from 'next/head'
 import {useRouter} from 'next/router'
 import {ParsedUrlQuery} from 'querystring'
-
 import axios from 'axios'
+
 import {useForm} from 'react-hook-form'
+import {useAuthState} from '@hooks/auth/useAuthState'
+import {useProjectContext} from '@hooks/project/useProjectContext'
 
 import {parseCookies} from '@utils/parseCookies'
-import {useAuthState} from '@hooks/auth/useAuthState'
 
 import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
@@ -27,6 +28,7 @@ const Project: NextPage = ({
   token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {user} = useAuthState()
+  const {add} = useProjectContext()
   const {avatar, username} = {...user}
   const {
     register,
@@ -34,6 +36,7 @@ const Project: NextPage = ({
     errors,
     control,
     setValue,
+    reset,
   } = useForm<IProjectInput>({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -58,10 +61,13 @@ const Project: NextPage = ({
           },
         }
       )
-      router.push('/')
-      return response
+      if (response.status === 201) {
+        add(response.data.project)
+        router.push('/profile')
+        return
+      }
     } catch (error) {
-      Promise.reject(error)
+      return Promise.reject(error)
     }
   }
   return (
@@ -167,7 +173,7 @@ const Project: NextPage = ({
                   )}
                 />
               </div>
-              <CancelButton onClickAction={() => router.push('/')} />
+              <CancelButton onClickAction={() => reset()} />
             </div>
           </form>
         </article>

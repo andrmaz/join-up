@@ -1,3 +1,4 @@
+import * as React from 'react'
 import {
   NextPage,
   GetServerSideProps,
@@ -5,10 +6,10 @@ import {
   InferGetServerSidePropsType,
 } from 'next'
 import Head from 'next/head'
-
-import {ParsedUrlQuery} from 'querystring'
 import axios from 'axios'
+import {ParsedUrlQuery} from 'node:querystring'
 
+import {useProjectContext} from '@hooks/project/useProjectContext'
 import {parseCookies} from '@utils/parseCookies'
 
 import Container from '@components/containers/Container/Container'
@@ -17,8 +18,27 @@ import UserCard from '@components/features/User/Card'
 import ProjectsList from '@components/features/Project/List'
 
 const Profile: NextPage = ({
-  projects,
+  token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const {projects, persist, clear} = useProjectContext()
+  React.useEffect(() => {
+    ;(async () => {
+      try {
+        const {
+          data: {projects},
+        } = await axios.get('/project/user', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        persist(projects)
+      } catch (error) {
+        return Promise.reject(error)
+      }
+    })()
+    //* Cleanup
+    return () => clear()
+  }, [clear, persist, token])
   return (
     <Container>
       <Head>
@@ -63,19 +83,8 @@ export const getServerSideProps: GetServerSideProps = async (
     }
   }
 
-  //* If there is a user,
-  const {
-    data: {projects},
-  } = await axios.get('/project/user', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-
-  //* return user projects
+  //* If there is a user, return session token
   return {
-    props: {
-      projects,
-    },
+    props: {token},
   }
 }
