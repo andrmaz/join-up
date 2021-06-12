@@ -15,7 +15,6 @@ updates:
       prefix: "npm"
     # Specify labels for npm pull requests
     labels:
-      - "npm"
       - "dependencies"
     # Allow up to 10 open pull requests for pip dependencies
     open-pull-requests-limit: 10
