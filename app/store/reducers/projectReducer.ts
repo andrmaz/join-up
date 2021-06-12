@@ -45,7 +45,12 @@ export function projectReducer(
       //* State will be an empty Array
       projectsCopy = [...state.projects]
       //* create a fresh, new store instance on every request
-      updatedProjects = [...projectsCopy, ...action.payload]
+      updatedProjects = action.payload.concat(
+        //* Merging objects arrays without creating duplicate objects
+        projectsCopy.filter(({id}) => {
+          !action.payload.find(project => project.id === id)
+        })
+      )
       return {
         ...state,
         projects: updatedProjects,
