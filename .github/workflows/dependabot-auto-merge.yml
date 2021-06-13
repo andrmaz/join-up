@@ -1,7 +1,7 @@
 name: Dependabot Auto Merge
 
 on:
-  pull_request:
+  pull_request_target:
 
 jobs:
   worker:
@@ -24,4 +24,4 @@ jobs:
               repo: context.payload.repository.name,
               pull_number: context.payload.pull_request.number
             })
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.SECRET_TOKEN }}
