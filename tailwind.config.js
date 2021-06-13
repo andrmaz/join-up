@@ -42,7 +42,7 @@ module.exports = {
         18: '4.5rem',
       },
       minHeight: {
-       '1/2': '50%',
+        '1/2': '50%',
       },
     },
     screens: {
