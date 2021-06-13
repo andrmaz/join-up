@@ -68,7 +68,6 @@
 - Role _Tags_ -> _String_
 - Project -> _Id_
 
-
 ### **MMP Features**
 
 - Chat
