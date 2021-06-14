@@ -2,19 +2,20 @@ import * as React from 'react'
 
 import {useAuthReducer} from '@hooks/auth/useAuthReducer'
 import {login} from '@actions/authActions'
+import {UserState, UserActions} from 'app/types/user'
 
-export function useAuthProvider(): ReadonlyArray<any> {
+export function useAuthProvider(): [UserState, React.Dispatch<UserActions>] {
   const [state, dispatch, updateLocalStorage] = useAuthReducer()
 
   //* persist state on page refresh
   React.useEffect(() => {
     //* You now have access to `window`
-    const userInLocalStorage = window.localStorage.getItem('user')
-    userInLocalStorage && login(dispatch, JSON.parse(userInLocalStorage))
-    //* dispatch can be ignored since it comes from a reducer
-    //* dispatch must be ignored to ensure the effect will be called
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    const isSession = document.cookie.includes('session')
+    if (isSession) {
+      const userInLocalStorage = window.localStorage.getItem('user')
+      userInLocalStorage && login(dispatch, JSON.parse(userInLocalStorage))
+    }
+  }, [dispatch])
 
   //* and then pass the state along to the client until session cookie exists
   React.useEffect(() => {
@@ -22,5 +23,5 @@ export function useAuthProvider(): ReadonlyArray<any> {
     updateLocalStorage()
   }, [updateLocalStorage])
 
-  return [state, dispatch] as const
+  return [state, dispatch]
 }
