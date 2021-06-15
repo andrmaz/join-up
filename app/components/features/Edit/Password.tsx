@@ -1,13 +1,13 @@
 import * as React from 'react'
 import axios from 'axios'
 
-import {useRouter} from 'next/router'
 import {useForm} from 'react-hook-form'
 
 import Panel from '@components/navigation/Tablist/Panel'
 import FormInput from '@components/form/Input/Form'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
+import SnackBar from '@components/notifications/SnackBar/SnackBar'
 
 import type {SettingPanelProps} from 'app/types/navigation'
 import type {IEditPassword} from 'app/types/edit'
@@ -16,18 +16,21 @@ const EditPassword = ({
   token,
   isSelectedTab,
 }: SettingPanelProps): JSX.Element => {
-  const {handleSubmit, register, errors, watch} = useForm<IEditPassword>({
-    mode: 'onSubmit',
-    reValidateMode: 'onChange',
-    defaultValues: {},
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: 'firstError',
-    shouldFocusError: true,
-    shouldUnregister: true,
-  })
+  //* Toast Component Status
+  const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
+  const [successMessage, setSuccessMessage] = React.useState<string>('')
+  const handleClose = (): void => {
+    setIsSuccess(false)
+    setSuccessMessage('')
+  }
+  const {
+    handleSubmit,
+    register,
+    errors,
+    watch,
+    reset,
+  } = useForm<IEditPassword>()
   const watchPassword = watch('newPassword')
-  const router = useRouter()
   const onSubmit = async (data: IEditPassword): Promise<unknown> => {
     try {
       const response = await axios.patch(
@@ -40,7 +43,8 @@ const EditPassword = ({
         }
       )
       if (response.status === 200) {
-        router.push('/profile')
+        setIsSuccess(true)
+        setSuccessMessage(response.data.message)
         return
       }
     } catch (error) {
@@ -99,7 +103,7 @@ const EditPassword = ({
           />
         </article>
         <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
-          <CancelButton onClickAction={() => router.push('/profile')} />
+          <CancelButton onClickAction={() => reset()} />
           <div className='w-16 p-1'>
             <SubmitButton
               value='Save'
@@ -113,6 +117,13 @@ const EditPassword = ({
           </div>
         </aside>
       </form>
+      {isSuccess && (
+        <SnackBar
+          color='green'
+          message={successMessage}
+          onClose={handleClose}
+        />
+      )}
     </Panel>
   )
 }

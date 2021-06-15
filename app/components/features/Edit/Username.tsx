@@ -1,7 +1,6 @@
 import * as React from 'react'
 import axios from 'axios'
 
-import {useRouter} from 'next/router'
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
@@ -12,6 +11,7 @@ import Panel from '@components/navigation/Tablist/Panel'
 import FormInput from '@components/form/Input/Form'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
+import SnackBar from '@components/notifications/SnackBar/SnackBar'
 
 import type {SettingPanelProps} from 'app/types/navigation'
 import type {IEditUsername} from 'app/types/edit'
@@ -22,17 +22,14 @@ const EditUsername = ({
 }: SettingPanelProps): JSX.Element => {
   const dispatch = useAuthDispatch()
   const [, setCookie] = useCookies(['session'])
-  const {handleSubmit, register, errors} = useForm<IEditUsername>({
-    mode: 'onSubmit',
-    reValidateMode: 'onChange',
-    defaultValues: {},
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: 'firstError',
-    shouldFocusError: true,
-    shouldUnregister: true,
-  })
-  const router = useRouter()
+  //* Toast Component Status
+  const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
+  const [successMessage, setSuccessMessage] = React.useState<string>('')
+  const handleClose = (): void => {
+    setIsSuccess(false)
+    setSuccessMessage('')
+  }
+  const {handleSubmit, register, errors, reset} = useForm<IEditUsername>()
   const onSubmit = async (data: IEditUsername): Promise<unknown> => {
     try {
       const response = await axios.patch(
@@ -54,7 +51,8 @@ const EditUsername = ({
           //httpOnly: true,
           //secure: true,
         })
-        router.push('/profile')
+        setIsSuccess(true)
+        setSuccessMessage(response.data.message)
         return
       }
     } catch (error) {
@@ -105,7 +103,7 @@ const EditUsername = ({
           />
         </article>
         <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
-          <CancelButton onClickAction={() => router.push('/profile')} />
+          <CancelButton onClickAction={() => reset()} />
           <div className='w-16 p-1'>
             <SubmitButton
               value='Save'
@@ -115,6 +113,13 @@ const EditUsername = ({
           </div>
         </aside>
       </form>
+      {isSuccess && (
+        <SnackBar
+          color='green'
+          message={successMessage}
+          onClose={handleClose}
+        />
+      )}
     </Panel>
   )
 }
