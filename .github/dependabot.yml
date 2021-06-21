@@ -10,9 +10,9 @@ updates:
     # Check the npm registry for updates every day (weekdays)
     schedule:
       interval: 'daily'
-    allowed_updates:
-      - match:
-          update_type: "security"
+    ignore:
+      # use to ignore types of semver major version updates
+      update-types: ["version-update:semver-major"]
     commit-message:
       # Prefix all commit messages with "npm"
       prefix: 'npm'
