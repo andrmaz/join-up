@@ -7,7 +7,7 @@ import {
 } from 'next'
 import Head from 'next/head'
 import axios from 'axios'
-import {ParsedUrlQuery} from 'node:querystring'
+import {ParsedUrlQuery} from 'querystring'
 
 import {useProjectContext} from '@hooks/project/useProjectContext'
 import {parseCookies} from '@utils/parseCookies'

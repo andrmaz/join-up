@@ -26,14 +26,14 @@ export interface IProjectData {
   createdAt: string
   updatedAt: string
 }
-export type ProjectState = IProjectData[] | Array
-
 export type ProjectActions =
   | {type: 'add'; payload: IProjectData}
   | {type: 'remove'; payload: string}
   | {type: 'edit'; payload: IProjectData}
   | {type: 'persist'; payload: IProjectData[]}
   | {type: 'clear'}
+
+export type ProjectState = Array<IProjectData>
 
 export type ProjectContextType = {
   projects: ProjectState
