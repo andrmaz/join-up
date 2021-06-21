@@ -2,22 +2,27 @@ import * as React from 'react'
 import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
 import axios from 'axios'
-
-import {parseCookies} from '@utils/parseCookies'
 import {Params} from 'next/dist/next-server/server/router'
+
+import {useAuthState} from '@hooks/auth/useAuthState'
+import {parseCookies} from '@utils/parseCookies'
+import {usePositionReducer} from '@hooks/position/usePositionReducer'
 
 import Container from '@components/containers/Container/Container'
 import Wrapper from '@components/containers/Wrapper/Wrapper'
 import ProjectOverview from '@components/features/Project/Overview'
-import PositionTabs from '@components/features/Position/Tabs'
-import PositionPanels from '@components/features/Position/Panels'
 import {EmptyMessage} from '@components/notifications/Message/Empty'
+import PositionLayout from '@components/features/Position/Layout'
+import {ActionButton} from '@components/form/Button/Action'
+import AddPosition from '@components/features/Add/Position'
 
 const Slug: NextPage = ({
   project,
   positions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [selectedTab, setSelectedTab] = React.useState<number>(0)
+  const {user} = useAuthState()
+  const [state, dispatch] = usePositionReducer(positions)
+  const [showModal, setShowModal] = React.useState<boolean>(false)
   return (
     <Container>
       <Head>
@@ -27,21 +32,26 @@ const Slug: NextPage = ({
       <main className='h-92v'>
         <Wrapper>
           <article className='w-full h-2/6'>
+            <div className='absolute right-24 w-1/5'>
+              {user?.id === project.owner && (
+                <ActionButton tabIndex={0} action={() => setShowModal(true)}>
+                  Add a new position
+                </ActionButton>
+              )}
+            </div>
             <ProjectOverview {...project} />
           </article>
-          {project.hasPositions ? (
-            <article className='h-4/6 grid grid-cols-2 divide-x divide-black-500'>
-              <PositionTabs
-                positions={positions}
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
-              />
-              <PositionPanels positions={positions} selectedTab={selectedTab} />
-            </article>
+          {state.positions.length ? (
+            <PositionLayout positions={state.positions} dispatch={dispatch} />
           ) : (
             <EmptyMessage>This project has no posts available.</EmptyMessage>
           )}
         </Wrapper>
+        <AddPosition
+          showModal={showModal}
+          setShowModal={setShowModal}
+          dispatch={dispatch}
+        />
       </main>
     </Container>
   )
@@ -77,7 +87,7 @@ export const getServerSideProps: GetServerSideProps<Params> = async context => {
   })
 
   const {
-    data: {positions},
+    data: {positions: positions},
   } = await axios.get(`/position/project/${slug}`, {
     headers: {
       Authorization: `Bearer ${token}`,
