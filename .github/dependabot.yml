@@ -12,7 +12,8 @@ updates:
       interval: 'daily'
     ignore:
       # use to ignore types of semver major version updates
-      - update-types: ["version-update:semver-major"]
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     commit-message:
       # Prefix all commit messages with "npm"
       prefix: 'npm'
