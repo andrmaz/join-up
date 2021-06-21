@@ -18,7 +18,7 @@ const ConfirmDialog = ({
   showDialog,
   setShowDialog,
 }: {
-  uid: number
+  uid: string
   title?: string
   message: string
   showDialog: boolean

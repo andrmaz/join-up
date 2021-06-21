@@ -1,11 +1,11 @@
 import * as React from 'react'
 import {ProjectContext} from '@context/projectContext'
-import type {ProjectState} from 'app/types/project'
+import type {ProjectContextType} from 'app/types/project'
 
-export function useProjectContext(): ProjectState {
+export function useProjectContext(): ProjectContextType {
   const context = React.useContext(ProjectContext)
   if (!context) {
-    throw new Error('useProjectState must be used within a ProjectProvider')
+    throw new Error('useProjectContext must be used within a ProjectProvider')
   }
   return context
 }

@@ -1,11 +1,15 @@
-import {ProjectActions, ProjectState, IProjectData} from 'app/types/project'
+import {
+  ProjectActions,
+  ProjectContextType,
+  IProjectData,
+} from 'app/types/project'
 
 export function projectReducer(
-  state: ProjectState,
+  state: ProjectContextType,
   action: ProjectActions
-): ProjectState {
+): ProjectContextType {
   let index: number
-  let projectCopy: IProjectData
+  let projectCopy: IProjectData | undefined
   let projectsCopy: IProjectData[]
   let updatedProject: IProjectData
   let filteredProjects: IProjectData[]
@@ -39,6 +43,7 @@ export function projectReducer(
       )
       updatedProjects = [...filteredProjects, updatedProject]
       return {
+        ...state,
         projects: updatedProjects,
       }
     case 'persist':
