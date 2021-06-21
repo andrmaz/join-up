@@ -44,7 +44,9 @@ const PositionOverview = ({
           <p className='h-auto py-2'>{description}</p>
         </main>
         <article className='h-auto py-2'>
-          <p className='text-red-400 break-words'>{technologies?.toString()}</p>
+          <p className='text-red-400 break-words'>
+            {technologies.map(technology => technology.label)}
+          </p>
         </article>
         <section className='h-1/10 flex justify-between'>
           <span className='text-xs'>

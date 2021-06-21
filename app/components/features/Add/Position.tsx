@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
 
-import axios from 'axios'
+import axios, {AxiosResponse} from 'axios'
 
 import Portal from '@components/containers/Portal/Portal'
 
@@ -19,36 +19,36 @@ import CancelButton from '@components/form/Button/Cancel'
 import CloseModalButton from '@components/form/Button/Close'
 
 import type {SelectOptions} from 'app/types/form'
-import type {IPositionInput} from 'app/types/position'
+import type {
+  IPosistionData,
+  IPositionInput,
+  PositionActions,
+} from 'app/types/position'
 
 const AddPosition = ({
   showModal,
   setShowModal,
+  dispatch,
 }: {
   showModal: boolean
   setShowModal: (state: boolean) => void
+  dispatch: React.Dispatch<PositionActions>
 }): JSX.Element => {
   const [options, setOptions] = React.useState<SelectOptions[] | undefined>()
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
-  const {
-    register,
-    handleSubmit,
-    control,
-    setValue,
-    reset,
-    errors,
-  } = useForm<IPositionInput>({
-    mode: 'onSubmit',
-    reValidateMode: 'onChange',
-    defaultValues: {},
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: 'firstError',
-    shouldFocusError: true,
-    shouldUnregister: true,
-  })
+  const {register, handleSubmit, control, setValue, reset, errors} =
+    useForm<IPositionInput>({
+      mode: 'onSubmit',
+      reValidateMode: 'onChange',
+      defaultValues: {},
+      resolver: undefined,
+      context: undefined,
+      criteriaMode: 'firstError',
+      shouldFocusError: true,
+      shouldUnregister: true,
+    })
   //* Store project id in useRef Hook
   const id = React.useRef<string | null>(null)
   //* Trap focus inside modal dialog
@@ -70,7 +70,6 @@ const AddPosition = ({
     return () => {
       id.current = null
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
@@ -79,9 +78,11 @@ const AddPosition = ({
     reset()
     setShowModal(false)
   }
-  const onSubmit = async (data: IPositionInput): Promise<any> => {
-    data.projectId = id.current
+  const onSubmit = async (
+    data: IPositionInput
+  ): Promise<AxiosResponse<IPosistionData> | undefined> => {
     try {
+      data.projectId = id.current
       const response = await axios.post(
         '/position',
         {
@@ -94,6 +95,7 @@ const AddPosition = ({
         }
       )
       if (response.status === 201) {
+        dispatch({type: 'add', payload: response.data.position})
         setShowModal(false)
         return response
       }
