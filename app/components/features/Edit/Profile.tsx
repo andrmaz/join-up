@@ -50,14 +50,8 @@ const EditProfile = ({
     setIsSuccess(false)
     setSuccessMessage('')
   }
-  const {
-    handleSubmit,
-    register,
-    errors,
-    control,
-    setValue,
-    reset,
-  } = useForm<IUserContext>()
+  const {handleSubmit, register, errors, control, setValue, reset} =
+    useForm<IUserContext>()
   React.useEffect(() => {
     ;(async () => {
       const {

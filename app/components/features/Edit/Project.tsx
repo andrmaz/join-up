@@ -40,14 +40,8 @@ const EditProject = ({
       setOptions(technologies)
     })()
   }, [])
-  const {
-    register,
-    handleSubmit,
-    errors,
-    control,
-    setValue,
-    reset,
-  } = useForm<IProjectData>()
+  const {register, handleSubmit, errors, control, setValue, reset} =
+    useForm<IProjectData>()
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* ref will be a callback function instead of a Ref Object
@@ -171,7 +165,8 @@ const EditProject = ({
                   defaultValue={projectURL}
                   register={register({
                     pattern: {
-                      value: /(https?:\/\/)?([\w-])+\.{1}([a-zA-Z]{2,63})([/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)/,
+                      value:
+                        /(https?:\/\/)?([\w-])+\.{1}([a-zA-Z]{2,63})([/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)/,
                       message: 'Please enter a valid URL',
                     },
                   })}

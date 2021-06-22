@@ -23,13 +23,8 @@ const EditPassword = ({
     setIsSuccess(false)
     setSuccessMessage('')
   }
-  const {
-    handleSubmit,
-    register,
-    errors,
-    watch,
-    reset,
-  } = useForm<IEditPassword>()
+  const {handleSubmit, register, errors, watch, reset} =
+    useForm<IEditPassword>()
   const watchPassword = watch('newPassword')
   const onSubmit = async (data: IEditPassword): Promise<unknown> => {
     try {

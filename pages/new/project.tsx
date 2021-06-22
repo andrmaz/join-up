@@ -30,23 +30,17 @@ const Project: NextPage = ({
   const {user} = useAuthState()
   const {add} = useProjectContext()
   const {avatar, username} = {...user}
-  const {
-    register,
-    handleSubmit,
-    errors,
-    control,
-    setValue,
-    reset,
-  } = useForm<IProjectInput>({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-    defaultValues: {},
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: 'firstError',
-    shouldFocusError: true,
-    shouldUnregister: true,
-  })
+  const {register, handleSubmit, errors, control, setValue, reset} =
+    useForm<IProjectInput>({
+      mode: 'onChange',
+      reValidateMode: 'onChange',
+      defaultValues: {},
+      resolver: undefined,
+      context: undefined,
+      criteriaMode: 'firstError',
+      shouldFocusError: true,
+      shouldUnregister: true,
+    })
   const router = useRouter()
   const onSubmit = async (data: IProjectInput): Promise<any> => {
     try {
@@ -156,7 +150,8 @@ const Project: NextPage = ({
               placeholder='Connect this project to an existing one'
               register={register({
                 pattern: {
-                  value: /(https?:\/\/)?([\w-])+\.{1}([a-zA-Z]{2,63})([/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)/,
+                  value:
+                    /(https?:\/\/)?([\w-])+\.{1}([a-zA-Z]{2,63})([/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)/,
                   message: 'Please enter a valid URL',
                 },
               })}

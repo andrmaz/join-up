@@ -9,13 +9,15 @@ import {
 /**
  * @param  {IPosistionData[]} data
  */
-export function usePositionReducer(data: IPosistionData[]) {
+export function usePositionReducer(
+  data: IPosistionData[]
+): [PositionStateType, React.Dispatch<PositionActions>] {
   const [state, dispatch] = React.useReducer<
     React.Reducer<PositionStateType, PositionActions>
   >(positionReducer, {positions: []})
   React.useEffect(() => {
     dispatch({type: 'persist', payload: data})
     return () => dispatch({type: 'clear'})
-  }, [])
-  return [state, dispatch] as const
+  }, [data])
+  return [state, dispatch]
 }

@@ -18,8 +18,8 @@ const Portal = ({
   //* where the window.document object is not available
   //* So we need to make sure that, we use the document object safely only in the browser environment
   return isBrowser
-    ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      //* We assume `modal_root` exists with '!'
+    ? //* We assume `modal_root` exists with '!'
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       ReactDOM.createPortal(children, document.getElementById('modal_root')!)
     : null
 }
