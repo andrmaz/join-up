@@ -6,8 +6,7 @@ import useRefCallback from '@hooks/ref/useRefCallback'
 
 import axios, {AxiosResponse} from 'axios'
 
-import Portal from '@components/containers/Portal/Portal'
-
+import Modal from '@components/containers/Modal/Modal'
 import FormInput from '@components/form/Input/Form'
 import TechSelect from '@components/form/Select/Tech'
 import NumberInput from '@components/form/Input/Number'
@@ -106,114 +105,99 @@ const AddPosition = ({
   return (
     <React.Fragment>
       {showModal && (
-        <Portal>
-          <section
-            id='dialog_layer'
-            className='fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-50 z-50'
-          >
-            <article
-              id='dialog'
-              role='dialog'
-              aria-label='dialog'
-              aria-labelledby='dialog_label'
-              aria-modal={true}
-              aria-describedby='dialog_label'
-              className='fixed h-4/5 w-1/2 top-32 right-1/4 bg-white border-black border-2 rounded p-4'
+        <Modal height='4/5'>
+          <div className='h-1/10 flex justify-between'>
+            <h2
+              id='dialog_label'
+              tabIndex={-1}
+              ref={setRef}
+              className='focus:ring-2 focus:ring-yellow-600 h-1/2 text-2xl'
             >
-              <div className='h-1/10 flex justify-between'>
-                <h2
-                  id='dialog_label'
-                  tabIndex={-1}
-                  ref={setRef}
-                  className='focus:ring-2 focus:ring-yellow-600 h-1/2 text-2xl'
-                >
-                  Add a new position
-                </h2>
-                <CloseModalButton
-                  onClickAction={() => setShowModal(false)}
-                  focusRef={focusTrapRef}
+              Add a new position
+            </h2>
+            <CloseModalButton
+              onClickAction={() => setShowModal(false)}
+              focusRef={focusTrapRef}
+            />
+          </div>
+          <form className='h-18/20' onSubmit={handleSubmit(onSubmit)}>
+            <div className='h-18/20 flex flex-col justify-evenly pb-6'>
+              <NumberInput
+                id='vacancy-select'
+                name='vacancies'
+                label='Vacancy'
+                register={register}
+              />
+              <FormInput
+                id='title'
+                name='title'
+                label='Title'
+                type='text'
+                placeholder='Give it a meaningful title'
+                register={register({
+                  required: {
+                    value: true,
+                    message: 'Please enter a title',
+                  },
+                })}
+                errors={errors}
+              />
+              <FormInput
+                id='description'
+                name='description'
+                label='Description'
+                type='text'
+                placeholder='Provide a short description'
+                register={register({
+                  required: {
+                    value: true,
+                    message: 'Please provide a description',
+                  },
+                })}
+                errors={errors}
+              />
+              <DefaultSelect
+                id='level-select'
+                name='level'
+                control={control}
+                setValue={setValue}
+                errors={errors}
+              />
+              <DefaultSelect
+                id='role-select'
+                name='role'
+                control={control}
+                setValue={setValue}
+                errors={errors}
+              />
+              <TechSelect
+                options={options!}
+                control={control}
+                setValue={setValue}
+                errors={errors}
+              />
+            </div>
+            <div className='h-1/10 flex'>
+              <div className='w-16 p-1'>
+                <SubmitButton
+                  value='Add'
+                  bgColor='green-600'
+                  errors={Boolean(
+                    errors.title ||
+                      errors.description ||
+                      errors.level ||
+                      errors.role ||
+                      errors.technologies
+                  )}
                 />
               </div>
-              <form className='h-18/20' onSubmit={handleSubmit(onSubmit)}>
-                <div className='h-18/20 flex flex-col justify-evenly pb-6'>
-                  <NumberInput
-                    id='vacancy-select'
-                    name='vacancies'
-                    label='Vacancy'
-                    register={register}
-                  />
-                  <FormInput
-                    id='title'
-                    name='title'
-                    label='Title'
-                    type='text'
-                    placeholder='Give it a meaningful title'
-                    register={register({
-                      required: {
-                        value: true,
-                        message: 'Please enter a title',
-                      },
-                    })}
-                    errors={errors}
-                  />
-                  <FormInput
-                    id='description'
-                    name='description'
-                    label='Description'
-                    type='text'
-                    placeholder='Provide a short description'
-                    register={register({
-                      required: {
-                        value: true,
-                        message: 'Please provide a description',
-                      },
-                    })}
-                    errors={errors}
-                  />
-                  <DefaultSelect
-                    id='level-select'
-                    name='level'
-                    control={control}
-                    setValue={setValue}
-                    errors={errors}
-                  />
-                  <DefaultSelect
-                    id='role-select'
-                    name='role'
-                    control={control}
-                    setValue={setValue}
-                    errors={errors}
-                  />
-                  <TechSelect
-                    options={options!}
-                    control={control}
-                    setValue={setValue}
-                    errors={errors}
-                  />
-                </div>
-                <div className='h-1/10 flex'>
-                  <div className='w-16 p-1'>
-                    <SubmitButton
-                      value='Add'
-                      bgColor='green-600'
-                      errors={Boolean(
-                        errors.title ||
-                          errors.description ||
-                          errors.level ||
-                          errors.role ||
-                          errors.technologies
-                      )}
-                    />
-                  </div>
-                  <CancelButton
-                    onClickAction={handleCancel}
-                    onKeyDownAction={() => focusTrapRef.current?.focus()}
-                  />
-                </div>
-              </form>
-            </article>
-          </section>
-        </Portal>
+              <CancelButton
+                onClickAction={handleCancel}
+                onKeyDownAction={() => focusTrapRef.current?.focus()}
+              />
+            </div>
+          </form>
+        </Modal>
       )}
     </React.Fragment>
   )
