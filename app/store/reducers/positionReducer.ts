@@ -51,9 +51,9 @@ export function positionReducer(
       //* create a fresh, new store instance on every request
       updatedPositions = action.payload.concat(
         //* Merging objects arrays without creating duplicate objects
-        positionsCopy.filter(({id}) => {
-          !action.payload.find(position => position.id === id)
-        })
+        positionsCopy.filter(
+          ({id}) => !action.payload.find(position => position.id === id)
+        )
       )
       return {
         ...state,
