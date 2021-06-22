@@ -14,6 +14,7 @@ const ConfirmDialog = dynamic(
 const AlertDialog = dynamic(
   () => import('@components/notifications/Dialog/Alert')
 )
+const EditPosition = dynamic(() => import('@components/features/Edit/Position'))
 
 import type {IPosistionData, PositionActions} from 'app/types/position'
 
@@ -41,6 +42,7 @@ const PositionOverview = ({
   const [showConfirmDialog, setShowConfirmDialog] =
     React.useState<boolean>(false)
   const [showAlertDialog, setShowAlertDialog] = React.useState<boolean>(false)
+  const [showModal, setShowModal] = React.useState<boolean>(false)
   return (
     <Panel index={index} isSelectedTab={isSelectedTab}>
       <div className='h-auto w-full border-2 border-black p-2 rounded'>
@@ -75,7 +77,7 @@ const PositionOverview = ({
             <div className='w-12 flex justify-between'>
               <FiEdit2
                 tabIndex={0}
-                onClick={() => ''}
+                onClick={() => setShowModal(true)}
                 className='cursor-pointer focus:ring-2 focus:ring-yellow-600'
               />
               <RiDeleteBin6Line
@@ -102,6 +104,7 @@ const PositionOverview = ({
           action={(uid: typeof id) => dispatch({type: 'remove', payload: uid})}
           path='position'
         />
+        <EditPosition showModal={showModal} setShowModal={setShowModal} />
       </div>
     </Panel>
   )

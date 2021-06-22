@@ -6,7 +6,7 @@ import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
 import {useProjectContext} from '@hooks/project/useProjectContext'
 
-import Portal from '@components/containers/Portal/Portal'
+import Modal from '@components/containers/Modal/Modal'
 import CloseModalButton from '@components/form/Button/Close'
 import FormInput from '@components/form/Input/Form'
 import TechSelect from '@components/form/Select/Tech'
@@ -75,123 +75,108 @@ const EditProject = ({
   return (
     <React.Fragment>
       {showModal && (
-        <Portal>
-          <section
-            id='dialog_layer'
-            className='fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-50 z-50'
-          >
-            <article
-              id='dialog'
-              role='dialog'
-              aria-label='dialog'
-              aria-labelledby='dialog_label'
-              aria-modal={true}
-              aria-describedby='dialog_label'
-              className='fixed h-3/4 w-1/2 top-32 right-1/4 bg-white border-black border-2 rounded p-4'
+        <Modal height='3/4'>
+          <header className='h-16 flex justify-between'>
+            <h2
+              id='dialog_label'
+              tabIndex={-1}
+              ref={setRef}
+              className='focus:ring-2 focus:ring-yellow-600 h-1/2 text-2xl'
             >
-              <header className='h-16 flex justify-between'>
-                <h2
-                  id='dialog_label'
-                  tabIndex={-1}
-                  ref={setRef}
-                  className='focus:ring-2 focus:ring-yellow-600 h-1/2 text-2xl'
-                >
-                  Edit your project data here
-                </h2>
-                <CloseModalButton
-                  onClickAction={() => setShowModal(false)}
-                  focusRef={focusTrapRef}
+              Edit your project data here
+            </h2>
+            <CloseModalButton
+              onClickAction={() => setShowModal(false)}
+              focusRef={focusTrapRef}
+            />
+          </header>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='flex flex-col h-5/6 justify-evenly'
+          >
+            <FormInput
+              type='text'
+              id='name'
+              name='name'
+              label='Name'
+              placeholder={name}
+              defaultValue={name}
+              register={register({
+                required: 'project name is required',
+                minLength: {
+                  value: 3,
+                  message: 'please provide a longer name',
+                },
+                maxLength: 255,
+              })}
+              errors={errors}
+            />
+            <FormInput
+              type='text'
+              id='description'
+              name='description'
+              label='Description'
+              placeholder={description}
+              defaultValue={description}
+              register={register({
+                required: 'project description is required',
+                minLength: {
+                  value: 10,
+                  message: 'please provide a longer description',
+                },
+                maxLength: 65535,
+              })}
+              errors={errors}
+            />
+            <div className='h-1/6 flex flex-col mb-6'>
+              <TechSelect
+                options={options!}
+                control={control}
+                defaultValues={technologies}
+                defaultValue={technologies}
+                setValue={setValue}
+                errors={errors}
+              />
+            </div>
+            {collaborators.length
+              ? 'Collaborators (temporary)'
+              : 'No collaboratos (temporary)'}
+            <FormInput
+              type='url'
+              id='projectURL'
+              name='projectURL'
+              label='Url'
+              placeholder={
+                projectURL || 'Connect this project to an existing one'
+              }
+              defaultValue={projectURL}
+              register={register({
+                pattern: {
+                  value:
+                    /(https?:\/\/)?([\w-])+\.{1}([a-zA-Z]{2,63})([/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)/,
+                  message: 'Please enter a valid URL',
+                },
+              })}
+              errors={errors}
+              optional
+            />
+            <div className='h-1/6 flex items-end'>
+              <div className='w-16 p-1'>
+                <SubmitButton
+                  value='Save'
+                  bgColor='green-600'
+                  errors={Boolean(
+                    errors.name || errors.description || errors.technologies
+                  )}
                 />
-              </header>
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className='flex flex-col h-5/6 justify-evenly'
-              >
-                <FormInput
-                  type='text'
-                  id='name'
-                  name='name'
-                  label='Name'
-                  placeholder={name}
-                  defaultValue={name}
-                  register={register({
-                    required: 'project name is required',
-                    minLength: {
-                      value: 3,
-                      message: 'please provide a longer name',
-                    },
-                    maxLength: 255,
-                  })}
-                  errors={errors}
-                />
-                <FormInput
-                  type='text'
-                  id='description'
-                  name='description'
-                  label='Description'
-                  placeholder={description}
-                  defaultValue={description}
-                  register={register({
-                    required: 'project description is required',
-                    minLength: {
-                      value: 10,
-                      message: 'please provide a longer description',
-                    },
-                    maxLength: 65535,
-                  })}
-                  errors={errors}
-                />
-                <div className='h-1/6 flex flex-col mb-6'>
-                  <TechSelect
-                    options={options!}
-                    control={control}
-                    defaultValues={technologies}
-                    defaultValue={technologies}
-                    setValue={setValue}
-                    errors={errors}
-                  />
-                </div>
-                {collaborators.length
-                  ? 'Collaborators (temporary)'
-                  : 'No collaboratos (temporary)'}
-                <FormInput
-                  type='url'
-                  id='projectURL'
-                  name='projectURL'
-                  label='Url'
-                  placeholder={
-                    projectURL || 'Connect this project to an existing one'
-                  }
-                  defaultValue={projectURL}
-                  register={register({
-                    pattern: {
-                      value:
-                        /(https?:\/\/)?([\w-])+\.{1}([a-zA-Z]{2,63})([/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)/,
-                      message: 'Please enter a valid URL',
-                    },
-                  })}
-                  errors={errors}
-                  optional
-                />
-                <div className='h-1/6 flex items-end'>
-                  <div className='w-16 p-1'>
-                    <SubmitButton
-                      value='Save'
-                      bgColor='green-600'
-                      errors={Boolean(
-                        errors.name || errors.description || errors.technologies
-                      )}
-                    />
-                  </div>
-                  <CancelButton
-                    onClickAction={handleCancel}
-                    onKeyDownAction={() => focusTrapRef.current?.focus()}
-                  />
-                </div>
-              </form>
-            </article>
-          </section>
-        </Portal>
+              </div>
+              <CancelButton
+                onClickAction={handleCancel}
+                onKeyDownAction={() => focusTrapRef.current?.focus()}
+              />
+            </div>
+          </form>
+        </Modal>
       )}
     </React.Fragment>
   )
