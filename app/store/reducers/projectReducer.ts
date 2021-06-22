@@ -52,9 +52,9 @@ export function projectReducer(
       //* create a fresh, new store instance on every request
       updatedProjects = action.payload.concat(
         //* Merging objects arrays without creating duplicate objects
-        projectsCopy.filter(({id}) => {
-          !action.payload.find(project => project.id === id)
-        })
+        projectsCopy.filter(
+          ({id}) => !action.payload.find(project => project.id === id)
+        )
       )
       return {
         ...state,
