@@ -4,7 +4,6 @@ import axios from 'axios'
 
 import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
-import {useProjectContext} from '@hooks/project/useProjectContext'
 
 import Portal from '@components/containers/Portal/Portal'
 import CancelButton from '@components/form/Button/Cancel'
@@ -12,19 +11,22 @@ import {ConfirmButton} from '@components/form/Button/Confirm'
 import CloseButton from '@components/form/Button/Close'
 
 const AlertDialog = ({
-  id,
+  uid,
   title = 'Confirm your choice',
   message,
   showDialog,
   setShowDialog,
+  action,
+  path,
 }: {
-  id: string
+  uid: string
   title?: string
   message: string
   showDialog: boolean
   setShowDialog: (state: boolean) => void
+  action: (id: string) => void
+  path: string
 }): JSX.Element => {
-  const {remove} = useProjectContext()
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
@@ -34,14 +36,15 @@ const AlertDialog = ({
   const [setRef] = useRefCallback()
   const handleConfirm: () => Promise<undefined> = async () => {
     try {
-      const response = await axios.delete(`/project/${id}`, {
+      const response = await axios.delete(`/${path}/${uid}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       if (response.status === 200) {
         setShowDialog(false)
-        remove(response.data.project.id)
+        //* execute provided action on given identifier
+        action(response.data[path].id)
         return
       }
     } catch (error) {
