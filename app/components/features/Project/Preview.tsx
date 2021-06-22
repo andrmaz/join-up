@@ -2,17 +2,20 @@ import * as React from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
+import {useProjectContext} from '@hooks/project/useProjectContext'
+
 import {FiEdit2} from 'react-icons/fi'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 
 const ProjectModal = dynamic(() => import('@components/features/Edit/Project'))
-const DeleteDialog = dynamic(
+const AlertDialog = dynamic(
   () => import('@components/notifications/Dialog/Alert')
 )
 
 import type {IProjectData} from 'app/types/project'
 
 const ProjectPreview = ({project}: {project: IProjectData}): JSX.Element => {
+  const {remove} = useProjectContext()
   const [showModal, setShowModal] = React.useState<boolean>(false)
   const [showDialog, setShowDialog] = React.useState<boolean>(false)
   return (
@@ -63,12 +66,14 @@ const ProjectPreview = ({project}: {project: IProjectData}): JSX.Element => {
         setShowModal={setShowModal}
         project={project}
       />
-      <DeleteDialog
-        id={project.id}
+      <AlertDialog
+        uid={project.id}
         title='Delete this project'
         message='Are you sure you want to delete this project?'
         showDialog={showDialog}
         setShowDialog={setShowDialog}
+        action={remove}
+        path='project'
       />
     </li>
   )
