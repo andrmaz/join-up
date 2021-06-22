@@ -4,6 +4,10 @@ import {useAuthState} from '@hooks/auth/useAuthState'
 
 import {ActionButton} from '@components/form/Button/Action'
 import Panel from '@components/navigation/Tablist/Panel'
+
+import {FiEdit2} from 'react-icons/fi'
+import {RiDeleteBin6Line} from 'react-icons/ri'
+
 const ConfirmDialog = dynamic(
   () => import('@components/notifications/Dialog/Confirmation')
 )
@@ -61,20 +65,26 @@ const PositionOverview = ({
               ? `This position has ${applicants} applicant/s`
               : userId !== user?.id && 'Be the first to apply this position'}
           </span>
-          <div className='w-1/4'>
-            {userId !== user?.id ? (
+          {userId !== user?.id ? (
+            <div className='w-1/4'>
               <ActionButton action={() => setShowConfirmDialog(true)}>
                 Apply
               </ActionButton>
-            ) : (
-              <ActionButton
-                action={() => setShowAlertDialog(true)}
-                bgColor='red'
-              >
-                Delete
-              </ActionButton>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className='w-12 flex justify-between'>
+              <FiEdit2
+                tabIndex={0}
+                onClick={() => ''}
+                className='cursor-pointer focus:ring-2 focus:ring-yellow-600'
+              />
+              <RiDeleteBin6Line
+                tabIndex={0}
+                onClick={() => setShowAlertDialog(true)}
+                className='cursor-pointer focus:ring-2 focus:ring-yellow-600'
+              />
+            </div>
+          )}
         </section>
         <ConfirmDialog
           uid={id}
