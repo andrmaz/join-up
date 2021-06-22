@@ -22,23 +22,17 @@ const SignUp = ({
   technologies,
   languages,
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    errors,
-    control,
-    setValue,
-  } = useForm<ISignupInputs>({
-    mode: 'onSubmit',
-    reValidateMode: 'onChange',
-    defaultValues: {},
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: 'firstError',
-    shouldFocusError: true,
-    shouldUnregister: true,
-  })
+  const {register, handleSubmit, watch, errors, control, setValue} =
+    useForm<ISignupInputs>({
+      mode: 'onSubmit',
+      reValidateMode: 'onChange',
+      defaultValues: {},
+      resolver: undefined,
+      context: undefined,
+      criteriaMode: 'firstError',
+      shouldFocusError: true,
+      shouldUnregister: true,
+    })
   const watchPassword = watch('password')
   const router = useRouter()
   const dispatch = useAuthDispatch()
