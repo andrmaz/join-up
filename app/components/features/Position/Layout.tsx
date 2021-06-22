@@ -10,7 +10,6 @@ const PositionLayout = ({
   positions: IPosistionData[]
   dispatch: React.Dispatch<PositionActions>
 }): JSX.Element => {
-  console.log(dispatch)
   const [selectedTab, setSelectedTab] = React.useState<number>(0)
   return (
     <article className='h-4/6 grid grid-cols-2 divide-x divide-black-500'>
@@ -19,7 +18,11 @@ const PositionLayout = ({
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
       />
-      <PositionPanels positions={positions} selectedTab={selectedTab} />
+      <PositionPanels
+        positions={positions}
+        selectedTab={selectedTab}
+        dispatch={dispatch}
+      />
     </article>
   )
 }

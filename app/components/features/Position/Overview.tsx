@@ -7,8 +7,11 @@ import Panel from '@components/navigation/Tablist/Panel'
 const ConfirmDialog = dynamic(
   () => import('@components/notifications/Dialog/Confirmation')
 )
+const AlertDialog = dynamic(
+  () => import('@components/notifications/Dialog/Alert')
+)
 
-import type {IPosistionData} from 'app/types/position'
+import type {IPosistionData, PositionActions} from 'app/types/position'
 
 const PositionOverview = ({
   isSelectedTab,
@@ -23,13 +26,17 @@ const PositionOverview = ({
     userId,
     applicants,
   },
+  dispatch,
 }: {
   isSelectedTab: boolean
   index: number
   position: IPosistionData
+  dispatch: React.Dispatch<PositionActions>
 }): JSX.Element => {
   const {user} = useAuthState()
-  const [showDialog, setShowDialog] = React.useState<boolean>(false)
+  const [showConfirmDialog, setShowConfirmDialog] =
+    React.useState<boolean>(false)
+  const [showAlertDialog, setShowAlertDialog] = React.useState<boolean>(false)
   return (
     <Panel index={index} isSelectedTab={isSelectedTab}>
       <div className='h-auto w-full border-2 border-black p-2 rounded'>
@@ -55,9 +62,16 @@ const PositionOverview = ({
               : userId !== user?.id && 'Be the first to apply this position'}
           </span>
           <div className='w-1/4'>
-            {userId !== user?.id && (
-              <ActionButton action={() => setShowDialog(true)}>
+            {userId !== user?.id ? (
+              <ActionButton action={() => setShowConfirmDialog(true)}>
                 Apply
+              </ActionButton>
+            ) : (
+              <ActionButton
+                action={() => setShowAlertDialog(true)}
+                bgColor='red'
+              >
+                Delete
               </ActionButton>
             )}
           </div>
@@ -66,8 +80,17 @@ const PositionOverview = ({
           uid={id}
           title='Please confirm your application'
           message='Are you sure you want to apply to this position?'
-          showDialog={showDialog}
-          setShowDialog={setShowDialog}
+          showDialog={showConfirmDialog}
+          setShowDialog={setShowConfirmDialog}
+        />
+        <AlertDialog
+          uid={id}
+          title='Delete this position'
+          message='Are you sure you want to delete this position?'
+          showDialog={showAlertDialog}
+          setShowDialog={setShowAlertDialog}
+          action={(uid: typeof id) => dispatch({type: 'remove', payload: uid})}
+          path='position'
         />
       </div>
     </Panel>
