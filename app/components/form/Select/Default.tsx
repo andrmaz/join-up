@@ -12,6 +12,7 @@ const DefaultSelect = ({
   control,
   setValue,
   errors,
+  defaultValue,
 }: IDefaultSelect): React.ReactElement => {
   const [options, setOptions] = React.useState<SelectOptions[] | undefined>()
   //* Set technologies options to State as soon as the modal is shown
@@ -30,7 +31,9 @@ const DefaultSelect = ({
       <Controller
         name={name}
         control={control}
-        defaultValue={options ? options[0].id : ''}
+        defaultValue={
+          defaultValue ? defaultValue.id : options ? options[0].id : ''
+        }
         rules={{
           required: {
             value: true,
@@ -43,7 +46,9 @@ const DefaultSelect = ({
             inputId={id}
             name={name}
             aria-labelledby={name}
-            defaultValue={options ? options[0] : value}
+            defaultValue={
+              defaultValue ? defaultValue : options ? options[0] : value
+            }
             closeMenuOnSelect={true}
             options={options}
             getOptionValue={option => option['id']}
