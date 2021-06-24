@@ -6,6 +6,10 @@ import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {useAuthState} from '@hooks/auth/useAuthState'
 
 import {edit} from '@actions/authActions'
+import {
+  fetchTechnologiesWithToken,
+  fetchLanguagesWithToken,
+} from '@api/fetchWithToken'
 
 import Panel from '@components/navigation/Tablist/Panel'
 import FormInput from '@components/form/Input/Form'
@@ -56,26 +60,20 @@ const EditProfile = ({
     ;(async () => {
       const {
         data: {technologies},
-      } = await axios.get('/technology', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      } = await fetchTechnologiesWithToken('/technology', token)
       setTechOptions(technologies)
     })()
+    return () => setTechOptions(undefined)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   React.useEffect(() => {
     ;(async () => {
       const {
         data: {languages},
-      } = await axios.get('/language', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      } = await fetchLanguagesWithToken('/language', token)
       setLangOptions(languages)
     })()
+    return () => setLangOptions(undefined)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const dispatch = useAuthDispatch()
