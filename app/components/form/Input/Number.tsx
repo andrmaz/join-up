@@ -6,6 +6,7 @@ const NumberInput = ({
   name,
   label,
   register,
+  defaultValue,
 }: INumberInput): JSX.Element => {
   return (
     <div className='flex'>
@@ -16,7 +17,7 @@ const NumberInput = ({
         id={id}
         type='number'
         name={name}
-        defaultValue={1}
+        defaultValue={defaultValue ? defaultValue : 1}
         step={1}
         min={1}
         max={20}

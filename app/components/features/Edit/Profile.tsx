@@ -63,7 +63,8 @@ const EditProfile = ({
       })
       setTechOptions(technologies)
     })()
-  }, [token])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   React.useEffect(() => {
     ;(async () => {
       const {
@@ -75,7 +76,8 @@ const EditProfile = ({
       })
       setLangOptions(languages)
     })()
-  }, [token])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const dispatch = useAuthDispatch()
   const onSubmit = async (data: IUserContext): Promise<unknown> => {
     try {

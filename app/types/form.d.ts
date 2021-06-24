@@ -1,4 +1,4 @@
-import {Control, NestedValue} from 'react-hook-form'
+import {Control, NestedValue, SetValueConfig} from 'react-hook-form'
 
 export interface IFormInput {
   id: string
@@ -18,11 +18,7 @@ export type NestedOptions = NestedValue<SelectOptions[]> | undefined
 export interface IFormSelect {
   options: SelectOptions[]
   control: Control
-  setValue: (
-    name: any,
-    value: unknown,
-    config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
-  ) => void
+  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   errors?: Record<string, any>
   disabled?: boolean
   defaultValues?: NestedOptions
@@ -33,18 +29,16 @@ export interface IDefaultSelect {
   id: string
   name: string
   control: Control
-  setValue: (
-    name: any,
-    value: unknown,
-    config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
-  ) => void
+  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   errors?: Record<string, any>
+  defaultValue?: SelectOptions
 }
 
 export interface INumberInput {
   id: string
   name: string
   label: string
+  defaultValue?: number
   register: React.Ref<T>
 }
 

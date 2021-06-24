@@ -24,7 +24,7 @@ import type {
   PositionActions,
 } from 'app/types/position'
 
-const AddPosition = ({
+const NewPosition = ({
   showModal,
   setShowModal,
   dispatch,
@@ -69,6 +69,7 @@ const AddPosition = ({
     return () => {
       id.current = null
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
@@ -203,4 +204,4 @@ const AddPosition = ({
   )
 }
 
-export default AddPosition
+export default NewPosition

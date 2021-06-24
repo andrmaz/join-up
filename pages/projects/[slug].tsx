@@ -14,7 +14,7 @@ import ProjectOverview from '@components/features/Project/Overview'
 import {EmptyMessage} from '@components/notifications/Message/Empty'
 import PositionLayout from '@components/features/Position/Layout'
 import {ActionButton} from '@components/form/Button/Action'
-import AddPosition from '@components/features/Add/Position'
+import NewPosition from '@components/features/Position/New'
 
 const Slug: NextPage = ({
   project,
@@ -47,7 +47,7 @@ const Slug: NextPage = ({
             <EmptyMessage>This project has no posts available.</EmptyMessage>
           )}
         </Wrapper>
-        <AddPosition
+        <NewPosition
           showModal={showModal}
           setShowModal={setShowModal}
           dispatch={dispatch}

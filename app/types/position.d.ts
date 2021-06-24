@@ -15,8 +15,8 @@ export interface IPosistionData {
   description: string
   technologies: NestedValue<SelectOptions[]>
   vacancies: number
-  level: string
-  role: string
+  level: SelectOptions
+  role: SelectOptions
   projectId: number
   userId: number
   applicants: number
