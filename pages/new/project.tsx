@@ -14,6 +14,7 @@ import {useAuthState} from '@hooks/auth/useAuthState'
 import {useProjectContext} from '@hooks/project/useProjectContext'
 
 import {parseCookies} from '@utils/parseCookies'
+import {fetchTechnologiesWithToken} from '@api/fetchWithToken'
 
 import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
@@ -199,7 +200,7 @@ export const getServerSideProps: GetServerSideProps = async (
   //* If there is a user,
   const {
     data: {technologies},
-  } = await axios.get('/technology')
+  } = await fetchTechnologiesWithToken('/technology', token)
 
   //* return technologies and user token
   return {

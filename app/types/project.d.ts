@@ -1,5 +1,6 @@
 import {NestedValue} from 'react-hook-form'
 import {IUserContext} from 'app/types/user'
+import {NestedOptions} from 'app/types/form'
 import {useProjectProvider} from '@hooks/project/useProjectProvider'
 
 // https://github.com/react-hook-form/react-hook-form/issues/987
@@ -18,7 +19,7 @@ export interface IProjectData {
   id: string
   name: string
   description: string
-  technologies: NestedValue<SelectOptions[]>
+  technologies: NestedOptions
   projectURL?: string
   owner: number
   collaborators: Array<IUserContext>

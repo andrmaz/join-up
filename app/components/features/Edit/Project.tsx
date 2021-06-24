@@ -6,6 +6,8 @@ import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
 import {useProjectContext} from '@hooks/project/useProjectContext'
 
+import {fetchTechnologiesWithToken} from '@api/fetchWithToken'
+
 import Modal from '@components/containers/Modal/Modal'
 import CloseModalButton from '@components/form/Button/Close'
 import FormInput from '@components/form/Input/Form'
@@ -36,9 +38,11 @@ const EditProject = ({
     ;(async () => {
       const {
         data: {technologies},
-      } = await axios.get('/technology')
+      } = await fetchTechnologiesWithToken('/technology', token)
       setOptions(technologies)
     })()
+    return () => setOptions(undefined)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const {register, handleSubmit, errors, control, setValue, reset} =
     useForm<IProjectData>()
