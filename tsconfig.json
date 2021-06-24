@@ -23,7 +23,8 @@
       "@context/*": ["app/store/context/*"],
       "@providers/*": ["app/store/providers/*"],
       "@reducers/*": ["app/store/reducers/*"],
-      "@utils/*": ["app/utils/*"]
+      "@utils/*": ["app/utils/*"],
+      "@api/*": ["app/api/*"],
     },
     "typeRoots": ["./node_modules/@types", "./app/types"]
   },
