@@ -38,6 +38,7 @@ export default function useEditPosition(
       if (response.status === 200) {
         actionsDispatch({type: 'edit', payload: response.data.position})
         setShowModal(false)
+        return Promise.resolve(response.data)
       }
       return response.data
     } catch (error) {
