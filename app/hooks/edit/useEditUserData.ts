@@ -1,24 +1,20 @@
 import * as React from 'react'
 import axios from 'axios'
 
-import {useCookies} from 'react-cookie'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
-
 import {edit} from '@actions/authActions'
 
-import type {IEditEmail} from 'app/types/edit'
-import type {EditEmailResponseType} from 'app/types/response'
 import type {IUserContext} from 'app/types/user'
+import type {EditUserResponseType} from 'app/types/response'
 
-export default function useEditUserEmail(
+export default function useEditUserData(
   token: string
 ): readonly [
   boolean,
   string,
   () => void,
-  (data: IEditEmail) => Promise<IUserContext>
+  (data: IUserContext) => Promise<IUserContext>
 ] {
-  const dispatch = useAuthDispatch()
   //* Toast Component Status
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
   const [successMessage, setSuccessMessage] = React.useState<string>('')
@@ -26,11 +22,11 @@ export default function useEditUserEmail(
     setIsSuccess(false)
     setSuccessMessage('')
   }
-  const [, setCookie] = useCookies(['session'])
-  const onSubmit = async (data: IEditEmail): Promise<IUserContext> => {
+  const dispatch = useAuthDispatch()
+  const onSubmit = async (data: IUserContext): Promise<IUserContext> => {
     try {
-      const response = await axios.patch<EditEmailResponseType>(
-        '/user/email',
+      const response = await axios.patch<EditUserResponseType>(
+        '/user',
         {user: data},
         {
           headers: {
@@ -38,16 +34,8 @@ export default function useEditUserEmail(
           },
         }
       )
-      const {user, token: newToken, message} = response.data
+      const {user, message} = response.data
       edit(dispatch, user)
-      setCookie('session', newToken, {
-        path: '/',
-        // ? expiration date
-        //maxAge: 3600, // Expires after 1hr
-        sameSite: true,
-        //httpOnly: true,
-        //secure: true,
-      })
       setIsSuccess(true)
       setSuccessMessage(message)
       return Promise.resolve(user)

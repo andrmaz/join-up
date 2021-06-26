@@ -25,13 +25,20 @@ export type PositionResponseType = {
   status: number
 }
 
-export type EditUserResponseType = {
+export type EditEmailResponseType = {
   user: IUserContext
   token: string
   message: string
+  status: number
 }
 
 export type EditPasswordResponseType = {
   status: number
   message: string
+}
+
+export type EditUserResponseType = {
+  status: number
+  message: string
+  user: IUserContext
 }
