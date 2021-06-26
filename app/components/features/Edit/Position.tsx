@@ -1,9 +1,9 @@
 import * as React from 'react'
+
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
-import useRefCallback from '@hooks/ref/useRefCallback'
-
-import axios, {Canceler} from 'axios'
+import {useFetchPositionTechnologiesWithToken} from '@hooks/fetch/useFetchWithToken'
+import useEditPosition from '@hooks/edit/useEditPosition'
 
 import Modal from '@components/containers/Modal/Modal'
 import FormInput from '@components/form/Input/Form'
@@ -16,7 +16,6 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 import CloseModalButton from '@components/form/Button/Close'
 
-import type {SelectOptions} from 'app/types/form'
 import type {
   IPosistionData,
   IPositionInput,
@@ -43,87 +42,24 @@ const EditPosition = ({
   setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
   dispatch: React.Dispatch<PositionActions>
 }): React.ReactElement => {
-  const [options, setOptions] = React.useState<SelectOptions[] | undefined>()
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
   const {register, handleSubmit, control, setValue, reset, errors} =
-    useForm<IPositionInput>({
-      mode: 'onSubmit',
-      reValidateMode: 'onChange',
-      defaultValues: {},
-      resolver: undefined,
-      context: undefined,
-      criteriaMode: 'firstError',
-      shouldFocusError: true,
-      shouldUnregister: true,
-    })
-  //* Trap focus inside modal dialog
-  const focusTrapRef = React.useRef<HTMLElement | null>(null)
-  //* ref will be a callback function instead of a Ref Object
-  const [setRef] = useRefCallback()
+    useForm<IPositionInput>()
+  //* Set technologies options to State as soon as the modal is shown
+  const options = useFetchPositionTechnologiesWithToken(token)
+  const [focusTrapRef, setRef, onSubmit] = useEditPosition(
+    token,
+    id,
+    projectId,
+    setShowModal,
+    dispatch
+  )
   //* Reset the entire form state and close the modal
   const handleCancel = (): void => {
     reset()
     setShowModal(false)
-  }
-  //* Store project id in useRef Hook
-  const uid = React.useRef<string | null>(null)
-  //* Set technologies options to State as soon as the modal is shown
-  React.useEffect(() => {
-    //* You now have access to `window`
-    uid.current = window.location.pathname.slice(10)
-    let cancel: Canceler
-    ;(async () => {
-      try {
-        const {
-          data: {technologies},
-        } = await axios.get(`/technology/project/${uid.current}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          //* An executor function receives a cancel function as a parameter
-          cancelToken: new axios.CancelToken(c => (cancel = c)),
-        })
-        setOptions(technologies)
-      } catch (thrown) {
-        if (axios.isCancel(thrown)) {
-          console.log('Request canceled', thrown.message)
-          return thrown.message
-        } else {
-          Promise.reject(thrown)
-        }
-      }
-    })()
-    //* Cleanup
-    return () => {
-      //* cancel the request
-      cancel()
-      uid.current = null
-    }
-  }, [token])
-  const onSubmit = async (data: IPosistionData): Promise<unknown> => {
-    try {
-      data.projectId = projectId
-      const response = await axios.patch(
-        `/position/${id}`,
-        {
-          position: data,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      if (response.status === 200) {
-        dispatch({type: 'edit', payload: response.data.position})
-        setShowModal(false)
-        return response
-      }
-    } catch (error) {
-      return Promise.reject(error)
-    }
   }
   return (
     <React.Fragment>
@@ -199,7 +135,7 @@ const EditPosition = ({
                 errors={errors}
               />
               <TechSelect
-                options={options!}
+                options={options}
                 control={control}
                 defaultValue={technologies}
                 defaultValues={technologies}

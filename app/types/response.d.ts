@@ -1,4 +1,5 @@
 import type {IUserContext} from 'app/types/user'
+import type {IPosistionData} from 'app/types/position'
 
 export type TechnologiesResponseType = {
   message: string
@@ -15,6 +16,12 @@ export type LanguagesResponseType = {
 export type ProjectsResponseType = {
   message: string
   projects: IProjectData[]
+  status: number
+}
+
+export type PositionResponseType = {
+  message: string
+  position: IPosistionData
   status: number
 }
 

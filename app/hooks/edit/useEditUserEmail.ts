@@ -1,5 +1,5 @@
 import * as React from 'react'
-import axios, {AxiosResponse} from 'axios'
+import axios from 'axios'
 
 import {useCookies} from 'react-cookie'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
@@ -29,7 +29,7 @@ export default function useEditUserEmail(
   const [, setCookie] = useCookies(['session'])
   const onSubmit = async (data: IEditEmail): Promise<IUserContext> => {
     try {
-      const response: AxiosResponse<EditUserResponseType> = await axios.patch(
+      const response = await axios.patch<EditUserResponseType>(
         '/user/email',
         {user: data},
         {
