@@ -3,22 +3,22 @@ import axios from 'axios'
 
 import {useCookies} from 'react-cookie'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
-
 import {edit} from '@actions/authActions'
 
-import type {IEditEmail} from 'app/types/edit'
-import type {EditTokenResponseType} from 'app/types/response'
+import type {IEditUsername} from 'app/types/edit'
 import type {IUserContext} from 'app/types/user'
+import type {EditTokenResponseType} from 'app/types/response'
 
-export default function useEditUserEmail(
+export default function useEditUsername(
   token: string
 ): readonly [
   boolean,
   string,
   () => void,
-  (data: IEditEmail) => Promise<IUserContext>
+  (data: IEditUsername) => Promise<IUserContext>
 ] {
   const dispatch = useAuthDispatch()
+  const [, setCookie] = useCookies(['session'])
   //* Toast Component Status
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
   const [successMessage, setSuccessMessage] = React.useState<string>('')
@@ -26,11 +26,10 @@ export default function useEditUserEmail(
     setIsSuccess(false)
     setSuccessMessage('')
   }
-  const [, setCookie] = useCookies(['session'])
-  const onSubmit = async (data: IEditEmail): Promise<IUserContext> => {
+  const onSubmit = async (data: IEditUsername): Promise<IUserContext> => {
     try {
       const response = await axios.patch<EditTokenResponseType>(
-        '/user/email',
+        '/user/username',
         {user: data},
         {
           headers: {

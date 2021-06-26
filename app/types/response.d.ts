@@ -33,7 +33,7 @@ export type PositionResponseType = {
   status: number
 }
 
-export type EditEmailResponseType = {
+export type EditTokenResponseType = {
   user: IUserContext
   token: string
   message: string
