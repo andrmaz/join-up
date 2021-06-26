@@ -1,3 +1,5 @@
+import type {IUserContext} from 'app/types/user'
+
 export type TechnologiesResponseType = {
   message: string
   technologies: NestedOptions[]
@@ -14,4 +16,10 @@ export type ProjectsResponseType = {
   message: string
   projects: IProjectData[]
   status: number
+}
+
+export type EditUserResponseType = {
+  user: IUserContext
+  token: string
+  message: string
 }
