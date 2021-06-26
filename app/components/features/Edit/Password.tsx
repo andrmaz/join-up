@@ -1,7 +1,7 @@
 import * as React from 'react'
-import axios from 'axios'
 
 import {useForm} from 'react-hook-form'
+import useEditUserPassword from '@hooks/edit/useEditUserPassword'
 
 import Panel from '@components/navigation/Tablist/Panel'
 import FormInput from '@components/form/Input/Form'
@@ -16,36 +16,11 @@ const EditPassword = ({
   token,
   isSelectedTab,
 }: SettingPanelProps): JSX.Element => {
-  //* Toast Component Status
-  const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
-  const [successMessage, setSuccessMessage] = React.useState<string>('')
-  const handleClose = (): void => {
-    setIsSuccess(false)
-    setSuccessMessage('')
-  }
   const {handleSubmit, register, errors, watch, reset} =
     useForm<IEditPassword>()
   const watchPassword = watch('newPassword')
-  const onSubmit = async (data: IEditPassword): Promise<unknown> => {
-    try {
-      const response = await axios.patch(
-        '/user/password',
-        {user: data},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      if (response.status === 200) {
-        setIsSuccess(true)
-        setSuccessMessage(response.data.message)
-        return
-      }
-    } catch (error) {
-      return Promise.reject(error)
-    }
-  }
+  const [isSuccess, successMessage, handleClose, onSubmit] =
+    useEditUserPassword(token)
   return (
     <Panel index={3} isSelectedTab={isSelectedTab}>
       <form

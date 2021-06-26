@@ -23,3 +23,8 @@ export type EditUserResponseType = {
   token: string
   message: string
 }
+
+export type EditPasswordResponseType = {
+  status: number
+  message: string
+}
