@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
 
-import axios, {AxiosResponse} from 'axios'
+import axios, {AxiosResponse, Canceler} from 'axios'
 
 import Modal from '@components/containers/Modal/Modal'
 import FormInput from '@components/form/Input/Form'
@@ -56,21 +56,34 @@ const NewPosition = ({
   React.useEffect(() => {
     //* You now have access to `window`
     id.current = window.location.pathname.slice(10)
+    let cancel: Canceler
     ;(async () => {
-      const {
-        data: {technologies},
-      } = await axios.get(`/technology/project/${id.current}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      setOptions(technologies)
+      try {
+        const {
+          data: {technologies},
+        } = await axios.get(`/technology/project/${id.current}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          cancelToken: new axios.CancelToken(c => (cancel = c)),
+        })
+        setOptions(technologies)
+      } catch (thrown) {
+        if (axios.isCancel(thrown)) {
+          console.log('Request canceled', thrown.message)
+          return thrown.message
+        } else {
+          Promise.reject(thrown)
+        }
+      }
     })()
+    //* Cleanup
     return () => {
+      //* cancel the request
+      cancel()
       id.current = null
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [token])
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
   //* Reset the entire form state and close the modal

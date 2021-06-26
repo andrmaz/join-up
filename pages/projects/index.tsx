@@ -7,19 +7,18 @@ import {
 } from 'next'
 import Head from 'next/head'
 import {ParsedUrlQuery} from 'querystring'
+import axios from 'axios'
 
 import {useForm} from 'react-hook-form'
 import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
 
-import {
-  fetchTechnologiesWithToken,
-  fetchProjectsWithToken,
-} from '@api/fetchWithToken'
+import {fetchTechnologiesWithToken} from '@api/fetchWithToken'
 import {parseCookies} from '@utils/parseCookies'
 
 import Container from '@components/containers/Container/Container'
 import ProjectsGrid from '@components/features/Project/Grid'
 import Drawer from '@components/navigation/Drawer/Drawer'
+import {Canceler} from 'axios'
 
 const Projects: NextPage = ({
   token,
@@ -29,7 +28,8 @@ const Projects: NextPage = ({
   const {control, register, watch, setValue} = useForm()
   //* watching every fields in the form
   const {date, match, available, technologies} = watch()
-  const fetchProjectsData = React.useCallback(async () => {
+  const fetchProjectswithToken = React.useCallback(async () => {
+    let cancel: Canceler
     try {
       //* technologies and match must be checked before each fetching
       const tech =
@@ -38,18 +38,25 @@ const Projects: NextPage = ({
           : ''
       const matchs = match ? `&match=${match}` : ''
       dispatch({type: 'pending'})
-      const response = await fetchProjectsWithToken(
+      const response = await axios.get(
         `/project?sort=${date}${matchs}&hasPositions=${available}${tech}`,
-        token
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          cancelToken: new axios.CancelToken(c => (cancel = c)),
+        }
       )
-      return dispatch({type: 'resolved', payload: response.data.projects})
+      dispatch({type: 'resolved', payload: response.data.projects})
     } catch (error) {
       dispatch({type: 'rejected', payload: error.message})
     }
+    //* cancel the request
+    return () => cancel()
   }, [technologies, match, dispatch, date, available, token])
   React.useEffect(() => {
-    fetchProjectsData()
-  }, [fetchProjectsData])
+    fetchProjectswithToken()
+  }, [fetchProjectswithToken])
   // State
   const {status, data /* ,error */} = state
   // Status
@@ -97,9 +104,7 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 
   //* If there is a user,
-  const {
-    data: {technologies: options},
-  } = await fetchTechnologiesWithToken('/technology', token)
+  const {technologies: options} = await fetchTechnologiesWithToken(token)
 
   //* return token and technologies
   return {

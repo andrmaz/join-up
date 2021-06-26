@@ -198,9 +198,7 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 
   //* If there is a user,
-  const {
-    data: {technologies},
-  } = await fetchTechnologiesWithToken('/technology', token)
+  const {technologies} = await fetchTechnologiesWithToken(token)
 
   //* return technologies and user token
   return {

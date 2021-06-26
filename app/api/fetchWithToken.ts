@@ -1,53 +1,36 @@
-import axios, {AxiosResponse} from 'axios'
+import axios from 'axios'
 import type {
   TechnologiesResponseType,
   LanguagesResponseType,
-  ProjectsResponseType,
 } from 'app/types/response'
 
 export async function fetchTechnologiesWithToken(
-  url: string,
   token: string
-): Promise<AxiosResponse<TechnologiesResponseType>> {
+): Promise<TechnologiesResponseType> {
   try {
-    const res = await axios.get(url, {
+    const response = await axios.get('/technology', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    return res
+    const {data} = response
+    return Promise.resolve(data)
   } catch (err) {
     return Promise.reject(err)
   }
 }
 
 export async function fetchLanguagesWithToken(
-  url: string,
   token: string
-): Promise<AxiosResponse<LanguagesResponseType>> {
+): Promise<LanguagesResponseType> {
   try {
-    const res = await axios.get(url, {
+    const response = await axios.get('/language', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    return res
-  } catch (err) {
-    return Promise.reject(err)
-  }
-}
-
-export async function fetchProjectsWithToken(
-  url: string,
-  token: string
-): Promise<AxiosResponse<ProjectsResponseType>> {
-  try {
-    const res = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    return res
+    const {data} = response
+    return Promise.resolve(data)
   } catch (err) {
     return Promise.reject(err)
   }

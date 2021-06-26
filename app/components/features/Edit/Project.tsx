@@ -6,7 +6,7 @@ import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
 import {useProjectContext} from '@hooks/project/useProjectContext'
 
-import {fetchTechnologiesWithToken} from '@api/fetchWithToken'
+import {useFetchTechnologiesWithToken} from '@hooks/fetch/useFetchWithToken'
 
 import Modal from '@components/containers/Modal/Modal'
 import CloseModalButton from '@components/form/Button/Close'
@@ -15,7 +15,6 @@ import TechSelect from '@components/form/Select/Tech'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
-import type {SelectOptions} from 'app/types/form'
 import type {IProjectData} from 'app/types/project'
 
 const EditProject = ({
@@ -31,19 +30,8 @@ const EditProject = ({
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
-  const [options, setOptions] = React.useState<SelectOptions[] | undefined>()
   //* Set technologies options to State as soon as the modal is shown
-  React.useEffect(() => {
-    //* You now have access to `window`
-    ;(async () => {
-      const {
-        data: {technologies},
-      } = await fetchTechnologiesWithToken('/technology', token)
-      setOptions(technologies)
-    })()
-    return () => setOptions(undefined)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const options = useFetchTechnologiesWithToken(token)
   const {register, handleSubmit, errors, control, setValue, reset} =
     useForm<IProjectData>()
   //* Trap focus inside modal dialog
@@ -134,7 +122,7 @@ const EditProject = ({
             />
             <div className='h-1/6 flex flex-col mb-6'>
               <TechSelect
-                options={options!}
+                options={options}
                 control={control}
                 defaultValues={technologies}
                 defaultValue={technologies}

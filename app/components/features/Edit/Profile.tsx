@@ -4,12 +4,12 @@ import axios from 'axios'
 import {useForm} from 'react-hook-form'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {useAuthState} from '@hooks/auth/useAuthState'
+import {
+  useFetchTechnologiesWithToken,
+  useFetchLanguagesWithToken,
+} from '@hooks/fetch/useFetchWithToken'
 
 import {edit} from '@actions/authActions'
-import {
-  fetchTechnologiesWithToken,
-  fetchLanguagesWithToken,
-} from '@api/fetchWithToken'
 
 import Panel from '@components/navigation/Tablist/Panel'
 import FormInput from '@components/form/Input/Form'
@@ -22,18 +22,11 @@ import SnackBar from '@components/notifications/SnackBar/SnackBar'
 
 import type {SettingPanelProps} from 'app/types/navigation'
 import type {IUserContext} from 'app/types/user'
-import type {SelectOptions} from 'app/types/form'
 
 const EditProfile = ({
   token,
   isSelectedTab,
 }: SettingPanelProps): JSX.Element => {
-  const [techOptions, setTechOptions] = React.useState<
-    SelectOptions[] | undefined
-  >()
-  const [langOptions, setLangOptions] = React.useState<
-    SelectOptions[] | undefined
-  >()
   const {user} = useAuthState()
   const {
     avatar,
@@ -56,26 +49,8 @@ const EditProfile = ({
   }
   const {handleSubmit, register, errors, control, setValue, reset} =
     useForm<IUserContext>()
-  React.useEffect(() => {
-    ;(async () => {
-      const {
-        data: {technologies},
-      } = await fetchTechnologiesWithToken('/technology', token)
-      setTechOptions(technologies)
-    })()
-    return () => setTechOptions(undefined)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  React.useEffect(() => {
-    ;(async () => {
-      const {
-        data: {languages},
-      } = await fetchLanguagesWithToken('/language', token)
-      setLangOptions(languages)
-    })()
-    return () => setLangOptions(undefined)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const techs = useFetchTechnologiesWithToken(token)
+  const langs = useFetchLanguagesWithToken(token)
   const dispatch = useAuthDispatch()
   const onSubmit = async (data: IUserContext): Promise<unknown> => {
     try {
@@ -159,7 +134,7 @@ const EditProfile = ({
           </div>
           <div className='flex flex-col p-0.5'>
             <LangSelect
-              options={langOptions!}
+              options={langs}
               control={control}
               defaultValue={languages}
               defaultValues={languages}
@@ -169,7 +144,7 @@ const EditProfile = ({
           </div>
           <div className='flex flex-col p-0.5'>
             <TechSelect
-              options={techOptions!}
+              options={techs}
               control={control}
               defaultValue={technologies}
               defaultValues={technologies}
