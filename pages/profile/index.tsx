@@ -6,7 +6,7 @@ import {
   InferGetServerSidePropsType,
 } from 'next'
 import Head from 'next/head'
-import axios from 'axios'
+import axios, {Canceler} from 'axios'
 import {ParsedUrlQuery} from 'querystring'
 
 import {useProjectContext} from '@hooks/project/useProjectContext'
@@ -22,6 +22,7 @@ const Profile: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {projects, persist, clear} = useProjectContext()
   React.useEffect(() => {
+    let cancel: Canceler
     ;(async () => {
       try {
         const {
@@ -30,14 +31,24 @@ const Profile: NextPage = ({
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          cancelToken: new axios.CancelToken(c => (cancel = c)),
         })
         persist(projects)
-      } catch (error) {
-        return Promise.reject(error)
+      } catch (thrown) {
+        if (axios.isCancel(thrown)) {
+          console.log('Request canceled', thrown.message)
+          return thrown.message
+        } else {
+          Promise.reject(thrown)
+        }
       }
     })()
     //* Cleanup
-    return () => clear()
+    return () => {
+      //* cancel the request
+      cancel()
+      clear()
+    }
   }, [clear, persist, token])
   return (
     <Container>
