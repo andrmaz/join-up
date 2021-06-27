@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
-import {useFetchPositionTechnologiesWithToken} from '@hooks/fetch/useFetchWithToken'
+import {useFetchProjectTechnologiesWithToken} from '@hooks/fetch/useFetchWithToken'
 import useEditPosition from '@hooks/edit/useEditPosition'
 
 import Modal from '@components/containers/Modal/Modal'
@@ -48,7 +48,7 @@ const EditPosition = ({
   const {register, handleSubmit, control, setValue, reset, errors} =
     useForm<IPositionInput>()
   //* Set technologies options to State as soon as the modal is shown
-  const options = useFetchPositionTechnologiesWithToken(token)
+  const options = useFetchProjectTechnologiesWithToken(token)
   const [focusTrapRef, setRef, onSubmit] = useEditPosition(
     token,
     id,

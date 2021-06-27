@@ -69,22 +69,22 @@ export function useFetchLanguagesWithToken(token: string): SelectOptions[] {
   return options
 }
 
-export function useFetchPositionTechnologiesWithToken(
+export function useFetchProjectTechnologiesWithToken(
   token: string
 ): SelectOptions[] {
   const [options, setOptions] = React.useState<SelectOptions[]>([])
-  //* Store project id in useRef Hook
-  const uid = React.useRef<string | null>(null)
+  //* Store id in useRef Hook
+  const id = React.useRef<string | null>(null)
   React.useEffect(() => {
     //* You now have access to `window`
-    uid.current = window.location.pathname.slice(10)
+    id.current = window.location.pathname.slice(10)
     let cancel: Canceler
     ;(async () => {
       try {
         const {
           data: {technologies},
         } = await axios.get<TechnologiesResponseType>(
-          `/technology/project/${uid.current}`,
+          `/technology/project/${id.current}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -107,7 +107,7 @@ export function useFetchPositionTechnologiesWithToken(
     return () => {
       //* cancel the request
       cancel()
-      uid.current = null
+      id.current = null
     }
   }, [token])
   return options
