@@ -56,3 +56,8 @@ export type EditUserResponseType = {
   message: string
   user: IUserContext
 }
+
+export type ApplicationResponseType = {
+  status: number
+  message: string
+}
