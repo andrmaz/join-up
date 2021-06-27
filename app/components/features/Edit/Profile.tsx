@@ -3,10 +3,8 @@ import * as React from 'react'
 import {useForm} from 'react-hook-form'
 import {useAuthState} from '@hooks/auth/useAuthState'
 import useEditUserData from '@hooks/edit/useEditUserData'
-import {
-  useFetchTechnologiesWithToken,
-  useFetchLanguagesWithToken,
-} from '@hooks/fetch/useFetchWithToken'
+import useFetchTechnologiesWithToken from '@hooks/fetch/useFetchTechnologiesWithToken'
+import useFetchLanguagesWithToken from '@hooks/fetch//useFetchLanguagesWithToken'
 
 import Panel from '@components/navigation/Tablist/Panel'
 import FormInput from '@components/form/Input/Form'

@@ -1,10 +1,10 @@
 import * as React from 'react'
+import axios from 'axios'
 
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
-
-import axios, {AxiosResponse, Canceler} from 'axios'
+import useFetchProjectTechnologiesWithToken from '@hooks/fetch/useFetchProjectTechnologiesWithToken'
 
 import Modal from '@components/containers/Modal/Modal'
 import FormInput from '@components/form/Input/Form'
@@ -17,7 +17,6 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 import CloseModalButton from '@components/form/Button/Close'
 
-import type {SelectOptions} from 'app/types/form'
 import type {
   IPosistionData,
   IPositionInput,
@@ -33,57 +32,17 @@ const NewPosition = ({
   setShowModal: (state: boolean) => void
   dispatch: React.Dispatch<PositionActions>
 }): JSX.Element => {
-  const [options, setOptions] = React.useState<SelectOptions[] | undefined>()
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
   const {register, handleSubmit, control, setValue, reset, errors} =
-    useForm<IPositionInput>({
-      mode: 'onSubmit',
-      reValidateMode: 'onChange',
-      defaultValues: {},
-      resolver: undefined,
-      context: undefined,
-      criteriaMode: 'firstError',
-      shouldFocusError: true,
-      shouldUnregister: true,
-    })
+    useForm<IPositionInput>()
   //* Store project id in useRef Hook
   const id = React.useRef<string | null>(null)
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* Set technologies options to State as soon as the modal is shown
-  React.useEffect(() => {
-    //* You now have access to `window`
-    id.current = window.location.pathname.slice(10)
-    let cancel: Canceler
-    ;(async () => {
-      try {
-        const {
-          data: {technologies},
-        } = await axios.get(`/technology/project/${id.current}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          cancelToken: new axios.CancelToken(c => (cancel = c)),
-        })
-        setOptions(technologies)
-      } catch (thrown) {
-        if (axios.isCancel(thrown)) {
-          console.log('Request canceled', thrown.message)
-          return thrown.message
-        } else {
-          Promise.reject(thrown)
-        }
-      }
-    })()
-    //* Cleanup
-    return () => {
-      //* cancel the request
-      cancel()
-      id.current = null
-    }
-  }, [token])
+  const options = useFetchProjectTechnologiesWithToken(token)
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
   //* Reset the entire form state and close the modal
@@ -91,9 +50,7 @@ const NewPosition = ({
     reset()
     setShowModal(false)
   }
-  const onSubmit = async (
-    data: IPositionInput
-  ): Promise<AxiosResponse<IPosistionData> | undefined> => {
+  const onSubmit = async (data: IPositionInput): Promise<IPosistionData> => {
     try {
       data.projectId = id.current
       const response = await axios.post(
@@ -110,10 +67,11 @@ const NewPosition = ({
       if (response.status === 201) {
         dispatch({type: 'add', payload: response.data.position})
         setShowModal(false)
-        return response
+        return Promise.resolve(response.data.position)
       }
+      return response.data
     } catch (error) {
-      Promise.reject(error)
+      return Promise.reject(error)
     }
   }
   return (
@@ -185,7 +143,7 @@ const NewPosition = ({
                 errors={errors}
               />
               <TechSelect
-                options={options!}
+                options={options}
                 control={control}
                 setValue={setValue}
                 errors={errors}

@@ -16,7 +16,13 @@ import PositionLayout from '@components/features/Position/Layout'
 import {ActionButton} from '@components/form/Button/Action'
 import NewPosition from '@components/features/Position/New'
 
-const Slug: NextPage = ({
+import type {
+  ProjectResponseType,
+  PositionsResponseType,
+} from 'app/types/response'
+import type {ProjectSlugPageParams} from 'app/types/params'
+
+const Slug: NextPage<ProjectSlugPageParams> = ({
   project,
   positions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -59,46 +65,47 @@ const Slug: NextPage = ({
 
 export default Slug
 
-export const getServerSideProps: GetServerSideProps<Params> = async context => {
-  //* Get the user's session based on the request
-  const {session: token} = parseCookies(context.req)
+export const getServerSideProps: GetServerSideProps<ProjectSlugPageParams> =
+  async context => {
+    //* Get the user's session based on the request
+    const {session: token} = parseCookies(context.req)
 
-  //* project id parameter will be sent as a query parameter (slug) to the page
-  const {slug} = context.params as Params
+    //* project id parameter will be sent as a query parameter (slug) to the page
+    const {slug} = context.params as Params
 
-  //* If no user, redirect to login
-  if (!token) {
+    //* If no user, redirect to login
+    if (!token) {
+      return {
+        props: {},
+        redirect: {
+          destination: '/signin',
+          permanent: false,
+        },
+      }
+    }
+
+    //* If there is a user,
+    const {
+      data: {project},
+    } = await axios.get<ProjectResponseType>(`/project/${slug}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    const {
+      data: {positions},
+    } = await axios.get<PositionsResponseType>(`/position/project/${slug}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    //* return project data
     return {
-      props: {},
-      redirect: {
-        destination: '/signin',
-        permanent: false,
+      props: {
+        project,
+        positions,
       },
     }
   }
-
-  //* If there is a user,
-  const {
-    data: {project},
-  } = await axios.get(`/project/${slug}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-
-  const {
-    data: {positions: positions},
-  } = await axios.get(`/position/project/${slug}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-
-  //* return project data
-  return {
-    props: {
-      project,
-      positions,
-    },
-  }
-}

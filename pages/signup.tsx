@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
+import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next'
 import axios from 'axios'
 
 import {useCookies} from 'react-cookie'
@@ -17,11 +17,16 @@ import Textarea from '@components/form/Textarea/Textarea'
 import {SubmitButton} from '@components/form/Button/Submit'
 
 import type {ISignupInputs} from 'app/types/user'
+import type {
+  TechnologiesResponseType,
+  LanguagesResponseType,
+} from 'app/types/response'
+import type {SignUpPageParams} from 'app/types/params'
 
-const SignUp = ({
+const SignUp: NextPage<SignUpPageParams> = ({
   technologies,
   languages,
-}: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {register, handleSubmit, watch, errors, control, setValue} =
     useForm<ISignupInputs>({
       mode: 'onSubmit',
@@ -224,18 +229,19 @@ const SignUp = ({
 
 export default SignUp
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const {
-    data: {technologies},
-  } = await axios.get('/technology')
-  const {
-    data: {languages},
-  } = await axios.get('/language')
+export const getServerSideProps: GetServerSideProps<SignUpPageParams> =
+  async () => {
+    const {
+      data: {technologies},
+    } = await axios.get<TechnologiesResponseType>('/technology')
+    const {
+      data: {languages},
+    } = await axios.get<LanguagesResponseType>('/language')
 
-  return {
-    props: {
-      technologies,
-      languages,
-    },
+    return {
+      props: {
+        technologies,
+        languages,
+      },
+    }
   }
-}

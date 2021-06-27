@@ -8,7 +8,7 @@ import type {IDefaultSelect, SelectOptions} from 'app/types/form'
 
 const DefaultSelect = ({
   id,
-  name,
+  name, // level, role
   control,
   setValue,
   errors,
@@ -17,7 +17,7 @@ const DefaultSelect = ({
   const [options, setOptions] = React.useState<SelectOptions[] | undefined>()
   //* Set technologies options to State as soon as the modal is shown
   const fetchOptions = React.useCallback(async () => {
-    const {data} = await axios.get(`/${name}`)
+    const {data} = await axios.get(`/${name}`) // level, role
     setOptions(data[name + 's'])
   }, [name])
   React.useEffect(() => {

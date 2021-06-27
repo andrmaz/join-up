@@ -7,10 +7,9 @@ import {
 } from 'next'
 import Head from 'next/head'
 import {ParsedUrlQuery} from 'querystring'
-import axios from 'axios'
 
 import {useForm} from 'react-hook-form'
-import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
+import useFetchProjectsWithToken from '@hooks/fetch/useFetchProjectsWithToken'
 
 import {fetchTechnologiesWithToken} from '@api/fetchWithToken'
 import {parseCookies} from '@utils/parseCookies'
@@ -18,45 +17,17 @@ import {parseCookies} from '@utils/parseCookies'
 import Container from '@components/containers/Container/Container'
 import ProjectsGrid from '@components/features/Project/Grid'
 import Drawer from '@components/navigation/Drawer/Drawer'
-import {Canceler} from 'axios'
 
-const Projects: NextPage = ({
+import type {ProjectsPageParams} from 'app/types/params'
+
+const Projects: NextPage<ProjectsPageParams> = ({
   token,
   options,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [state, dispatch] = useAsyncReducer()
   const {control, register, watch, setValue} = useForm()
   //* watching every fields in the form
-  const {date, match, available, technologies} = watch()
-  const fetchProjectswithToken = React.useCallback(async () => {
-    let cancel: Canceler
-    try {
-      //* technologies and match must be checked before each fetching
-      const tech =
-        technologies && technologies.length
-          ? `&technologies=${technologies.toString()},`
-          : ''
-      const matchs = match ? `&match=${match}` : ''
-      dispatch({type: 'pending'})
-      const response = await axios.get(
-        `/project?sort=${date}${matchs}&hasPositions=${available}${tech}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          cancelToken: new axios.CancelToken(c => (cancel = c)),
-        }
-      )
-      dispatch({type: 'resolved', payload: response.data.projects})
-    } catch (error) {
-      dispatch({type: 'rejected', payload: error.message})
-    }
-    //* cancel the request
-    return () => cancel()
-  }, [technologies, match, dispatch, date, available, token])
-  React.useEffect(() => {
-    fetchProjectswithToken()
-  }, [fetchProjectswithToken])
+  const fields = watch()
+  const [state, technologies] = useFetchProjectsWithToken(token, fields)
   // State
   const {status, data /* ,error */} = state
   // Status
@@ -86,31 +57,30 @@ const Projects: NextPage = ({
 
 export default Projects
 
-export const getServerSideProps: GetServerSideProps = async (
-  context: GetServerSidePropsContext<ParsedUrlQuery>
-) => {
-  //* Get the user's session based on the request
-  const {session: token} = parseCookies(context.req)
+export const getServerSideProps: GetServerSideProps<ProjectsPageParams> =
+  async (context: GetServerSidePropsContext<ParsedUrlQuery>) => {
+    //* Get the user's session based on the request
+    const {session: token} = parseCookies(context.req)
 
-  //* If no user, redirect to login
-  if (!token) {
+    //* If no user, redirect to login
+    if (!token) {
+      return {
+        props: {},
+        redirect: {
+          destination: '/signin',
+          permanent: false,
+        },
+      }
+    }
+
+    //* If there is a user,
+    const {technologies: options} = await fetchTechnologiesWithToken(token)
+
+    //* return token and technologies
     return {
-      props: {},
-      redirect: {
-        destination: '/signin',
-        permanent: false,
+      props: {
+        token,
+        options,
       },
     }
   }
-
-  //* If there is a user,
-  const {technologies: options} = await fetchTechnologiesWithToken(token)
-
-  //* return token and technologies
-  return {
-    props: {
-      token,
-      options,
-    },
-  }
-}

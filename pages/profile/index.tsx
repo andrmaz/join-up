@@ -6,10 +6,9 @@ import {
   InferGetServerSidePropsType,
 } from 'next'
 import Head from 'next/head'
-import axios, {Canceler} from 'axios'
 import {ParsedUrlQuery} from 'querystring'
 
-import {useProjectContext} from '@hooks/project/useProjectContext'
+import useFetchUserProjectsWithToken from '@hooks/fetch/useFetchUserProjectsWithToken'
 import {parseCookies} from '@utils/parseCookies'
 
 import Container from '@components/containers/Container/Container'
@@ -17,39 +16,12 @@ import Wrapper from '@components/containers/Wrapper/Wrapper'
 import UserCard from '@components/features/User/Card'
 import ProjectsList from '@components/features/Project/List'
 
-const Profile: NextPage = ({
+type Props = {token: string}
+
+const Profile: NextPage<Props> = ({
   token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const {projects, persist, clear} = useProjectContext()
-  React.useEffect(() => {
-    let cancel: Canceler
-    ;(async () => {
-      try {
-        const {
-          data: {projects},
-        } = await axios.get('/project/user', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          cancelToken: new axios.CancelToken(c => (cancel = c)),
-        })
-        persist(projects)
-      } catch (thrown) {
-        if (axios.isCancel(thrown)) {
-          console.log('Request canceled', thrown.message)
-          return thrown.message
-        } else {
-          Promise.reject(thrown)
-        }
-      }
-    })()
-    //* Cleanup
-    return () => {
-      //* cancel the request
-      cancel()
-      clear()
-    }
-  }, [clear, persist, token])
+  const projects = useFetchUserProjectsWithToken(token)
   return (
     <Container>
       <Head>
@@ -77,7 +49,7 @@ const Profile: NextPage = ({
 
 export default Profile
 
-export const getServerSideProps: GetServerSideProps = async (
+export const getServerSideProps: GetServerSideProps<Props> = async (
   context: GetServerSidePropsContext<ParsedUrlQuery>
 ) => {
   //* Get the user's session based on the request

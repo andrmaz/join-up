@@ -27,6 +27,12 @@ export type ProjectResponseType = {
   status: number
 }
 
+export type PositionsResponseType = {
+  message: string
+  positions: IPosistionData[]
+  status: number
+}
+
 export type PositionResponseType = {
   message: string
   position: IPosistionData
