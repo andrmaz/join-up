@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
-import {useFetchProjectTechnologiesWithToken} from '@hooks/fetch/useFetchWithToken'
+import useFetchProjectTechnologiesWithToken from '@hooks/fetch/useFetchProjectTechnologiesWithToken'
 import useEditPosition from '@hooks/edit/useEditPosition'
 
 import Modal from '@components/containers/Modal/Modal'

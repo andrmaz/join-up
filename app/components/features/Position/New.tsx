@@ -4,7 +4,7 @@ import axios from 'axios'
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
-import {useFetchProjectTechnologiesWithToken} from '@hooks/fetch/useFetchWithToken'
+import useFetchProjectTechnologiesWithToken from '@hooks/fetch/useFetchProjectTechnologiesWithToken'
 
 import Modal from '@components/containers/Modal/Modal'
 import FormInput from '@components/form/Input/Form'

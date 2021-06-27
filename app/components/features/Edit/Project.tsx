@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
 
 import useRefCallback from '@hooks/ref/useRefCallback'
-import {useFetchTechnologiesWithToken} from '@hooks/fetch/useFetchWithToken'
+import useFetchTechnologiesWithToken from '@hooks/fetch/useFetchTechnologiesWithToken'
 import useEditProject from '@hooks/edit/useEditProject'
 
 import Modal from '@components/containers/Modal/Modal'

@@ -8,7 +8,7 @@ import {
 import Head from 'next/head'
 import {ParsedUrlQuery} from 'querystring'
 
-import {useFetchUserProjectsWithToken} from '@hooks/fetch/useFetchWithToken'
+import useFetchUserProjectsWithToken from '@hooks/fetch/useFetchUserProjectsWithToken'
 import {parseCookies} from '@utils/parseCookies'
 
 import Container from '@components/containers/Container/Container'

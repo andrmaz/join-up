@@ -9,7 +9,7 @@ import Head from 'next/head'
 import {ParsedUrlQuery} from 'querystring'
 
 import {useForm} from 'react-hook-form'
-import {useFetchProjectsWithToken} from '@hooks/fetch/useFetchWithToken'
+import useFetchProjectsWithToken from '@hooks/fetch/useFetchProjectsWithToken'
 
 import {fetchTechnologiesWithToken} from '@api/fetchWithToken'
 import {parseCookies} from '@utils/parseCookies'
