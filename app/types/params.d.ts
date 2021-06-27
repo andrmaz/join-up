@@ -11,3 +11,8 @@ export type SignUpPageParams = {
   technologies: SelectOptions[]
   languages: SelectOptions[]
 }
+
+export type ProjectsPageParams = {
+  token: string
+  options: SelectOptions[]
+}
