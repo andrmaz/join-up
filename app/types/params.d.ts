@@ -16,3 +16,8 @@ export type ProjectsPageParams = {
   token: string
   options: SelectOptions[]
 }
+
+export type ProjectPageParams = {
+  token: string
+  technologies: SelectOptions[]
+}
