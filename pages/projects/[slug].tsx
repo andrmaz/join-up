@@ -19,8 +19,8 @@ import NewPosition from '@components/features/Position/New'
 import type {
   ProjectResponseType,
   PositionsResponseType,
-  ProjectSlugPageParams,
 } from 'app/types/response'
+import type {ProjectSlugPageParams} from 'app/types/params'
 
 const Slug: NextPage<ProjectSlugPageParams> = ({
   project,

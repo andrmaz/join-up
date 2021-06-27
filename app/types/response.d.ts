@@ -56,8 +56,3 @@ export type EditUserResponseType = {
   message: string
   user: IUserContext
 }
-
-export type ProjectSlugPageParams = {
-  project: IProjectData
-  positions: IPosistionData[]
-}
