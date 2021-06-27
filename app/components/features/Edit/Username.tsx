@@ -1,11 +1,6 @@
 import * as React from 'react'
-import axios from 'axios'
-
 import {useForm} from 'react-hook-form'
-import {useCookies} from 'react-cookie'
-import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
-
-import {edit} from '@actions/authActions'
+import useEditUsername from '@hooks/edit/useEditUsername'
 
 import Panel from '@components/navigation/Tablist/Panel'
 import FormInput from '@components/form/Input/Form'
@@ -20,45 +15,9 @@ const EditUsername = ({
   token,
   isSelectedTab,
 }: SettingPanelProps): JSX.Element => {
-  const dispatch = useAuthDispatch()
-  const [, setCookie] = useCookies(['session'])
-  //* Toast Component Status
-  const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
-  const [successMessage, setSuccessMessage] = React.useState<string>('')
-  const handleClose = (): void => {
-    setIsSuccess(false)
-    setSuccessMessage('')
-  }
   const {handleSubmit, register, errors, reset} = useForm<IEditUsername>()
-  const onSubmit = async (data: IEditUsername): Promise<unknown> => {
-    try {
-      const response = await axios.patch(
-        '/user/username',
-        {user: data},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      if (response.status === 200) {
-        edit(dispatch, response.data.user)
-        setCookie('session', response.data.token, {
-          path: '/',
-          // ? expiration date
-          //maxAge: 3600, // Expires after 1hr
-          sameSite: true,
-          //httpOnly: true,
-          //secure: true,
-        })
-        setIsSuccess(true)
-        setSuccessMessage(response.data.message)
-        return
-      }
-    } catch (error) {
-      return Promise.reject(error)
-    }
-  }
+  const [isSuccess, successMessage, handleClose, onSubmit] =
+    useEditUsername(token)
   return (
     <Panel index={1} isSelectedTab={isSelectedTab}>
       <form

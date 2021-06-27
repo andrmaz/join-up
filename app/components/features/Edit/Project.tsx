@@ -1,12 +1,11 @@
 import * as React from 'react'
-import axios from 'axios'
 
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
-import useRefCallback from '@hooks/ref/useRefCallback'
-import {useProjectContext} from '@hooks/project/useProjectContext'
 
+import useRefCallback from '@hooks/ref/useRefCallback'
 import {useFetchTechnologiesWithToken} from '@hooks/fetch/useFetchWithToken'
+import useEditProject from '@hooks/edit/useEditProject'
 
 import Modal from '@components/containers/Modal/Modal'
 import CloseModalButton from '@components/form/Button/Close'
@@ -23,46 +22,24 @@ const EditProject = ({
   project: {id, name, description, technologies, collaborators, projectURL},
 }: {
   showModal: boolean
-  setShowModal: (state: boolean) => void
+  setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
   project: IProjectData
 }): React.ReactElement => {
-  const {edit} = useProjectContext()
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
-  //* Set technologies options to State as soon as the modal is shown
-  const options = useFetchTechnologiesWithToken(token)
-  const {register, handleSubmit, errors, control, setValue, reset} =
-    useForm<IProjectData>()
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
+  //* Set technologies options to State as soon as the modal is shown
+  const options = useFetchTechnologiesWithToken(token)
+  const {register, handleSubmit, errors, control, setValue, reset} =
+    useForm<IProjectData>()
+  const onSubmit = useEditProject(token, id, setShowModal)
   const handleCancel = (): void => {
     reset()
     setShowModal(false)
-  }
-  const onSubmit = async (data: IProjectData): Promise<any> => {
-    try {
-      const response = await axios.patch(
-        `/project/${id}`,
-        {
-          project: data,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      if (response.status === 200) {
-        edit(response.data.project)
-        setShowModal(false)
-        return
-      }
-    } catch (error) {
-      return Promise.reject(error)
-    }
   }
   return (
     <React.Fragment>
