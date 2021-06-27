@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import * as React from 'react'
-import axios from 'axios'
 
 import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
+import useAddApplication from '@hooks/add/useAddApplication'
 
 import Portal from '@components/containers/Portal/Portal'
 import CancelButton from '@components/form/Button/Cancel'
@@ -22,11 +22,8 @@ const ConfirmDialog = ({
   title?: string
   message: string
   showDialog: boolean
-  setShowDialog: (state: boolean) => void
+  setShowDialog: React.Dispatch<React.SetStateAction<typeof showDialog>>
 }): JSX.Element => {
-  //* Toast Component Status
-  const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
-  const [successMessage, setSuccessMessage] = React.useState<string>('')
   //* Get user token from session cookie
   const [cookies] = useCookies(['session'])
   const {session: token} = cookies
@@ -34,29 +31,8 @@ const ConfirmDialog = ({
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
-  const handleConfirm = async (): Promise<any> => {
-    try {
-      const response = await axios.post(
-        '/application',
-        {
-          position: uid,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      if (response.status === 201) {
-        setIsSuccess(true)
-        setSuccessMessage(response.data.message)
-        setShowDialog(false)
-        return
-      }
-    } catch (error) {
-      Promise.reject(error)
-    }
-  }
+  const [isSuccess, successMessage, setIsSuccess, handleConfirm] =
+    useAddApplication(token, uid, setShowDialog)
   if (isSuccess)
     return (
       <SnackBar

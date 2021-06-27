@@ -5,13 +5,11 @@ import {
   InferGetServerSidePropsType,
 } from 'next'
 import Head from 'next/head'
-import {useRouter} from 'next/router'
 import {ParsedUrlQuery} from 'querystring'
-import axios from 'axios'
 
 import {useForm} from 'react-hook-form'
 import {useAuthState} from '@hooks/auth/useAuthState'
-import {useProjectContext} from '@hooks/project/useProjectContext'
+import useAddProject from '@hooks/add/useAddProject'
 
 import {parseCookies} from '@utils/parseCookies'
 import {fetchTechnologiesWithToken} from '@api/fetchWithToken'
@@ -23,48 +21,17 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
 import type {IProjectInput} from 'app/types/project'
+import type {ProjectPageParams} from 'app/types/params'
 
-const Project: NextPage = ({
-  technologies,
+const Project: NextPage<ProjectPageParams> = ({
   token,
+  technologies,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {user} = useAuthState()
-  const {add} = useProjectContext()
   const {avatar, username} = {...user}
   const {register, handleSubmit, errors, control, setValue, reset} =
-    useForm<IProjectInput>({
-      mode: 'onChange',
-      reValidateMode: 'onChange',
-      defaultValues: {},
-      resolver: undefined,
-      context: undefined,
-      criteriaMode: 'firstError',
-      shouldFocusError: true,
-      shouldUnregister: true,
-    })
-  const router = useRouter()
-  const onSubmit = async (data: IProjectInput): Promise<any> => {
-    try {
-      const response = await axios.post(
-        '/project',
-        {
-          project: data,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      if (response.status === 201) {
-        add(response.data.project)
-        router.push('/profile')
-        return
-      }
-    } catch (error) {
-      return Promise.reject(error)
-    }
-  }
+    useForm<IProjectInput>()
+  const onSubmit = useAddProject(token)
   return (
     <Container>
       <Head>
@@ -180,7 +147,7 @@ const Project: NextPage = ({
 
 export default Project
 
-export const getServerSideProps: GetServerSideProps = async (
+export const getServerSideProps: GetServerSideProps<ProjectPageParams> = async (
   context: GetServerSidePropsContext<ParsedUrlQuery>
 ) => {
   //* Get the user's session based on the request
@@ -203,8 +170,8 @@ export const getServerSideProps: GetServerSideProps = async (
   //* return technologies and user token
   return {
     props: {
-      technologies,
       token,
+      technologies,
     },
   }
 }
