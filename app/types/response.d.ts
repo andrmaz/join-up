@@ -27,6 +27,12 @@ export type ProjectResponseType = {
   status: number
 }
 
+export type PositionsResponseType = {
+  message: string
+  positions: IPosistionData[]
+  status: number
+}
+
 export type PositionResponseType = {
   message: string
   position: IPosistionData
@@ -49,4 +55,9 @@ export type EditUserResponseType = {
   status: number
   message: string
   user: IUserContext
+}
+
+export type ProjectSlugPageParams = {
+  project: IProjectData
+  positions: IPosistionData[]
 }
