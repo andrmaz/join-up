@@ -1,10 +1,11 @@
 import * as React from 'react'
-import axios from 'axios'
 
 import {useForm} from 'react-hook-form'
 import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
 import useFetchProjectTechnologiesWithToken from '@hooks/fetch/useFetchProjectTechnologiesWithToken'
+
+import {addPositionWithToken} from '@api/fetchWithToken'
 
 import Modal from '@components/containers/Modal/Modal'
 import FormInput from '@components/form/Input/Form'
@@ -17,11 +18,8 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 import CloseModalButton from '@components/form/Button/Close'
 
-import type {
-  IPosistionData,
-  IPositionInput,
-  PositionActions,
-} from 'app/types/position'
+import type {IPositionInput, PositionActions} from 'app/types/position'
+import {PositionResponseType} from 'app/types/response'
 
 const NewPosition = ({
   showModal,
@@ -29,7 +27,7 @@ const NewPosition = ({
   dispatch,
 }: {
   showModal: boolean
-  setShowModal: (state: boolean) => void
+  setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
   dispatch: React.Dispatch<PositionActions>
 }): JSX.Element => {
   //* Get user token from session cookie
@@ -37,8 +35,6 @@ const NewPosition = ({
   const {session: token} = cookies
   const {register, handleSubmit, control, setValue, reset, errors} =
     useForm<IPositionInput>()
-  //* Store project id in useRef Hook
-  const id = React.useRef<string | null>(null)
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* Set technologies options to State as soon as the modal is shown
@@ -50,30 +46,17 @@ const NewPosition = ({
     reset()
     setShowModal(false)
   }
-  const onSubmit = async (data: IPositionInput): Promise<IPosistionData> => {
-    try {
-      data.projectId = id.current
-      const response = await axios.post(
-        '/position',
-        {
-          position: data,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+  const onSubmit = (data: IPositionInput): Promise<PositionResponseType> =>
+    addPositionWithToken(data, token)
+      .then(response => {
+        if (response.status === 201) {
+          dispatch({type: 'add', payload: response.data.position})
+          setShowModal(false)
+          return Promise.resolve(response.data)
         }
-      )
-      if (response.status === 201) {
-        dispatch({type: 'add', payload: response.data.position})
-        setShowModal(false)
-        return Promise.resolve(response.data.position)
-      }
-      return response.data
-    } catch (error) {
-      return Promise.reject(error)
-    }
-  }
+        return response.data
+      })
+      .catch(err => Promise.reject(err))
   return (
     <React.Fragment>
       {showModal && (
