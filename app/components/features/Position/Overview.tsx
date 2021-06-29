@@ -8,11 +8,11 @@ import Panel from '@components/navigation/Tablist/Panel'
 import {FiEdit2} from 'react-icons/fi'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 
+const RemovePosition = dynamic(
+  () => import('@components/features/Remove/Position')
+)
 const ConfirmDialog = dynamic(
   () => import('@components/notifications/Dialog/Confirmation')
-)
-const AlertDialog = dynamic(
-  () => import('@components/notifications/Dialog/Alert')
 )
 const EditPosition = dynamic(() => import('@components/features/Edit/Position'))
 
@@ -88,16 +88,12 @@ const PositionOverview = ({
           showDialog={showConfirmDialog}
           setShowDialog={setShowConfirmDialog}
         />
-        <AlertDialog
+        <RemovePosition
           uid={position.id}
-          title='Delete this position'
-          message='Are you sure you want to delete this position?'
           showDialog={showAlertDialog}
           setShowDialog={setShowAlertDialog}
-          action={(uid: typeof position.id) =>
-            dispatch({type: 'remove', payload: uid})
-          }
-          path='position'
+          //TODO Create Position Context to avoid props drilling
+          dispatch={dispatch}
         />
         <EditPosition
           position={position}

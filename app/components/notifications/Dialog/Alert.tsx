@@ -1,56 +1,25 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import * as React from 'react'
-import axios from 'axios'
 
-import {useCookies} from 'react-cookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
 
 import Portal from '@components/containers/Portal/Portal'
 import CancelButton from '@components/form/Button/Cancel'
 import {ConfirmButton} from '@components/form/Button/Confirm'
 import CloseButton from '@components/form/Button/Close'
+import type {AlertDialogType} from 'app/types/notification'
 
 const AlertDialog = ({
-  uid,
   title = 'Confirm your choice',
   message,
   showDialog,
   setShowDialog,
-  action,
-  path,
-}: {
-  uid: string
-  title?: string
-  message: string
-  showDialog: boolean
-  setShowDialog: (state: boolean) => void
-  action: (id: string) => void
-  path: string
-}): JSX.Element => {
-  //* Get user token from session cookie
-  const [cookies] = useCookies(['session'])
-  const {session: token} = cookies
+  handleConfirm,
+}: AlertDialogType): React.ReactElement => {
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
-  const handleConfirm: () => Promise<undefined> = async () => {
-    try {
-      const response = await axios.delete(`/${path}/${uid}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      if (response.status === 200) {
-        setShowDialog(false)
-        //* execute provided action on given identifier
-        action(response.data[path].id)
-        return
-      }
-    } catch (error) {
-      return Promise.reject(error)
-    }
-  }
   return (
     <React.Fragment>
       {showDialog && (
