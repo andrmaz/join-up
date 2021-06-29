@@ -2,7 +2,7 @@ import * as React from 'react'
 import axios, {AxiosResponse} from 'axios'
 
 import type {IEditPassword} from 'app/types/edit'
-import type {EditPasswordResponseType} from 'app/types/response'
+import type {StatusResponseType} from 'app/types/response'
 
 export default function useEditUserPassword(
   token: string
@@ -10,7 +10,7 @@ export default function useEditUserPassword(
   boolean,
   string,
   () => void,
-  (data: IEditPassword) => Promise<EditPasswordResponseType>
+  (data: IEditPassword) => Promise<StatusResponseType>
 ] {
   //* Toast Component Status
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
@@ -19,20 +19,17 @@ export default function useEditUserPassword(
     setIsSuccess(false)
     setSuccessMessage('')
   }
-  const onSubmit = async (
-    data: IEditPassword
-  ): Promise<EditPasswordResponseType> => {
+  const onSubmit = async (data: IEditPassword): Promise<StatusResponseType> => {
     try {
-      const response: AxiosResponse<EditPasswordResponseType> =
-        await axios.patch(
-          '/user/password',
-          {user: data},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+      const response: AxiosResponse<StatusResponseType> = await axios.patch(
+        '/user/password',
+        {user: data},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       if (response.status === 200) {
         setIsSuccess(true)
         setSuccessMessage(response.data.message)

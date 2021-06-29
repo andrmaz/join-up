@@ -46,18 +46,25 @@ export type EditTokenResponseType = {
   status: number
 }
 
-export type EditPasswordResponseType = {
-  status: number
-  message: string
-}
-
 export type EditUserResponseType = {
   status: number
   message: string
   user: IUserContext
 }
 
-export type ApplicationResponseType = {
+export type StatusResponseType = {
   status: number
   message: string
+}
+
+export type RemoveProjectResponseType = {
+  message: string
+  project: {id: string}
+  status: number
+}
+
+export type RemovePositionResponseType = {
+  message: string
+  position: {id: string}
+  status: number
 }
