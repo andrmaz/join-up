@@ -1,13 +1,8 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import axios from 'axios'
 
-import {useRouter} from 'next/router'
-import {useCookies} from 'react-cookie'
 import {useForm} from 'react-hook-form'
-
-import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
-import {login} from '@actions/authActions'
+import useUserLogin from '@hooks/user/useUserLogin'
 
 import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
@@ -16,42 +11,8 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import type {SigninInputs} from 'app/types/user'
 
 const SignIn = (): JSX.Element => {
-  const {register, handleSubmit, errors} = useForm<SigninInputs>({
-    mode: 'onSubmit',
-    reValidateMode: 'onChange',
-    defaultValues: {},
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: 'firstError',
-    shouldFocusError: true,
-    shouldUnregister: true,
-  })
-  const router = useRouter()
-  const dispatch = useAuthDispatch()
-  const [, setCookie] = useCookies(['session'])
-  const onSubmit = (data: SigninInputs): void => {
-    axios
-      .post('/user/login', {user: data})
-      .then(res => {
-        if (res.status === 200) {
-          login(dispatch, res.data.user)
-          setCookie('session', res.data.token, {
-            path: '/',
-            // ? expiration date
-            //maxAge: 3600, // Expires after 1hr
-            sameSite: true,
-            //httpOnly: true,
-            //secure: true,
-          })
-          router.push('/')
-        } else {
-          console.log(res.data.error)
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+  const {register, handleSubmit, errors} = useForm<SigninInputs>()
+  const onSubmit = useUserLogin()
   return (
     <Container>
       <Head>
