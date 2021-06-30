@@ -4,6 +4,7 @@ import {useForm} from 'react-hook-form'
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
 import useFetchProjectTechnologiesWithToken from '@hooks/fetch/useFetchProjectTechnologiesWithToken'
+import {usePositionContext} from '@hooks/position/usePositionContext'
 
 import {addPositionWithToken} from '@api/fetchWithToken'
 
@@ -18,19 +19,18 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 import CloseModalButton from '@components/form/Button/Close'
 
-import type {IPositionInput, PositionActions} from 'app/types/position'
+import type {IPositionInput} from 'app/types/position'
 import {PositionResponseType} from 'app/types/response'
 
 const NewPosition = ({
   showModal,
   setShowModal,
-  dispatch,
 }: {
   showModal: boolean
   setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
-  dispatch: React.Dispatch<PositionActions>
 }): JSX.Element => {
   const token = useSessionCookie()
+  const {dispatch} = usePositionContext()
   const {register, handleSubmit, control, setValue, reset, errors} =
     useForm<IPositionInput>()
   //* Trap focus inside modal dialog

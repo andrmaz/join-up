@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import {AuthProvider} from '@providers/AuthProvider'
 import {CookiesProvider} from 'react-cookie'
 import {ProjectProvider} from '@providers/ProjectProvider'
+import {PositionProvider} from '@providers/PositionProvider'
 
 import Navbar from '@components/navigation/Navbar/Navbar'
 
@@ -28,8 +29,10 @@ function MyApp({Component, pageProps}: AppProps): React.ReactNode {
       <AuthProvider>
         <Navbar />
         <ProjectProvider>
-          <Component {...pageProps} />
-          <DynamicComponent />
+          <PositionProvider>
+            <Component {...pageProps} />
+            <DynamicComponent />
+          </PositionProvider>
         </ProjectProvider>
       </AuthProvider>
     </CookiesProvider>
