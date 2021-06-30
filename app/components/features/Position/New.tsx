@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {useForm} from 'react-hook-form'
-import {useCookies} from 'react-cookie'
+import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
 import useFetchProjectTechnologiesWithToken from '@hooks/fetch/useFetchProjectTechnologiesWithToken'
 
@@ -30,9 +30,7 @@ const NewPosition = ({
   setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
   dispatch: React.Dispatch<PositionActions>
 }): JSX.Element => {
-  //* Get user token from session cookie
-  const [cookies] = useCookies(['session'])
-  const {session: token} = cookies
+  const token = useSessionCookie()
   const {register, handleSubmit, control, setValue, reset, errors} =
     useForm<IPositionInput>()
   //* Trap focus inside modal dialog

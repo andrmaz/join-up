@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {useCookies} from 'react-cookie'
+import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useRemoveProject from '@hooks/remove/useRemoveProject'
 import AlertDialog from '@components/notifications/Dialog/Alert'
 
@@ -12,9 +12,7 @@ const RemoveProject = ({
   showDialog: boolean
   setShowDialog: React.Dispatch<React.SetStateAction<typeof showDialog>>
 }): JSX.Element => {
-  //* Get user token from session cookie
-  const [cookies] = useCookies(['session'])
-  const {session: token} = cookies
+  const token = useSessionCookie()
   const handleConfirm = useRemoveProject(token, uid, setShowDialog)
   return (
     <AlertDialog
