@@ -32,3 +32,11 @@ export type PositionActions =
   | {type: 'edit'; payload: IPosistionData}
   | {type: 'persist'; payload: IPosistionData[]}
   | {type: 'clear'}
+
+export type PositionDispatch = (action: PositionActions) => void
+export type PositionProviderProps = {children: React.ReactNode}
+
+export type PositionContextType = {
+  state: PositionStateType
+  dispatch: PositionDispatch
+}

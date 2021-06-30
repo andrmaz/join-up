@@ -1,15 +1,13 @@
 import * as React from 'react'
 import PositionOverview from '@components/features/Position/Overview'
-import type {IPosistionData, PositionActions} from 'app/types/position'
+import type {IPosistionData} from 'app/types/position'
 
 const PositionPanels = ({
   positions,
   selectedTab,
-  dispatch,
 }: {
   positions: IPosistionData[]
   selectedTab: number
-  dispatch: React.Dispatch<PositionActions>
 }): React.ReactElement => {
   return (
     <main className='h-full w-full overflow-y-scroll'>
@@ -19,7 +17,6 @@ const PositionPanels = ({
           isSelectedTab={selectedTab === index}
           index={index}
           position={position}
-          dispatch={dispatch}
         />
       ))}
     </main>

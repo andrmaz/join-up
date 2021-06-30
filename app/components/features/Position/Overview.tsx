@@ -16,18 +16,16 @@ const ConfirmDialog = dynamic(
 )
 const EditPosition = dynamic(() => import('@components/features/Edit/Position'))
 
-import type {IPosistionData, PositionActions} from 'app/types/position'
+import type {IPosistionData} from 'app/types/position'
 
 const PositionOverview = ({
   isSelectedTab,
   index,
   position,
-  dispatch,
 }: {
   isSelectedTab: boolean
   index: number
   position: IPosistionData
-  dispatch: React.Dispatch<PositionActions>
 }): JSX.Element => {
   const {user} = useAuthState()
   const [showConfirmDialog, setShowConfirmDialog] =
@@ -92,14 +90,11 @@ const PositionOverview = ({
           uid={position.id}
           showDialog={showAlertDialog}
           setShowDialog={setShowAlertDialog}
-          //TODO Create Position Context to avoid props drilling
-          dispatch={dispatch}
         />
         <EditPosition
           position={position}
           showModal={showModal}
           setShowModal={setShowModal}
-          dispatch={dispatch}
         />
       </div>
     </Panel>

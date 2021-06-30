@@ -6,7 +6,7 @@ import {Params} from 'next/dist/next-server/server/router'
 
 import {useAuthState} from '@hooks/auth/useAuthState'
 import {parseCookies} from '@utils/parseCookies'
-import {usePositionReducer} from '@hooks/position/usePositionReducer'
+import {usePositionContext} from '@hooks/position/usePositionContext'
 
 import Container from '@components/containers/Container/Container'
 import Wrapper from '@components/containers/Wrapper/Wrapper'
@@ -27,8 +27,12 @@ const Slug: NextPage<ProjectSlugPageParams> = ({
   positions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {user} = useAuthState()
-  const [state, dispatch] = usePositionReducer(positions)
+  const {state, dispatch} = usePositionContext()
   const [showModal, setShowModal] = React.useState<boolean>(false)
+  React.useEffect(() => {
+    dispatch({type: 'persist', payload: positions})
+    return () => dispatch({type: 'clear'})
+  }, [dispatch, positions])
   return (
     <Container>
       <Head>
@@ -48,16 +52,12 @@ const Slug: NextPage<ProjectSlugPageParams> = ({
             <ProjectOverview {...project} />
           </article>
           {state.positions.length ? (
-            <PositionLayout positions={state.positions} dispatch={dispatch} />
+            <PositionLayout positions={state.positions} />
           ) : (
             <EmptyMessage>This project has no posts available.</EmptyMessage>
           )}
         </Wrapper>
-        <NewPosition
-          showModal={showModal}
-          setShowModal={setShowModal}
-          dispatch={dispatch}
-        />
+        <NewPosition showModal={showModal} setShowModal={setShowModal} />
       </main>
     </Container>
   )

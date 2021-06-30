@@ -1,14 +1,14 @@
 import * as React from 'react'
 import {deletePositionByIdWithToken} from '@api/fetchWithToken'
-import type {PositionActions} from 'app/types/position'
+import {usePositionContext} from '@hooks/position/usePositionContext'
 import type {RemovePositionResponseType} from 'app/types/response'
 
 export default function useRemovePosition(
   token: string,
   uid: string,
-  setShowDialog: React.Dispatch<React.SetStateAction<boolean>>,
-  dispatch: React.Dispatch<PositionActions>
+  setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
 ): () => Promise<RemovePositionResponseType> {
+  const {dispatch} = usePositionContext()
   const handleConfirm = async (): Promise<RemovePositionResponseType> => {
     try {
       const response = await deletePositionByIdWithToken(token, uid)
