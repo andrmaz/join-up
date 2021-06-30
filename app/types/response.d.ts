@@ -68,3 +68,10 @@ export type RemovePositionResponseType = {
   position: {id: string}
   status: number
 }
+
+export type UserResponseType = {
+  message: string
+  status: number
+  token: string
+  user: IUserContext
+}
