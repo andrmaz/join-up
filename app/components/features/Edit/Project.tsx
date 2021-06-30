@@ -1,8 +1,7 @@
 import * as React from 'react'
 
 import {useForm} from 'react-hook-form'
-import {useCookies} from 'react-cookie'
-
+import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
 import useFetchTechnologiesWithToken from '@hooks/fetch/useFetchTechnologiesWithToken'
 import useEditProject from '@hooks/edit/useEditProject'
@@ -25,9 +24,7 @@ const EditProject = ({
   setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
   project: IProjectData
 }): React.ReactElement => {
-  //* Get user token from session cookie
-  const [cookies] = useCookies(['session'])
-  const {session: token} = cookies
+  const token = useSessionCookie()
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* ref will be a callback function instead of a Ref Object

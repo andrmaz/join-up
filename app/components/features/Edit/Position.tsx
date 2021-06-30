@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {useForm} from 'react-hook-form'
-import {useCookies} from 'react-cookie'
+import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useFetchProjectTechnologiesWithToken from '@hooks/fetch/useFetchProjectTechnologiesWithToken'
 import useEditPosition from '@hooks/edit/useEditPosition'
 
@@ -42,9 +42,7 @@ const EditPosition = ({
   setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
   dispatch: React.Dispatch<PositionActions>
 }): React.ReactElement => {
-  //* Get user token from session cookie
-  const [cookies] = useCookies(['session'])
-  const {session: token} = cookies
+  const token = useSessionCookie()
   const {register, handleSubmit, control, setValue, reset, errors} =
     useForm<IPositionInput>()
   //* Set technologies options to State as soon as the modal is shown

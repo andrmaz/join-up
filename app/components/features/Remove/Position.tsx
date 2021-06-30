@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {useCookies} from 'react-cookie'
+import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useRemovePosition from '@hooks/remove/useRemovePosition'
 import AlertDialog from '@components/notifications/Dialog/Alert'
 import type {PositionActions} from 'app/types/position'
@@ -15,9 +15,7 @@ const RemovePosition = ({
   setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
   dispatch: React.Dispatch<PositionActions>
 }): JSX.Element => {
-  //* Get user token from session cookie
-  const [cookies] = useCookies(['session'])
-  const {session: token} = cookies
+  const token = useSessionCookie()
   const handleConfirm = useRemovePosition(token, uid, setShowDialog, dispatch)
   return (
     <AlertDialog
