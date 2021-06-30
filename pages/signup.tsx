@@ -1,13 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import {useRouter} from 'next/router'
 import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next'
 import axios from 'axios'
 
-import {useCookies} from 'react-cookie'
 import {useForm} from 'react-hook-form'
-import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
-import {login} from '@actions/authActions'
+import useUserRegister from '@hooks/user/useUserRegister'
 
 import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
@@ -28,43 +25,9 @@ const SignUp: NextPage<SignUpPageParams> = ({
   languages,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {register, handleSubmit, watch, errors, control, setValue} =
-    useForm<ISignupInputs>({
-      mode: 'onSubmit',
-      reValidateMode: 'onChange',
-      defaultValues: {},
-      resolver: undefined,
-      context: undefined,
-      criteriaMode: 'firstError',
-      shouldFocusError: true,
-      shouldUnregister: true,
-    })
+    useForm<ISignupInputs>()
   const watchPassword = watch('password')
-  const router = useRouter()
-  const dispatch = useAuthDispatch()
-  const [, setCookie] = useCookies(['session'])
-  const onSubmit = (data: ISignupInputs): void => {
-    axios
-      .post('/user/register', {user: data})
-      .then(res => {
-        if (res.status === 201) {
-          login(dispatch, res.data.user)
-          setCookie('session', res.data.token, {
-            path: '/',
-            // ? expiration date
-            //maxAge: 3600, // Expires after 1hr
-            sameSite: true,
-            //httpOnly: true,
-            //secure: true,
-          })
-          router.push('/')
-        } else {
-          console.log(res.data.error)
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+  const onSubmit = useUserRegister()
   return (
     <Container>
       <Head>
