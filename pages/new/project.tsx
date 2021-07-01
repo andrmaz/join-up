@@ -8,7 +8,6 @@ import Head from 'next/head'
 import {ParsedUrlQuery} from 'querystring'
 
 import {useForm} from 'react-hook-form'
-import {useAuthState} from '@hooks/auth/useAuthState'
 import useAddProject from '@hooks/add/useAddProject'
 
 import {parseCookies} from '@utils/parseCookies'
@@ -27,8 +26,6 @@ const Project: NextPage<ProjectPageParams> = ({
   token,
   technologies,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const {user} = useAuthState()
-  const {avatar, username} = {...user}
   const {register, handleSubmit, errors, control, setValue, reset} =
     useForm<IProjectInput>()
   const onSubmit = useAddProject(token)
@@ -50,26 +47,6 @@ const Project: NextPage<ProjectPageParams> = ({
             onSubmit={handleSubmit(onSubmit)}
             className='flex flex-col h-5/6 justify-evenly'
           >
-            <div className='h-1/6 flex flex-col justify-evenly'>
-              <label htmlFor='owner'>Owner: </label>
-              <div className='flex flex-row'>
-                <div className='h-6 w-6 pr-1'>
-                  <img
-                    src={avatar}
-                    alt='user'
-                    className='w-full h-full m-auto rounded-full object-cover'
-                  />
-                </div>
-                <select
-                  id='owner'
-                  name='owner'
-                  className='md:w-auto'
-                  ref={register({required: true})}
-                >
-                  <option value={username}>{username}</option>
-                </select>
-              </div>
-            </div>
             <FormInput
               type='text'
               id='name'

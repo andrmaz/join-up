@@ -7,8 +7,6 @@ import {useProjectProvider} from '@hooks/project/useProjectProvider'
 export type NestedStrings = NestedValue<string[]>
 
 export interface IProjectInput {
-  //? pass project owner for future use cases
-  owner: string
   name: string
   description: string
   technologies: NestedStrings
