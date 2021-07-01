@@ -1,4 +1,5 @@
 import {useAuthState} from '@hooks/auth/useAuthState'
+import UserAvatar from '@components/features/User/Avatar'
 import {FaUser, FaBitbucket, FaLinkedin} from 'react-icons/fa'
 import {FiGitlab} from 'react-icons/fi'
 import {GiOpenBook, GiTechnoHeart} from 'react-icons/gi'
@@ -21,11 +22,7 @@ const UserCard = (): JSX.Element => {
   return (
     <section className='sticky top-44 h-70v p-1'>
       <div className='h-60 xl:h-72 w-60 xl:w-72 mb-10'>
-        <img
-          className='h-full w-full rounded-full object-cover'
-          src={avatar}
-          alt='user'
-        />
+        <UserAvatar image={avatar} />
       </div>
       <ul className='h-auto w-full flex flex-col justify-around text-lg xl:text-xl'>
         <li className='flex py-1 my-1'>

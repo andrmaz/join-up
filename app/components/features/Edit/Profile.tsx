@@ -14,6 +14,7 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import Textarea from '@components/form/Textarea/Textarea'
 import CancelButton from '@components/form/Button/Cancel'
 import SnackBar from '@components/notifications/SnackBar/SnackBar'
+import UserAvatar from '@components/features/User/Avatar'
 
 import type {SettingPanelProps} from 'app/types/navigation'
 import type {IUserContext} from 'app/types/user'
@@ -94,11 +95,7 @@ const EditProfile = ({
             </div>
             <section className='w-2/5'>
               <div className='h-52 xl:h-60 w-52 xl:w-60 my-auto'>
-                <img
-                  className='w-full h-full m-auto rounded-full object-cover'
-                  src={avatar}
-                  alt='user'
-                />
+                <UserAvatar image={avatar} />
               </div>
             </section>
           </div>

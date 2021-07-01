@@ -2,6 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import {useAuthState} from '@hooks/auth/useAuthState'
 import {SignOutButton} from '@components/form/Button/SignOut'
+import UserAvatar from '@components/features/User/Avatar'
 
 export function Dropdown(): JSX.Element {
   const {user} = useAuthState()
@@ -28,11 +29,7 @@ export function Dropdown(): JSX.Element {
     <nav role='navigation' className='w-1/6' ref={ref}>
       <button className='flex-initial' onClick={toggleVisibility}>
         <div className='w-8 h-8'>
-          <img
-            className='w-full h-full m-auto rounded-full object-cover'
-            src={user?.avatar}
-            alt='user'
-          />
+          <UserAvatar image={user?.avatar} />
         </div>
       </button>
       {visible && (
