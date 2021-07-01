@@ -5,9 +5,15 @@ import Portal from '@components/containers/Portal/Portal'
 const Modal = ({
   children,
   height,
+  width = '1/2',
+  top = '32',
+  color = 'black',
 }: {
   children: React.ReactNode
   height: string
+  width?: string
+  top?: string
+  color?: string
 }): JSX.Element => (
   <Portal>
     <section
@@ -21,7 +27,7 @@ const Modal = ({
         aria-labelledby='dialog_label'
         aria-modal={true}
         aria-describedby='dialog_label'
-        className={`fixed h-${height} w-1/2 top-32 right-1/4 bg-white border-black border-2 rounded p-4`}
+        className={`fixed h-${height} w-${width} top-${top} right-1/4 bg-white border-${color} border-2 rounded p-4`}
       >
         {children}
       </article>
