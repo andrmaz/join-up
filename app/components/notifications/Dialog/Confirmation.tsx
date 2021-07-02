@@ -12,19 +12,15 @@ import {ConfirmButton} from '@components/form/Button/Confirm'
 import CloseButton from '@components/form/Button/Close'
 import SnackBar from '@components/notifications/SnackBar/SnackBar'
 
+import type {ConfirmDialogType} from 'app/types/notification'
+
 const ConfirmDialog = ({
   uid,
   title = 'Confirm your choice',
   message,
   showDialog,
   setShowDialog,
-}: {
-  uid: string
-  title?: string
-  message: string
-  showDialog: boolean
-  setShowDialog: React.Dispatch<React.SetStateAction<typeof showDialog>>
-}): JSX.Element => {
+}: ConfirmDialogType): JSX.Element => {
   const token = useSessionCookie()
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)

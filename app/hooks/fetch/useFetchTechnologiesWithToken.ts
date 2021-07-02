@@ -1,12 +1,12 @@
 import * as React from 'react'
 import axios, {Canceler} from 'axios'
-import type {SelectOptions} from 'app/types/form'
+import type {SelectOptionsType} from 'app/types/form'
 import type {TechnologiesResponseType} from 'app/types/response'
 
 export default function useFetchTechnologiesWithToken(
   token: string
-): SelectOptions[] {
-  const [options, setOptions] = React.useState<SelectOptions[]>([])
+): SelectOptionsType[] {
+  const [options, setOptions] = React.useState<SelectOptionsType[]>([])
   React.useEffect(() => {
     let cancel: Canceler
     ;(async () => {

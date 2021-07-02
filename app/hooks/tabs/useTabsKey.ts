@@ -2,14 +2,17 @@ import * as React from 'react'
 
 export const useTabsKey = (
   tabCount: number,
-  state: number,
-  setState: (position: number) => void
-): ReadonlyArray<any> => {
+  tab: number,
+  setTab: React.Dispatch<React.SetStateAction<number>>
+): readonly [
+  (event: React.KeyboardEvent<Element>) => void,
+  React.MutableRefObject<HTMLButtonElement | null>
+] => {
   const tabRef = React.useRef<HTMLButtonElement | null>(null)
   //* focus on the correct element programmatically when a user presses either one of the arrow keys
   React.useEffect(() => {
     tabRef.current?.focus()
-  }, [state])
+  }, [tab])
 
   //*** https://dev.to/eevajonnapanula/keyboard-accessible-tabs-with-react-5ch4 */
   //* helper function to handle focusing the correct tab
@@ -22,21 +25,21 @@ export const useTabsKey = (
     nextTab: number,
     lastTabInRound: number
   ): void => {
-    const tabToSelect = state === lastTabInRound ? firstTabInRound : nextTab
-    setState(tabToSelect)
+    const tabToSelect = tab === lastTabInRound ? firstTabInRound : nextTab
+    setTab(tabToSelect)
   }
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'ArrowUp') {
       const last = tabCount
-      const next = state - 1
+      const next = tab - 1
       handleNextTab(last, next, 0)
     }
     if (event.key === 'ArrowDown') {
       const first = 0
-      const next = state + 1
+      const next = tab + 1
       handleNextTab(first, next, tabCount)
     }
   }
-  return [handleKeyPress, tabRef] as const
+  return [handleKeyPress, tabRef] //as const
 }

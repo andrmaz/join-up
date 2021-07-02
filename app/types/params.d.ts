@@ -1,23 +1,27 @@
 import type {IProjectData} from 'app/types/project'
 import type {IPosistionData} from 'app/types/position'
-import {SelectOptions} from 'app/types/form'
+import {SelectOptionsType} from 'app/types/form'
 
-export type ProjectSlugPageParams = {
+export type ProtectedParamsType = {
+  token: string
+}
+
+export type SignUpParamsType = {
+  technologies: SelectOptionsType[]
+  languages: SelectOptionsType[]
+}
+
+export type SlugParamsType = {
   project: IProjectData
   positions: IPosistionData[]
 }
 
-export type SignUpPageParams = {
-  technologies: SelectOptions[]
-  languages: SelectOptions[]
+export type ProjectParamsType = {
+  token: string
+  technologies: SelectOptionsType[]
 }
 
-export type ProjectsPageParams = {
+export type ProjectsParamsType = {
   token: string
-  options: SelectOptions[]
-}
-
-export type ProjectPageParams = {
-  token: string
-  technologies: SelectOptions[]
+  options: SelectOptionsType[]
 }

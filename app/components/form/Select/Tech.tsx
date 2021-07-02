@@ -2,7 +2,7 @@ import * as React from 'react'
 import Select from 'react-select'
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@components/notifications/Message/Error'
-import type {IFormSelect, SelectOptions} from 'app/types/form'
+import type {IFormSelect, SelectOptionsType} from 'app/types/form'
 
 const TechSelect = ({
   options,
@@ -14,7 +14,7 @@ const TechSelect = ({
   defaultValue,
 }: IFormSelect): React.ReactElement => {
   return (
-    <>
+    <React.Fragment>
       <label id='technologies' htmlFor='technologies'>
         Technologies :
       </label>
@@ -44,7 +44,7 @@ const TechSelect = ({
             onChange={values => {
               setValue(
                 'technologies',
-                values.map((value: SelectOptions) => value.id),
+                values.map((value: SelectOptionsType) => value.id),
                 {
                   shouldValidate: true,
                   shouldDirty: true,
@@ -58,7 +58,7 @@ const TechSelect = ({
       {errors?.technologies && (
         <ErrorMessage>{errors?.technologies?.message}</ErrorMessage>
       )}
-    </>
+    </React.Fragment>
   )
 }
 

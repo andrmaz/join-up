@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {projectReducer} from '@reducers/projectReducer'
-import type {ProjectActions, ProjectContextType} from 'app/types/project'
+import type {ProjectActionsType, ProjectContextType} from 'app/types/project'
 
 const initialState = {
   projects: [],
@@ -14,10 +14,10 @@ const initialState = {
 
 export function useProjectReducer(): [
   ProjectContextType,
-  React.Dispatch<ProjectActions>
+  React.Dispatch<ProjectActionsType>
 ] {
   const [state, dispatch] = React.useReducer<
-    React.Reducer<ProjectContextType, ProjectActions>
+    React.Reducer<ProjectContextType, ProjectActionsType>
   >(projectReducer, initialState)
   return [state, dispatch]
 }

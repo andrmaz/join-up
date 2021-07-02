@@ -1,16 +1,8 @@
 import {FaCheckCircle} from 'react-icons/fa'
-
 import CloseButton from '@components/form/Button/Close'
+import type {SnackBarType} from 'app/types/notification'
 
-const SnackBar = ({
-  color,
-  message,
-  onClose,
-}: {
-  color: string
-  message: string
-  onClose: () => void
-}): JSX.Element => (
+const SnackBar = ({color, message, onClose}: SnackBarType): JSX.Element => (
   <section
     className={`absolute h-20 w-96 min-w-max bottom-6 left-4 p-2 bg-${color}-600 rounded`}
   >

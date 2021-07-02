@@ -1,12 +1,12 @@
 import {
-  PositionActions,
+  PositionActionsType,
   PositionStateType,
   IPosistionData,
 } from 'app/types/position'
 
 export function positionReducer(
   state: PositionStateType,
-  action: PositionActions
+  action: PositionActionsType
 ): PositionStateType {
   let index: number
   let positionCopy: IPosistionData | undefined

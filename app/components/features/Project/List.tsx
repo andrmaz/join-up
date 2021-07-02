@@ -1,18 +1,18 @@
 import Link from 'next/link'
 import ProjectPreview from '@components/features/Project/Preview'
 import {EmptyMessage} from '@components/notifications/Message/Empty'
-import type {IProjectData} from 'app/types/project'
+import type {ProjectStateType} from 'app/types/project'
 
 const ProjectsList = ({
   projects,
 }: {
-  projects: IProjectData[]
+  projects: ProjectStateType
 }): React.ReactElement => {
   return (
     <section className='pt-12'>
       {projects.length ? (
         <ul className='flex flex-col'>
-          {projects.map((project: IProjectData) => (
+          {projects.map(project => (
             <ProjectPreview key={project.id} project={project} />
           ))}
         </ul>

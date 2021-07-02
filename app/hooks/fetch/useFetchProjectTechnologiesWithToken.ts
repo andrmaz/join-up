@@ -1,12 +1,12 @@
 import * as React from 'react'
 import axios, {Canceler} from 'axios'
-import type {SelectOptions} from 'app/types/form'
+import type {SelectOptionsType} from 'app/types/form'
 import type {TechnologiesResponseType} from 'app/types/response'
 
 export default function useFetchProjectTechnologiesWithToken(
   token: string
-): SelectOptions[] {
-  const [options, setOptions] = React.useState<SelectOptions[]>([])
+): SelectOptionsType[] {
+  const [options, setOptions] = React.useState<SelectOptionsType[]>([])
   //* Store id in useRef Hook
   const id = React.useRef<string | null>(null)
   React.useEffect(() => {

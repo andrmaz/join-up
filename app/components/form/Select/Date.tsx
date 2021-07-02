@@ -1,9 +1,9 @@
-import {DrawerInputsProps} from 'app/types/navigation'
+import {DrawerInputsType} from 'app/types/navigation'
 
 export const DateSelect = ({
   register,
   isPending,
-}: DrawerInputsProps): JSX.Element => (
+}: DrawerInputsType): JSX.Element => (
   <div className='flex flex-col'>
     <label htmlFor='sort-by-date' className='xl:text-2xl'>
       Choose if you want to sort by date

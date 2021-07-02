@@ -1,10 +1,11 @@
 import {NestedValue} from 'react-hook-form'
-import {SelectOptions} from 'app/types/form'
+import {SelectOptionsType} from 'app/types/form'
+import React from 'react'
 export interface IPositionInput {
   projectId: string | null
   title: string
   description: string
-  technologies: NestedValue<SelectOptions[]>
+  technologies: NestedValue<SelectOptionsType[]>
   vacancies: number
   level: string
   role: string
@@ -13,10 +14,10 @@ export interface IPosistionData {
   id: string
   title: string
   description: string
-  technologies: NestedValue<SelectOptions[]>
+  technologies: NestedValue<SelectOptionsType[]>
   vacancies: number
-  level: SelectOptions
-  role: SelectOptions
+  level: SelectOptionsType
+  role: SelectOptionsType
   projectId: number
   userId: number
   applicants: number
@@ -26,17 +27,48 @@ export interface IPosistionData {
 
 export type PositionStateType = {positions: Array<IPosistionData>}
 
-export type PositionActions =
+export type PositionActionsType =
   | {type: 'add'; payload: IPosistionData}
   | {type: 'remove'; payload: string}
   | {type: 'edit'; payload: IPosistionData}
   | {type: 'persist'; payload: IPosistionData[]}
   | {type: 'clear'}
 
-export type PositionDispatch = (action: PositionActions) => void
-export type PositionProviderProps = {children: React.ReactNode}
+export type PositionDispatchType = (action: PositionActionsType) => void
 
 export type PositionContextType = {
   state: PositionStateType
-  dispatch: PositionDispatch
+  dispatch: PositionDispatchType
+}
+
+export type PositionOverviewType = {
+  isSelectedTab: boolean
+  index: number
+  position: IPosistionData
+}
+
+export type PositionPreviewType = {
+  index: number
+  isSelectedTab: boolean
+  setSelectedTab: React.Dispatch<React.SetStateAction<number>>
+  tabRef: React.MutableRefObject<HTMLButtonElement | null>
+  position: IPosistionData
+}
+
+export type PositionTabsType = {
+  positions: IPosistionData[]
+  selectedTab: number
+  setSelectedTab: React.Dispatch<React.SetStateAction<typeof selectedTab>>
+}
+
+export type EditPositoinType = {
+  position: IPosistionData
+  showModal: boolean
+  setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
+}
+
+export type RemovePositionType = {
+  uid: string
+  showDialog: boolean
+  setShowDialog: React.Dispatch<React.SetStateAction<typeof showDialog>>
 }

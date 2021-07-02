@@ -1,16 +1,12 @@
+import type {IMenuTab} from 'app/types/form'
+
 const Tab = ({
   children,
   isSelectedTab,
   index,
   tabRef,
   setSelectedTab,
-}: {
-  children: React.ReactNode
-  isSelectedTab: boolean
-  index: number
-  tabRef: React.Ref<never>
-  setSelectedTab: (position: number) => void
-}): JSX.Element => (
+}: IMenuTab): JSX.Element => (
   <button
     role='tab'
     aria-selected={isSelectedTab}

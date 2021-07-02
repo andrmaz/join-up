@@ -1,9 +1,9 @@
-import {DrawerInputsProps} from 'app/types/navigation'
+import {DrawerInputsType} from 'app/types/navigation'
 
 export const RadioInput = ({
   register,
   isPending,
-}: DrawerInputsProps): JSX.Element => (
+}: DrawerInputsType): JSX.Element => (
   <div className='mt-4'>
     <p className='xl:text-2xl'>
       Please select how you want to match technologies:

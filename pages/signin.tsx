@@ -8,10 +8,10 @@ import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
 import {SubmitButton} from '@components/form/Button/Submit'
 
-import type {SigninInputs} from 'app/types/user'
+import type {ISigninInputs} from 'app/types/user'
 
 const SignIn = (): JSX.Element => {
-  const {register, handleSubmit, errors} = useForm<SigninInputs>()
+  const {register, handleSubmit, errors} = useForm<ISigninInputs>()
   const onSubmit = useUserLogin()
   return (
     <Container>

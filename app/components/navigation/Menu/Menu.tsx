@@ -1,13 +1,14 @@
 import {useTabsKey} from '@hooks/tabs/useTabsKey'
 import Item from '@components/navigation/Menu/Item'
 import items from '@data/menuItems'
+import React from 'react'
 
 const Menu = ({
   selectedTab,
   setSelectedTab,
 }: {
   selectedTab: number
-  setSelectedTab: (position: number) => void
+  setSelectedTab: React.Dispatch<React.SetStateAction<typeof selectedTab>>
 }): JSX.Element => {
   const [handleKeyPress, tabRef] = useTabsKey(
     items.length - 1,

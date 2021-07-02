@@ -5,9 +5,9 @@ import {useCookies} from 'react-cookie'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {edit} from '@actions/authActions'
 
-import type {IEditUsername} from 'app/types/edit'
+import type {IEditUsername} from 'app/types/user'
 import type {IUserContext} from 'app/types/user'
-import type {EditTokenResponseType} from 'app/types/response'
+import type {UserResponseType} from 'app/types/response'
 
 export default function useEditUsername(
   token: string
@@ -28,7 +28,7 @@ export default function useEditUsername(
   }
   const onSubmit = async (data: IEditUsername): Promise<IUserContext> => {
     try {
-      const response = await axios.patch<EditTokenResponseType>(
+      const response = await axios.patch<UserResponseType>(
         '/user/username',
         {user: data},
         {

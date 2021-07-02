@@ -1,7 +1,7 @@
-import type {NestedOptions} from 'app/types/form'
-import type {NestedStrings} from 'app/types/project'
+import type {NestedOptionsType} from 'app/types/form'
+import type {NestedStringsType} from 'app/types/project'
 
-export type SigninInputs = {
+export interface ISigninInputs {
   email: string
   password: string
 }
@@ -15,8 +15,8 @@ export interface ISignupInputs {
   gitlabURL?: string
   bitbucketURL?: string
   linkedinURL?: string
-  languages: NestedStrings
-  technologies: NestedStrings
+  languages: NestedStringsType
+  technologies: NestedStringsType
   bio?: string
 }
 export interface IUserContext {
@@ -29,21 +29,33 @@ export interface IUserContext {
   linkedinURL?: string
   avatar: string
   bio?: string
-  languages: NestedOptions
-  technologies: NestedOptions
+  languages: NestedOptionsType
+  technologies: NestedOptionsType
 }
 
-export type UserData = IUserContext | null
+export type UserDataType = IUserContext | null
 
 export type UserState = {
-  user: UserData
+  user: UserDataType
 }
 
-export type UserActions =
+export type UserActionsType =
   | {type: 'login'; payload: IUserContext}
   | {type: 'logout'}
   | {type: 'edit'; payload: IUserContext}
 
-export type UserDispatch = (action: UserActions) => void
+export type UserDispatchType = (action: UserActionsType) => void
 
-export type UserProviderProps = {children: React.ReactNode}
+export interface IEditUsername {
+  newUsername: string
+  password: string
+}
+export interface IEditEmail {
+  newEmail: string
+  password: string
+}
+export interface IEditPassword {
+  currentPassword: string
+  newPassword: string
+  newPasswordConfirm: string
+}

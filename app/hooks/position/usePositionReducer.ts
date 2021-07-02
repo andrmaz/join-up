@@ -1,14 +1,14 @@
 import * as React from 'react'
 
 import {positionReducer} from '@reducers/positionReducer'
-import {PositionStateType, PositionActions} from 'app/types/position'
+import {PositionStateType, PositionActionsType} from 'app/types/position'
 
 export function usePositionReducer(): [
   PositionStateType,
-  React.Dispatch<PositionActions>
+  React.Dispatch<PositionActionsType>
 ] {
   const [state, dispatch] = React.useReducer<
-    React.Reducer<PositionStateType, PositionActions>
+    React.Reducer<PositionStateType, PositionActionsType>
   >(positionReducer, {positions: []})
   return [state, dispatch]
 }

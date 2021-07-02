@@ -2,7 +2,7 @@ const Textarea = ({
   register,
   defaultValue,
 }: {
-  register: (Ref: any) => void
+  register: React.LegacyRef<HTMLTextAreaElement> | undefined
   defaultValue?: string
 }): JSX.Element => (
   <article className='h-1/5'>

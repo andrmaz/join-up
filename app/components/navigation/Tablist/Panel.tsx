@@ -1,12 +1,6 @@
-const Panel = ({
-  children,
-  index,
-  isSelectedTab,
-}: {
-  children: React.ReactNode
-  index: number
-  isSelectedTab: boolean
-}): JSX.Element => (
+import type {IMenuPanel} from 'app/types/form'
+
+const Panel = ({children, index, isSelectedTab}: IMenuPanel): JSX.Element => (
   <section
     id={`panel-${index}`}
     role='tabpanel'

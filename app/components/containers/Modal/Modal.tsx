@@ -2,19 +2,15 @@ import * as React from 'react'
 
 import Portal from '@components/containers/Portal/Portal'
 
+import type {ModalPropsType} from 'app/types/container'
+
 const Modal = ({
   children,
   height,
   width = '1/2',
   top = '32',
   color = 'black',
-}: {
-  children: React.ReactNode
-  height: string
-  width?: string
-  top?: string
-  color?: string
-}): JSX.Element => (
+}: ModalPropsType): JSX.Element => (
   <Portal>
     <section
       id='dialog_layer'

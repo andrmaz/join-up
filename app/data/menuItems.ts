@@ -1,4 +1,4 @@
-const items = [
+const items: {value: string; label: string}[] = [
   {value: 'profile', label: 'Profile'},
   {value: 'username', label: 'Username'},
   {value: 'emails', label: 'Emails'},

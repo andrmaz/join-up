@@ -1,12 +1,12 @@
 import {
-  ProjectActions,
+  ProjectActionsType,
   ProjectContextType,
   IProjectData,
 } from 'app/types/project'
 
 export function projectReducer(
   state: ProjectContextType,
-  action: ProjectActions
+  action: ProjectActionsType
 ): ProjectContextType {
   let index: number
   let projectCopy: IProjectData | undefined

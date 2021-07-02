@@ -1,11 +1,11 @@
-import type {SaveButton} from 'app/types/form'
+import type {ConfirmButtonType} from 'app/types/form'
 
 export const ConfirmButton = ({
   children = 'Save',
   errors = false,
   bgColor = 'green',
   onClickAction,
-}: SaveButton): JSX.Element => (
+}: ConfirmButtonType): JSX.Element => (
   <button
     type='button'
     onClick={onClickAction}

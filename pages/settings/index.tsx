@@ -17,11 +17,14 @@ import Menu from '@components/navigation/Menu/Menu'
 import Panel from '@components/navigation/Tablist/Panel'
 
 import EditProfile from '@components/features/Edit/Profile'
+
+import type {ProtectedParamsType} from 'app/types/params'
+
 const EditUsername = dynamic(() => import('@components/features/Edit/Username'))
 const EditEmail = dynamic(() => import('@components/features/Edit/Email'))
 const EditPassword = dynamic(() => import('@components/features/Edit/Password'))
 
-const Settings: NextPage = ({
+const Settings: NextPage<ProtectedParamsType> = ({
   token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [selectedTab, setSelectedTab] = React.useState<number>(0)
@@ -68,27 +71,26 @@ const Settings: NextPage = ({
 
 export default Settings
 
-export const getServerSideProps: GetServerSideProps = async (
-  context: GetServerSidePropsContext<ParsedUrlQuery>
-) => {
-  //* Get the user's session based on the request
-  const {session: token} = parseCookies(context.req)
+export const getServerSideProps: GetServerSideProps<ProtectedParamsType> =
+  async (context: GetServerSidePropsContext<ParsedUrlQuery>) => {
+    //* Get the user's session based on the request
+    const {session: token} = parseCookies(context.req)
 
-  //* If no user, redirect to login
-  if (!token) {
+    //* If no user, redirect to login
+    if (!token) {
+      return {
+        props: {},
+        redirect: {
+          destination: '/signin',
+          permanent: false,
+        },
+      }
+    }
+
+    //* return user token
     return {
-      props: {},
-      redirect: {
-        destination: '/signin',
-        permanent: false,
+      props: {
+        token,
       },
     }
   }
-
-  //* return user token
-  return {
-    props: {
-      token,
-    },
-  }
-}

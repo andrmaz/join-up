@@ -18,9 +18,9 @@ import type {
   TechnologiesResponseType,
   LanguagesResponseType,
 } from 'app/types/response'
-import type {SignUpPageParams} from 'app/types/params'
+import type {SignUpParamsType} from 'app/types/params'
 
-const SignUp: NextPage<SignUpPageParams> = ({
+const SignUp: NextPage<SignUpParamsType> = ({
   technologies,
   languages,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -192,7 +192,7 @@ const SignUp: NextPage<SignUpPageParams> = ({
 
 export default SignUp
 
-export const getServerSideProps: GetServerSideProps<SignUpPageParams> =
+export const getServerSideProps: GetServerSideProps<SignUpParamsType> =
   async () => {
     const {
       data: {technologies},

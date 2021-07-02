@@ -1,7 +1,7 @@
 import * as React from 'react'
-import axios, {AxiosResponse} from 'axios'
+import axios from 'axios'
 
-import type {IEditPassword} from 'app/types/edit'
+import type {IEditPassword} from 'app/types/user'
 import type {StatusResponseType} from 'app/types/response'
 
 export default function useEditUserPassword(
@@ -21,7 +21,7 @@ export default function useEditUserPassword(
   }
   const onSubmit = async (data: IEditPassword): Promise<StatusResponseType> => {
     try {
-      const response: AxiosResponse<StatusResponseType> = await axios.patch(
+      const response = await axios.patch<StatusResponseType>(
         '/user/password',
         {user: data},
         {

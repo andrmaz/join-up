@@ -4,7 +4,7 @@ import Select from 'react-select'
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@components/notifications/Message/Error'
 
-import type {IDefaultSelect, SelectOptions} from 'app/types/form'
+import type {IDefaultSelect, SelectOptionsType} from 'app/types/form'
 
 const DefaultSelect = ({
   id,
@@ -14,7 +14,9 @@ const DefaultSelect = ({
   errors,
   defaultValue,
 }: IDefaultSelect): React.ReactElement => {
-  const [options, setOptions] = React.useState<SelectOptions[] | undefined>()
+  const [options, setOptions] = React.useState<
+    SelectOptionsType[] | undefined
+  >()
   //* Set technologies options to State as soon as the modal is shown
   const fetchOptions = React.useCallback(async () => {
     const {data} = await axios.get(`/${name}`) // level, role
@@ -53,7 +55,7 @@ const DefaultSelect = ({
             options={options}
             getOptionValue={option => option['id']}
             blurInputOnSelect={false}
-            onChange={(value: SelectOptions) => {
+            onChange={(value: SelectOptionsType) => {
               setValue(name, value.id, {
                 shouldValidate: true,
                 shouldDirty: true,

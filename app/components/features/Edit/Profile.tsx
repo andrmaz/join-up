@@ -16,13 +16,10 @@ import CancelButton from '@components/form/Button/Cancel'
 import SnackBar from '@components/notifications/SnackBar/SnackBar'
 import UserAvatar from '@components/features/User/Avatar'
 
-import type {SettingPanelProps} from 'app/types/navigation'
+import type {PanelPropsType} from 'app/types/navigation'
 import type {IUserContext} from 'app/types/user'
 
-const EditProfile = ({
-  token,
-  isSelectedTab,
-}: SettingPanelProps): JSX.Element => {
+const EditProfile = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
   const {user} = useAuthState()
   const {
     avatar,

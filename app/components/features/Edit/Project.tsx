@@ -13,17 +13,13 @@ import TechSelect from '@components/form/Select/Tech'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
-import type {IProjectData} from 'app/types/project'
+import type {IProjectData, EditProjectType} from 'app/types/project'
 
 const EditProject = ({
   showModal,
   setShowModal,
   project: {id, name, description, technologies, collaborators, projectURL},
-}: {
-  showModal: boolean
-  setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
-  project: IProjectData
-}): React.ReactElement => {
+}: EditProjectType): React.ReactElement => {
   const token = useSessionCookie()
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)

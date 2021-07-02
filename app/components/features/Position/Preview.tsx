@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Tab from '@components/navigation/Tablist/Tab'
-import type {IPosistionData} from 'app/types/position'
+import type {PositionPreviewType} from 'app/types/position'
 
 const PositionPreview = ({
   index,
@@ -8,13 +8,7 @@ const PositionPreview = ({
   setSelectedTab,
   tabRef,
   position: {title, createdAt, vacancies, updatedAt},
-}: {
-  index: number
-  isSelectedTab: boolean
-  setSelectedTab: (position: number) => void
-  tabRef: React.Ref<never>
-  position: IPosistionData
-}): React.ReactElement => (
+}: PositionPreviewType): React.ReactElement => (
   <Tab
     isSelectedTab={isSelectedTab}
     index={index}

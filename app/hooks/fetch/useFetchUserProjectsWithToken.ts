@@ -1,11 +1,12 @@
 import * as React from 'react'
 import axios, {Canceler} from 'axios'
 import {useProjectContext} from '@hooks/project/useProjectContext'
-import type {ProjectState} from 'app/types/project'
+import type {ProjectStateType} from 'app/types/project'
+import type {ProjectsResponseType} from 'app/types/response'
 
 export default function useFetchUserProjectsWithToken(
   token: string
-): ProjectState {
+): ProjectStateType {
   const {projects, persist, clear} = useProjectContext()
   React.useEffect(() => {
     let cancel: Canceler
@@ -13,7 +14,7 @@ export default function useFetchUserProjectsWithToken(
       try {
         const {
           data: {projects},
-        } = await axios.get('/project/user', {
+        } = await axios.get<ProjectsResponseType>('/project/user', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
