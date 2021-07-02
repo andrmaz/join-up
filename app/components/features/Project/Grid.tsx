@@ -1,6 +1,6 @@
 import * as React from 'react'
 import ProjectCard from '@components/features/Project/Card'
-import type {AsyncData} from 'app/types/project'
+import type {AsyncDataType} from 'app/types/async'
 import type {IProjectData} from 'app/types/project'
 
 const ProjectsGrid = ({
@@ -8,7 +8,7 @@ const ProjectsGrid = ({
   projects,
 }: {
   status: string
-  projects: AsyncData
+  projects: AsyncDataType
 }): JSX.Element => (
   <section className='w-200 min-h-screen h-auto'>
     <div className='grid grid-cols-2 xl:grid-cols-3 gap-4 py-2 px-1'>

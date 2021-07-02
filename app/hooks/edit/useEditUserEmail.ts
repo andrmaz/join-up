@@ -6,8 +6,8 @@ import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 
 import {edit} from '@actions/authActions'
 
-import type {IEditEmail} from 'app/types/edit'
-import type {EditTokenResponseType} from 'app/types/response'
+import type {IEditEmail} from 'app/types/user'
+import type {UserResponseType} from 'app/types/response'
 import type {IUserContext} from 'app/types/user'
 
 export default function useEditUserEmail(
@@ -29,7 +29,7 @@ export default function useEditUserEmail(
   const [, setCookie] = useCookies(['session'])
   const onSubmit = async (data: IEditEmail): Promise<IUserContext> => {
     try {
-      const response = await axios.patch<EditTokenResponseType>(
+      const response = await axios.patch<UserResponseType>(
         '/user/email',
         {user: data},
         {

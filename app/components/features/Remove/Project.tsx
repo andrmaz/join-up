@@ -2,16 +2,13 @@ import * as React from 'react'
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useRemoveProject from '@hooks/remove/useRemoveProject'
 import AlertDialog from '@components/notifications/Dialog/Alert'
+import type {RemoveProjectType} from 'app/types/project'
 
 const RemoveProject = ({
   uid,
   showDialog,
   setShowDialog,
-}: {
-  uid: string
-  showDialog: boolean
-  setShowDialog: React.Dispatch<React.SetStateAction<typeof showDialog>>
-}): JSX.Element => {
+}: RemoveProjectType): JSX.Element => {
   const token = useSessionCookie()
   const handleConfirm = useRemoveProject(token, uid, setShowDialog)
   return (

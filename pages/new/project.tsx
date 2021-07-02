@@ -20,9 +20,9 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
 import type {IProjectInput} from 'app/types/project'
-import type {ProjectPageParams} from 'app/types/params'
+import type {ProjectParamsType} from 'app/types/params'
 
-const Project: NextPage<ProjectPageParams> = ({
+const Project: NextPage<ProjectParamsType> = ({
   token,
   technologies,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -124,7 +124,7 @@ const Project: NextPage<ProjectPageParams> = ({
 
 export default Project
 
-export const getServerSideProps: GetServerSideProps<ProjectPageParams> = async (
+export const getServerSideProps: GetServerSideProps<ProjectParamsType> = async (
   context: GetServerSidePropsContext<ParsedUrlQuery>
 ) => {
   //* Get the user's session based on the request

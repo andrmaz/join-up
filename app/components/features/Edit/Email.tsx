@@ -9,10 +9,10 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 import SnackBar from '@components/notifications/SnackBar/SnackBar'
 
-import type {SettingPanelProps} from 'app/types/navigation'
-import type {IEditEmail} from 'app/types/edit'
+import type {PanelPropsType} from 'app/types/navigation'
+import type {IEditEmail} from 'app/types/user'
 
-const EditEmail = ({token, isSelectedTab}: SettingPanelProps): JSX.Element => {
+const EditEmail = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
   const {handleSubmit, register, errors, reset} = useForm<IEditEmail>()
   const [isSuccess, successMessage, handleClose, onSubmit] =
     useEditUserEmail(token)

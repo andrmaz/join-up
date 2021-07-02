@@ -3,16 +3,16 @@ import {useRouter} from 'next/router'
 import {useCookies} from 'react-cookie'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {login} from '@actions/authActions'
-import type {SigninInputs} from 'app/types/user'
+import type {ISigninInputs} from 'app/types/user'
 import type {UserResponseType} from 'app/types/response'
 
 export default function useUserLogin(): (
-  data: SigninInputs
+  data: ISigninInputs
 ) => Promise<UserResponseType> {
   const router = useRouter()
   const dispatch = useAuthDispatch()
   const [, setCookie] = useCookies(['session'])
-  const onSubmit = async (data: SigninInputs): Promise<UserResponseType> => {
+  const onSubmit = async (data: ISigninInputs): Promise<UserResponseType> => {
     try {
       const response = await axios.post<UserResponseType>('/user/login', {
         user: data,

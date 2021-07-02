@@ -1,17 +1,13 @@
 import * as React from 'react'
 import {useTabsKey} from '@hooks/tabs/useTabsKey'
 import PositionPreview from '@components/features/Position/Preview'
-import type {IPosistionData} from 'app/types/position'
+import type {PositionTabsType} from 'app/types/position'
 
 const PositionTabs = ({
   positions,
   selectedTab,
   setSelectedTab,
-}: {
-  positions: IPosistionData[]
-  selectedTab: number
-  setSelectedTab: (position: number) => void
-}): React.ReactElement => {
+}: PositionTabsType): React.ReactElement => {
   const [handleKeyPress, tabRef] = useTabsKey(
     positions.length - 1,
     selectedTab,

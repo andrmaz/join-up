@@ -18,9 +18,9 @@ import Container from '@components/containers/Container/Container'
 import ProjectsGrid from '@components/features/Project/Grid'
 import Drawer from '@components/navigation/Drawer/Drawer'
 
-import type {ProjectsPageParams} from 'app/types/params'
+import type {ProjectsParamsType} from 'app/types/params'
 
-const Projects: NextPage<ProjectsPageParams> = ({
+const Projects: NextPage<ProjectsParamsType> = ({
   token,
   options,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -57,7 +57,7 @@ const Projects: NextPage<ProjectsPageParams> = ({
 
 export default Projects
 
-export const getServerSideProps: GetServerSideProps<ProjectsPageParams> =
+export const getServerSideProps: GetServerSideProps<ProjectsParamsType> =
   async (context: GetServerSidePropsContext<ParsedUrlQuery>) => {
     //* Get the user's session based on the request
     const {session: token} = parseCookies(context.req)

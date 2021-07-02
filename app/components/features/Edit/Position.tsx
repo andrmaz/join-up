@@ -16,7 +16,7 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 import CloseModalButton from '@components/form/Button/Close'
 
-import type {IPosistionData, IPositionInput} from 'app/types/position'
+import type {EditPositoinType, IPositionInput} from 'app/types/position'
 
 const EditPosition = ({
   position: {
@@ -31,11 +31,7 @@ const EditPosition = ({
   },
   showModal,
   setShowModal,
-}: {
-  position: IPosistionData
-  showModal: boolean
-  setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
-}): React.ReactElement => {
+}: EditPositoinType): React.ReactElement => {
   const token = useSessionCookie()
   const {register, handleSubmit, control, setValue, reset, errors} =
     useForm<IPositionInput>()

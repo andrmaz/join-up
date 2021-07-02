@@ -1,13 +1,14 @@
 import * as React from 'react'
 import axios, {Canceler} from 'axios'
 import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
-import type {NestedStrings, AsyncState} from 'app/types/project'
+import type {NestedStringsType} from 'app/types/project'
+import type {AsyncStateType} from 'app/types/async'
 import type {ProjectsResponseType} from 'app/types/response'
 
 export default function useFetchProjectsWithToken(
   token: string,
-  fields: {[x: string]: NestedStrings}
-): readonly [AsyncState, NestedStrings] {
+  fields: {[x: string]: NestedStringsType}
+): readonly [AsyncStateType, NestedStringsType] {
   const [state, dispatch] = useAsyncReducer()
   const {date, match, available, technologies} = fields
   const fetchProjectsWithToken = React.useCallback(async () => {

@@ -16,17 +16,13 @@ const ConfirmDialog = dynamic(
 )
 const EditPosition = dynamic(() => import('@components/features/Edit/Position'))
 
-import type {IPosistionData} from 'app/types/position'
+import type {PositionOverviewType} from 'app/types/position'
 
 const PositionOverview = ({
   isSelectedTab,
   index,
   position,
-}: {
-  isSelectedTab: boolean
-  index: number
-  position: IPosistionData
-}): JSX.Element => {
+}: PositionOverviewType): JSX.Element => {
   const {user} = useAuthState()
   const [showConfirmDialog, setShowConfirmDialog] =
     React.useState<boolean>(false)

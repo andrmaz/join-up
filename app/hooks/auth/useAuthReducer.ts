@@ -1,14 +1,16 @@
 import * as React from 'react'
 
 import {authReducer} from '@reducers/authReducer'
-import {UserState, UserActions} from 'app/types/user'
+import {UserState, UserActionsType} from 'app/types/user'
 
 export function useAuthReducer(): [
   UserState,
-  React.Dispatch<UserActions>,
+  React.Dispatch<UserActionsType>,
   React.EffectCallback
 ] {
-  const [state, dispatch] = React.useReducer(authReducer, {user: null})
+  const [state, dispatch] = React.useReducer<
+    React.Reducer<UserState, UserActionsType>
+  >(authReducer, {user: null})
   const {user} = state
   const serializedUser = JSON.stringify(user)
   const updateLocalStorage = React.useCallback(() => {

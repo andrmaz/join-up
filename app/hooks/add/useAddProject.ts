@@ -13,7 +13,7 @@ export default function useAddProject(
     data: IProjectInput
   ): Promise<ProjectResponseType> => {
     try {
-      const response = await axios.post(
+      const response = await axios.post<ProjectResponseType>(
         '/project',
         {
           project: data,

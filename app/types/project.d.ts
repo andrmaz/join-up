@@ -1,15 +1,15 @@
 import {NestedValue} from 'react-hook-form'
 import {IUserContext} from 'app/types/user'
-import {NestedOptions} from 'app/types/form'
+import {NestedOptionsType} from 'app/types/form'
 import {useProjectProvider} from '@hooks/project/useProjectProvider'
 
 // https://github.com/react-hook-form/react-hook-form/issues/987
-export type NestedStrings = NestedValue<string[]>
+export type NestedStringsType = NestedValue<string[]>
 
 export interface IProjectInput {
   name: string
   description: string
-  technologies: NestedStrings
+  technologies: NestedStringsType
   projectURL?: string
 }
 
@@ -17,7 +17,7 @@ export interface IProjectData {
   id: string
   name: string
   description: string
-  technologies: NestedOptions
+  technologies: NestedOptionsType
   projectURL?: string
   owner: number
   collaborators: Array<IUserContext>
@@ -25,17 +25,17 @@ export interface IProjectData {
   createdAt: string
   updatedAt: string
 }
-export type ProjectActions =
+export type ProjectActionsType =
   | {type: 'add'; payload: IProjectData}
   | {type: 'remove'; payload: string}
   | {type: 'edit'; payload: IProjectData}
   | {type: 'persist'; payload: IProjectData[]}
   | {type: 'clear'}
 
-export type ProjectState = Array<IProjectData>
+export type ProjectStateType = Array<IProjectData>
 
 export type ProjectContextType = {
-  projects: ProjectState
+  projects: ProjectStateType
   add: (data: IProjectData) => void
   remove: (id: string) => void
   edit: (data: IProjectData) => void
@@ -43,20 +43,16 @@ export type ProjectContextType = {
   clear: () => void
 }
 
-export type ProjectProviderProps = {children: React.ReactNode}
-
 export type UseProjectContextResults = ReturnType<typeof useProjectProvider>
 
-export type AsyncData = IProjectData[] | undefined
-
-export type AsyncState = {
-  status: string
-  data: AsyncData
-  error: string | null
+export type EditProjectType = {
+  showModal: boolean
+  setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
+  project: IProjectData
 }
 
-export type AsyncActions =
-  | {type: 'idle'}
-  | {type: 'pending'}
-  | {type: 'resolved'; payload: AsyncData}
-  | {type: 'rejected'; payload: string}
+export type RemoveProjectType = {
+  uid: string
+  showDialog: boolean
+  setShowDialog: React.Dispatch<React.SetStateAction<typeof showDialog>>
+}

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Tab from '@components/navigation/Tablist/Tab'
+import type {IMenuItem} from 'app/types/form'
 
 const Item = ({
   label,
@@ -7,13 +8,7 @@ const Item = ({
   tabRef,
   isSelectedTab,
   setSelectedTab,
-}: {
-  label: string
-  index: number
-  tabRef: React.Ref<never>
-  isSelectedTab: boolean
-  setSelectedTab: (position: number) => void
-}): React.ReactElement => (
+}: IMenuItem): React.ReactElement => (
   <Tab
     index={index}
     tabRef={tabRef}

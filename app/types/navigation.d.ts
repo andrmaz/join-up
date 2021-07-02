@@ -1,26 +1,26 @@
 import {Control} from 'react-hook-form'
-import type {SelectOptions} from 'app/types/form'
-import type {NestedStrings} from 'app/types/project'
+import type {SelectOptionsType} from 'app/types/form'
+import type {NestedStringsType} from 'app/types/project'
 
 export interface IDrawerProps {
-  register: (Ref: any) => void
+  register: React.Ref<T>
   isPending: boolean
-  options: SelectOptions[]
+  options: SelectOptionsType[]
   setValue: (
-    name: any,
+    name: string,
     value: unknown,
     config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
   ) => void
   control: Control
-  technologies: NestedStrings
+  technologies: NestedStringsType
 }
 
-export type DrawerInputsProps = {
-  register: (Ref: any) => void
+export type DrawerInputsType = {
+  register: React.Ref<T>
   isPending: boolean
 }
 
-export type SettingPanelProps = {
+export type PanelPropsType = {
   token: string
   isSelectedTab: boolean
 }

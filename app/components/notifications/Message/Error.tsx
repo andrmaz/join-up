@@ -1,10 +1,8 @@
 import * as React from 'react'
 
-type Props = {
-  children: React.ReactNode
-}
+import type {ContainerPropsType} from 'app/types/container'
 
-const ErrorMessage = ({children}: Props): JSX.Element => {
+const ErrorMessage = ({children}: ContainerPropsType): JSX.Element => {
   return (
     <div role='alert' className='text-red-500'>
       {children}

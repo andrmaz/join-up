@@ -20,9 +20,9 @@ import type {
   ProjectResponseType,
   PositionsResponseType,
 } from 'app/types/response'
-import type {ProjectSlugPageParams} from 'app/types/params'
+import type {SlugParamsType} from 'app/types/params'
 
-const Slug: NextPage<ProjectSlugPageParams> = ({
+const Slug: NextPage<SlugParamsType> = ({
   project,
   positions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -65,7 +65,7 @@ const Slug: NextPage<ProjectSlugPageParams> = ({
 
 export default Slug
 
-export const getServerSideProps: GetServerSideProps<ProjectSlugPageParams> =
+export const getServerSideProps: GetServerSideProps<SlugParamsType> =
   async context => {
     //* Get the user's session based on the request
     const {session: token} = parseCookies(context.req)

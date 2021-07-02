@@ -1,14 +1,10 @@
+import type {ActionButtonType} from 'app/types/form'
 export const ActionButton = ({
   children,
   action,
   tabIndex,
   bgColor = 'blue',
-}: {
-  children: string
-  action: () => void
-  tabIndex?: number
-  bgColor?: string
-}): JSX.Element => (
+}: ActionButtonType): JSX.Element => (
   <button
     tabIndex={tabIndex}
     type='button'

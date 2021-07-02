@@ -2,16 +2,13 @@ import * as React from 'react'
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useRemovePosition from '@hooks/remove/useRemovePosition'
 import AlertDialog from '@components/notifications/Dialog/Alert'
+import type {RemovePositionType} from 'app/types/position'
 
 const RemovePosition = ({
   uid,
   showDialog,
   setShowDialog,
-}: {
-  uid: string
-  showDialog: boolean
-  setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
-}): JSX.Element => {
+}: RemovePositionType): JSX.Element => {
   const token = useSessionCookie()
   const handleConfirm = useRemovePosition(token, uid, setShowDialog)
   return (

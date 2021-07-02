@@ -9,13 +9,10 @@ import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 import SnackBar from '@components/notifications/SnackBar/SnackBar'
 
-import type {SettingPanelProps} from 'app/types/navigation'
-import type {IEditPassword} from 'app/types/edit'
+import type {PanelPropsType} from 'app/types/navigation'
+import type {IEditPassword} from 'app/types/user'
 
-const EditPassword = ({
-  token,
-  isSelectedTab,
-}: SettingPanelProps): JSX.Element => {
+const EditPassword = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
   const {handleSubmit, register, errors, watch, reset} =
     useForm<IEditPassword>()
   const watchPassword = watch('newPassword')

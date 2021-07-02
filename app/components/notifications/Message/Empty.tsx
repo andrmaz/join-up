@@ -1,10 +1,8 @@
 import * as React from 'react'
 
-type Props = {
-  children: React.ReactNode
-}
+import type {ContainerPropsType} from 'app/types/container'
 
-export const EmptyMessage = ({children}: Props): JSX.Element => (
+export const EmptyMessage = ({children}: ContainerPropsType): JSX.Element => (
   <div className='w-full flex justify-center'>
     <span className='xl:text-xl text-center tracking-wide text-blue-500'>
       {children}

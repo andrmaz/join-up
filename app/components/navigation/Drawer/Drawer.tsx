@@ -6,7 +6,7 @@ import {CheckboxInput} from '@components/form/Input/Checkbox'
 
 import {IDrawerProps} from 'app/types/navigation'
 
-const ProjectDrawer = ({
+const Drawer = ({
   register,
   isPending,
   options,
@@ -31,7 +31,7 @@ const ProjectDrawer = ({
   </section>
 )
 
-export default React.memo(ProjectDrawer, (prevProps, nextProps) => {
+export default React.memo(Drawer, (prevProps, nextProps) => {
   /*
   return true if passing nextProps to render would return
   the same result as passing prevProps to render,

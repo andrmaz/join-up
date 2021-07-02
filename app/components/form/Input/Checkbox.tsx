@@ -1,9 +1,9 @@
-import {DrawerInputsProps} from 'app/types/navigation'
+import {DrawerInputsType} from 'app/types/navigation'
 
 export const CheckboxInput = ({
   register,
   isPending,
-}: DrawerInputsProps): JSX.Element => (
+}: DrawerInputsType): JSX.Element => (
   <div className='my-4'>
     <p className='xl:text-2xl'>
       Check if you want to only see available positions:

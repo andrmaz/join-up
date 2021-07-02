@@ -12,7 +12,7 @@ export async function fetchTechnologiesWithToken(
   token: string
 ): Promise<TechnologiesResponseType> {
   try {
-    const response = await axios.get('/technology', {
+    const response = await axios.get<TechnologiesResponseType>('/technology', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -28,7 +28,7 @@ export async function fetchLanguagesWithToken(
   token: string
 ): Promise<LanguagesResponseType> {
   try {
-    const response = await axios.get('/language', {
+    const response = await axios.get<LanguagesResponseType>('/language', {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -16,9 +16,9 @@ import Wrapper from '@components/containers/Wrapper/Wrapper'
 import UserCard from '@components/features/User/Card'
 import ProjectsList from '@components/features/Project/List'
 
-type Props = {token: string}
+import type {ProtectedParamsType} from 'app/types/params'
 
-const Profile: NextPage<Props> = ({
+const Profile: NextPage<ProtectedParamsType> = ({
   token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const projects = useFetchUserProjectsWithToken(token)
@@ -49,25 +49,24 @@ const Profile: NextPage<Props> = ({
 
 export default Profile
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
-  context: GetServerSidePropsContext<ParsedUrlQuery>
-) => {
-  //* Get the user's session based on the request
-  const {session: token} = parseCookies(context.req)
+export const getServerSideProps: GetServerSideProps<ProtectedParamsType> =
+  async (context: GetServerSidePropsContext<ParsedUrlQuery>) => {
+    //* Get the user's session based on the request
+    const {session: token} = parseCookies(context.req)
 
-  //* If no user, redirect to login
-  if (!token) {
+    //* If no user, redirect to login
+    if (!token) {
+      return {
+        props: {},
+        redirect: {
+          destination: '/signin',
+          permanent: false,
+        },
+      }
+    }
+
+    //* If there is a user, return session token
     return {
-      props: {},
-      redirect: {
-        destination: '/signin',
-        permanent: false,
-      },
+      props: {token},
     }
   }
-
-  //* If there is a user, return session token
-  return {
-    props: {token},
-  }
-}

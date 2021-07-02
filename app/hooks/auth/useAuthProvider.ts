@@ -2,9 +2,12 @@ import * as React from 'react'
 
 import {useAuthReducer} from '@hooks/auth/useAuthReducer'
 import {login} from '@actions/authActions'
-import {UserState, UserActions} from 'app/types/user'
+import {UserState, UserActionsType} from 'app/types/user'
 
-export function useAuthProvider(): [UserState, React.Dispatch<UserActions>] {
+export function useAuthProvider(): [
+  UserState,
+  React.Dispatch<UserActionsType>
+] {
   const [state, dispatch, updateLocalStorage] = useAuthReducer()
 
   //* persist state on page refresh
