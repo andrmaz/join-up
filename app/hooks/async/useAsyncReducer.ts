@@ -3,7 +3,7 @@ import * as React from 'react'
 import {asyncReducer} from '@reducers/asyncReducer'
 import type {AsyncStateType, AsyncActionsType} from 'app/types/async'
 
-const initialState = {data: [], error: null, status: 'idle'}
+const initialState: AsyncStateType = {status: 'idle', data: [], error: null}
 
 export function useAsyncReducer(): readonly [
   AsyncStateType,

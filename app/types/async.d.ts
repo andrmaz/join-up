@@ -2,8 +2,10 @@ import {IProjectData} from 'app/types/project'
 
 export type AsyncDataType = IProjectData[] | undefined
 
+export type AsyncStatusType = 'idle' | 'pending' | 'resolved' | 'rejected'
+
 export type AsyncStateType = {
-  status: string
+  status: AsyncStatusType
   data: AsyncDataType
   error: string | null
 }
