@@ -34,7 +34,8 @@ export type FormInputType = {
   name?: string
   label?: string
   register: (ref: FieldElement<T> & React.Ref) => RegisterType
-  errors: DeepMap<T, FieldError>
+  defaultValue?: string
+  errors?: DeepMap<T, FieldError>
 }
 
 //* Selects

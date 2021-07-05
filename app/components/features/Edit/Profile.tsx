@@ -7,14 +7,19 @@ import useFetchTechnologiesWithToken from '@hooks/fetch/useFetchTechnologiesWith
 import useFetchLanguagesWithToken from '@hooks/fetch//useFetchLanguagesWithToken'
 
 import Panel from '@components/navigation/Tablist/Panel'
-import FormInput from '@components/form/Input/Form'
-import LangSelect from '@components/form/Select/Lang'
-import TechSelect from '@components/form/Select/Tech'
-import {SubmitButton} from '@components/form/Button/Submit'
-import Textarea from '@components/form/Textarea/Textarea'
-import CancelButton from '@components/form/Button/Cancel'
 import SnackBar from '@components/notifications/SnackBar/SnackBar'
 import UserAvatar from '@components/features/User/Avatar'
+
+import GitHubInput from '@components/form/Input/GitHub'
+import GitLabInput from '@components/form/Input/GitLab'
+import BitBucketInput from '@components/form/Input/BitBucket'
+import LinkedInInput from '@components/form/Input/LinkedIn'
+
+import LangSelect from '@components/form/Select/Lang'
+import TechSelect from '@components/form/Select/Tech'
+import Textarea from '@components/form/Textarea/Textarea'
+import {SubmitButton} from '@components/form/Button/Submit'
+import CancelButton from '@components/form/Button/Cancel'
 
 import type {PanelPropsType} from 'app/types/navigation'
 import type {IUserContext} from 'app/types/user'
@@ -49,45 +54,13 @@ const EditProfile = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
           <div className='flex flex-row'>
             <div className='w-3/5'>
               <div className='flex flex-col xl:justify-between'>
-                <FormInput
-                  type='text'
-                  id='githubURL'
-                  name='githubURL'
-                  label='GitHub'
-                  placeholder='your GitHub username here'
+                <GitHubInput register={register} defaultValue={githubURL} />
+                <GitLabInput register={register} defaultValue={gitlabURL} />
+                <BitBucketInput
                   register={register}
-                  defaultValue={githubURL?.slice(19, githubURL.length)}
+                  defaultValue={bitbucketURL}
                 />
-                <FormInput
-                  type='text'
-                  id='gitlabURL'
-                  name='gitlabURL'
-                  label='GitLab'
-                  placeholder='your GitLab username here'
-                  register={register}
-                  defaultValue={gitlabURL?.slice(19, gitlabURL.length)}
-                />
-                <FormInput
-                  type='text'
-                  id='bitbucketURL'
-                  name='bitbucketURL'
-                  label='BitBucket'
-                  placeholder='your BitBucket username here'
-                  register={register}
-                  defaultValue={bitbucketURL?.slice(
-                    22,
-                    bitbucketURL.length - 1
-                  )}
-                />
-                <FormInput
-                  type='text'
-                  id='linkedinURL'
-                  name='linkedinURL'
-                  label='LinkedIn'
-                  placeholder='your LinkedIn username here'
-                  register={register}
-                  defaultValue={linkedinURL?.slice(28, linkedinURL.length - 1)}
-                />
+                <LinkedInInput register={register} defaultValue={linkedinURL} />
               </div>
             </div>
             <section className='w-2/5'>

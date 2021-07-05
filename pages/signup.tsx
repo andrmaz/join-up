@@ -7,10 +7,15 @@ import {useForm} from 'react-hook-form'
 import useUserRegister from '@hooks/user/useUserRegister'
 
 import Container from '@components/containers/Container/Container'
+
 import FormInput from '@components/form/Input/Form'
 import UsernameInput from '@components/form/Input/Username'
 import EmailInput from '@components/form/Input/Email'
 import PasswordInput from '@components/form/Input/Password'
+import GitHubInput from '@components/form/Input/GitHub'
+import GitLabInput from '@components/form/Input/GitLab'
+import BitBucketInput from '@components/form/Input/BitBucket'
+import LinkedInInput from '@components/form/Input/LinkedIn'
 
 import LangSelect from '@components/form/Select/Lang'
 import TechSelect from '@components/form/Select/Tech'
@@ -66,38 +71,10 @@ const SignUp: NextPage<SignUpParamsType> = ({
                 />
               </section>
               <section className='w-3/6 flex flex-col justify-around'>
-                <FormInput
-                  type='text'
-                  id='githubURL'
-                  name='githubURL'
-                  label='GitHub'
-                  placeholder='your GitHub username here'
-                  register={register}
-                />
-                <FormInput
-                  type='text'
-                  id='gitlabURL'
-                  name='gitlabURL'
-                  label='GitLab'
-                  placeholder='your GitLab username here'
-                  register={register}
-                />
-                <FormInput
-                  type='text'
-                  id='bitbucketURL'
-                  name='bitbucketURL'
-                  label='BitBucket'
-                  placeholder='your BitBucket username here'
-                  register={register}
-                />
-                <FormInput
-                  type='text'
-                  id='linkedinURL'
-                  name='linkedinURL'
-                  label='LinkedIn'
-                  placeholder='your LinkedIn username here'
-                  register={register}
-                />
+                <GitHubInput register={register} />
+                <GitLabInput register={register} />
+                <BitBucketInput register={register} />
+                <LinkedInInput register={register} />
               </section>
             </article>
             <article className='h-1/5 w-full flex mt-2'>
