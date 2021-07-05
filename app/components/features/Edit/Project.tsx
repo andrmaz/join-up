@@ -8,7 +8,10 @@ import useEditProject from '@hooks/edit/useEditProject'
 
 import Modal from '@components/containers/Modal/Modal'
 import CloseModalButton from '@components/form/Button/Close'
-import FormInput from '@components/form/Input/Form'
+import NameInput from '@components/form/Input/project/Name'
+import DescriptionInput from '@components/form/Input/Description'
+import UrlInput from '@components/form/Input/project/Url'
+
 import TechSelect from '@components/form/Select/Tech'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
@@ -56,38 +59,14 @@ const EditProject = ({
             onSubmit={handleSubmit(onSubmit)}
             className='flex flex-col h-5/6 justify-evenly'
           >
-            <FormInput
-              type='text'
-              id='name'
-              name='name'
-              label='Name'
-              placeholder={name}
+            <NameInput
               defaultValue={name}
-              register={register({
-                required: 'project name is required',
-                minLength: {
-                  value: 3,
-                  message: 'please provide a longer name',
-                },
-                maxLength: 255,
-              })}
+              register={register}
               errors={errors}
             />
-            <FormInput
-              type='text'
-              id='description'
-              name='description'
-              label='Description'
-              placeholder={description}
+            <DescriptionInput
               defaultValue={description}
-              register={register({
-                required: 'project description is required',
-                minLength: {
-                  value: 10,
-                  message: 'please provide a longer description',
-                },
-                maxLength: 65535,
-              })}
+              register={register}
               errors={errors}
             />
             <div className='h-1/6 flex flex-col mb-6'>
@@ -103,24 +82,10 @@ const EditProject = ({
             {collaborators.length
               ? 'Collaborators (temporary)'
               : 'No collaboratos (temporary)'}
-            <FormInput
-              type='url'
-              id='projectURL'
-              name='projectURL'
-              label='Url'
-              placeholder={
-                projectURL || 'Connect this project to an existing one'
-              }
+            <UrlInput
               defaultValue={projectURL}
-              register={register({
-                pattern: {
-                  value:
-                    /(https?:\/\/)?([\w-])+\.{1}([a-zA-Z]{2,63})([/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)/,
-                  message: 'Please enter a valid URL',
-                },
-              })}
+              register={register}
               errors={errors}
-              optional
             />
             <div className='h-1/6 flex items-end'>
               <div className='w-16 p-1'>
