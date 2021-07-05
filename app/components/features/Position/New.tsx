@@ -13,8 +13,10 @@ import Modal from '@components/containers/Modal/Modal'
 import TitleInput from '@components/form/Input/position/Title'
 import DescriptionInput from '@components/form/Input/Description'
 import VacancyInput from '@components/form/Input/position/Vacancy'
+
 import TechSelect from '@components/form/Select/Tech'
-import DefaultSelect from '@components/form/Select/Default'
+import LevelSelect from '@components/form/Select/Level'
+import RoleSelect from '@components/form/Select/Role'
 
 // buttons
 import {SubmitButton} from '@components/form/Button/Submit'
@@ -80,16 +82,12 @@ const NewPosition = ({
               <VacancyInput register={register} />
               <TitleInput register={register} errors={errors} />
               <DescriptionInput register={register} errors={errors} />
-              <DefaultSelect
-                id='level-select'
-                name='level'
+              <LevelSelect
                 control={control}
                 setValue={setValue}
                 errors={errors}
               />
-              <DefaultSelect
-                id='role-select'
-                name='role'
+              <RoleSelect
                 control={control}
                 setValue={setValue}
                 errors={errors}

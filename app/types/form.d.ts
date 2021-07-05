@@ -9,6 +9,7 @@ import {
 //* Inputs
 type RegisterType = (ref: (FieldElement<T> & React.Ref) | null) => void
 //({required: string; pattern: {value: RegExp; message: string}})
+
 export interface IFormInput {
   id: string
   name: string
@@ -49,9 +50,7 @@ export interface IFormSelect {
   defaultValue?: NestedOptionsType
 }
 
-export interface IDefaultSelect {
-  id: string
-  name: string
+export interface IPositionSelect {
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   errors?: Record<string, any>

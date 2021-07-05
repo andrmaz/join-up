@@ -12,7 +12,8 @@ import DescriptionInput from '@components/form/Input/Description'
 import VacancyInput from '@components/form/Input/position/Vacancy'
 
 import TechSelect from '@components/form/Select/Tech'
-import DefaultSelect from '@components/form/Select/Default'
+import LevelSelect from '@components/form/Select/Level'
+import RoleSelect from '@components/form/Select/Role'
 
 // buttons
 import {SubmitButton} from '@components/form/Button/Submit'
@@ -82,17 +83,13 @@ const EditPosition = ({
                 register={register}
                 errors={errors}
               />
-              <DefaultSelect
-                id='level-select'
-                name='level'
+              <LevelSelect
                 control={control}
                 defaultValue={level}
                 setValue={setValue}
                 errors={errors}
               />
-              <DefaultSelect
-                id='role-select'
-                name='role'
+              <RoleSelect
                 control={control}
                 defaultValue={role}
                 setValue={setValue}

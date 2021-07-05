@@ -72,3 +72,15 @@ export type LanguagesResponseType = {
   languages: SelectOptionsType[]
   status: number
 }
+
+export type LevelsResponseType = {
+  status: number
+  message: string
+  levels: SelectOptionsType[]
+}
+
+export type RolesResponseType = {
+  status: number
+  message: string
+  roles: SelectOptionsType[]
+}
