@@ -1,13 +1,10 @@
 import Link from 'next/link'
+import useFetchUserProjectsWithToken from '@hooks/fetch/useFetchUserProjectsWithToken'
 import ProjectPreview from '@components/features/Project/Preview'
 import {EmptyMessage} from '@components/notifications/Message/Empty'
-import type {ProjectStateType} from 'app/types/project'
 
-const ProjectsList = ({
-  projects,
-}: {
-  projects: ProjectStateType
-}): React.ReactElement => {
+const ProjectsList = ({token}: {token: string}): React.ReactElement => {
+  const projects = useFetchUserProjectsWithToken(token)
   return (
     <section className='pt-12'>
       {projects.length ? (
