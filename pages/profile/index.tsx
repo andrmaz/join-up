@@ -8,7 +8,6 @@ import {
 import Head from 'next/head'
 import {ParsedUrlQuery} from 'querystring'
 
-import useFetchUserProjectsWithToken from '@hooks/fetch/useFetchUserProjectsWithToken'
 import {parseCookies} from '@utils/parseCookies'
 
 import Container from '@components/containers/Container/Container'
@@ -21,7 +20,6 @@ import type {ProtectedParamsType} from 'app/types/params'
 const Profile: NextPage<ProtectedParamsType> = ({
   token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const projects = useFetchUserProjectsWithToken(token)
   return (
     <Container>
       <Head>
@@ -37,7 +35,7 @@ const Profile: NextPage<ProtectedParamsType> = ({
                 <h3>Your Projects</h3>
               </header>
               <main className='w-full p-1'>
-                <ProjectsList projects={projects} />
+                <ProjectsList token={token} />
               </main>
             </article>
           </div>
