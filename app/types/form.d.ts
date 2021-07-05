@@ -21,10 +21,7 @@ export interface IFormInput {
   errors?: Record<string, any>
 }
 
-export interface INumberInput {
-  id: string
-  name: string
-  label: string
+export interface IVacancyInput {
   defaultValue?: number
   register: React.Ref<T>
 }
