@@ -6,7 +6,6 @@ import {
   InferGetServerSidePropsType,
 } from 'next'
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
 import {ParsedUrlQuery} from 'querystring'
 
 import {useForm} from 'react-hook-form'
@@ -17,16 +16,9 @@ import {parseCookies} from '@utils/parseCookies'
 
 import Container from '@components/containers/Container/Container'
 import Drawer from '@components/navigation/Drawer/Drawer'
+import ProjectsGrid from '@components/features/Project/Grid'
 
 import type {ProjectsParamsType} from 'app/types/params'
-
-const ProjectsGrid = dynamic(
-  () => import('@components/features/Project/Grid'),
-  {
-    // eslint-disable-next-line react/display-name
-    loading: () => <p>Loading projects ...</p>,
-  }
-)
 
 const Projects: NextPage<ProjectsParamsType> = ({
   token,
