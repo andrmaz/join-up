@@ -8,7 +8,7 @@ import {RiDeleteBin6Line} from 'react-icons/ri'
 const RemoveProject = dynamic(
   () => import('@components/features/Remove/Project')
 )
-const ProjectModal = dynamic(() => import('@components/features/Edit/Project'))
+const EditProject = dynamic(() => import('@components/features/Edit/Project'))
 
 import type {IProjectData} from 'app/types/project'
 
@@ -62,7 +62,7 @@ const ProjectPreview = ({
           </div>
         </div>
       </article>
-      <ProjectModal
+      <EditProject
         showModal={showModal}
         setShowModal={setShowModal}
         project={project}
