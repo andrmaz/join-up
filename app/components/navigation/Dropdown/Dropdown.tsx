@@ -6,33 +6,43 @@ import UserAvatar from '@components/features/User/Avatar'
 
 export function Dropdown(): JSX.Element {
   const {user} = useAuthState()
-  const [visible, setVisible] = React.useState<boolean>(false)
-  const toggleVisibility = (): void => setVisible(prevState => !prevState)
-  const ref = React.createRef<HTMLElement>()
-  const handleClickOutside = React.useCallback(
-    (event): void => {
-      //* We need to check to make sure that our current is actually filled in with a DOM element.
-      //* Then using the DOM method contains we ask our container if we have the event.target which is the DOM element that was clicked
-      //* If we don't have the clicked target then that means it's outside of our container and we need to close our menu.
-      if (ref.current && !ref.current.contains(event.target)) {
-        setVisible(false)
-      }
-    },
-    [ref]
-  )
-  React.useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside)
-    //* Cleanup
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [handleClickOutside])
+  let timeOutId: NodeJS.Timeout
+  const [isOpen, setIsOpen] = React.useState<boolean>(false)
+  const onClickHandler = (): void => setIsOpen(prevState => !prevState)
+
+  //* We close the popover on the next tick by using setTimeout.
+  //* This is necessary because we need to first check if
+  //* another child of the element has received focus as
+  //* the blur event fires prior to the new focus event.
+  function onBlurHandler(): void {
+    timeOutId = setTimeout(() => {
+      setIsOpen(false)
+    })
+  }
+
+  //* If a child receives focus, do not close the popover.
+  function onFocusHandler(): void {
+    clearTimeout(timeOutId)
+  }
+
   return (
-    <nav role='navigation' className='w-1/6' ref={ref}>
-      <button className='flex-initial' onClick={toggleVisibility}>
+    <nav
+      role='navigation'
+      className='w-1/6'
+      onBlur={onBlurHandler}
+      onFocus={onFocusHandler}
+    >
+      <button
+        className='flex-initial'
+        onClick={onClickHandler}
+        aria-haspopup='true'
+        aria-expanded={isOpen}
+      >
         <div className='w-8 h-8'>
           <UserAvatar image={user?.avatar} />
         </div>
       </button>
-      {visible && (
+      {isOpen && (
         <ul className='absolute top-14 xl:top-16 right-14 xl:right-16 flex flex-col h-auto w-auto bg-gray-800 border-2 p-2 rounded z-40 text-xs'>
           <Link href={'/profile'}>
             <a className='flex-initial text-white m-1'>Your profile</a>
