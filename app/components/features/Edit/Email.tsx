@@ -4,7 +4,8 @@ import {useForm} from 'react-hook-form'
 import useEditUserEmail from '@hooks/edit/useEditUserEmail'
 
 import Panel from '@components/navigation/Tablist/Panel'
-import FormInput from '@components/form/Input/Form'
+import EmailInput from '@components/form/Input/Email'
+import PasswordInput from '@components/form/Input/Password'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 import SnackBar from '@components/notifications/SnackBar/SnackBar'
@@ -24,36 +25,8 @@ const EditEmail = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
       >
         <h2 className='text-2xl mb-4'>Change email</h2>
         <article className='h-auto flex flex-col justify-evenly mb-8'>
-          <FormInput
-            type='email'
-            id='email'
-            name='newEmail'
-            label='Email'
-            placeholder='please enter a new email'
-            register={register({
-              required: 'email is required',
-              pattern: {
-                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                message: 'please enter a valid email address',
-              },
-            })}
-            errors={errors}
-          />
-          <FormInput
-            type='password'
-            id='password-email'
-            name='password'
-            label='Password'
-            placeholder='please enter your password'
-            register={register({
-              required: 'password is required',
-              pattern: {
-                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                message: 'please enter a valid password',
-              },
-            })}
-            errors={errors}
-          />
+          <EmailInput name='newEmail' register={register} errors={errors} />
+          <PasswordInput id='email-pwd' register={register} errors={errors} />
         </article>
         <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
           <CancelButton onClickAction={() => reset()} />

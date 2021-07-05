@@ -8,6 +8,10 @@ import useUserRegister from '@hooks/user/useUserRegister'
 
 import Container from '@components/containers/Container/Container'
 import FormInput from '@components/form/Input/Form'
+import UsernameInput from '@components/form/Input/Username'
+import EmailInput from '@components/form/Input/Email'
+import PasswordInput from '@components/form/Input/Password'
+
 import LangSelect from '@components/form/Select/Lang'
 import TechSelect from '@components/form/Select/Tech'
 import Textarea from '@components/form/Textarea/Textarea'
@@ -45,55 +49,9 @@ const SignUp: NextPage<SignUpParamsType> = ({
           >
             <article className='w-full h-1/2 flex'>
               <section className='w-3/6 flex flex-col justify-around'>
-                <FormInput
-                  type='text'
-                  id='username'
-                  name='username'
-                  label='Username'
-                  placeholder='please enter your username'
-                  register={register({
-                    required: 'username is required',
-                    minLength: {
-                      value: 3,
-                      message: 'username must be at least 3 characters long',
-                    },
-                    maxLength: {
-                      value: 20,
-                      message: 'username must be at most 20 characters long',
-                    },
-                  })}
-                  errors={errors}
-                />
-                <FormInput
-                  type='email'
-                  id='email'
-                  name='email'
-                  label='Email'
-                  placeholder='please enter your email'
-                  register={register({
-                    required: 'email is required',
-                    pattern: {
-                      value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                      message: 'please enter a valid email address',
-                    },
-                  })}
-                  errors={errors}
-                />
-                <FormInput
-                  type='password'
-                  id='password'
-                  name='password'
-                  label='Password'
-                  placeholder='min. 8 char, mix letters and numbers'
-                  register={register({
-                    required: 'password is required',
-                    pattern: {
-                      value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                      message: 'please enter a valid password',
-                    },
-                  })}
-                  errors={errors}
-                />
+                <UsernameInput register={register} errors={errors} />
+                <EmailInput register={register} errors={errors} />
+                <PasswordInput register={register} errors={errors} />
                 <FormInput
                   type='password'
                   id='confirmPassword'
