@@ -1,37 +1,27 @@
 import * as React from 'react'
-import axios from 'axios'
-import Select from 'react-select'
+
 import {Controller} from 'react-hook-form'
+import useFetchRolesOptions from '@hooks/fetch/useFetchRolesOptions'
+
+import Select from 'react-select'
 import ErrorMessage from '@components/notifications/Message/Error'
 
-import type {IDefaultSelect, SelectOptionsType} from 'app/types/form'
+import type {IPositionSelect, SelectOptionsType} from 'app/types/form'
 
-const DefaultSelect = ({
-  id,
-  name, // level, role
+const RoleSelect = ({
   control,
   setValue,
   errors,
   defaultValue,
-}: IDefaultSelect): React.ReactElement => {
-  const [options, setOptions] = React.useState<
-    SelectOptionsType[] | undefined
-  >()
-  //* Set technologies options to State as soon as the modal is shown
-  const fetchOptions = React.useCallback(async () => {
-    const {data} = await axios.get(`/${name}`) // level, role
-    setOptions(data[name + 's'])
-  }, [name])
-  React.useEffect(() => {
-    fetchOptions()
-  }, [fetchOptions])
+}: IPositionSelect): React.ReactElement => {
+  const options = useFetchRolesOptions()
   return (
     <React.Fragment>
-      <label id={id} htmlFor={name}>
-        {`Choose a ${name} :`}
+      <label id='role-select' htmlFor='role'>
+        {`Choose a role :`}
       </label>
       <Controller
-        name={name}
+        name='role'
         control={control}
         defaultValue={
           defaultValue ? defaultValue.id : options ? options[0].id : ''
@@ -39,15 +29,15 @@ const DefaultSelect = ({
         rules={{
           required: {
             value: true,
-            message: `Please select at least one ${name}`,
+            message: `Please select at least one role'`,
           },
         }}
         render={({onBlur, value}) => (
           <Select
-            id={id}
-            inputId={id}
-            name={name}
-            aria-labelledby={name}
+            id='role-select'
+            inputId='role-select'
+            name='role'
+            aria-labelledby='role'
             defaultValue={
               defaultValue ? defaultValue : options ? options[0] : value
             }
@@ -56,7 +46,7 @@ const DefaultSelect = ({
             getOptionValue={option => option['id']}
             blurInputOnSelect={false}
             onChange={(value: SelectOptionsType) => {
-              setValue(name, value.id, {
+              setValue('role', value.id, {
                 shouldValidate: true,
                 shouldDirty: true,
               })
@@ -65,9 +55,9 @@ const DefaultSelect = ({
           />
         )}
       />
-      {errors?.[name] && <ErrorMessage>{errors?.[name]?.message}</ErrorMessage>}
+      {errors?.role && <ErrorMessage>{errors?.role?.message}</ErrorMessage>}
     </React.Fragment>
   )
 }
 
-export default DefaultSelect
+export default RoleSelect

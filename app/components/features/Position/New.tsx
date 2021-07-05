@@ -9,10 +9,14 @@ import {usePositionContext} from '@hooks/position/usePositionContext'
 import {addPositionWithToken} from '@api/fetchWithToken'
 
 import Modal from '@components/containers/Modal/Modal'
-import FormInput from '@components/form/Input/Form'
+
+import TitleInput from '@components/form/Input/position/Title'
+import DescriptionInput from '@components/form/Input/Description'
+import VacancyInput from '@components/form/Input/position/Vacancy'
+
 import TechSelect from '@components/form/Select/Tech'
-import NumberInput from '@components/form/Input/Number'
-import DefaultSelect from '@components/form/Select/Default'
+import LevelSelect from '@components/form/Select/Level'
+import RoleSelect from '@components/form/Select/Role'
 
 // buttons
 import {SubmitButton} from '@components/form/Button/Submit'
@@ -20,7 +24,7 @@ import CancelButton from '@components/form/Button/Cancel'
 import CloseModalButton from '@components/form/Button/Close'
 
 import type {IPositionInput} from 'app/types/position'
-import {PositionResponseType} from 'app/types/response'
+import type {PositionResponseType} from 'app/types/response'
 
 const NewPosition = ({
   showModal,
@@ -75,50 +79,15 @@ const NewPosition = ({
           </div>
           <form className='h-18/20' onSubmit={handleSubmit(onSubmit)}>
             <div className='h-18/20 flex flex-col justify-evenly pb-6'>
-              <NumberInput
-                id='vacancy-select'
-                name='vacancies'
-                label='Vacancy'
-                register={register}
-              />
-              <FormInput
-                id='title'
-                name='title'
-                label='Title'
-                type='text'
-                placeholder='Give it a meaningful title'
-                register={register({
-                  required: {
-                    value: true,
-                    message: 'Please enter a title',
-                  },
-                })}
-                errors={errors}
-              />
-              <FormInput
-                id='description'
-                name='description'
-                label='Description'
-                type='text'
-                placeholder='Provide a short description'
-                register={register({
-                  required: {
-                    value: true,
-                    message: 'Please provide a description',
-                  },
-                })}
-                errors={errors}
-              />
-              <DefaultSelect
-                id='level-select'
-                name='level'
+              <VacancyInput register={register} />
+              <TitleInput register={register} errors={errors} />
+              <DescriptionInput register={register} errors={errors} />
+              <LevelSelect
                 control={control}
                 setValue={setValue}
                 errors={errors}
               />
-              <DefaultSelect
-                id='role-select'
-                name='role'
+              <RoleSelect
                 control={control}
                 setValue={setValue}
                 errors={errors}

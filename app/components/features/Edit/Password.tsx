@@ -5,6 +5,8 @@ import useEditUserPassword from '@hooks/edit/useEditUserPassword'
 
 import Panel from '@components/navigation/Tablist/Panel'
 import FormInput from '@components/form/Input/Form'
+import PasswordInput from '@components/form/Input/user/Password'
+
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 import SnackBar from '@components/notifications/SnackBar/SnackBar'
@@ -26,34 +28,18 @@ const EditPassword = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
       >
         <h2 className='text-2xl mb-4'>Change password</h2>
         <article className='h-auto flex flex-col justify-evenly mb-8'>
-          <FormInput
-            type='password'
+          <PasswordInput
             id='currentPassword'
             name='currentPassword'
             label='Current Password'
-            placeholder='please enter your current password'
-            register={register({
-              required: 'password is required',
-              pattern: {
-                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                message: 'please enter a valid password',
-              },
-            })}
+            register={register}
             errors={errors}
           />
-          <FormInput
-            type='password'
+          <PasswordInput
             id='newPassword'
             name='newPassword'
             label='New Password'
-            placeholder='please enter a new password'
-            register={register({
-              required: 'new password is required',
-              pattern: {
-                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                message: 'please enter a valid password',
-              },
-            })}
+            register={register}
             errors={errors}
           />
           <FormInput

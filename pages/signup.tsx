@@ -7,7 +7,16 @@ import {useForm} from 'react-hook-form'
 import useUserRegister from '@hooks/user/useUserRegister'
 
 import Container from '@components/containers/Container/Container'
+
 import FormInput from '@components/form/Input/Form'
+import UsernameInput from '@components/form/Input/user/Username'
+import EmailInput from '@components/form/Input/user/Email'
+import PasswordInput from '@components/form/Input/user/Password'
+import GitHubInput from '@components/form/Input/user/GitHub'
+import GitLabInput from '@components/form/Input/user/GitLab'
+import BitBucketInput from '@components/form/Input/user/BitBucket'
+import LinkedInInput from '@components/form/Input/user/LinkedIn'
+
 import LangSelect from '@components/form/Select/Lang'
 import TechSelect from '@components/form/Select/Tech'
 import Textarea from '@components/form/Textarea/Textarea'
@@ -45,55 +54,9 @@ const SignUp: NextPage<SignUpParamsType> = ({
           >
             <article className='w-full h-1/2 flex'>
               <section className='w-3/6 flex flex-col justify-around'>
-                <FormInput
-                  type='text'
-                  id='username'
-                  name='username'
-                  label='Username'
-                  placeholder='please enter your username'
-                  register={register({
-                    required: 'username is required',
-                    minLength: {
-                      value: 3,
-                      message: 'username must be at least 3 characters long',
-                    },
-                    maxLength: {
-                      value: 20,
-                      message: 'username must be at most 20 characters long',
-                    },
-                  })}
-                  errors={errors}
-                />
-                <FormInput
-                  type='email'
-                  id='email'
-                  name='email'
-                  label='Email'
-                  placeholder='please enter your email'
-                  register={register({
-                    required: 'email is required',
-                    pattern: {
-                      value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                      message: 'please enter a valid email address',
-                    },
-                  })}
-                  errors={errors}
-                />
-                <FormInput
-                  type='password'
-                  id='password'
-                  name='password'
-                  label='Password'
-                  placeholder='min. 8 char, mix letters and numbers'
-                  register={register({
-                    required: 'password is required',
-                    pattern: {
-                      value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                      message: 'please enter a valid password',
-                    },
-                  })}
-                  errors={errors}
-                />
+                <UsernameInput register={register} errors={errors} />
+                <EmailInput register={register} errors={errors} />
+                <PasswordInput register={register} errors={errors} />
                 <FormInput
                   type='password'
                   id='confirmPassword'
@@ -108,38 +71,10 @@ const SignUp: NextPage<SignUpParamsType> = ({
                 />
               </section>
               <section className='w-3/6 flex flex-col justify-around'>
-                <FormInput
-                  type='text'
-                  id='githubURL'
-                  name='githubURL'
-                  label='GitHub'
-                  placeholder='your GitHub username here'
-                  register={register}
-                />
-                <FormInput
-                  type='text'
-                  id='gitlabURL'
-                  name='gitlabURL'
-                  label='GitLab'
-                  placeholder='your GitLab username here'
-                  register={register}
-                />
-                <FormInput
-                  type='text'
-                  id='bitbucketURL'
-                  name='bitbucketURL'
-                  label='BitBucket'
-                  placeholder='your BitBucket username here'
-                  register={register}
-                />
-                <FormInput
-                  type='text'
-                  id='linkedinURL'
-                  name='linkedinURL'
-                  label='LinkedIn'
-                  placeholder='your LinkedIn username here'
-                  register={register}
-                />
+                <GitHubInput register={register} />
+                <GitLabInput register={register} />
+                <BitBucketInput register={register} />
+                <LinkedInInput register={register} />
               </section>
             </article>
             <article className='h-1/5 w-full flex mt-2'>

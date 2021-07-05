@@ -1,25 +1,39 @@
 import React from 'react'
-import {Control, NestedValue, SetValueConfig} from 'react-hook-form'
+import {
+  Control,
+  NestedValue,
+  SetValueConfig,
+  FieldElement,
+} from 'react-hook-form'
 
 //* Inputs
+type RegisterType = (ref: (FieldElement<T> & React.Ref) | null) => void
+//({required: string; pattern: {value: RegExp; message: string}})
+
 export interface IFormInput {
   id: string
   name: string
   type: string
   label: string
   placeholder: string
-  register: React.Ref<T>
+  register: RegisterType
   defaultValue?: string
   optional?: boolean
   errors?: Record<string, any>
 }
 
-export interface INumberInput {
-  id: string
-  name: string
-  label: string
+export interface IVacancyInput {
   defaultValue?: number
   register: React.Ref<T>
+}
+
+export type FormInputType = {
+  id?: string
+  name?: string
+  label?: string
+  register: (ref: FieldElement<T> & React.Ref) => RegisterType
+  defaultValue?: string
+  errors?: DeepMap<T, FieldError>
 }
 
 //* Selects
@@ -36,9 +50,7 @@ export interface IFormSelect {
   defaultValue?: NestedOptionsType
 }
 
-export interface IDefaultSelect {
-  id: string
-  name: string
+export interface IPositionSelect {
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   errors?: Record<string, any>

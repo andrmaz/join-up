@@ -14,7 +14,10 @@ import {parseCookies} from '@utils/parseCookies'
 import {fetchTechnologiesWithToken} from '@api/fetchWithToken'
 
 import Container from '@components/containers/Container/Container'
-import FormInput from '@components/form/Input/Form'
+
+import NameInput from '@components/form/Input/project/Name'
+import DescriptionInput from '@components/form/Input/Description'
+import UrlInput from '@components/form/Input/project/Url'
 import TechSelect from '@components/form/Select/Tech'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
@@ -47,38 +50,8 @@ const Project: NextPage<ProjectParamsType> = ({
             onSubmit={handleSubmit(onSubmit)}
             className='flex flex-col h-5/6 justify-evenly'
           >
-            <FormInput
-              type='text'
-              id='name'
-              name='name'
-              label='Name'
-              placeholder='Give a unique and memorable name to your project'
-              register={register({
-                required: 'project name is required',
-                minLength: {
-                  value: 3,
-                  message: 'please provide a longer name',
-                },
-                maxLength: 255,
-              })}
-              errors={errors}
-            />
-            <FormInput
-              type='text'
-              id='description'
-              name='description'
-              label='Description'
-              placeholder='Consider providing a short description'
-              register={register({
-                required: 'project description is required',
-                minLength: {
-                  value: 10,
-                  message: 'please provide a longer description',
-                },
-                maxLength: 65535,
-              })}
-              errors={errors}
-            />
+            <NameInput register={register} errors={errors} />
+            <DescriptionInput register={register} errors={errors} />
             <div className='h-1/6 flex flex-col mb-6'>
               <TechSelect
                 options={technologies}
@@ -87,22 +60,7 @@ const Project: NextPage<ProjectParamsType> = ({
                 errors={errors}
               />
             </div>
-            <FormInput
-              type='url'
-              id='projectURL'
-              name='projectURL'
-              label='Url'
-              placeholder='Connect this project to an existing one'
-              register={register({
-                pattern: {
-                  value:
-                    /(https?:\/\/)?([\w-])+\.{1}([a-zA-Z]{2,63})([/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)/,
-                  message: 'Please enter a valid URL',
-                },
-              })}
-              errors={errors}
-              optional
-            />
+            <UrlInput register={register} errors={errors} />
             <div className='h-1/6 flex items-end'>
               <div className='w-16 p-1'>
                 <SubmitButton

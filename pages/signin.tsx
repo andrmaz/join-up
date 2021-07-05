@@ -5,7 +5,8 @@ import {useForm} from 'react-hook-form'
 import useUserLogin from '@hooks/user/useUserLogin'
 
 import Container from '@components/containers/Container/Container'
-import FormInput from '@components/form/Input/Form'
+import EmailInput from '@components/form/Input/user/Email'
+import PasswordInput from '@components/form/Input/user/Password'
 import {SubmitButton} from '@components/form/Button/Submit'
 
 import type {ISigninInputs} from 'app/types/user'
@@ -28,36 +29,8 @@ const SignIn = (): JSX.Element => {
             onSubmit={handleSubmit(onSubmit)}
             className='h-4/6 flex flex-col justify-between  xl:justify-evenly'
           >
-            <FormInput
-              type='email'
-              id='email'
-              name='email'
-              label='Email'
-              placeholder='please enter your email'
-              register={register({
-                required: 'email is required',
-                pattern: {
-                  value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                  message: 'please enter a valid email address',
-                },
-              })}
-              errors={errors}
-            />
-            <FormInput
-              type='password'
-              id='password'
-              name='password'
-              label='Password'
-              placeholder='please enter your password'
-              register={register({
-                required: 'password is required',
-                pattern: {
-                  value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                  message: 'please enter a valid password',
-                },
-              })}
-              errors={errors}
-            />
+            <EmailInput register={register} errors={errors} />
+            <PasswordInput register={register} errors={errors} />
             <SubmitButton
               value='SignIn'
               errors={Boolean(errors.email || errors.password)}

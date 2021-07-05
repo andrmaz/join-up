@@ -1,22 +1,16 @@
 import * as React from 'react'
-import type {INumberInput} from 'app/types/form'
+import type {IVacancyInput} from 'app/types/form'
 
-const NumberInput = ({
-  id,
-  name,
-  label,
-  register,
-  defaultValue,
-}: INumberInput): JSX.Element => {
+const VacancyInput = ({register, defaultValue}: IVacancyInput): JSX.Element => {
   return (
     <div className='flex'>
-      <label htmlFor={name} className='mr-2'>
-        {label}
+      <label htmlFor='vacancies' className='mr-2'>
+        Vacancy
       </label>
       <input
-        id={id}
         type='number'
-        name={name}
+        id='vacancy-select'
+        name='vacancies'
         defaultValue={defaultValue ? defaultValue : 1}
         step={1}
         min={1}
@@ -28,4 +22,4 @@ const NumberInput = ({
   )
 }
 
-export default NumberInput
+export default VacancyInput
