@@ -5,8 +5,8 @@ import {useForm} from 'react-hook-form'
 import useUserLogin from '@hooks/user/useUserLogin'
 
 import Container from '@components/containers/Container/Container'
-import EmailInput from '@components/form/Input/Email'
-import PasswordInput from '@components/form/Input/Password'
+import EmailInput from '@components/form/Input/user/Email'
+import PasswordInput from '@components/form/Input/user/Password'
 import {SubmitButton} from '@components/form/Button/Submit'
 
 import type {ISigninInputs} from 'app/types/user'

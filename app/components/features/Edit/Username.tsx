@@ -3,8 +3,8 @@ import {useForm} from 'react-hook-form'
 import useEditUsername from '@hooks/edit/useEditUsername'
 
 import Panel from '@components/navigation/Tablist/Panel'
-import UsernameInput from '@components/form/Input/Username'
-import PasswordInput from '@components/form/Input/Password'
+import UsernameInput from '@components/form/Input/user/Username'
+import PasswordInput from '@components/form/Input/user/Password'
 
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
