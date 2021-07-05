@@ -7,14 +7,14 @@ import useFetchTechnologiesWithToken from '@hooks/fetch/useFetchTechnologiesWith
 import useEditProject from '@hooks/edit/useEditProject'
 
 import Modal from '@components/containers/Modal/Modal'
-import CloseModalButton from '@components/form/Button/Close'
 import NameInput from '@components/form/Input/project/Name'
 import DescriptionInput from '@components/form/Input/Description'
 import UrlInput from '@components/form/Input/project/Url'
-
 import TechSelect from '@components/form/Select/Tech'
+
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
+import CloseModalButton from '@components/form/Button/Close'
 
 import type {IProjectData, EditProjectType} from 'app/types/project'
 

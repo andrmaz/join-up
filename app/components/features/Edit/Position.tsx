@@ -6,9 +6,12 @@ import useFetchProjectTechnologiesWithToken from '@hooks/fetch/useFetchProjectTe
 import useEditPosition from '@hooks/edit/useEditPosition'
 
 import Modal from '@components/containers/Modal/Modal'
-import FormInput from '@components/form/Input/Form'
-import TechSelect from '@components/form/Select/Tech'
+
+import TitleInput from '@components/form/Input/position/Title'
+import DescriptionInput from '@components/form/Input/Description'
 import NumberInput from '@components/form/Input/Number'
+
+import TechSelect from '@components/form/Select/Tech'
 import DefaultSelect from '@components/form/Select/Default'
 
 // buttons
@@ -75,34 +78,14 @@ const EditPosition = ({
                 defaultValue={vacancies}
                 register={register}
               />
-              <FormInput
-                id='title'
-                name='title'
-                label='Title'
-                type='text'
-                placeholder={title}
+              <TitleInput
                 defaultValue={title}
-                register={register({
-                  required: {
-                    value: true,
-                    message: 'Please enter a title',
-                  },
-                })}
+                register={register}
                 errors={errors}
               />
-              <FormInput
-                id='description'
-                name='description'
-                label='Description'
-                type='text'
-                placeholder={description}
+              <DescriptionInput
                 defaultValue={description}
-                register={register({
-                  required: {
-                    value: true,
-                    message: 'Please provide a description',
-                  },
-                })}
+                register={register}
                 errors={errors}
               />
               <DefaultSelect

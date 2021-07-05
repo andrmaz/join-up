@@ -9,7 +9,9 @@ import {usePositionContext} from '@hooks/position/usePositionContext'
 import {addPositionWithToken} from '@api/fetchWithToken'
 
 import Modal from '@components/containers/Modal/Modal'
-import FormInput from '@components/form/Input/Form'
+
+import TitleInput from '@components/form/Input/position/Title'
+import DescriptionInput from '@components/form/Input/Description'
 import TechSelect from '@components/form/Select/Tech'
 import NumberInput from '@components/form/Input/Number'
 import DefaultSelect from '@components/form/Select/Default'
@@ -20,7 +22,7 @@ import CancelButton from '@components/form/Button/Cancel'
 import CloseModalButton from '@components/form/Button/Close'
 
 import type {IPositionInput} from 'app/types/position'
-import {PositionResponseType} from 'app/types/response'
+import type {PositionResponseType} from 'app/types/response'
 
 const NewPosition = ({
   showModal,
@@ -81,34 +83,8 @@ const NewPosition = ({
                 label='Vacancy'
                 register={register}
               />
-              <FormInput
-                id='title'
-                name='title'
-                label='Title'
-                type='text'
-                placeholder='Give it a meaningful title'
-                register={register({
-                  required: {
-                    value: true,
-                    message: 'Please enter a title',
-                  },
-                })}
-                errors={errors}
-              />
-              <FormInput
-                id='description'
-                name='description'
-                label='Description'
-                type='text'
-                placeholder='Provide a short description'
-                register={register({
-                  required: {
-                    value: true,
-                    message: 'Please provide a description',
-                  },
-                })}
-                errors={errors}
-              />
+              <TitleInput register={register} errors={errors} />
+              <DescriptionInput register={register} errors={errors} />
               <DefaultSelect
                 id='level-select'
                 name='level'
