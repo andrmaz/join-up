@@ -1,5 +1,5 @@
 import {useAuthState} from '@hooks/auth/useAuthState'
-import UserAvatar from '@components/features/User/Avatar'
+import UserAvatar from '@components/lib/User/Avatar'
 import {FaUser, FaBitbucket, FaLinkedin} from 'react-icons/fa'
 import {FiGitlab} from 'react-icons/fi'
 import {GiOpenBook, GiTechnoHeart} from 'react-icons/gi'

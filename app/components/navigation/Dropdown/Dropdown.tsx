@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import {useAuthState} from '@hooks/auth/useAuthState'
 import {SignOutButton} from '@components/form/Button/SignOut'
-import UserAvatar from '@components/features/User/Avatar'
+import UserAvatar from '@components/lib/User/Avatar'
 
 export function Dropdown(): JSX.Element {
   const {user} = useAuthState()

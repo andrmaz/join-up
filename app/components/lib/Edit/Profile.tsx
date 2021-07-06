@@ -8,7 +8,7 @@ import useFetchLanguagesWithToken from '@hooks/fetch//useFetchLanguagesWithToken
 
 import Panel from '@components/navigation/Tablist/Panel'
 import SnackBar from '@components/notifications/SnackBar/SnackBar'
-import UserAvatar from '@components/features/User/Avatar'
+import UserAvatar from '@components/lib/User/Avatar'
 
 import GitHubInput from '@components/form/Input/user/GitHub'
 import GitLabInput from '@components/form/Input/user/GitLab'

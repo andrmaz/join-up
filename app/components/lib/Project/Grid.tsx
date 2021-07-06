@@ -1,5 +1,5 @@
 import * as React from 'react'
-import ProjectCard from '@components/features/Project/Card'
+import ProjectCard from '@components/lib/Project/Card'
 import type {AsyncDataType, AsyncStatusType} from 'app/types/async'
 import type {IProjectData} from 'app/types/project'
 

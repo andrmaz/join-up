@@ -7,11 +7,11 @@ import {usePositionContext} from '@hooks/position/usePositionContext'
 
 import Container from '@components/containers/Container/Container'
 import Wrapper from '@components/containers/Wrapper/Wrapper'
-import ProjectOverview from '@components/features/Project/Overview'
+import ProjectOverview from '@components/lib/Project/Overview'
 import {EmptyMessage} from '@components/notifications/Message/Empty'
-import PositionLayout from '@components/features/Position/Layout'
+import PositionLayout from '@components/lib/Position/Layout'
 import {ActionButton} from '@components/form/Button/Action'
-import NewPosition from '@components/features/Position/New'
+import NewPosition from '@components/lib/Position/New'
 
 import {getProjectAndPositions} from '@api/getServerSideProps'
 

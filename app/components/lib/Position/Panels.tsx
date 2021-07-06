@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 //import PositionOverview from '@components/features/Position/Overview'
 import type {IPosistionData} from 'app/types/position'
 const PositionOverview = dynamic(
-  () => import('@components/features/Position/Overview')
+  () => import('@components/lib/Position/Overview')
 )
 
 const PositionPanels = ({

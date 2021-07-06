@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import useFetchUserProjectsWithToken from '@hooks/fetch/useFetchUserProjectsWithToken'
-import ProjectPreview from '@components/features/Project/Preview'
+import ProjectPreview from '@components/lib/Project/Preview'
 import {EmptyMessage} from '@components/notifications/Message/Empty'
 
 const ProjectsList = ({token}: {token: string}): React.ReactElement => {

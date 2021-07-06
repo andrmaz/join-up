@@ -5,10 +5,8 @@ import Link from 'next/link'
 import {FiEdit2} from 'react-icons/fi'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 
-const RemoveProject = dynamic(
-  () => import('@components/features/Remove/Project')
-)
-const EditProject = dynamic(() => import('@components/features/Edit/Project'))
+const RemoveProject = dynamic(() => import('@components/lib/Remove/Project'))
+const EditProject = dynamic(() => import('@components/lib/Edit/Project'))
 
 import type {IProjectData} from 'app/types/project'
 
