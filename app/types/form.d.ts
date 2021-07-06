@@ -118,3 +118,15 @@ export interface ISigninForm {
   register: (ref: any) => RegisterType
   errors: Record<string, any>
 }
+
+export interface ISignupForm {
+  handleSubmit: (field: FieldValues) => typeof onSubmit
+  onSubmit: (data: ISigninInputs) => Promise<UserResponseType>
+  register: (ref: any) => RegisterType
+  errors: Record<string, any>
+  watchPassword: string
+  control: Control
+  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
+  languages: SelectOptionsType[]
+  technologies: SelectOptionsType[]
+}
