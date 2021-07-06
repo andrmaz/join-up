@@ -110,3 +110,11 @@ export interface IMenuPanel {
   index: number
   isSelectedTab: boolean
 }
+
+//* Forms
+export interface ISigninForm {
+  handleSubmit: (field: FieldValues) => typeof onSubmit
+  onSubmit: (data: ISigninInputs) => Promise<UserResponseType>
+  register: (ref: any) => RegisterType
+  errors: Record<string, any>
+}

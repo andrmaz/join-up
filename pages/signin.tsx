@@ -5,9 +5,7 @@ import {useForm} from 'react-hook-form'
 import useUserLogin from '@hooks/user/useUserLogin'
 
 import Container from '@components/containers/Container/Container'
-import EmailInput from '@components/form/Input/user/Email'
-import PasswordInput from '@components/form/Input/user/Password'
-import {SubmitButton} from '@components/form/Button/Submit'
+import SigninForm from '@components/form/Form/Signin'
 
 import type {ISigninInputs} from 'app/types/user'
 
@@ -25,17 +23,12 @@ const SignIn = (): JSX.Element => {
           <header className='h-1/6 text-center'>
             <h1 className='text-3xl'>SignIn</h1>
           </header>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className='h-4/6 flex flex-col justify-between  xl:justify-evenly'
-          >
-            <EmailInput register={register} errors={errors} />
-            <PasswordInput register={register} errors={errors} />
-            <SubmitButton
-              value='SignIn'
-              errors={Boolean(errors.email || errors.password)}
-            />
-          </form>
+          <SigninForm
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            errors={errors}
+          />
           <div className='inline-flex justify-between w-full h-1/6 pt-5 lg:text-xs'>
             <Link href='/signup'>
               <a>Do not have an account? SignUp</a>
