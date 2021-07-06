@@ -4,8 +4,8 @@ import Head from 'next/head'
 
 import Container from '@components/containers/Container/Container'
 import Wrapper from '@components/containers/Wrapper/Wrapper'
-import UserCard from '@components/features/User/Card'
-import ProjectsList from '@components/features/Project/List'
+import UserCard from '@components/lib/User/Card'
+import ProjectsList from '@components/lib/Project/List'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
 

@@ -1,6 +1,6 @@
 import * as React from 'react'
-import PositionTabs from '@components/features/Position/Tabs'
-import PositionPanels from '@components/features/Position/Panels'
+import PositionTabs from '@components/lib/Position/Tabs'
+import PositionPanels from '@components/lib/Position/Panels'
 import type {PositionStateType} from 'app/types/position'
 
 const PositionLayout = ({positions}: PositionStateType): JSX.Element => {

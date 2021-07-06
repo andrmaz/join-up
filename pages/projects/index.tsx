@@ -7,7 +7,7 @@ import useFetchProjectsWithToken from '@hooks/fetch/useFetchProjectsWithToken'
 
 import Container from '@components/containers/Container/Container'
 import Drawer from '@components/navigation/Drawer/Drawer'
-import ProjectsGrid from '@components/features/Project/Grid'
+import ProjectsGrid from '@components/lib/Project/Grid'
 
 import {getTokenAndOptions} from '@api/getServerSideProps'
 

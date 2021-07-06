@@ -8,13 +8,11 @@ import Panel from '@components/navigation/Tablist/Panel'
 import {FiEdit2} from 'react-icons/fi'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 
-const RemovePosition = dynamic(
-  () => import('@components/features/Remove/Position')
-)
+const RemovePosition = dynamic(() => import('@components/lib/Remove/Position'))
 const ConfirmDialog = dynamic(
   () => import('@components/notifications/Dialog/Confirmation')
 )
-const EditPosition = dynamic(() => import('@components/features/Edit/Position'))
+const EditPosition = dynamic(() => import('@components/lib/Edit/Position'))
 
 import type {PositionOverviewType} from 'app/types/position'
 

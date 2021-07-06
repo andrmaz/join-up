@@ -7,15 +7,15 @@ import Container from '@components/containers/Container/Container'
 import Menu from '@components/navigation/Menu/Menu'
 import Panel from '@components/navigation/Tablist/Panel'
 
-import EditProfile from '@components/features/Edit/Profile'
+import EditProfile from '@components/lib/Edit/Profile'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
 
 import type {SessionTokenParamType} from 'app/types/params'
 
-const EditUsername = dynamic(() => import('@components/features/Edit/Username'))
-const EditEmail = dynamic(() => import('@components/features/Edit/Email'))
-const EditPassword = dynamic(() => import('@components/features/Edit/Password'))
+const EditUsername = dynamic(() => import('@components/lib/Edit/Username'))
+const EditEmail = dynamic(() => import('@components/lib/Edit/Email'))
+const EditPassword = dynamic(() => import('@components/lib/Edit/Password'))
 
 const Settings: NextPage<SessionTokenParamType> = ({
   token,

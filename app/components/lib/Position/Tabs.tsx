@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useTabsKey} from '@hooks/tabs/useTabsKey'
-import PositionPreview from '@components/features/Position/Preview'
+import PositionPreview from '@components/lib/Position/Preview'
 import type {PositionTabsType} from 'app/types/position'
 
 const PositionTabs = ({
