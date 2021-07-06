@@ -1,23 +1,17 @@
 import * as React from 'react'
-import {
-  NextPage,
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  InferGetServerSidePropsType,
-} from 'next'
+import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
-import {ParsedUrlQuery} from 'querystring'
-
-import {parseCookies} from '@utils/parseCookies'
 
 import Container from '@components/containers/Container/Container'
 import Wrapper from '@components/containers/Wrapper/Wrapper'
 import UserCard from '@components/features/User/Card'
 import ProjectsList from '@components/features/Project/List'
 
-import type {ProtectedParamsType} from 'app/types/params'
+import {getSessionTokenProps} from '@api/getServerSideProps'
 
-const Profile: NextPage<ProtectedParamsType> = ({
+import type {SessionTokenParamType} from 'app/types/params'
+
+const Profile: NextPage<SessionTokenParamType> = ({
   token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
@@ -47,24 +41,5 @@ const Profile: NextPage<ProtectedParamsType> = ({
 
 export default Profile
 
-export const getServerSideProps: GetServerSideProps<ProtectedParamsType> =
-  async (context: GetServerSidePropsContext<ParsedUrlQuery>) => {
-    //* Get the user's session based on the request
-    const {session: token} = parseCookies(context.req)
-
-    //* If no user, redirect to login
-    if (!token) {
-      return {
-        props: {},
-        redirect: {
-          destination: '/signin',
-          permanent: false,
-        },
-      }
-    }
-
-    //* If there is a user, return session token
-    return {
-      props: {token},
-    }
-  }
+export const getServerSideProps: GetServerSideProps<SessionTokenParamType> =
+  getSessionTokenProps
