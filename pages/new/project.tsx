@@ -1,17 +1,8 @@
-import {
-  NextPage,
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  InferGetServerSidePropsType,
-} from 'next'
+import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
-import {ParsedUrlQuery} from 'querystring'
 
 import {useForm} from 'react-hook-form'
 import useAddProject from '@hooks/add/useAddProject'
-
-import {parseCookies} from '@utils/parseCookies'
-import {fetchTechnologiesWithToken} from '@api/fetchWithToken'
 
 import Container from '@components/containers/Container/Container'
 
@@ -21,6 +12,8 @@ import UrlInput from '@components/form/Input/project/Url'
 import TechSelect from '@components/form/Select/Tech'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
+
+import {getTokenAndTechnologies} from '@api/getServerSideProps'
 
 import type {IProjectInput} from 'app/types/project'
 import type {ProjectParamsType} from 'app/types/params'
@@ -82,31 +75,5 @@ const Project: NextPage<ProjectParamsType> = ({
 
 export default Project
 
-export const getServerSideProps: GetServerSideProps<ProjectParamsType> = async (
-  context: GetServerSidePropsContext<ParsedUrlQuery>
-) => {
-  //* Get the user's session based on the request
-  const {session: token} = parseCookies(context.req)
-
-  //* If no user, redirect to login
-  if (!token) {
-    return {
-      props: {},
-      redirect: {
-        destination: '/signin',
-        permanent: false,
-      },
-    }
-  }
-
-  //* If there is a user,
-  const {technologies} = await fetchTechnologiesWithToken(token)
-
-  //* return technologies and user token
-  return {
-    props: {
-      token,
-      technologies,
-    },
-  }
-}
+export const getServerSideProps: GetServerSideProps<ProjectParamsType> =
+  getTokenAndTechnologies

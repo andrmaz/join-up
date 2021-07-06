@@ -1,22 +1,15 @@
 import * as React from 'react'
-import {
-  NextPage,
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  InferGetServerSidePropsType,
-} from 'next'
+import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
-import {ParsedUrlQuery} from 'querystring'
 
 import {useForm} from 'react-hook-form'
 import useFetchProjectsWithToken from '@hooks/fetch/useFetchProjectsWithToken'
 
-import {fetchTechnologiesWithToken} from '@api/fetchWithToken'
-import {parseCookies} from '@utils/parseCookies'
-
 import Container from '@components/containers/Container/Container'
 import Drawer from '@components/navigation/Drawer/Drawer'
 import ProjectsGrid from '@components/features/Project/Grid'
+
+import {getTokenAndOptions} from '@api/getServerSideProps'
 
 import type {ProjectsParamsType} from 'app/types/params'
 
@@ -58,29 +51,4 @@ const Projects: NextPage<ProjectsParamsType> = ({
 export default Projects
 
 export const getServerSideProps: GetServerSideProps<ProjectsParamsType> =
-  async (context: GetServerSidePropsContext<ParsedUrlQuery>) => {
-    //* Get the user's session based on the request
-    const {session: token} = parseCookies(context.req)
-
-    //* If no user, redirect to login
-    if (!token) {
-      return {
-        props: {},
-        redirect: {
-          destination: '/signin',
-          permanent: false,
-        },
-      }
-    }
-
-    //* If there is a user,
-    const {technologies: options} = await fetchTechnologiesWithToken(token)
-
-    //* return token and technologies
-    return {
-      props: {
-        token,
-        options,
-      },
-    }
-  }
+  getTokenAndOptions

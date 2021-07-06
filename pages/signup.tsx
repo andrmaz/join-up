@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next'
-import axios from 'axios'
 
 import {useForm} from 'react-hook-form'
 import useUserRegister from '@hooks/user/useUserRegister'
@@ -22,11 +21,9 @@ import TechSelect from '@components/form/Select/Tech'
 import Textarea from '@components/form/Textarea/Textarea'
 import {SubmitButton} from '@components/form/Button/Submit'
 
+import {getTechnologiesAndLanguages} from '@api/getServerSideProps'
+
 import type {ISignupInputs} from 'app/types/user'
-import type {
-  TechnologiesResponseType,
-  LanguagesResponseType,
-} from 'app/types/response'
 import type {SignUpParamsType} from 'app/types/params'
 
 const SignUp: NextPage<SignUpParamsType> = ({
@@ -128,18 +125,4 @@ const SignUp: NextPage<SignUpParamsType> = ({
 export default SignUp
 
 export const getServerSideProps: GetServerSideProps<SignUpParamsType> =
-  async () => {
-    const {
-      data: {technologies},
-    } = await axios.get<TechnologiesResponseType>('/technology')
-    const {
-      data: {languages},
-    } = await axios.get<LanguagesResponseType>('/language')
-
-    return {
-      props: {
-        technologies,
-        languages,
-      },
-    }
-  }
+  getTechnologiesAndLanguages
