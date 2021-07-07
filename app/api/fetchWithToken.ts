@@ -1,9 +1,11 @@
 import axios, {AxiosResponse} from 'axios'
+import type {NestedStringsType} from 'app/types/project'
 import type {IPositionInput} from 'app/types/position'
 import type {
   TechnologiesResponseType,
   LanguagesResponseType,
   PositionResponseType,
+  ProjectsResponseType,
   RemoveProjectResponseType,
   RemovePositionResponseType,
 } from 'app/types/response'
@@ -38,6 +40,30 @@ export async function fetchLanguagesWithToken(
   } catch (err) {
     return Promise.reject(err)
   }
+}
+
+export async function fetchProjectsWithToken(
+  token: string,
+  date: NestedStringsType,
+  match: NestedStringsType,
+  available: NestedStringsType,
+  technologies: NestedStringsType
+): Promise<AxiosResponse<ProjectsResponseType>> {
+  //* technologies and match must be checked before each fetching
+  const tech =
+    technologies && technologies.length
+      ? `&technologies=${technologies.toString()},`
+      : ''
+  const matches = match ? `&match=${match}` : ''
+  const response = await axios.get<ProjectsResponseType>(
+    `/project?sort=${date}${matches}&hasPositions=${available}${tech}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+  return response
 }
 
 export async function addPositionWithToken(
