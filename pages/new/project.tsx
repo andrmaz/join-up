@@ -6,12 +6,7 @@ import useAddProject from '@hooks/add/useAddProject'
 
 import Container from '@components/containers/Container/Container'
 
-import NameInput from '@components/form/Input/project/Name'
-import DescriptionInput from '@components/form/Input/Description'
-import UrlInput from '@components/form/Input/project/Url'
-import TechSelect from '@components/form/Select/Tech'
-import {SubmitButton} from '@components/form/Button/Submit'
-import CancelButton from '@components/form/Button/Cancel'
+import ProjectForm from '@components/form/Form/Project'
 
 import {getTokenAndTechnologies} from '@api/getServerSideProps'
 
@@ -39,34 +34,16 @@ const Project: NextPage<ProjectParamsType> = ({
               Please fill out this form to start creating a new project
             </span>
           </header>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className='flex flex-col h-5/6 justify-evenly'
-          >
-            <NameInput register={register} errors={errors} />
-            <DescriptionInput register={register} errors={errors} />
-            <div className='h-1/6 flex flex-col mb-6'>
-              <TechSelect
-                options={technologies}
-                control={control}
-                setValue={setValue}
-                errors={errors}
-              />
-            </div>
-            <UrlInput register={register} errors={errors} />
-            <div className='h-1/6 flex items-end'>
-              <div className='w-16 p-1'>
-                <SubmitButton
-                  value='Create'
-                  bgColor='green-600'
-                  errors={Boolean(
-                    errors.name || errors.description || errors.technologies
-                  )}
-                />
-              </div>
-              <CancelButton onClickAction={() => reset()} />
-            </div>
-          </form>
+          <ProjectForm
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            errors={errors}
+            options={technologies}
+            control={control}
+            setValue={setValue}
+            reset={reset}
+          />
         </article>
       </main>
     </Container>

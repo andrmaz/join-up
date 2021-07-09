@@ -1,7 +1,7 @@
+import {useProjectProvider} from '@hooks/project/useProjectProvider'
 import {NestedValue} from 'react-hook-form'
 import {IUserContext} from 'app/types/user'
-import {NestedOptionsType} from 'app/types/form'
-import {useProjectProvider} from '@hooks/project/useProjectProvider'
+import {SelectOptionsType} from 'app/types/form'
 
 // https://github.com/react-hook-form/react-hook-form/issues/987
 export type NestedStringsType = NestedValue<string[]>
@@ -9,6 +9,7 @@ export type NestedStringsType = NestedValue<string[]>
 export interface IProjectInput {
   name: string
   description: string
+  mission: string
   technologies: NestedStringsType
   projectURL?: string
 }
@@ -17,7 +18,8 @@ export interface IProjectData {
   id: string
   name: string
   description: string
-  technologies: NestedOptionsType
+  mission: string
+  technologies: SelectOptionsType[]
   projectURL?: string
   owner: number
   collaborators: Array<IUserContext>
@@ -55,4 +57,12 @@ export type RemoveProjectType = {
   uid: string
   showDialog: boolean
   setShowDialog: React.Dispatch<React.SetStateAction<typeof showDialog>>
+}
+
+export type DefaultValuesType = {
+  name: string
+  description: string
+  mission: string
+  technologies: SelectOptionsType[]
+  projectURL: string | undefined
 }

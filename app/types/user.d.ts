@@ -1,4 +1,4 @@
-import type {NestedOptionsType} from 'app/types/form'
+import type {SelectOptionsType} from 'app/types/form'
 import type {NestedStringsType} from 'app/types/project'
 
 export interface ISigninInputs {
@@ -29,8 +29,8 @@ export interface IUserContext {
   linkedinURL?: string
   avatar: string
   bio?: string
-  languages: NestedOptionsType
-  technologies: NestedOptionsType
+  languages: SelectOptionsType[]
+  technologies: SelectOptionsType[]
 }
 
 export type UserDataType = IUserContext | null

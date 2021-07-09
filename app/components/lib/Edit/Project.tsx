@@ -7,13 +7,7 @@ import useFetchTechnologiesWithToken from '@hooks/fetch/useFetchTechnologiesWith
 import useEditProject from '@hooks/edit/useEditProject'
 
 import Modal from '@components/containers/Modal/Modal'
-import NameInput from '@components/form/Input/project/Name'
-import DescriptionInput from '@components/form/Input/Description'
-import UrlInput from '@components/form/Input/project/Url'
-import TechSelect from '@components/form/Select/Tech'
-
-import {SubmitButton} from '@components/form/Button/Submit'
-import CancelButton from '@components/form/Button/Cancel'
+import ProjectForm from '@components/form/Form/Project'
 import CloseModalButton from '@components/form/Button/Close'
 
 import type {IProjectData, EditProjectType} from 'app/types/project'
@@ -21,7 +15,7 @@ import type {IProjectData, EditProjectType} from 'app/types/project'
 const EditProject = ({
   showModal,
   setShowModal,
-  project: {id, name, description, technologies, collaborators, projectURL},
+  project: {id, name, description, mission, technologies, projectURL},
 }: EditProjectType): React.ReactElement => {
   const token = useSessionCookie()
   //* Trap focus inside modal dialog
@@ -33,10 +27,6 @@ const EditProject = ({
   const {register, handleSubmit, errors, control, setValue, reset} =
     useForm<IProjectData>()
   const onSubmit = useEditProject(token, id, setShowModal)
-  const handleCancel = (): void => {
-    reset()
-    setShowModal(false)
-  }
   return (
     <React.Fragment>
       {showModal && (
@@ -55,54 +45,24 @@ const EditProject = ({
               focusRef={focusTrapRef}
             />
           </header>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className='flex flex-col h-5/6 justify-evenly'
-          >
-            <NameInput
-              defaultValue={name}
-              register={register}
-              errors={errors}
-            />
-            <DescriptionInput
-              defaultValue={description}
-              register={register}
-              errors={errors}
-            />
-            <div className='h-1/6 flex flex-col mb-6'>
-              <TechSelect
-                options={options}
-                control={control}
-                defaultValues={technologies}
-                defaultValue={technologies}
-                setValue={setValue}
-                errors={errors}
-              />
-            </div>
-            {collaborators.length
-              ? 'Collaborators (temporary)'
-              : 'No collaboratos (temporary)'}
-            <UrlInput
-              defaultValue={projectURL}
-              register={register}
-              errors={errors}
-            />
-            <div className='h-1/6 flex items-end'>
-              <div className='w-16 p-1'>
-                <SubmitButton
-                  value='Save'
-                  bgColor='green-600'
-                  errors={Boolean(
-                    errors.name || errors.description || errors.technologies
-                  )}
-                />
-              </div>
-              <CancelButton
-                onClickAction={handleCancel}
-                onKeyDownAction={() => focusTrapRef.current?.focus()}
-              />
-            </div>
-          </form>
+          <ProjectForm
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            errors={errors}
+            options={options}
+            control={control}
+            setValue={setValue}
+            reset={reset}
+            onKeyDown={() => focusTrapRef.current?.focus()}
+            defaultValues={{
+              name,
+              description,
+              mission,
+              technologies,
+              projectURL,
+            }}
+          />
         </Modal>
       )}
     </React.Fragment>
