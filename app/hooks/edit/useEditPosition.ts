@@ -2,7 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import useRefCallback from '@hooks/ref/useRefCallback'
 import {usePositionContext} from '@hooks/position/usePositionContext'
-import type {IPosistionData} from 'app/types/position'
+import type {IPositionData} from 'app/types/position'
 import type {PositionResponseType} from 'app/types/response'
 
 export default function useEditPosition(
@@ -13,7 +13,7 @@ export default function useEditPosition(
 ): readonly [
   React.MutableRefObject<HTMLElement | null>,
   (node: HTMLInputElement) => void,
-  (data: IPosistionData) => Promise<PositionResponseType>
+  (data: IPositionData) => Promise<PositionResponseType>
 ] {
   const {dispatch} = usePositionContext()
   //* Trap focus inside modal dialog
@@ -21,7 +21,7 @@ export default function useEditPosition(
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
   const onSubmit = async (
-    data: IPosistionData
+    data: IPositionData
   ): Promise<PositionResponseType> => {
     try {
       data.projectId = projectId

@@ -1,6 +1,6 @@
 import type {IUserContext} from 'app/types/user'
 import type {IProjectData} from 'app/types/project'
-import type {IPosistionData} from 'app/types/position'
+import type {IPositionData} from 'app/types/position'
 import {SelectOptionsType} from 'app/types/form'
 
 export type StatusResponseType = {
@@ -53,13 +53,13 @@ export type FetchProjectsResponseType = {
 //* Position
 export type PositionsResponseType = {
   message: string
-  positions: IPosistionData[]
+  positions: IPositionData[]
   status: number
 }
 
 export type PositionResponseType = {
   message: string
-  position: IPosistionData
+  position: IPositionData
   status: number
 }
 

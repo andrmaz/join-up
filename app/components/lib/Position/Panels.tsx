@@ -1,7 +1,7 @@
 import * as React from 'react'
 import dynamic from 'next/dynamic'
 //import PositionOverview from '@components/features/Position/Overview'
-import type {IPosistionData} from 'app/types/position'
+import type {IPositionData} from 'app/types/position'
 const PositionOverview = dynamic(
   () => import('@components/lib/Position/Overview')
 )
@@ -10,7 +10,7 @@ const PositionPanels = ({
   positions,
   selectedTab,
 }: {
-  positions: IPosistionData[]
+  positions: IPositionData[]
   selectedTab: number
 }): React.ReactElement => {
   return (
