@@ -37,7 +37,7 @@ const PositionOverview = ({
           <span className='h-1/2'>Role: {position.role.label}</span>
         </article>
         <main>
-          <p className='h-auto py-2'>{position.description}</p>
+          <p className='h-auto py-2'>{position.duties}</p>
         </main>
         <article className='h-auto py-2'>
           <p className='text-red-400 break-words'>
