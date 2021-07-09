@@ -1,10 +1,8 @@
 import React from 'react'
-import {
-  Control,
-  NestedValue,
-  SetValueConfig,
-  FieldElement,
-} from 'react-hook-form'
+import {Control, SetValueConfig, FieldElement} from 'react-hook-form'
+import type {ISigninInputs, ISignupInputs} from 'app/types/user'
+import type {IProjectInput, DefaultValuesType} from 'app/types/project'
+import type {UserResponseType, ProjectResponseType} from 'app/types/response'
 
 //* Inputs
 type RegisterType = (ref: (FieldElement<T> & React.Ref) | null) => void
@@ -38,7 +36,6 @@ export type FormInputType = {
 
 //* Selects
 export type SelectOptionsType = {id: number; label: string}
-export type NestedOptionsType = NestedValue<SelectOptionsType[]> | undefined
 
 export interface IFormSelect {
   options: SelectOptionsType[]
@@ -46,8 +43,8 @@ export interface IFormSelect {
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   errors?: Record<string, any>
   disabled?: boolean
-  defaultValues?: NestedOptionsType
-  defaultValue?: NestedOptionsType
+  defaultValues?: SelectOptionsType[]
+  defaultValue?: SelectOptionsType[]
 }
 
 export interface IPositionSelect {
@@ -79,8 +76,8 @@ export type ActionButtonType = {
 }
 
 export type CancelButtonType = {
-  onClickAction: () => void
-  onKeyDownAction?: () => void
+  onClickHandler: () => void
+  onKeyDownHandler?: () => void
 }
 
 export type CloseButtonType = {
@@ -121,7 +118,7 @@ export interface ISigninForm {
 
 export interface ISignupForm {
   handleSubmit: (field: FieldValues) => typeof onSubmit
-  onSubmit: (data: ISigninInputs) => Promise<UserResponseType>
+  onSubmit: (data: ISignupInputs) => Promise<UserResponseType>
   register: (ref: any) => RegisterType
   errors: Record<string, any>
   watchPassword: string
@@ -129,4 +126,16 @@ export interface ISignupForm {
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   languages: SelectOptionsType[]
   technologies: SelectOptionsType[]
+}
+export interface IProjectForm {
+  handleSubmit: (field: FieldValues) => typeof onSubmit
+  onSubmit: (data: IProjectInput | IProjectData) => Promise<ProjectResponseType>
+  register: (ref: any) => RegisterType
+  errors: Record<string, any>
+  options: SelectOptionsType[]
+  control: Control
+  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
+  reset: (values?: Record<string, any>, omitResetState?: OmitResetState) => void
+  onKeyDown?: () => void
+  defaultValues?: DefaultValuesType
 }
