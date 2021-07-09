@@ -3,6 +3,7 @@ import {NestedValue} from 'react-hook-form'
 import {IUserContext} from 'app/types/user'
 import {SelectOptionsType} from 'app/types/form'
 
+
 // https://github.com/react-hook-form/react-hook-form/issues/987
 export type NestedStringsType = NestedValue<string[]>
 
@@ -46,6 +47,14 @@ export type ProjectContextType = {
 }
 
 export type UseProjectContextResults = ReturnType<typeof useProjectProvider>
+
+export type ProjectGridType = {
+  isIdle: boolean
+  isLoading: boolean
+  isError: boolean
+  isSuccess: boolean
+  data: ProjectsResponseType | null
+}
 
 export type EditProjectType = {
   showModal: boolean

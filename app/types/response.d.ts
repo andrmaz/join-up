@@ -41,6 +41,15 @@ export type RemoveProjectResponseType = {
   status: number
 }
 
+export type FetchProjectsResponseType = {
+  isIdle: boolean
+  isLoading: boolean
+  isError: boolean
+  isSuccess: boolean
+  data: ProjectsResponseType | null
+  error: string | null
+}
+
 //* Position
 export type PositionsResponseType = {
   message: string
