@@ -93,7 +93,7 @@ const EditProfile = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
         <Textarea register={register} defaultValue={bio} />
         <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
           <CancelButton
-            onClickAction={() => {
+            onClickHandler={() => {
               reset({
                 githubURL: '',
                 gitlabURL: '',

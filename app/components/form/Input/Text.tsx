@@ -1,25 +1,30 @@
 import FormInput from '@components/form/Input/Form'
 import type {FormInputType} from 'app/types/form'
 
-const DescriptionInput = ({
+const TextInput = ({
+  id = 'description',
+  name = 'description',
+  label = 'Description',
   register,
   errors,
   defaultValue,
 }: FormInputType): JSX.Element => (
   <FormInput
     type='text'
-    id='description'
-    name='description'
-    label='Description'
+    id={id}
+    name={name}
+    label={label}
     placeholder={
-      defaultValue ? defaultValue : 'Consider providing a short description'
+      defaultValue
+        ? defaultValue
+        : `Provide a ${name} to get people involved in your project`
     }
     defaultValue={defaultValue ? defaultValue : ''}
     register={register({
-      required: 'project description is required',
+      required: `${name} is required`,
       minLength: {
         value: 10,
-        message: 'please provide a longer description',
+        message: `please provide a longer ${name}`,
       },
       maxLength: 65535,
     })}
@@ -27,4 +32,4 @@ const DescriptionInput = ({
   />
 )
 
-export default DescriptionInput
+export default TextInput

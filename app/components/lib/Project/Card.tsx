@@ -5,7 +5,7 @@ import type {IProjectData} from 'app/types/project'
 const ProjectCard = ({
   id,
   name,
-  description,
+  mission,
   technologies,
   updatedAt,
 }: IProjectData): JSX.Element => {
@@ -23,7 +23,7 @@ const ProjectCard = ({
           Last update: {updatedAt.slice(0, 7)}
         </span>
         <p className='h-5/6 text-sm tracking-tighter overflow-hidden'>
-          {description}
+          {mission}
         </p>
       </article>
       <aside className='h-2/6 w-full pt-2 overflow-hidden'>

@@ -51,8 +51,8 @@ const AlertDialog = ({
                   Confirm
                 </ConfirmButton>
                 <CancelButton
-                  onClickAction={() => setShowDialog(false)}
-                  onKeyDownAction={() => focusTrapRef.current?.focus()}
+                  onClickHandler={() => setShowDialog(false)}
+                  onKeyDownHandler={() => focusTrapRef.current?.focus()}
                 />
               </div>
             </div>

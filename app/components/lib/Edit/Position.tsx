@@ -8,7 +8,7 @@ import useEditPosition from '@hooks/edit/useEditPosition'
 import Modal from '@components/containers/Modal/Modal'
 
 import TitleInput from '@components/form/Input/position/Title'
-import DescriptionInput from '@components/form/Input/Description'
+import TextInput from '@components/form/Input/Text'
 import VacancyInput from '@components/form/Input/position/Vacancy'
 
 import TechSelect from '@components/form/Select/Tech'
@@ -78,7 +78,7 @@ const EditPosition = ({
                 register={register}
                 errors={errors}
               />
-              <DescriptionInput
+              <TextInput
                 defaultValue={description}
                 register={register}
                 errors={errors}
@@ -119,8 +119,8 @@ const EditPosition = ({
                 />
               </div>
               <CancelButton
-                onClickAction={handleCancel}
-                onKeyDownAction={() => focusTrapRef.current?.focus()}
+                onClickHandler={handleCancel}
+                onKeyDownHandler={() => focusTrapRef.current?.focus()}
               />
             </div>
           </form>
