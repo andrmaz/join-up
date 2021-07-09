@@ -56,7 +56,7 @@ const EditPassword = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
           />
         </article>
         <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
-          <CancelButton onClickAction={() => reset()} />
+          <CancelButton onClickHandler={() => reset()} />
           <div className='w-16 p-1'>
             <SubmitButton
               value='Save'

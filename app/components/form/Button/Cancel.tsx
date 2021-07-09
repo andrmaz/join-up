@@ -1,8 +1,8 @@
 import type {CancelButtonType} from 'app/types/form'
 
 const CancelButton = ({
-  onClickAction,
-  onKeyDownAction,
+  onClickHandler: onClickAction,
+  onKeyDownHandler: onKeyDownAction,
 }: CancelButtonType): JSX.Element => (
   <button
     type='button'
