@@ -11,7 +11,7 @@ import {addPositionWithToken} from '@api/fetchWithToken'
 import Modal from '@components/containers/Modal/Modal'
 
 import TitleInput from '@components/form/Input/position/Title'
-import DescriptionInput from '@components/form/Input/Description'
+import TextInput from '@components/form/Input/Text'
 import VacancyInput from '@components/form/Input/position/Vacancy'
 
 import TechSelect from '@components/form/Select/Tech'
@@ -81,7 +81,7 @@ const NewPosition = ({
             <div className='h-18/20 flex flex-col justify-evenly pb-6'>
               <VacancyInput register={register} />
               <TitleInput register={register} errors={errors} />
-              <DescriptionInput register={register} errors={errors} />
+              <TextInput register={register} errors={errors} />
               <LevelSelect
                 control={control}
                 setValue={setValue}
@@ -114,8 +114,8 @@ const NewPosition = ({
                 />
               </div>
               <CancelButton
-                onClickAction={handleCancel}
-                onKeyDownAction={() => focusTrapRef.current?.focus()}
+                onClickHandler={handleCancel}
+                onKeyDownHandler={() => focusTrapRef.current?.focus()}
               />
             </div>
           </form>

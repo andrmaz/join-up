@@ -1,27 +1,27 @@
 import FormInput from '@components/form/Input/Form'
 import type {FormInputType} from 'app/types/form'
 
-const NameInput = ({
+const TitleInput = ({
+  id = 'title',
+  name = 'title',
   register,
   errors,
   defaultValue,
 }: FormInputType): JSX.Element => (
   <FormInput
     type='text'
-    id='name'
-    name='name'
-    label='Name'
+    id={id}
+    name={name}
+    label='Title'
     placeholder={
-      defaultValue
-        ? defaultValue
-        : 'Give a unique and memorable name to your project'
+      defaultValue ? defaultValue : 'Give it a unique and memorable title'
     }
     defaultValue={defaultValue ? defaultValue : ''}
     register={register({
-      required: 'project name is required',
+      required: 'title is required',
       minLength: {
         value: 3,
-        message: 'please provide a longer name',
+        message: 'please provide a longer title',
       },
       maxLength: 255,
     })}
@@ -29,4 +29,4 @@ const NameInput = ({
   />
 )
 
-export default NameInput
+export default TitleInput
