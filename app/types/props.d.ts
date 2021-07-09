@@ -1,5 +1,5 @@
 import type {SelectOptionsType} from 'app/types/form'
-import type {IPosistionData} from './position'
+import type {IPositionData} from './position'
 import type {IProjectData} from './project'
 
 type RedirectPropsType = {
@@ -16,7 +16,7 @@ export type SessionTokenPropsType = {token: string}
 
 export type ProjectAndPositionsPropsType = {
   project: IProjectData
-  positions: IPosistionData[]
+  positions: IPositionData[]
 }
 
 export type TokenAndOptionsPropsType = {

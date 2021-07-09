@@ -1,5 +1,5 @@
 import type {IProjectData} from 'app/types/project'
-import type {IPosistionData} from 'app/types/position'
+import type {IPositionData} from 'app/types/position'
 import {SelectOptionsType} from 'app/types/form'
 
 export type SignUpParamsType = {
@@ -13,7 +13,7 @@ export type SessionTokenParamType = {
 
 export type SlugParamsType = {
   project: IProjectData
-  positions: IPosistionData[]
+  positions: IPositionData[]
 }
 
 export type ProjectParamsType = {

@@ -1,7 +1,7 @@
 import {
   PositionActionsType,
   PositionStateType,
-  IPosistionData,
+  IPositionData,
 } from 'app/types/position'
 
 export function positionReducer(
@@ -9,11 +9,11 @@ export function positionReducer(
   action: PositionActionsType
 ): PositionStateType {
   let index: number
-  let positionCopy: IPosistionData | undefined
-  let positionsCopy: IPosistionData[]
-  let updatedPosition: IPosistionData
-  let filteredPositions: IPosistionData[]
-  let updatedPositions: IPosistionData[]
+  let positionCopy: IPositionData | undefined
+  let positionsCopy: IPositionData[]
+  let updatedPosition: IPositionData
+  let filteredPositions: IPositionData[]
+  let updatedPositions: IPositionData[]
   switch (action.type) {
     case 'add':
       positionsCopy = [...state.positions]
@@ -24,7 +24,7 @@ export function positionReducer(
       }
     case 'remove':
       index = state.positions.findIndex(
-        (position: IPosistionData) => position.id === action.payload
+        (position: IPositionData) => position.id === action.payload
       )
       positionsCopy = [...state.positions]
       positionsCopy.splice(index, 1)
@@ -34,12 +34,12 @@ export function positionReducer(
       }
     case 'edit':
       positionCopy = state.positions.find(
-        (position: IPosistionData) => position.id === action.payload.id
+        (position: IPositionData) => position.id === action.payload.id
       )
       updatedPosition = Object.assign({...positionCopy}, action.payload)
       positionsCopy = [...state.positions]
       filteredPositions = positionsCopy.filter(
-        (position: IPosistionData) => position.id !== updatedPosition.id
+        (position: IPositionData) => position.id !== updatedPosition.id
       )
       updatedPositions = [...filteredPositions, updatedPosition]
       return {
