@@ -17,14 +17,14 @@ const TextInput = ({
     placeholder={
       defaultValue
         ? defaultValue
-        : `Provide a ${name} to get people involved in your project`
+        : `Provide some details to get people involved in your project`
     }
     defaultValue={defaultValue ? defaultValue : ''}
     register={register({
-      required: `${name} is required`,
+      required: `${name} field is required`,
       minLength: {
         value: 10,
-        message: `please provide a longer ${name}`,
+        message: `please provide a longer ${name} field`,
       },
       maxLength: 65535,
     })}

@@ -7,17 +7,7 @@ import useEditPosition from '@hooks/edit/useEditPosition'
 
 import Modal from '@components/containers/Modal/Modal'
 
-import TitleInput from '@components/form/Input/position/Title'
-import TextInput from '@components/form/Input/Text'
-import VacancyInput from '@components/form/Input/position/Vacancy'
-
-import TechSelect from '@components/form/Select/Tech'
-import LevelSelect from '@components/form/Select/Level'
-import RoleSelect from '@components/form/Select/Role'
-
-// buttons
-import {SubmitButton} from '@components/form/Button/Submit'
-import CancelButton from '@components/form/Button/Cancel'
+import PositionForm from '@components/form/Form/Position'
 import CloseModalButton from '@components/form/Button/Close'
 
 import type {EditPositoinType, IPositionInput} from 'app/types/position'
@@ -26,7 +16,8 @@ const EditPosition = ({
   position: {
     id,
     title,
-    description,
+    duties,
+    qualifications,
     technologies,
     level,
     role,
@@ -47,11 +38,6 @@ const EditPosition = ({
     projectId,
     setShowModal
   )
-  //* Reset the entire form state and close the modal
-  const handleCancel = (): void => {
-    reset()
-    setShowModal(false)
-  }
   return (
     <React.Fragment>
       {showModal && (
@@ -70,60 +56,26 @@ const EditPosition = ({
               focusRef={focusTrapRef}
             />
           </header>
-          <form className='h-18/20' onSubmit={handleSubmit(onSubmit)}>
-            <div className='h-18/20 flex flex-col justify-evenly pb-6'>
-              <VacancyInput defaultValue={vacancies} register={register} />
-              <TitleInput
-                defaultValue={title}
-                register={register}
-                errors={errors}
-              />
-              <TextInput
-                defaultValue={description}
-                register={register}
-                errors={errors}
-              />
-              <LevelSelect
-                control={control}
-                defaultValue={level}
-                setValue={setValue}
-                errors={errors}
-              />
-              <RoleSelect
-                control={control}
-                defaultValue={role}
-                setValue={setValue}
-                errors={errors}
-              />
-              <TechSelect
-                options={options}
-                control={control}
-                defaultValue={technologies}
-                defaultValues={technologies}
-                setValue={setValue}
-                errors={errors}
-              />
-            </div>
-            <div className='h-1/10 flex'>
-              <div className='w-16 p-1'>
-                <SubmitButton
-                  value='Edit'
-                  bgColor='green-600'
-                  errors={Boolean(
-                    errors.title ||
-                      errors.description ||
-                      errors.level ||
-                      errors.role ||
-                      errors.technologies
-                  )}
-                />
-              </div>
-              <CancelButton
-                onClickHandler={handleCancel}
-                onKeyDownHandler={() => focusTrapRef.current?.focus()}
-              />
-            </div>
-          </form>
+          <PositionForm
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            errors={errors}
+            options={options}
+            control={control}
+            setValue={setValue}
+            reset={reset}
+            onKeyDown={() => focusTrapRef.current?.focus()}
+            defaultValues={{
+              title,
+              duties,
+              qualifications,
+              technologies,
+              level,
+              role,
+              vacancies,
+            }}
+          />
         </Modal>
       )}
     </React.Fragment>

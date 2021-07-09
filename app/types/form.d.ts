@@ -1,8 +1,15 @@
 import React from 'react'
 import {Control, SetValueConfig, FieldElement} from 'react-hook-form'
+
 import type {ISigninInputs, ISignupInputs} from 'app/types/user'
-import type {IProjectInput, DefaultValuesType} from 'app/types/project'
-import type {UserResponseType, ProjectResponseType} from 'app/types/response'
+import type {ProjectValuesType} from 'app/types/project'
+import type {PositionValuesType} from 'app/types/position'
+
+import type {
+  UserResponseType,
+  ProjectResponseType,
+  PositionResponseType,
+} from 'app/types/response'
 
 //* Inputs
 type RegisterType = (ref: (FieldElement<T> & React.Ref) | null) => void
@@ -129,7 +136,7 @@ export interface ISignupForm {
 }
 export interface IProjectForm {
   handleSubmit: (field: FieldValues) => typeof onSubmit
-  onSubmit: (data: IProjectInput | IProjectData) => Promise<ProjectResponseType>
+  onSubmit: (data: any) => Promise<ProjectResponseType>
   register: (ref: any) => RegisterType
   errors: Record<string, any>
   options: SelectOptionsType[]
@@ -137,5 +144,18 @@ export interface IProjectForm {
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   reset: (values?: Record<string, any>, omitResetState?: OmitResetState) => void
   onKeyDown?: () => void
-  defaultValues?: DefaultValuesType
+  defaultValues?: ProjectValuesType
+}
+
+export interface IPositionForm {
+  handleSubmit: (field: FieldValues) => typeof onSubmit
+  onSubmit: (data: any) => Promise<PositionResponseType>
+  register: (ref: any) => RegisterType
+  errors: Record<string, any>
+  options: SelectOptionsType[]
+  control: Control
+  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
+  reset: (values?: Record<string, any>, omitResetState?: OmitResetState) => void
+  onKeyDown?: () => void
+  defaultValues?: PositionValuesType
 }

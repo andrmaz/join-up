@@ -10,17 +10,7 @@ import {addPositionWithToken} from '@api/fetchWithToken'
 
 import Modal from '@components/containers/Modal/Modal'
 
-import TitleInput from '@components/form/Input/position/Title'
-import TextInput from '@components/form/Input/Text'
-import VacancyInput from '@components/form/Input/position/Vacancy'
-
-import TechSelect from '@components/form/Select/Tech'
-import LevelSelect from '@components/form/Select/Level'
-import RoleSelect from '@components/form/Select/Role'
-
-// buttons
-import {SubmitButton} from '@components/form/Button/Submit'
-import CancelButton from '@components/form/Button/Cancel'
+import PositionForm from '@components/form/Form/Position'
 import CloseModalButton from '@components/form/Button/Close'
 
 import type {IPositionInput} from 'app/types/position'
@@ -43,11 +33,6 @@ const NewPosition = ({
   const options = useFetchProjectTechnologiesWithToken(token)
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
-  //* Reset the entire form state and close the modal
-  const handleCancel = (): void => {
-    reset()
-    setShowModal(false)
-  }
   const onSubmit = (data: IPositionInput): Promise<PositionResponseType> =>
     addPositionWithToken(data, token)
       .then(response => {
@@ -77,48 +62,17 @@ const NewPosition = ({
               focusRef={focusTrapRef}
             />
           </div>
-          <form className='h-18/20' onSubmit={handleSubmit(onSubmit)}>
-            <div className='h-18/20 flex flex-col justify-evenly pb-6'>
-              <VacancyInput register={register} />
-              <TitleInput register={register} errors={errors} />
-              <TextInput register={register} errors={errors} />
-              <LevelSelect
-                control={control}
-                setValue={setValue}
-                errors={errors}
-              />
-              <RoleSelect
-                control={control}
-                setValue={setValue}
-                errors={errors}
-              />
-              <TechSelect
-                options={options}
-                control={control}
-                setValue={setValue}
-                errors={errors}
-              />
-            </div>
-            <div className='h-1/10 flex'>
-              <div className='w-16 p-1'>
-                <SubmitButton
-                  value='Add'
-                  bgColor='green-600'
-                  errors={Boolean(
-                    errors.title ||
-                      errors.description ||
-                      errors.level ||
-                      errors.role ||
-                      errors.technologies
-                  )}
-                />
-              </div>
-              <CancelButton
-                onClickHandler={handleCancel}
-                onKeyDownHandler={() => focusTrapRef.current?.focus()}
-              />
-            </div>
-          </form>
+          <PositionForm
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            errors={errors}
+            options={options}
+            control={control}
+            setValue={setValue}
+            reset={reset}
+            onKeyDown={() => focusTrapRef.current?.focus()}
+          />
         </Modal>
       )}
     </React.Fragment>

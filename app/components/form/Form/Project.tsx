@@ -1,4 +1,4 @@
-import TitleInput from '@components/form/Input/project/Name'
+import TitleInput from '@components/form/Input/Title'
 import TextInput from '@components/form/Input/Text'
 import UrlInput from '@components/form/Input/project/Url'
 import TechSelect from '@components/form/Select/Tech'
