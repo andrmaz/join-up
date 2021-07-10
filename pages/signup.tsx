@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next'
 
 import {useForm} from 'react-hook-form'
 import useUserRegister from '@hooks/user/useUserRegister'
@@ -7,15 +6,9 @@ import useUserRegister from '@hooks/user/useUserRegister'
 import Container from '@components/containers/Container/Container'
 import SignupForm from '@components/form/Form/Signup'
 
-import {getTechnologiesAndLanguages} from '@api/getServerSideProps'
-
 import type {ISignupInputs} from 'app/types/user'
-import type {SignUpParamsType} from 'app/types/params'
 
-const SignUp: NextPage<SignUpParamsType> = ({
-  technologies,
-  languages,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const SignUp = (): JSX.Element => {
   const {register, handleSubmit, watch, errors, control, setValue} =
     useForm<ISignupInputs>()
   const watchPassword = watch('password')
@@ -39,8 +32,6 @@ const SignUp: NextPage<SignUpParamsType> = ({
             watchPassword={watchPassword}
             control={control}
             setValue={setValue}
-            languages={languages}
-            technologies={technologies}
           />
         </section>
       </main>
@@ -49,6 +40,3 @@ const SignUp: NextPage<SignUpParamsType> = ({
 }
 
 export default SignUp
-
-export const getServerSideProps: GetServerSideProps<SignUpParamsType> =
-  getTechnologiesAndLanguages

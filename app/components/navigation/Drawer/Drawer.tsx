@@ -9,7 +9,6 @@ import {IDrawerProps} from 'app/types/navigation'
 const Drawer = ({
   register,
   isPending,
-  options,
   setValue,
   control,
   technologies,
@@ -22,7 +21,6 @@ const Drawer = ({
       )}
       <CheckboxInput register={register} isPending={isPending} />
       <TechSelect
-        options={options}
         disabled={Boolean(isPending)}
         control={control}
         setValue={setValue}
@@ -38,7 +36,6 @@ export default React.memo(Drawer, (prevProps, nextProps) => {
   otherwise return false
   */
   if (prevProps.isPending !== nextProps.isPending) return false
-  if (prevProps.options !== nextProps.options) return false
   if (prevProps.setValue !== nextProps.setValue) return false
   if (prevProps.control !== nextProps.control) return false
   if (prevProps.technologies !== nextProps.technologies) return false

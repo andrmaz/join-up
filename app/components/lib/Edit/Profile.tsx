@@ -3,8 +3,6 @@ import * as React from 'react'
 import {useForm} from 'react-hook-form'
 import {useAuthState} from '@hooks/auth/useAuthState'
 import useEditUserData from '@hooks/edit/useEditUserData'
-import useFetchTechnologiesWithToken from '@hooks/fetch/useFetchTechnologiesWithToken'
-import useFetchLanguagesWithToken from '@hooks/fetch//useFetchLanguagesWithToken'
 
 import Panel from '@components/navigation/Tablist/Panel'
 import SnackBar from '@components/notifications/SnackBar/SnackBar'
@@ -40,8 +38,6 @@ const EditProfile = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
   }
   const {handleSubmit, register, errors, control, setValue, reset} =
     useForm<IUserContext>()
-  const techs = useFetchTechnologiesWithToken(token)
-  const langs = useFetchLanguagesWithToken(token)
   const [isSuccess, successMessage, handleClose, onSubmit] =
     useEditUserData(token)
   return (
@@ -71,7 +67,7 @@ const EditProfile = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
           </div>
           <div className='flex flex-col p-0.5'>
             <LangSelect
-              options={langs}
+              token={token}
               control={control}
               defaultValue={languages}
               defaultValues={languages}
@@ -81,7 +77,7 @@ const EditProfile = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
           </div>
           <div className='flex flex-col p-0.5'>
             <TechSelect
-              options={techs}
+              token={token}
               control={control}
               defaultValue={technologies}
               defaultValues={technologies}

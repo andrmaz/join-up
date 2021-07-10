@@ -1,18 +1,23 @@
 import * as React from 'react'
 import Select from 'react-select'
+
 import {Controller} from 'react-hook-form'
+import useTechnologies from '@hooks/technology/useTechnologies'
+
 import ErrorMessage from '@components/notifications/Message/Error'
 import type {IFormSelect, SelectOptionsType} from 'app/types/form'
 
 const TechSelect = ({
-  options,
   control,
   setValue,
   errors,
   disabled,
   defaultValues,
   defaultValue,
+  id,
+  token,
 }: IFormSelect): React.ReactElement => {
+  const options = useTechnologies(id, token)
   return (
     <React.Fragment>
       <label id='technologies' htmlFor='technologies'>

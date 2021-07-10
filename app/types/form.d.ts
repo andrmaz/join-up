@@ -13,7 +13,6 @@ import type {
 
 //* Inputs
 type RegisterType = (ref: (FieldElement<T> & React.Ref) | null) => void
-//({required: string; pattern: {value: RegExp; message: string}})
 
 export interface IFormInput {
   id: string
@@ -45,13 +44,14 @@ export type FormInputType = {
 export type SelectOptionsType = {id: number; label: string}
 
 export interface IFormSelect {
-  options: SelectOptionsType[]
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   errors?: Record<string, any>
   disabled?: boolean
   defaultValues?: SelectOptionsType[]
   defaultValue?: SelectOptionsType[]
+  id?: number
+  token?: string
 }
 
 export interface IPositionSelect {
@@ -131,15 +131,12 @@ export interface ISignupForm {
   watchPassword: string
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
-  languages: SelectOptionsType[]
-  technologies: SelectOptionsType[]
 }
 export interface IProjectForm {
   handleSubmit: (field: FieldValues) => typeof onSubmit
   onSubmit: (data: any) => Promise<ProjectResponseType>
   register: (ref: any) => RegisterType
   errors: Record<string, any>
-  options: SelectOptionsType[]
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   reset: (values?: Record<string, any>, omitResetState?: OmitResetState) => void
@@ -152,10 +149,11 @@ export interface IPositionForm {
   onSubmit: (data: any) => Promise<PositionResponseType>
   register: (ref: any) => RegisterType
   errors: Record<string, any>
-  options: SelectOptionsType[]
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   reset: (values?: Record<string, any>, omitResetState?: OmitResetState) => void
   onKeyDown?: () => void
   defaultValues?: PositionValuesType
+  id?: number
+  token?: string
 }
