@@ -1,8 +1,8 @@
 import * as React from 'react'
 
 import {useForm} from 'react-hook-form'
+import useRefCallback from '@hooks/ref/useRefCallback'
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
-import useFetchProjectTechnologiesWithToken from '@hooks/fetch/useFetchProjectTechnologiesWithToken'
 import useEditPosition from '@hooks/edit/useEditPosition'
 
 import Modal from '@components/containers/Modal/Modal'
@@ -30,14 +30,11 @@ const EditPosition = ({
   const token = useSessionCookie()
   const {register, handleSubmit, control, setValue, reset, errors} =
     useForm<IPositionInput>()
-  //* Set technologies options to State as soon as the modal is shown
-  const options = useFetchProjectTechnologiesWithToken(token)
-  const [focusTrapRef, setRef, onSubmit] = useEditPosition(
-    token,
-    id,
-    projectId,
-    setShowModal
-  )
+  //* Trap focus inside modal dialog
+  const focusTrapRef = React.useRef<HTMLElement | null>(null)
+  //* ref will be a callback function instead of a Ref Object
+  const [setRef] = useRefCallback()
+  const onSubmit = useEditPosition(token, id, projectId, setShowModal)
   return (
     <React.Fragment>
       {showModal && (
@@ -57,11 +54,12 @@ const EditPosition = ({
             />
           </header>
           <PositionForm
+            id={projectId}
+            token={token}
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             register={register}
             errors={errors}
-            options={options}
             control={control}
             setValue={setValue}
             reset={reset}

@@ -9,13 +9,12 @@ import Container from '@components/containers/Container/Container'
 import Drawer from '@components/navigation/Drawer/Drawer'
 import ProjectsGrid from '@components/lib/Project/Grid'
 
-import {getTokenAndOptions} from '@api/getServerSideProps'
+import {getSessionTokenProps} from '@api/getServerSideProps'
 
-import type {ProjectsParamsType} from 'app/types/params'
+import type {TokenParamsType} from 'app/types/params'
 
-const Projects: NextPage<ProjectsParamsType> = ({
+const Projects: NextPage<TokenParamsType> = ({
   token,
-  options,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {control, register, watch, setValue} = useForm()
   //* watching every fields in the form
@@ -33,7 +32,6 @@ const Projects: NextPage<ProjectsParamsType> = ({
           <Drawer
             register={register}
             isPending={isLoading}
-            options={options}
             setValue={setValue}
             control={control}
             technologies={fields.technologies}
@@ -53,5 +51,5 @@ const Projects: NextPage<ProjectsParamsType> = ({
 
 export default Projects
 
-export const getServerSideProps: GetServerSideProps<ProjectsParamsType> =
-  getTokenAndOptions
+export const getServerSideProps: GetServerSideProps<TokenParamsType> =
+  getSessionTokenProps

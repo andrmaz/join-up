@@ -23,8 +23,6 @@ const SignupForm = ({
   watchPassword,
   control,
   setValue,
-  languages,
-  technologies,
 }: ISignupForm): JSX.Element => (
   <form
     onSubmit={handleSubmit(onSubmit)}
@@ -57,20 +55,10 @@ const SignupForm = ({
     </article>
     <article className='h-1/5 w-full flex mt-2'>
       <div className='w-3/6 flex flex-col m-auto p-0.5'>
-        <LangSelect
-          options={languages}
-          control={control}
-          setValue={setValue}
-          errors={errors}
-        />
+        <LangSelect control={control} setValue={setValue} errors={errors} />
       </div>
       <div className='w-3/6 flex flex-col m-auto p-0.5'>
-        <TechSelect
-          options={technologies}
-          control={control}
-          setValue={setValue}
-          errors={errors}
-        />
+        <TechSelect control={control} setValue={setValue} errors={errors} />
       </div>
     </article>
     <Textarea register={register} />

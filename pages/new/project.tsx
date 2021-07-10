@@ -8,14 +8,13 @@ import Container from '@components/containers/Container/Container'
 
 import ProjectForm from '@components/form/Form/Project'
 
-import {getTokenAndTechnologies} from '@api/getServerSideProps'
+import {getSessionTokenProps} from '@api/getServerSideProps'
 
 import type {IProjectInput} from 'app/types/project'
-import type {ProjectParamsType} from 'app/types/params'
+import type {TokenParamsType} from 'app/types/params'
 
-const Project: NextPage<ProjectParamsType> = ({
+const Project: NextPage<TokenParamsType> = ({
   token,
-  technologies,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {register, handleSubmit, errors, control, setValue, reset} =
     useForm<IProjectInput>()
@@ -39,7 +38,6 @@ const Project: NextPage<ProjectParamsType> = ({
             onSubmit={onSubmit}
             register={register}
             errors={errors}
-            options={technologies}
             control={control}
             setValue={setValue}
             reset={reset}
@@ -52,5 +50,5 @@ const Project: NextPage<ProjectParamsType> = ({
 
 export default Project
 
-export const getServerSideProps: GetServerSideProps<ProjectParamsType> =
-  getTokenAndTechnologies
+export const getServerSideProps: GetServerSideProps<TokenParamsType> =
+  getSessionTokenProps

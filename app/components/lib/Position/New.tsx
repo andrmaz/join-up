@@ -3,7 +3,6 @@ import * as React from 'react'
 import {useForm} from 'react-hook-form'
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
-import useFetchProjectTechnologiesWithToken from '@hooks/fetch/useFetchProjectTechnologiesWithToken'
 import {usePositionContext} from '@hooks/position/usePositionContext'
 
 import {addPositionWithToken} from '@api/fetchWithToken'
@@ -17,9 +16,11 @@ import type {IPositionInput} from 'app/types/position'
 import type {PositionResponseType} from 'app/types/response'
 
 const NewPosition = ({
+  projectId,
   showModal,
   setShowModal,
 }: {
+  projectId: number
   showModal: boolean
   setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
 }): JSX.Element => {
@@ -29,8 +30,6 @@ const NewPosition = ({
     useForm<IPositionInput>()
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
-  //* Set technologies options to State as soon as the modal is shown
-  const options = useFetchProjectTechnologiesWithToken(token)
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
   const onSubmit = (data: IPositionInput): Promise<PositionResponseType> =>
@@ -63,11 +62,12 @@ const NewPosition = ({
             />
           </div>
           <PositionForm
+            id={projectId}
+            token={token}
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             register={register}
             errors={errors}
-            options={options}
             control={control}
             setValue={setValue}
             reset={reset}

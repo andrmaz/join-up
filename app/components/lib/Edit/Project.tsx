@@ -3,7 +3,6 @@ import * as React from 'react'
 import {useForm} from 'react-hook-form'
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
-import useFetchTechnologiesWithToken from '@hooks/fetch/useFetchTechnologiesWithToken'
 import useEditProject from '@hooks/edit/useEditProject'
 
 import Modal from '@components/containers/Modal/Modal'
@@ -22,8 +21,6 @@ const EditProject = ({
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   //* ref will be a callback function instead of a Ref Object
   const [setRef] = useRefCallback()
-  //* Set technologies options to State as soon as the modal is shown
-  const options = useFetchTechnologiesWithToken(token)
   const {register, handleSubmit, errors, control, setValue, reset} =
     useForm<IProjectData>()
   const onSubmit = useEditProject(token, id, setShowModal)
@@ -50,7 +47,6 @@ const EditProject = ({
             onSubmit={onSubmit}
             register={register}
             errors={errors}
-            options={options}
             control={control}
             setValue={setValue}
             reset={reset}

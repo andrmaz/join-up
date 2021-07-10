@@ -16,12 +16,13 @@ const PositionForm = ({
   onSubmit,
   register,
   errors,
-  options,
   control,
   setValue,
   reset,
   onKeyDown,
   defaultValues,
+  id,
+  token,
 }: IPositionForm): JSX.Element => (
   <form className='h-18/20' onSubmit={handleSubmit(onSubmit)}>
     <div className='h-18/20 flex flex-col justify-evenly pb-6'>
@@ -63,7 +64,8 @@ const PositionForm = ({
         errors={errors}
       />
       <TechSelect
-        options={options}
+        id={id}
+        token={token}
         control={control}
         defaultValue={defaultValues?.technologies}
         defaultValues={defaultValues?.technologies}

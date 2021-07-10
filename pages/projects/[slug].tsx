@@ -13,11 +13,11 @@ import PositionLayout from '@components/lib/Position/Layout'
 import {ActionButton} from '@components/form/Button/Action'
 import NewPosition from '@components/lib/Position/New'
 
-import {getProjectAndPositions} from '@api/getServerSideProps'
+import {getProjectProps} from '@api/getServerSideProps'
 
-import type {SlugParamsType} from 'app/types/params'
+import type {ProjectParamsType} from 'app/types/params'
 
-const Slug: NextPage<SlugParamsType> = ({
+const Slug: NextPage<ProjectParamsType> = ({
   project,
   positions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -52,7 +52,11 @@ const Slug: NextPage<SlugParamsType> = ({
             <EmptyMessage>This project has no posts available.</EmptyMessage>
           )}
         </Wrapper>
-        <NewPosition showModal={showModal} setShowModal={setShowModal} />
+        <NewPosition
+          projectId={project.id}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
       </main>
     </Container>
   )
@@ -60,5 +64,5 @@ const Slug: NextPage<SlugParamsType> = ({
 
 export default Slug
 
-export const getServerSideProps: GetServerSideProps<SlugParamsType> =
-  getProjectAndPositions
+export const getServerSideProps: GetServerSideProps<ProjectParamsType> =
+  getProjectProps

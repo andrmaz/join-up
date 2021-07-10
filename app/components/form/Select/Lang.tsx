@@ -1,11 +1,12 @@
 import * as React from 'react'
 import Select from 'react-select'
 import {Controller} from 'react-hook-form'
+import useFetchLanguages from '@hooks/fetch/useFetchLanguages'
+
 import ErrorMessage from '@components/notifications/Message/Error'
 import type {IFormSelect, SelectOptionsType} from 'app/types/form'
 
 const LangSelect = ({
-  options,
   control,
   setValue,
   errors,
@@ -13,6 +14,7 @@ const LangSelect = ({
   defaultValues,
   defaultValue,
 }: IFormSelect): React.ReactElement => {
+  const languages = useFetchLanguages()
   return (
     <React.Fragment>
       <label id='languages' htmlFor='languages'>
@@ -36,7 +38,7 @@ const LangSelect = ({
             defaultValue={defaultValue ? defaultValue : value}
             closeMenuOnSelect={false}
             isMulti
-            options={options}
+            options={languages}
             getOptionValue={option => option['id']}
             placeholder='Select your languages'
             blurInputOnSelect={false}

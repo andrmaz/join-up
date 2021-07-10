@@ -3,19 +3,21 @@ import axios, {Canceler} from 'axios'
 import type {SelectOptionsType} from 'app/types/form'
 import type {TechnologiesResponseType} from 'app/types/response'
 
-export default function useFetchTechnologiesWithToken(
-  token: string
+export default function useTechnologies(
+  id?: number,
+  token?: string
 ): SelectOptionsType[] {
+  const endpoint = id ? `/project/${id}` : ''
   const [options, setOptions] = React.useState<SelectOptionsType[]>([])
   React.useEffect(() => {
     let cancel: Canceler
     ;(async () => {
       try {
         const response = await axios.get<TechnologiesResponseType>(
-          '/technology',
+          `/technology${endpoint}`,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: token ? `Bearer ${token}` : undefined,
             },
             //* An executor function receives a cancel function as a parameter
             cancelToken: new axios.CancelToken(c => (cancel = c)),
@@ -34,6 +36,6 @@ export default function useFetchTechnologiesWithToken(
     })()
     //* cancel the request
     return () => cancel()
-  }, [token])
+  }, [endpoint, setOptions, token])
   return options
 }
