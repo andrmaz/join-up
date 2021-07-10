@@ -3,11 +3,7 @@ import {useForm} from 'react-hook-form'
 import useEditUsername from '@hooks/edit/useEditUsername'
 
 import Panel from '@components/navigation/Tablist/Panel'
-import UsernameInput from '@components/form/Input/user/Username'
-import PasswordInput from '@components/form/Input/user/Password'
-
-import {SubmitButton} from '@components/form/Button/Submit'
-import CancelButton from '@components/form/Button/Cancel'
+import UsernameForm from '@components/form/Form/user/Username'
 import SnackBar from '@components/notifications/SnackBar/SnackBar'
 
 import type {PanelPropsType} from 'app/types/navigation'
@@ -19,34 +15,13 @@ const EditUsername = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
     useEditUsername(token)
   return (
     <Panel index={1} isSelectedTab={isSelectedTab}>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col h-auto justify-between p-1'
-      >
-        <h2 className='text-2xl mb-4'>Change username</h2>
-        <article className='h-auto flex flex-col justify-evenly mb-8'>
-          <UsernameInput
-            name='newUsername'
-            register={register}
-            errors={errors}
-          />
-          <PasswordInput
-            id='username-pwd'
-            register={register}
-            errors={errors}
-          />
-        </article>
-        <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
-          <CancelButton onClickHandler={() => reset()} />
-          <div className='w-16 p-1'>
-            <SubmitButton
-              value='Save'
-              bgColor='green-600'
-              errors={Boolean(errors.newUsername || errors.password)}
-            />
-          </div>
-        </aside>
-      </form>
+      <UsernameForm
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        register={register}
+        errors={errors}
+        reset={reset}
+      />
       {isSuccess && (
         <SnackBar
           color='green'
