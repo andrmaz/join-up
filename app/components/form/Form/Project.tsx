@@ -4,6 +4,7 @@ import UrlInput from '@components/form/Input/project/Url'
 import TechSelect from '@components/form/Select/Tech'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
+
 import type {IProjectForm} from 'app/types/form'
 
 const ProjectForm = ({
@@ -11,7 +12,6 @@ const ProjectForm = ({
   onSubmit,
   register,
   errors,
-  options,
   control,
   setValue,
   reset,
@@ -25,12 +25,12 @@ const ProjectForm = ({
     <TitleInput
       id='name'
       name='name'
-      defaultValue={defaultValues ? defaultValues.name : ''}
+      defaultValue={defaultValues?.name}
       register={register}
       errors={errors}
     />
     <TextInput
-      defaultValue={defaultValues ? defaultValues.description : ''}
+      defaultValue={defaultValues?.description}
       register={register}
       errors={errors}
     />
@@ -38,22 +38,21 @@ const ProjectForm = ({
       id='mission'
       name='mission'
       label='Our mission'
-      defaultValue={defaultValues ? defaultValues.mission : ''}
+      defaultValue={defaultValues?.mission}
       register={register}
       errors={errors}
     />
     <div className='h-1/6 flex flex-col mb-6'>
       <TechSelect
-        options={options}
         control={control}
-        defaultValues={defaultValues ? defaultValues.technologies : undefined}
-        defaultValue={defaultValues ? defaultValues.technologies : undefined}
+        defaultValues={defaultValues?.technologies}
+        defaultValue={defaultValues?.technologies}
         setValue={setValue}
         errors={errors}
       />
     </div>
     <UrlInput
-      defaultValue={defaultValues ? defaultValues.projectURL : ''}
+      defaultValue={defaultValues?.projectURL}
       register={register}
       errors={errors}
     />

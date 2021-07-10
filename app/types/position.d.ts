@@ -1,7 +1,7 @@
 import {SelectOptionsType} from 'app/types/form'
 import React from 'react'
 export interface IPositionInput {
-  projectId: string | null
+  projectId: number
   title: string
   qualifications: string
   duties: string
@@ -11,7 +11,7 @@ export interface IPositionInput {
   role: string
 }
 export interface IPositionData {
-  id: string
+  id: number
   title: string
   qualifications: string
   duties: string
@@ -30,7 +30,7 @@ export type PositionStateType = {positions: Array<IPositionData>}
 
 export type PositionActionsType =
   | {type: 'add'; payload: IPositionData}
-  | {type: 'remove'; payload: string}
+  | {type: 'remove'; payload: number}
   | {type: 'edit'; payload: IPositionData}
   | {type: 'persist'; payload: IPositionData[]}
   | {type: 'clear'}
@@ -69,7 +69,7 @@ export type EditPositoinType = {
 }
 
 export type RemovePositionType = {
-  uid: string
+  uid: number
   showDialog: boolean
   setShowDialog: React.Dispatch<React.SetStateAction<typeof showDialog>>
 }

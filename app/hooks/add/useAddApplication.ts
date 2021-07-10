@@ -4,7 +4,7 @@ import type {StatusResponseType} from 'app/types/response'
 
 export default function useAddApplication(
   token: string,
-  id: string,
+  id: number,
   setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
 ): [
   boolean,

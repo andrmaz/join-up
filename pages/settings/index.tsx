@@ -11,13 +11,13 @@ import EditProfile from '@components/lib/Edit/Profile'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
 
-import type {SessionTokenParamType} from 'app/types/params'
+import type {TokenParamsType} from 'app/types/params'
 
 const EditUsername = dynamic(() => import('@components/lib/Edit/Username'))
 const EditEmail = dynamic(() => import('@components/lib/Edit/Email'))
 const EditPassword = dynamic(() => import('@components/lib/Edit/Password'))
 
-const Settings: NextPage<SessionTokenParamType> = ({
+const Settings: NextPage<TokenParamsType> = ({
   token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [selectedTab, setSelectedTab] = React.useState<number>(0)
@@ -64,5 +64,5 @@ const Settings: NextPage<SessionTokenParamType> = ({
 
 export default Settings
 
-export const getServerSideProps: GetServerSideProps<SessionTokenParamType> =
+export const getServerSideProps: GetServerSideProps<TokenParamsType> =
   getSessionTokenProps
