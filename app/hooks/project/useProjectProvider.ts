@@ -10,7 +10,7 @@ export function useProjectProvider(): ProjectContextType {
     [dispatch]
   )
   const remove = React.useCallback(
-    (id: string): void => dispatch({type: 'remove', payload: id}),
+    (id: number): void => dispatch({type: 'remove', payload: id}),
     [dispatch]
   )
   const edit = React.useCallback(

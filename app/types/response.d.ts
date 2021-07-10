@@ -37,7 +37,7 @@ export type ProjectResponseType = {
 
 export type RemoveProjectResponseType = {
   message: string
-  project: {id: string}
+  project: {id: number}
   status: number
 }
 
@@ -65,7 +65,7 @@ export type PositionResponseType = {
 
 export type RemovePositionResponseType = {
   message: string
-  position: {id: string}
+  position: {id: number}
   status: number
 }
 

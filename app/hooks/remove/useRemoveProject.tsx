@@ -5,7 +5,7 @@ import type {RemoveProjectResponseType} from 'app/types/response'
 
 export default function useRemoveProject(
   token: string,
-  uid: string,
+  uid: number,
   setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
 ): () => Promise<RemoveProjectResponseType> {
   const {remove} = useProjectContext()

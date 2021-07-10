@@ -7,26 +7,19 @@ type RedirectPropsType = {
   redirect: {destination: string; permanent: boolean}
 }
 
-export type TechnologiesAndLanguagesPropsType = {
-  technologies: SelectOptionsType[]
-  languages: SelectOptionsType[]
+export type TechnologiesPropsType = {
+  props: {
+    technologies: SelectOptionsType[]
+  }
 }
 
-export type SessionTokenPropsType = {token: string}
+export type TokenPropsType = {props: {token: string}} | RedirectPropsType
 
-export type ProjectAndPositionsPropsType = {
-  project: IProjectData
-  positions: IPositionData[]
-}
-
-export type TokenAndOptionsPropsType = {
-  token: string
-  options: SelectOptionsType[]
-}
-
-export type TokenAndTechnologiesPropsType = {
-  token: string
-  technologies: SelectOptionsType[]
-}
-
-export type SessionType<T> = {props: T} | RedirectPropsType
+export type ProjectPropsType =
+  | {
+      props: {
+        project: IProjectData
+        positions: IPositionData[]
+      }
+    }
+  | RedirectPropsType

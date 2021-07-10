@@ -7,7 +7,7 @@ export type AlertDialogType = {
 }
 
 export type ConfirmDialogType = {
-  uid: string
+  uid: number
   title?: string
   message: string
   showDialog: boolean

@@ -9,9 +9,9 @@ import ProjectsList from '@components/lib/Project/List'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
 
-import type {SessionTokenParamType} from 'app/types/params'
+import type {TokenParamsType} from 'app/types/params'
 
-const Profile: NextPage<SessionTokenParamType> = ({
+const Profile: NextPage<TokenParamsType> = ({
   token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
@@ -41,5 +41,5 @@ const Profile: NextPage<SessionTokenParamType> = ({
 
 export default Profile
 
-export const getServerSideProps: GetServerSideProps<SessionTokenParamType> =
+export const getServerSideProps: GetServerSideProps<TokenParamsType> =
   getSessionTokenProps

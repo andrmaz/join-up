@@ -16,7 +16,7 @@ export interface IProjectInput {
 }
 
 export interface IProjectData {
-  id: string
+  id: number
   name: string
   description: string
   mission: string
@@ -30,7 +30,7 @@ export interface IProjectData {
 }
 export type ProjectActionsType =
   | {type: 'add'; payload: IProjectData}
-  | {type: 'remove'; payload: string}
+  | {type: 'remove'; payload: number}
   | {type: 'edit'; payload: IProjectData}
   | {type: 'persist'; payload: IProjectData[]}
   | {type: 'clear'}
@@ -40,7 +40,7 @@ export type ProjectStateType = Array<IProjectData>
 export type ProjectContextType = {
   projects: ProjectStateType
   add: (data: IProjectData) => void
-  remove: (id: string) => void
+  remove: (id: number) => void
   edit: (data: IProjectData) => void
   persist: (data: IProjectData[]) => void
   clear: () => void
@@ -63,7 +63,7 @@ export type EditProjectType = {
 }
 
 export type RemoveProjectType = {
-  uid: string
+  uid: number
   showDialog: boolean
   setShowDialog: React.Dispatch<React.SetStateAction<typeof showDialog>>
 }

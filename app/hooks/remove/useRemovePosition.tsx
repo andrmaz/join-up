@@ -5,7 +5,7 @@ import type {RemovePositionResponseType} from 'app/types/response'
 
 export default function useRemovePosition(
   token: string,
-  uid: string,
+  uid: number,
   setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
 ): () => Promise<RemovePositionResponseType> {
   const {dispatch} = usePositionContext()

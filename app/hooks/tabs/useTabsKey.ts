@@ -28,8 +28,7 @@ export const useTabsKey = (
     const tabToSelect = tab === lastTabInRound ? firstTabInRound : nextTab
     setTab(tabToSelect)
   }
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const handleKeyPress = (event: React.KeyboardEvent) => {
+  const handleKeyPress = (event: React.KeyboardEvent): void => {
     if (event.key === 'ArrowUp') {
       const last = tabCount
       const next = tab - 1
