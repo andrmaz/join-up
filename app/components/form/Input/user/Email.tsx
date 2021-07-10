@@ -13,7 +13,11 @@ const EmailInput = ({
     id={id}
     name={name}
     label={label}
-    placeholder='please enter your email'
+    placeholder={
+      name !== 'email'
+        ? 'please enter a new email address '
+        : 'please enter your email'
+    }
     register={register({
       required: 'email is required',
       pattern: {

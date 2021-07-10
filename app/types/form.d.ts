@@ -1,11 +1,12 @@
 import React from 'react'
 import {Control, SetValueConfig, FieldElement} from 'react-hook-form'
 
-import type {ISigninInputs, ISignupInputs} from 'app/types/user'
+import type {ISigninInputs, ISignupInputs, IUserContext} from 'app/types/user'
 import type {ProjectValuesType} from 'app/types/project'
 import type {PositionValuesType} from 'app/types/position'
 
 import type {
+  StatusResponseType,
   UserResponseType,
   ProjectResponseType,
   PositionResponseType,
@@ -44,7 +45,7 @@ export type FormInputType = {
 export type SelectOptionsType = {id: number; label: string}
 
 export interface IFormSelect {
-  control: Control
+  control: Control | undefined
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   errors?: Record<string, any>
   disabled?: boolean
@@ -115,16 +116,16 @@ export interface IMenuPanel {
   isSelectedTab: boolean
 }
 
-//* Forms
+//* User
 export interface ISigninForm {
-  handleSubmit: (field: FieldValues) => typeof onSubmit
+  handleSubmit: (field: any) => typeof onSubmit
   onSubmit: (data: ISigninInputs) => Promise<UserResponseType>
   register: (ref: any) => RegisterType
   errors: Record<string, any>
 }
 
 export interface ISignupForm {
-  handleSubmit: (field: FieldValues) => typeof onSubmit
+  handleSubmit: (field: any) => typeof onSubmit
   onSubmit: (data: ISignupInputs) => Promise<UserResponseType>
   register: (ref: any) => RegisterType
   errors: Record<string, any>
@@ -132,8 +133,30 @@ export interface ISignupForm {
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
 }
+
+export interface IUserForm {
+  handleSubmit: (field: any) => typeof onSubmit
+  onSubmit: (data: any) => Promise<IUserContext | StatusResponseType>
+  register: (ref: any) => RegisterType
+  errors: Record<string, any>
+  reset: (values?: Record<string, any>, omitResetState?: OmitResetState) => void
+  watchPassword?: string
+}
+
+export interface IProfileForm {
+  handleSubmit: (field: any) => typeof onSubmit
+  onSubmit: (data: any) => Promise<IUserContext | StatusResponseType>
+  register: (ref: any) => RegisterType
+  errors: Record<string, any>
+  reset: (values?: Record<string, any>, omitResetState?: OmitResetState) => void
+  control: Control
+  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
+  token: string
+}
+
+//* Project
 export interface IProjectForm {
-  handleSubmit: (field: FieldValues) => typeof onSubmit
+  handleSubmit: (field: any) => typeof onSubmit
   onSubmit: (data: any) => Promise<ProjectResponseType>
   register: (ref: any) => RegisterType
   errors: Record<string, any>
@@ -144,8 +167,9 @@ export interface IProjectForm {
   defaultValues?: ProjectValuesType
 }
 
+//* Position
 export interface IPositionForm {
-  handleSubmit: (field: FieldValues) => typeof onSubmit
+  handleSubmit: (field: any) => typeof onSubmit
   onSubmit: (data: any) => Promise<PositionResponseType>
   register: (ref: any) => RegisterType
   errors: Record<string, any>
