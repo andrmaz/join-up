@@ -12,7 +12,7 @@ const SigninForm = ({
 }: ISigninForm): JSX.Element => (
   <form
     onSubmit={handleSubmit(onSubmit)}
-    className='h-4/6 flex flex-col justify-between  xl:justify-evenly'
+    className='h-14/20 flex flex-col justify-between  xl:justify-evenly'
   >
     <EmailInput register={register} errors={errors} />
     <PasswordInput register={register} errors={errors} />
