@@ -43,7 +43,7 @@ export function Dropdown(): JSX.Element {
         </div>
       </button>
       {isOpen && (
-        <ul className='absolute top-14 xl:top-16 right-14 xl:right-16 flex flex-col h-auto w-auto bg-gray-800 border-2 p-2 rounded z-40 text-xs'>
+        <ul className='absolute top-12 right-12 xl:right-16 flex flex-col h-auto w-auto bg-gray-800 border-2 p-2 rounded z-40 text-xs'>
           <Link href={'/profile'}>
             <a className='flex-initial text-white m-1'>Your profile</a>
           </Link>
