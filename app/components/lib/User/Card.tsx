@@ -21,7 +21,7 @@ const UserCard = (): JSX.Element => {
   } = {...user}
   return (
     <section className='sticky top-44 h-70v p-1'>
-      <div className='h-60 xl:h-72 w-60 xl:w-72 mb-10'>
+      <div className='h-auto w-full mb-10'>
         <UserAvatar image={avatar} />
       </div>
       <ul className='h-auto w-full flex flex-col justify-around text-lg xl:text-xl'>

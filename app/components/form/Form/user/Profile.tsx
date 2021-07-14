@@ -29,7 +29,7 @@ const ProfileForm = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='flex flex-col h-full justify-between p-1'
+      className='flex flex-col h-18/20 justify-between p-1'
     >
       <article className='h-3/5 flex flex-col justify-evenly mb-8'>
         <div className='flex flex-row'>
