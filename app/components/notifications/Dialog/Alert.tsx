@@ -3,8 +3,8 @@ import * as React from 'react'
 
 import useRefCallback from '@hooks/ref/useRefCallback'
 
-import Portal from '@components/containers/Portal/Portal'
-import Modal from '@components/containers/Modal/Modal'
+import Portal from '@components/screens/Portal/Portal'
+import Modal from '@components/screens/Modal/Modal'
 import CancelButton from '@components/form/Button/Cancel'
 import {ConfirmButton} from '@components/form/Button/Confirm'
 import CloseButton from '@components/form/Button/Close'

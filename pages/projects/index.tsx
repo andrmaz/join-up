@@ -5,7 +5,6 @@ import Head from 'next/head'
 import {useForm} from 'react-hook-form'
 import useFetchProjectsWithToken from '@hooks/fetch/useFetchProjectsWithToken'
 
-import Container from '@components/containers/Container/Container'
 import Drawer from '@components/navigation/Drawer/Drawer'
 import ProjectsGrid from '@components/lib/Project/Grid'
 
@@ -22,7 +21,7 @@ const Projects: NextPage<TokenParamsType> = ({
   const {isIdle, isLoading, isError, isSuccess, data} =
     useFetchProjectsWithToken(token, fields)
   return (
-    <Container>
+    <section className='h-min-screen pt-16'>
       <Head>
         <title>Projects</title>
         <link rel='icon' href='/favicon.ico' />
@@ -45,7 +44,7 @@ const Projects: NextPage<TokenParamsType> = ({
           />
         </article>
       </main>
-    </Container>
+    </section>
   )
 }
 

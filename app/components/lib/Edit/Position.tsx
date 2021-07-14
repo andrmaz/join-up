@@ -5,7 +5,7 @@ import useRefCallback from '@hooks/ref/useRefCallback'
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useEditPosition from '@hooks/edit/useEditPosition'
 
-import Modal from '@components/containers/Modal/Modal'
+import Modal from '@components/screens/Modal/Modal'
 
 import PositionForm from '@components/form/Form/Position'
 import CloseModalButton from '@components/form/Button/Close'

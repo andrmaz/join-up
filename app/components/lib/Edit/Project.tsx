@@ -5,7 +5,7 @@ import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useRefCallback from '@hooks/ref/useRefCallback'
 import useEditProject from '@hooks/edit/useEditProject'
 
-import Modal from '@components/containers/Modal/Modal'
+import Modal from '@components/screens/Modal/Modal'
 import ProjectForm from '@components/form/Form/Project'
 import CloseModalButton from '@components/form/Button/Close'
 

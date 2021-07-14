@@ -7,7 +7,7 @@ import {usePositionContext} from '@hooks/position/usePositionContext'
 
 import {addPositionWithToken} from '@api/fetchWithToken'
 
-import Modal from '@components/containers/Modal/Modal'
+import Modal from '@components/screens/Modal/Modal'
 
 import PositionForm from '@components/form/Form/Position'
 import CloseModalButton from '@components/form/Button/Close'

@@ -3,7 +3,6 @@ import Head from 'next/head'
 import {useForm} from 'react-hook-form'
 import useUserRegister from '@hooks/user/useUserRegister'
 
-import Container from '@components/containers/Container/Container'
 import SignupForm from '@components/form/Form/Signup'
 
 import type {ISignupInputs} from 'app/types/user'
@@ -14,7 +13,7 @@ const SignUp = (): JSX.Element => {
   const watchPassword = watch('password')
   const onSubmit = useUserRegister()
   return (
-    <Container>
+    <section className='h-min-screen pt-16'>
       <Head>
         <title>SignUp</title>
         <link rel='icon' href='/favicon.ico' />
@@ -35,7 +34,7 @@ const SignUp = (): JSX.Element => {
           />
         </section>
       </main>
-    </Container>
+    </section>
   )
 }
 

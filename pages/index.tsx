@@ -3,16 +3,15 @@ import Head from 'next/head'
 import {ParsedUrlQuery} from 'querystring'
 
 import {parseCookies} from '@utils/parseCookies'
-import Container from '@components/containers/Container/Container'
 
 const Home: NextPage = () => {
   return (
-    <Container>
+    <main>
       <Head>
         <title>Home Page</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-    </Container>
+    </main>
   )
 }
 
