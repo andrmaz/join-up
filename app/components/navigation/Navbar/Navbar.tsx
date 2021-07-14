@@ -8,7 +8,7 @@ const Navbar = (): JSX.Element => {
   const {user} = useAuthState()
   const router = useRouter()
   return (
-    <nav className='fixed top-0 flex justify-between items-center h-20 w-screen bg-blue-800 text-white z-50'>
+    <nav className='fixed top-0 flex justify-between items-center h-16 w-screen bg-blue-800 text-white z-50'>
       <div className='inline-flex justify-evenly w-3/12'>
         <Link href='/'>
           <a className='flex-initial'>Logo</a>
