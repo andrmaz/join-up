@@ -19,9 +19,7 @@ import 'tailwindcss/tailwind.css'
 export const reportWebVitals = webVitals
 
 //* the module will be dynamically loaded by the page in the browser
-const DynamicComponent = dynamic(
-  () => import('@components/containers/Root/Modal')
-)
+const DynamicComponent = dynamic(() => import('@components/screens/Root/Root'))
 
 function MyApp({Component, pageProps}: AppProps): React.ReactNode {
   return (

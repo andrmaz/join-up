@@ -2,8 +2,6 @@ import * as React from 'react'
 import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
 
-import Container from '@components/containers/Container/Container'
-import Wrapper from '@components/containers/Wrapper/Wrapper'
 import UserCard from '@components/lib/User/Card'
 import ProjectsList from '@components/lib/Project/List'
 
@@ -15,14 +13,14 @@ const Profile: NextPage<TokenParamsType> = ({
   token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <Container>
+    <section className='h-min-screen pt-16'>
       <Head>
         <title>Profile</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='h-92v'>
-        <Wrapper>
-          <div className='grid grid-cols-3 divide-x divide-black-500'>
+        <section className='h-full py-12 xl:py-32 px-40 xl:px-80'>
+          <div className='grid grid-cols-3 divide-x divide-black-500 gap-4'>
             <UserCard />
             <article className='w-200 min-h-1/2 border-2 border-solid rounded'>
               <header className='fixed top-20 z-30 w-full h-26 p-4 pt-12 text-2xl bg-white'>
@@ -33,9 +31,9 @@ const Profile: NextPage<TokenParamsType> = ({
               </main>
             </article>
           </div>
-        </Wrapper>
+        </section>
       </main>
-    </Container>
+    </section>
   )
 }
 

@@ -4,8 +4,6 @@ import Head from 'next/head'
 import {useForm} from 'react-hook-form'
 import useAddProject from '@hooks/add/useAddProject'
 
-import Container from '@components/containers/Container/Container'
-
 import ProjectForm from '@components/form/Form/Project'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
@@ -20,7 +18,7 @@ const Project: NextPage<TokenParamsType> = ({
     useForm<IProjectInput>()
   const onSubmit = useAddProject(token)
   return (
-    <Container>
+    <section className='h-min-screen pt-16'>
       <Head>
         <title>New</title>
         <link rel='icon' href='/favicon.ico' />
@@ -44,7 +42,7 @@ const Project: NextPage<TokenParamsType> = ({
           />
         </article>
       </main>
-    </Container>
+    </section>
   )
 }
 

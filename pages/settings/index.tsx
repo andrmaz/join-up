@@ -3,10 +3,8 @@ import dynamic from 'next/dynamic'
 import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
 
-import Container from '@components/containers/Container/Container'
 import Menu from '@components/navigation/Menu/Menu'
 import Panel from '@components/navigation/Tablist/Panel'
-
 import EditProfile from '@components/lib/Edit/Profile'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
@@ -22,13 +20,13 @@ const Settings: NextPage<TokenParamsType> = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [selectedTab, setSelectedTab] = React.useState<number>(0)
   return (
-    <Container>
+    <section className='h-min-screen pt-16'>
       <Head>
         <title>Settings</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main className='h-92v container'>
-        <section className='h-full p-12'>
+      <main className='h-92v'>
+        <section className='h-full py-12 xl:py-24 px-40 xl:px-80'>
           <div className='h-full grid grid-cols-3 divide-x divide-black-500'>
             <Menu selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
             <div className='w-200 h-auto border-2 border-solid rounded'>
@@ -58,7 +56,7 @@ const Settings: NextPage<TokenParamsType> = ({
           </div>
         </section>
       </main>
-    </Container>
+    </section>
   )
 }
 

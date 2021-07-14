@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import Portal from '@components/containers/Portal/Portal'
+import Portal from '@components/screens/Portal/Portal'
 
 import type {ModalPropsType} from 'app/types/container'
 

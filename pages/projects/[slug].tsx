@@ -5,8 +5,6 @@ import Head from 'next/head'
 import {useAuthState} from '@hooks/auth/useAuthState'
 import {usePositionContext} from '@hooks/position/usePositionContext'
 
-import Container from '@components/containers/Container/Container'
-import Wrapper from '@components/containers/Wrapper/Wrapper'
 import ProjectOverview from '@components/lib/Project/Overview'
 import {EmptyMessage} from '@components/notifications/Message/Empty'
 import PositionLayout from '@components/lib/Position/Layout'
@@ -29,15 +27,15 @@ const Slug: NextPage<ProjectParamsType> = ({
     return () => dispatch({type: 'clear'})
   }, [dispatch, positions])
   return (
-    <Container>
+    <section className='h-min-screen mt-16'>
       <Head>
         <title>Project</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='h-92v'>
-        <Wrapper>
-          <article className='w-full h-2/6'>
-            <div className='absolute right-24 w-1/5'>
+        <section className='h-full py-12 px-40 xl:px-80'>
+          <article className='w-full h-2/5'>
+            <div className='absolute right-40 xl:right-80'>
               {user?.id === project.owner && (
                 <ActionButton tabIndex={0} action={() => setShowModal(true)}>
                   Add a new position
@@ -51,14 +49,14 @@ const Slug: NextPage<ProjectParamsType> = ({
           ) : (
             <EmptyMessage>This project has no posts available.</EmptyMessage>
           )}
-        </Wrapper>
+        </section>
         <NewPosition
           projectId={project.id}
           showModal={showModal}
           setShowModal={setShowModal}
         />
       </main>
-    </Container>
+    </section>
   )
 }
 
