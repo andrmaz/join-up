@@ -24,7 +24,7 @@ const PositionForm = ({
   id,
   token,
 }: IPositionForm): JSX.Element => (
-  <form className='h-18/20' onSubmit={handleSubmit(onSubmit)}>
+  <form className='h-18/20 w-4/5 mx-auto' onSubmit={handleSubmit(onSubmit)}>
     <div className='h-18/20 flex flex-col justify-evenly pb-6'>
       <VacancyInput
         defaultValue={defaultValues?.vacancies}

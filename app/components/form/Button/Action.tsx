@@ -8,7 +8,7 @@ export const ActionButton = ({
   <button
     tabIndex={tabIndex}
     type='button'
-    className={`h-auto w-full py-1 cursor-pointer bg-${bgColor}-600 text-white rounded active:bg-${bgColor}-800`}
+    className={`h-auto w-auto py-1 px-2 cursor-pointer bg-${bgColor}-600 text-white rounded active:bg-${bgColor}-800`}
     onClick={action}
     aria-pressed={false}
   >

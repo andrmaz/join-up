@@ -17,14 +17,18 @@ const PositionPreview = ({
   >
     <li className='h-28 p-1 mx-2 border-gray-300 border-2 rounded'>
       <header className='h-2/5'>
-        <h4 className='font-semibold text-sm'>{title}</h4>
+        <h4 className='font-bold text-sm'>{title}</h4>
       </header>
-      <article className='h-1/5 text-sm'>
-        <span>Created at: {createdAt.slice(0, 7)}</span>
-      </article>
-      <article className='h-2/5 flex flex-col justify-start'>
-        <span className='text-xs'>Positions available: {vacancies}</span>
-        <span className='text-xs'>Last update: {updatedAt.slice(0, 7)}</span>
+      <article className='h-3/5 flex flex-col justify-start'>
+        <span className='text-xs font-semibold'>
+          Created at: <small className='italic'>{createdAt.slice(0, 7)}</small>
+        </span>
+        <span className='text-xs font-semibold'>
+          Positions available: <small className='italic'>{vacancies}</small>
+        </span>
+        <span className='text-xs font-semibold'>
+          Last update: <small className='italic'>{updatedAt.slice(0, 7)}</small>
+        </span>
       </article>
     </li>
   </Tab>
