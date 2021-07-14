@@ -5,7 +5,7 @@ export const CheckboxInput = ({
   isPending,
 }: DrawerInputsType): JSX.Element => (
   <div className='my-4'>
-    <p className='xl:text-2xl'>
+    <p className='text-xl italic mb-1'>
       Check if you want to only see available positions:
     </p>
     <div>

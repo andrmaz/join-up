@@ -13,8 +13,8 @@ const Drawer = ({
   control,
   technologies,
 }: IDrawerProps): JSX.Element => (
-  <section className='sticky top-40 w-full h-70v p-2'>
-    <form className='flex flex-col h-auto justify-around px-2'>
+  <section className='sticky top-40 w-5/6 h-70v p-2'>
+    <form className='flex flex-col h-auto max-h-full justify-around px-2'>
       <DateSelect register={register} isPending={isPending} />
       {technologies && technologies.length > 1 && (
         <RadioInput register={register} isPending={isPending} />
