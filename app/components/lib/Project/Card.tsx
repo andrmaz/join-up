@@ -10,28 +10,26 @@ const ProjectCard = ({
   updatedAt,
 }: IProjectData): JSX.Element => {
   return (
-    <div className='h-48 w-full border-2 border-black p-1 rounded'>
-      <header className='h-1/6'>
+    <section className='h-48 w-full border-2 border-black p-1 rounded'>
+      <header className='h-1/6  font-bold'>
         <Link href={`/projects/${id}`}>
           <a className='cursor-pointer hover:opacity-60 overflow-x-hidden'>
             {name}
           </a>
         </Link>
       </header>
-      <article className='h-3/6'>
+      <main className='h-3/6'>
         <span className='h-1/6 text-xs'>
-          Last update: {updatedAt.slice(0, 7)}
+          Last update: <small className='italic'>{updatedAt.slice(0, 7)}</small>
         </span>
-        <p className='h-5/6 text-sm tracking-tighter overflow-hidden'>
-          {mission}
-        </p>
-      </article>
+        <p className='h-5/6 text-sm tracking-wide overflow-hidden'>{mission}</p>
+      </main>
       <aside className='h-2/6 w-full pt-2 overflow-hidden'>
         <span className='text-xs break-words text-red-400'>
           {technologies?.map(technology => `${technology.label},`)}
         </span>
       </aside>
-    </div>
+    </section>
   )
 }
 
