@@ -24,24 +24,26 @@ const ProjectPreview = ({
           <a className='cursor-pointer hover:opacity-60'>{project.name}</a>
         </Link>
       </header>
-      <article className='h-4/5 text-sm'>
-        <div className='h-1/5 flex justify-between'>
-          <span className='w-1/2'>
+      <section className='h-4/5'>
+        <article className='h-1/5 flex justify-between text-sm'>
+          <small className='w-1/2'>
             Created at {project.createdAt.slice(0, 7)}{' '}
-          </span>
-          <span className='w-1/2'>
+          </small>
+          <small className='w-1/2'>
             Updated at {project.updatedAt.slice(0, 7)}{' '}
-          </span>
-        </div>
-        <p className='h-1/5 truncate'>{project.description}</p>
-        <div className='h-2/5'>
+          </small>
+        </article>
+        <p className='h-1/5 font-bold text-xs truncate'>
+          {project.description}
+        </p>
+        <article className='h-2/5 text-sm'>
           Technologies :{' '}
-          <span className='text-red-600'>
+          <small className='text-red-600'>
             {project.technologies?.map(technology => `${technology.label},`)}
-          </span>
-        </div>
-        <div className='h-1/5 flex pr-1 justify-between'>
-          <span>
+          </small>
+        </article>
+        <article className='h-1/5 flex pr-1 justify-between'>
+          <span className='text-xs italic'>
             This project{' '}
             {project.hasPositions ? 'has one or more' : 'has not any'} positions
             available
@@ -58,8 +60,8 @@ const ProjectPreview = ({
               className='cursor-pointer focus:ring-2 focus:ring-yellow-600'
             />
           </div>
-        </div>
-      </article>
+        </article>
+      </section>
       <EditProject
         showModal={showModal}
         setShowModal={setShowModal}

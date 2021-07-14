@@ -6,7 +6,7 @@ import type {PositionStateType} from 'app/types/position'
 const PositionLayout = ({positions}: PositionStateType): JSX.Element => {
   const [selectedTab, setSelectedTab] = React.useState<number>(0)
   return (
-    <article className='h-4/6 grid grid-cols-2 divide-x divide-black-500'>
+    <article className='h-3/5 grid grid-cols-2 divide-x divide-black-500'>
       <PositionTabs
         positions={positions}
         selectedTab={selectedTab}
