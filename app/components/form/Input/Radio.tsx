@@ -5,7 +5,7 @@ export const RadioInput = ({
   isPending,
 }: DrawerInputsType): JSX.Element => (
   <div className='mt-4'>
-    <p className='xl:text-2xl'>
+    <p className='text-xl italic mb-1'>
       Please select how you want to match technologies:
     </p>
     <div className='flex flex-row'>
