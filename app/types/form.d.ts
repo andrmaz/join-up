@@ -1,11 +1,11 @@
 import React from 'react'
 import {Control, SetValueConfig, FieldElement} from 'react-hook-form'
 
-import type {ISigninInputs, ISignupInputs, IUserContext} from 'app/types/user'
+import type {ISigninInputs, ISignupInputs} from 'app/types/user'
 import type {IProjectData} from 'app/types/project'
 import type {IPositionData} from 'app/types/position'
 
-import type {StatusResponseType, UserResponseType} from 'app/types/response'
+import type {UserResponseType} from 'app/types/response'
 
 //* Inputs
 type RegisterType = (ref: (FieldElement<T> & React.Ref) | null) => void
@@ -104,26 +104,6 @@ export interface ISignupForm {
   watchPassword: string
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
-}
-
-export interface IUserForm {
-  handleSubmit: (field: any) => typeof onSubmit
-  onSubmit: (data: any) => Promise<IUserContext | StatusResponseType>
-  register: (ref: any) => RegisterType
-  errors: Record<string, any>
-  reset: (values?: Record<string, any>, omitResetState?: OmitResetState) => void
-  watchPassword?: string
-}
-
-export interface IProfileForm {
-  handleSubmit: (field: any) => typeof onSubmit
-  onSubmit: (data: any) => Promise<IUserContext | StatusResponseType>
-  register: (ref: any) => RegisterType
-  errors: Record<string, any>
-  reset: (values?: Record<string, any>, omitResetState?: OmitResetState) => void
-  control: Control
-  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
-  token: string
 }
 
 export interface IProjectForm {
