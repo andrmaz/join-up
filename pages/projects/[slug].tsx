@@ -8,7 +8,6 @@ import {usePositionContext} from '@hooks/position/usePositionContext'
 import ProjectOverview from '@components/lib/Project/Overview'
 import {EmptyMessage} from '@components/notifications/Message/Empty'
 import PositionLayout from '@components/lib/Position/Layout'
-import {ActionButton} from '@components/form/Button/Action'
 import NewPosition from '@components/lib/Position/New'
 
 import {getProjectProps} from '@api/getServerSideProps'
@@ -21,7 +20,6 @@ const Slug: NextPage<ProjectParamsType> = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {user} = useAuthState()
   const {state, dispatch} = usePositionContext()
-  const [showModal, setShowModal] = React.useState<boolean>(false)
   React.useEffect(() => {
     dispatch({type: 'persist', payload: positions})
     return () => dispatch({type: 'clear'})
@@ -36,11 +34,7 @@ const Slug: NextPage<ProjectParamsType> = ({
         <section className='h-full py-12 px-40 xl:px-80'>
           <article className='w-full h-2/5'>
             <div className='absolute right-40 xl:right-80'>
-              {user?.id === project.owner && (
-                <ActionButton tabIndex={0} action={() => setShowModal(true)}>
-                  Add a new position
-                </ActionButton>
-              )}
+              {user?.id === project.owner && <NewPosition />}
             </div>
             <ProjectOverview {...project} />
           </article>
@@ -50,11 +44,6 @@ const Slug: NextPage<ProjectParamsType> = ({
             <EmptyMessage>This project has no posts available.</EmptyMessage>
           )}
         </section>
-        <NewPosition
-          projectId={project.id}
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
       </main>
     </section>
   )

@@ -1,24 +1,34 @@
 import * as React from 'react'
-import useSessionCookie from '@hooks/cookie/useSessionCookie'
-import useRemoveProject from '@hooks/remove/useRemoveProject'
-import AlertDialog from '@components/notifications/Dialog/Alert'
-import type {RemoveProjectType} from 'app/types/project'
+import {ModalProvider} from '@providers/ModalProvider'
 
-const RemoveProject = ({
-  uid,
-  showDialog,
-  setShowDialog,
-}: RemoveProjectType): JSX.Element => {
-  const token = useSessionCookie()
-  const handleConfirm = useRemoveProject(token, uid, setShowDialog)
+import ModalOpenButton from '@components/screens/Modal/OpenButton'
+import ModalContents from '@components/screens/Modal/Contents'
+
+import {RemoveProjectForm} from '@components/form/Form/project/Remove'
+import {RiDeleteBin6Line} from 'react-icons/ri'
+
+const RemoveProject = ({uid}: {uid: number}): JSX.Element => {
+  //* Trap focus inside modal dialog
+  const focusTrapRef = React.useRef<HTMLElement | null>(null)
   return (
-    <AlertDialog
-      title='Delete this project'
-      message='Are you sure you want to delete this project?'
-      showDialog={showDialog}
-      setShowDialog={setShowDialog}
-      handleConfirm={handleConfirm}
-    />
+    <ModalProvider>
+      <ModalOpenButton>
+        <RiDeleteBin6Line
+          tabIndex={0}
+          className='cursor-pointer focus:ring-2 focus:ring-yellow-600'
+        />
+      </ModalOpenButton>
+      <ModalContents
+        title='Edit position'
+        focusTrapRef={focusTrapRef}
+        aria-label='Edit position'
+      >
+        <RemoveProjectForm
+          uid={uid}
+          onKeyDown={() => focusTrapRef.current?.focus()}
+        />
+      </ModalContents>
+    </ModalProvider>
   )
 }
 

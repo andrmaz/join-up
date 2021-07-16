@@ -1,24 +1,34 @@
 import * as React from 'react'
-import useSessionCookie from '@hooks/cookie/useSessionCookie'
-import useRemovePosition from '@hooks/remove/useRemovePosition'
-import AlertDialog from '@components/notifications/Dialog/Alert'
-import type {RemovePositionType} from 'app/types/position'
+import {ModalProvider} from '@providers/ModalProvider'
 
-const RemovePosition = ({
-  uid,
-  showDialog,
-  setShowDialog,
-}: RemovePositionType): JSX.Element => {
-  const token = useSessionCookie()
-  const handleConfirm = useRemovePosition(token, uid, setShowDialog)
+import ModalOpenButton from '@components/screens/Modal/OpenButton'
+import ModalContents from '@components/screens/Modal/Contents'
+
+import {RemovePositionForm} from '@components/form/Form/position/Remove'
+import {RiDeleteBin6Line} from 'react-icons/ri'
+
+const RemovePosition = ({uid}: {uid: number}): JSX.Element => {
+  //* Trap focus inside modal dialog
+  const focusTrapRef = React.useRef<HTMLElement | null>(null)
   return (
-    <AlertDialog
-      title='Delete this position'
-      message='Are you sure you want to delete this position?'
-      showDialog={showDialog}
-      setShowDialog={setShowDialog}
-      handleConfirm={handleConfirm}
-    />
+    <ModalProvider>
+      <ModalOpenButton>
+        <RiDeleteBin6Line
+          tabIndex={0}
+          className='cursor-pointer focus:ring-2 focus:ring-yellow-600'
+        />
+      </ModalOpenButton>
+      <ModalContents
+        title='Remove position'
+        focusTrapRef={focusTrapRef}
+        aria-label='Remove position'
+      >
+        <RemovePositionForm
+          uid={uid}
+          onKeyDown={() => focusTrapRef.current?.focus()}
+        />
+      </ModalContents>
+    </ModalProvider>
   )
 }
 

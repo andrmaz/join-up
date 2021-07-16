@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic'
 
 import Panel from '@components/navigation/Tablist/Panel'
 import PositionContent from '@components/lib/Position/Content'
-import {ActionButton} from '@components/form/Button/Action'
 
 const ConfirmDialog = dynamic(
   () => import('@components/notifications/Dialog/Confirmation')
@@ -16,7 +15,6 @@ const PositionOverview = ({
   index,
   position,
 }: PositionOverviewType): JSX.Element => {
-  const [showDialog, setShowDialog] = React.useState<boolean>(false)
   return (
     <Panel index={index} isSelectedTab={isSelectedTab}>
       <section className='h-full w-full border-2 border-black p-2 rounded'>
@@ -28,18 +26,12 @@ const PositionOverview = ({
               : 'Be the first to apply this position'}
           </span>
           <div>
-            <ActionButton action={() => setShowDialog(true)}>
-              Apply
-            </ActionButton>
+            <ConfirmDialog
+              uid={position.id}
+              message='Are you sure you want to apply to this position?'
+            />
           </div>
         </article>
-        <ConfirmDialog
-          uid={position.id}
-          title='Please confirm your application'
-          message='Are you sure you want to apply to this position?'
-          showDialog={showDialog}
-          setShowDialog={setShowDialog}
-        />
       </section>
     </Panel>
   )
