@@ -1,12 +1,12 @@
-import * as React from 'react'
 import {useProjectContext} from '@hooks/project/useProjectContext'
 import {deleteProjectByIdWithToken} from '@api/fetchWithToken'
+import type {ModalDispatchType} from 'app/types/modal'
 import type {RemoveProjectResponseType} from 'app/types/response'
 
 export default function useRemoveProject(
   token: string,
   uid: number,
-  setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
+  setShowDialog: ModalDispatchType
 ): () => Promise<RemoveProjectResponseType> {
   const {remove} = useProjectContext()
   const handleConfirm = async (): Promise<RemoveProjectResponseType> => {

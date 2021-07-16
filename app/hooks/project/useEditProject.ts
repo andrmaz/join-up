@@ -1,16 +1,17 @@
 import axios from 'axios'
 
 import {useProjectContext} from '@hooks/project/useProjectContext'
+import useModalContext from '@hooks/modal/useModalContext'
 
 import type {IProjectData} from 'app/types/project'
 import type {ProjectResponseType} from 'app/types/response'
 
 export default function useEditProject(
   token: string,
-  id: number | undefined,
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+  id: number | undefined
 ): (data: IProjectData) => Promise<ProjectResponseType> {
   const {edit} = useProjectContext()
+  const {setIsOpen} = useModalContext()
   const onSubmit = async (data: IProjectData): Promise<ProjectResponseType> => {
     try {
       const response = await axios.patch<ProjectResponseType>(
@@ -26,7 +27,7 @@ export default function useEditProject(
       )
       if (response.status === 200) {
         edit(response.data.project)
-        setShowModal(false)
+        setIsOpen(false)
         return Promise.resolve(response.data)
       }
       return response.data

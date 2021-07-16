@@ -1,11 +1,13 @@
 import * as React from 'react'
 import axios from 'axios'
+
+import type {ModalDispatchType} from 'app/types/modal'
 import type {StatusResponseType} from 'app/types/response'
 
 export default function useAddApplication(
   token: string,
   id: number,
-  setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
+  setShowDialog: ModalDispatchType
 ): [
   boolean,
   string,
