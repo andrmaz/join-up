@@ -6,8 +6,8 @@ import type {PositionResponseType} from 'app/types/response'
 
 export default function useEditPosition(
   token: string,
-  positionId: number,
-  projectId: number,
+  positionId: number | undefined,
+  projectId: number | undefined,
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
 ): (data: IPositionData) => Promise<PositionResponseType> {
   const {dispatch} = usePositionContext()
@@ -16,6 +16,8 @@ export default function useEditPosition(
   ): Promise<PositionResponseType> => {
     try {
       data.projectId = projectId
+        ? projectId
+        : parseInt(window.location.pathname)
       const response = await axios.patch<PositionResponseType>(
         `/position/${positionId}`,
         {

@@ -1,22 +1,14 @@
 import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
 
-import {useForm} from 'react-hook-form'
-import useAddProject from '@hooks/add/useAddProject'
-
-import ProjectForm from '@components/form/Form/Project'
+import CreateProjectForm from '@components/form/Form/project/Create'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
-
-import type {IProjectInput} from 'app/types/project'
 import type {TokenParamsType} from 'app/types/params'
 
 const Project: NextPage<TokenParamsType> = ({
   token,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const {register, handleSubmit, errors, control, setValue, reset} =
-    useForm<IProjectInput>()
-  const onSubmit = useAddProject(token)
   return (
     <section className='h-min-screen pt-16'>
       <Head>
@@ -31,15 +23,7 @@ const Project: NextPage<TokenParamsType> = ({
               Please fill out this form to start creating a new project
             </span>
           </header>
-          <ProjectForm
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
-            errors={errors}
-            control={control}
-            setValue={setValue}
-            reset={reset}
-          />
+          <CreateProjectForm token={token} />
         </article>
       </main>
     </section>

@@ -2,15 +2,10 @@ import React from 'react'
 import {Control, SetValueConfig, FieldElement} from 'react-hook-form'
 
 import type {ISigninInputs, ISignupInputs, IUserContext} from 'app/types/user'
-import type {ProjectValuesType} from 'app/types/project'
-import type {PositionValuesType} from 'app/types/position'
+import type {IProjectData} from 'app/types/project'
+import type {IPositionData} from 'app/types/position'
 
-import type {
-  StatusResponseType,
-  UserResponseType,
-  ProjectResponseType,
-  PositionResponseType,
-} from 'app/types/response'
+import type {StatusResponseType, UserResponseType} from 'app/types/response'
 
 //* Inputs
 type RegisterType = (ref: (FieldElement<T> & React.Ref) | null) => void
@@ -156,28 +151,22 @@ export interface IProfileForm {
 
 //* Project
 export interface IProjectForm {
-  handleSubmit: (field: any) => typeof onSubmit
-  onSubmit: (data: any) => Promise<ProjectResponseType>
+  token: string
+  project?: IProjectData
   register: (ref: any) => RegisterType
   errors: Record<string, any>
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
-  reset: (values?: Record<string, any>, omitResetState?: OmitResetState) => void
-  onKeyDown?: () => void
-  defaultValues?: ProjectValuesType
 }
 
 //* Position
+
 export interface IPositionForm {
-  handleSubmit: (field: any) => typeof onSubmit
-  onSubmit: (data: any) => Promise<PositionResponseType>
+  id?: number
+  token: string
+  position?: IPositionData
   register: (ref: any) => RegisterType
   errors: Record<string, any>
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
-  reset: (values?: Record<string, any>, omitResetState?: OmitResetState) => void
-  onKeyDown?: () => void
-  defaultValues?: PositionValuesType
-  id?: number
-  token?: string
 }

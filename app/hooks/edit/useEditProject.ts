@@ -7,7 +7,7 @@ import type {ProjectResponseType} from 'app/types/response'
 
 export default function useEditProject(
   token: string,
-  id: number,
+  id: number | undefined,
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
 ): (data: IProjectData) => Promise<ProjectResponseType> {
   const {edit} = useProjectContext()
