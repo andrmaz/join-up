@@ -5,10 +5,10 @@ import Head from 'next/head'
 import {useAuthState} from '@hooks/auth/useAuthState'
 import {usePositionContext} from '@hooks/position/usePositionContext'
 
-import ProjectOverview from '@components/lib/Project/Overview'
-import {EmptyMessage} from '@components/notification/Message/Empty'
-import PositionTablist from '@components/lib/Position/Tablist'
-import CreatePosition from '@components/lib/Position/Create'
+import ProjectOverview from '@components/Project/Overview'
+import {EmptyMessage} from '@components/lib/Message/Empty'
+import PositionTablist from '@components/Position/Tablist'
+import CreatePosition from '@components/Position/Create'
 
 import {getProjectProps} from '@api/getServerSideProps'
 

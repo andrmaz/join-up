@@ -4,7 +4,7 @@ import Link from 'next/link'
 import {useForm} from 'react-hook-form'
 import useUserLogin from '@hooks/user/useUserLogin'
 
-import SigninForm from '@components/form/Form/user/Signin'
+import SigninForm from '@components/Form/user/Signin'
 
 import type {ISigninInputs} from 'app/types/user'
 

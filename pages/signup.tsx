@@ -3,7 +3,7 @@ import Head from 'next/head'
 import {useForm} from 'react-hook-form'
 import useUserRegister from '@hooks/user/useUserRegister'
 
-import SignupForm from '@components/form/Form/user/Signup'
+import SignupForm from '@components/Form/user/Signup'
 
 import type {ISignupInputs} from 'app/types/user'
 

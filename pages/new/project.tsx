@@ -1,7 +1,7 @@
 import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
 
-import CreateProjectForm from '@components/form/Form/project/helpers/Create'
+import CreateProjectForm from '@components/Form/project/helpers/Create'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
 import type {TokenParamsType} from 'app/types/params'

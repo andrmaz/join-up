@@ -1,5 +1,5 @@
 import * as React from 'react'
-import ErrorMessage from '@components/notification/Message/Error'
+import ErrorMessage from '@components/lib/Message/Error'
 import type {IFormInput} from 'app/types/form'
 
 const FormInput = ({

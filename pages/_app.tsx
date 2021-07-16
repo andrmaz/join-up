@@ -6,7 +6,7 @@ import {CookiesProvider} from 'react-cookie'
 import {ProjectProvider} from '@providers/ProjectProvider'
 import {PositionProvider} from '@providers/PositionProvider'
 
-import Navbar from '@components/navigation/Navbar/Navbar'
+import Navbar from '@components/route/Navbar/Navbar'
 
 import {webVitals} from '@utils/webVitals'
 
@@ -19,7 +19,7 @@ import 'tailwindcss/tailwind.css'
 export const reportWebVitals = webVitals
 
 //* the module will be dynamically loaded by the page in the browser
-const DynamicComponent = dynamic(() => import('@components/screen/Root/Root'))
+const DynamicComponent = dynamic(() => import('@components/lib/Root/Root'))
 
 function MyApp({Component, pageProps}: AppProps): React.ReactNode {
   return (

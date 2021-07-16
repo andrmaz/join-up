@@ -4,7 +4,7 @@ import Select from 'react-select'
 import {Controller} from 'react-hook-form'
 import useTechnologies from '@hooks/technology/useTechnologies'
 
-import ErrorMessage from '@components/notification/Message/Error'
+import ErrorMessage from '@components/lib/Message/Error'
 import type {IFormSelect, SelectOptionsType} from 'app/types/form'
 
 const TechSelect = ({

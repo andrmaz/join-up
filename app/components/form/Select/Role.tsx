@@ -4,7 +4,7 @@ import {Controller} from 'react-hook-form'
 import useFetchRolesOptions from '@hooks/fetch/useFetchRolesOptions'
 
 import Select from 'react-select'
-import ErrorMessage from '@components/notification/Message/Error'
+import ErrorMessage from '@components/lib/Message/Error'
 
 import type {IPositionSelect, SelectOptionsType} from 'app/types/form'
 
