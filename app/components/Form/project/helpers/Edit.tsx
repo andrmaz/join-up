@@ -2,7 +2,6 @@ import {useForm} from 'react-hook-form'
 
 import useEditProject from '@hooks/project/useEditProject'
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
-import useModalContext from '@hooks/modal/useModalContext'
 
 import ProjectForm from '@components/Form/project/Form'
 import {SubmitButton} from '@components/form/Button/Submit'
@@ -18,10 +17,9 @@ const EditProjectForm = ({
   project: IProjectData
 }): JSX.Element => {
   const token = useSessionCookie()
-  const {setIsOpen} = useModalContext()
   const {register, handleSubmit, errors, control, setValue, reset} =
     useForm<IProjectData>()
-  const onSubmit = useEditProject(token, project?.id, setIsOpen)
+  const onSubmit = useEditProject(token, project?.id)
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

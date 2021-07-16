@@ -1,16 +1,18 @@
-import * as React from 'react'
 import axios from 'axios'
+
 import {usePositionContext} from '@hooks/position/usePositionContext'
+import useModalContext from '@hooks/modal/useModalContext'
+
 import type {IPositionData} from 'app/types/position'
 import type {PositionResponseType} from 'app/types/response'
 
 export default function useEditPosition(
   token: string,
   positionId: number | undefined,
-  projectId: number | undefined,
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+  projectId: number | undefined
 ): (data: IPositionData) => Promise<PositionResponseType> {
   const {dispatch} = usePositionContext()
+  const {setIsOpen} = useModalContext()
   const onSubmit = async (
     data: IPositionData
   ): Promise<PositionResponseType> => {
@@ -31,7 +33,7 @@ export default function useEditPosition(
       )
       if (response.status === 200) {
         dispatch({type: 'edit', payload: response.data.position})
-        setShowModal(false)
+        setIsOpen(false)
         return Promise.resolve(response.data)
       }
       return response.data

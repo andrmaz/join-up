@@ -2,7 +2,6 @@ import {useForm} from 'react-hook-form'
 
 import useEditPosition from '@hooks/position/useEditPosition'
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
-import useModalContext from '@hooks/modal/useModalContext'
 
 import PositionForm from '@components/Form/position/Form'
 import {SubmitButton} from '@components/form/Button/Submit'
@@ -18,15 +17,9 @@ const EditPositionForm = ({
   position: IPositionData
 }): JSX.Element => {
   const token = useSessionCookie()
-  const {setIsOpen} = useModalContext()
   const {register, handleSubmit, control, setValue, reset, errors} =
     useForm<IPositionInput>()
-  const onSubmit = useEditPosition(
-    token,
-    position?.id,
-    position?.projectId,
-    setIsOpen
-  )
+  const onSubmit = useEditPosition(token, position?.id, position?.projectId)
   return (
     <form className='h-144' onSubmit={handleSubmit(onSubmit)}>
       <PositionForm
