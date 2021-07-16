@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {usePositionProvider} from '@hooks/position/usePositionProvider'
 import {PositionContext} from '@context/positionContext'
-import type {ContainerPropsType} from 'app/types/container'
+import type {ContainerPropsType} from 'app/types/modal'
 
 export function PositionProvider({
   children,

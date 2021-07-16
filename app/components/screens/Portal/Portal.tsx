@@ -1,6 +1,6 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom'
-import type {ContainerPropsType} from 'app/types/container'
+import type {ContainerPropsType} from 'app/types/modal'
 
 const Portal = ({children}: ContainerPropsType): React.ReactPortal | null => {
   const [isBrowser, setIsBrowser] = React.useState<boolean>(false)

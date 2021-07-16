@@ -1,6 +1,6 @@
 import {useAuthProvider} from '@hooks/auth/useAuthProvider'
 import {AuthStateContext, AuthDispatchContext} from '@context/authContext'
-import type {ContainerPropsType} from 'app/types/container'
+import type {ContainerPropsType} from 'app/types/modal'
 
 export function AuthProvider({children}: ContainerPropsType): JSX.Element {
   const [state, dispatch] = useAuthProvider()

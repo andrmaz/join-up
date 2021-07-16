@@ -43,6 +43,9 @@ module.exports = {
       minHeight: {
         '1/2': '50%',
       },
+      maxHeight: {
+        '3/4': '75%',
+      },
     },
     screens: {
       sm: '640px',
