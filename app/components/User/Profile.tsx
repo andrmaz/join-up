@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {useForm} from 'react-hook-form'
-import useEditUserData from '@hooks/edit/useEditUserData'
+import useEditUserData from '@hooks/user/useEditUserData'
 
 import Panel from '@components/route/Tablist/Panel'
 import SnackBar from '@components/lib/SnackBar/SnackBar'

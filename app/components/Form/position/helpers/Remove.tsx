@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
-import useRemovePosition from '@hooks/remove/useRemovePosition'
+import useRemovePosition from '@hooks/position/useRemovePosition'
 import useModalContext from '@hooks/modal/useModalContext'
 
 import CancelButton from '@components/form/Button/Cancel'

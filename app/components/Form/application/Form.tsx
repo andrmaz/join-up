@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
-import useAddApplication from '@hooks/add/useAddApplication'
+import useAddApplication from '@hooks/application/useAddApplication'
 import useModalContext from '@hooks/modal/useModalContext'
 
 import CancelButton from '@components/form/Button/Cancel'

@@ -1,6 +1,6 @@
 import {useForm} from 'react-hook-form'
 
-import useEditProject from '@hooks/edit/useEditProject'
+import useEditProject from '@hooks/project/useEditProject'
 import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useModalContext from '@hooks/modal/useModalContext'
 

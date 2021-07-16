@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {useForm} from 'react-hook-form'
-import useEditUserEmail from '@hooks/edit/useEditUserEmail'
+import useEditUserEmail from '@hooks/user/useEditUserEmail'
 
 import Panel from '@components/route/Tablist/Panel'
 import EmailForm from '@components/Form/user/Email'

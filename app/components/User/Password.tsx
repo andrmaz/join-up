@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {useForm} from 'react-hook-form'
-import useEditUserPassword from '@hooks/edit/useEditUserPassword'
+import useEditUserPassword from '@hooks/user/useEditUserPassword'
 
 import Panel from '@components/route/Tablist/Panel'
 import PasswordForm from '@components/Form/user/Password'

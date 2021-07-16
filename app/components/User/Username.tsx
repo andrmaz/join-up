@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useForm} from 'react-hook-form'
-import useEditUsername from '@hooks/edit/useEditUsername'
+import useEditUsername from '@hooks/user/useEditUsername'
 
 import Panel from '@components/route/Tablist/Panel'
 import UsernameForm from '@components/Form/user/Username'

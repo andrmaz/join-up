@@ -1,6 +1,6 @@
 import {useForm} from 'react-hook-form'
 
-import useAddProject from '@hooks/add/useAddProject'
+import useAddProject from '@hooks/project/useAddProject'
 import ProjectForm from '@components/Form/project/Form'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
