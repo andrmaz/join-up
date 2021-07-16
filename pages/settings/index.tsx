@@ -3,17 +3,17 @@ import dynamic from 'next/dynamic'
 import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
 
-import Menu from '@components/navigation/Menu/Menu'
-import Panel from '@components/navigation/Tablist/Panel'
-import EditProfile from '@components/lib/Edit/Profile'
+import Menu from '@components/route/Menu/Menu'
+import Panel from '@components/route/Tablist/Panel'
+import EditProfile from '@components/User/Profile'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
 
 import type {TokenParamsType} from 'app/types/params'
 
-const EditUsername = dynamic(() => import('@components/lib/Edit/Username'))
-const EditEmail = dynamic(() => import('@components/lib/Edit/Email'))
-const EditPassword = dynamic(() => import('@components/lib/Edit/Password'))
+const EditUsername = dynamic(() => import('@components/User/Username'))
+const EditEmail = dynamic(() => import('@components/User/Email'))
+const EditPassword = dynamic(() => import('@components/User/Password'))
 
 const Settings: NextPage<TokenParamsType> = ({
   token,

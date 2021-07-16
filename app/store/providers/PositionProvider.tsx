@@ -1,11 +1,11 @@
 import * as React from 'react'
 import {usePositionProvider} from '@hooks/position/usePositionProvider'
 import {PositionContext} from '@context/positionContext'
-import type {ContainerPropsType} from 'app/types/modal'
+import type {ChildrenPropsType} from 'app/types/modal'
 
 export function PositionProvider({
   children,
-}: ContainerPropsType): React.ReactElement {
+}: ChildrenPropsType): React.ReactElement {
   const {state, dispatch} = usePositionProvider()
   //? you *might* need to memoize this value
   const value = {state, dispatch}

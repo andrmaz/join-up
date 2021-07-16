@@ -5,10 +5,10 @@ import Head from 'next/head'
 import {useAuthState} from '@hooks/auth/useAuthState'
 import {usePositionContext} from '@hooks/position/usePositionContext'
 
-import ProjectOverview from '@components/lib/Project/Overview'
-import {EmptyMessage} from '@components/notifications/Message/Empty'
-import PositionLayout from '@components/lib/Position/Layout'
-import NewPosition from '@components/lib/Position/New'
+import ProjectOverview from '@components/Project/Overview'
+import {EmptyMessage} from '@components/lib/Message/Empty'
+import PositionTablist from '@components/Position/Tablist'
+import CreatePosition from '@components/Position/Create'
 
 import {getProjectProps} from '@api/getServerSideProps'
 
@@ -34,12 +34,12 @@ const Slug: NextPage<ProjectParamsType> = ({
         <section className='h-full py-12 px-40 xl:px-80'>
           <article className='w-full h-2/5'>
             <div className='absolute right-40 xl:right-80'>
-              {user?.id === project.owner && <NewPosition />}
+              {user?.id === project.owner && <CreatePosition />}
             </div>
             <ProjectOverview {...project} />
           </article>
           {state.positions.length ? (
-            <PositionLayout positions={state.positions} />
+            <PositionTablist positions={state.positions} />
           ) : (
             <EmptyMessage>This project has no posts available.</EmptyMessage>
           )}

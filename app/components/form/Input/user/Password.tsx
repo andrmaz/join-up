@@ -1,4 +1,4 @@
-import FormInput from '@components/form/Input/Form'
+import FormInput from '@components/form/Input/lib/Form'
 import type {FormInputType} from 'app/types/form'
 
 const PasswordInput = ({

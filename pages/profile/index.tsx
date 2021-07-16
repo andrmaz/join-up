@@ -2,8 +2,8 @@ import * as React from 'react'
 import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
 
-import UserCard from '@components/lib/User/Card'
-import ProjectsList from '@components/lib/Project/List'
+import UserCard from '@components/User/Card'
+import ProjectsList from '@components/Project/List'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
 

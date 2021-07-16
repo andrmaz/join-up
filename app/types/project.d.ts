@@ -55,23 +55,3 @@ export type ProjectGridType = {
   isSuccess: boolean
   data: ProjectsResponseType | null
 }
-
-export type EditProjectType = {
-  showModal: boolean
-  setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
-  project: IProjectData
-}
-
-export type RemoveProjectType = {
-  uid: number
-  showDialog: boolean
-  setShowDialog: React.Dispatch<React.SetStateAction<typeof showDialog>>
-}
-
-export type ProjectValuesType = {
-  name: string
-  description: string
-  mission: string
-  technologies: SelectOptionsType[]
-  projectURL: string | undefined
-}

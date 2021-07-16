@@ -5,8 +5,8 @@ import Head from 'next/head'
 import {useForm} from 'react-hook-form'
 import useFetchProjectsWithToken from '@hooks/fetch/useFetchProjectsWithToken'
 
-import Drawer from '@components/navigation/Drawer/Drawer'
-import ProjectsGrid from '@components/lib/Project/Grid'
+import Drawer from '@components/lib/Drawer/Drawer'
+import ProjectsGrid from '@components/Project/Grid'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
 
