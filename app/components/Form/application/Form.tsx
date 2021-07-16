@@ -10,11 +10,9 @@ import SnackBar from '@components/lib/SnackBar/SnackBar'
 
 export const ApplicationForm = ({
   uid,
-  message,
   onKeyDown,
 }: {
   uid: number
-  message: string
   onKeyDown: () => void
 }): JSX.Element => {
   const token = useSessionCookie()
@@ -33,7 +31,7 @@ export const ApplicationForm = ({
     <React.Fragment>
       <div className='h-16 w-full'>
         <span role='article' className='h-1/2'>
-          {message}
+          Are you sure you want to apply to this position?
         </span>
       </div>
       <div className='w-full h-1/3 flex'>

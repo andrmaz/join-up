@@ -4,7 +4,9 @@ import dynamic from 'next/dynamic'
 import Panel from '@components/route/Tablist/Panel'
 import PositionContents from '@components/Position/Contents'
 
-const ConfirmDialog = dynamic(() => import('@components/Application/Confirm'))
+const ConfirmApplication = dynamic(
+  () => import('@components/Application/Confirm')
+)
 
 import type {PositionOverviewType} from 'app/types/position'
 
@@ -24,10 +26,7 @@ const PositionOverview = ({
               : 'Be the first to apply this position'}
           </span>
           <div>
-            <ConfirmDialog
-              uid={position.id}
-              message='Are you sure you want to apply to this position?'
-            />
+            <ConfirmApplication uid={position.id} />
           </div>
         </article>
       </section>
