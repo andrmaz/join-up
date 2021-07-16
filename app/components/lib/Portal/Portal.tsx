@@ -1,8 +1,8 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom'
-import type {ContainerPropsType} from 'app/types/modal'
+import type {ChildrenPropsType} from 'app/types/modal'
 
-const Portal = ({children}: ContainerPropsType): React.ReactPortal | null => {
+const Portal = ({children}: ChildrenPropsType): React.ReactPortal | null => {
   const [isBrowser, setIsBrowser] = React.useState<boolean>(false)
   React.useEffect(() => {
     //* You now have access to `window`

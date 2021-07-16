@@ -88,30 +88,7 @@ export type CloseButtonType = {
   focusRef?: React.Ref<T>
 }
 
-//* Menu
-export interface IMenuItem {
-  label: string
-  index: number
-  tabRef: React.MutableRefObject<HTMLButtonElement | null>
-  isSelectedTab: boolean
-  setSelectedTab: React.Dispatch<React.SetStateAction<number>>
-}
-
-export interface IMenuTab {
-  children: React.ReactNode
-  isSelectedTab: boolean
-  index: number
-  tabRef: React.MutableRefObject<HTMLButtonElement | null>
-  setSelectedTab: React.Dispatch<React.SetStateAction<number>>
-}
-
-export interface IMenuPanel {
-  children: React.ReactNode
-  index: number
-  isSelectedTab: boolean
-}
-
-//* User
+//* Forms
 export interface ISigninForm {
   handleSubmit: (field: any) => typeof onSubmit
   onSubmit: (data: ISigninInputs) => Promise<UserResponseType>
@@ -149,7 +126,6 @@ export interface IProfileForm {
   token: string
 }
 
-//* Project
 export interface IProjectForm {
   token: string
   project?: IProjectData
@@ -158,8 +134,6 @@ export interface IProjectForm {
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
 }
-
-//* Position
 
 export interface IPositionForm {
   id?: number

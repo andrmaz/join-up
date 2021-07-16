@@ -6,7 +6,7 @@ import Panel from '@components/route/Tablist/Panel'
 import UsernameForm from '@components/Form/user/Username'
 import SnackBar from '@components/lib/SnackBar/SnackBar'
 
-import type {PanelPropsType} from 'app/types/navigation'
+import type {PanelPropsType} from 'app/types/components'
 import type {IEditUsername} from 'app/types/user'
 
 const EditUsername = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {

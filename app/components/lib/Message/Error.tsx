@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import type {ContainerPropsType} from 'app/types/modal'
+import type {ChildrenPropsType} from 'app/types/modal'
 
-const ErrorMessage = ({children}: ContainerPropsType): JSX.Element => {
+const ErrorMessage = ({children}: ChildrenPropsType): JSX.Element => {
   return (
     <div role='alert' className='text-red-500'>
       {children}

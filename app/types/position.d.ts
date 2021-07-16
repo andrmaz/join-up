@@ -61,25 +61,3 @@ export type PositionTabsType = {
   selectedTab: number
   setSelectedTab: React.Dispatch<React.SetStateAction<typeof selectedTab>>
 }
-
-export type EditPositoinType = {
-  position: IPositionData
-  showModal: boolean
-  setShowModal: React.Dispatch<React.SetStateAction<typeof showModal>>
-}
-
-export type RemovePositionType = {
-  uid: number
-  showDialog: boolean
-  setShowDialog: React.Dispatch<React.SetStateAction<typeof showDialog>>
-}
-
-export type PositionValuesType = {
-  title: string
-  vacancies: number
-  qualifications: string
-  duties: string
-  level: SelectOptionsType
-  role: SelectOptionsType
-  technologies: SelectOptionsType[]
-}

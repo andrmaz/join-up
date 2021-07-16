@@ -1,4 +1,4 @@
-import type {IMenuTab} from 'app/types/form'
+import type {IMenuTab} from 'app/types/components'
 
 const Tab = ({
   children,

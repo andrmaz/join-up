@@ -7,7 +7,7 @@ import Panel from '@components/route/Tablist/Panel'
 import PasswordForm from '@components/Form/user/Password'
 import SnackBar from '@components/lib/SnackBar/SnackBar'
 
-import type {PanelPropsType} from 'app/types/navigation'
+import type {PanelPropsType} from 'app/types/components'
 import type {IEditPassword} from 'app/types/user'
 
 const EditPassword = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {

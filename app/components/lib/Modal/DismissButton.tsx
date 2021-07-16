@@ -1,8 +1,8 @@
 import * as React from 'react'
 import useModalContext from '@hooks/modal/useModalContext'
-import type {ContainerPropsType} from 'app/types/modal'
+import type {ChildrenPropsType} from 'app/types/modal'
 
-const DismissButton = React.forwardRef<HTMLButtonElement, ContainerPropsType>(
+const DismissButton = React.forwardRef<HTMLButtonElement, ChildrenPropsType>(
   function dismissButton(props, ref) {
     return (
       <div style={{display: 'flex', justifyContent: 'flex-end'}}>

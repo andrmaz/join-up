@@ -1,4 +1,4 @@
-import type {IMenuPanel} from 'app/types/form'
+import type {IMenuPanel} from 'app/types/components'
 
 const Panel = ({children, index, isSelectedTab}: IMenuPanel): JSX.Element => (
   <section

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Tab from '@components/route/Tablist/Tab'
-import type {IMenuItem} from 'app/types/form'
+import type {IMenuItem} from 'app/types/components'
 
 const Item = ({
   label,

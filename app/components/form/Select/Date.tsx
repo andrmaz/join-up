@@ -1,4 +1,4 @@
-import {DrawerInputsType} from 'app/types/navigation'
+import {DrawerInputsType} from 'app/types/components'
 
 export const DateSelect = ({
   register,

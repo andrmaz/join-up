@@ -1,4 +1,4 @@
-export type ContainerPropsType = {children: React.ReactNode}
+export type ChildrenPropsType = {children: React.ReactNode}
 
 export type ModalPropsType = {
   children: React.ReactNode

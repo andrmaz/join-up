@@ -7,7 +7,7 @@ import Panel from '@components/route/Tablist/Panel'
 import SnackBar from '@components/lib/SnackBar/SnackBar'
 import ProfileForm from '@components/Form/user/Profile'
 
-import type {PanelPropsType} from 'app/types/navigation'
+import type {PanelPropsType} from 'app/types/components'
 import type {IUserContext} from 'app/types/user'
 
 const EditProfile = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
