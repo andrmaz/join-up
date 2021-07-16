@@ -2,10 +2,10 @@ import * as React from 'react'
 import dynamic from 'next/dynamic'
 
 import Panel from '@components/navigation/Tablist/Panel'
-import PositionContent from '@components/lib/Position/Content'
+import PositionContents from '@components/lib/Position/Contents'
 
-const RemovePosition = dynamic(() => import('@components/lib/Remove/Position'))
-const EditPosition = dynamic(() => import('@components/lib/Edit/Position'))
+const RemovePosition = dynamic(() => import('@components/lib/Position/Remove'))
+const EditPosition = dynamic(() => import('@components/lib/Position/Edit'))
 
 import type {PositionOverviewType} from 'app/types/position'
 
@@ -17,7 +17,7 @@ const PositionCard = ({
   return (
     <Panel index={index} isSelectedTab={isSelectedTab}>
       <section className='h-full w-full border-2 border-black p-2 rounded'>
-        <PositionContent {...position} />
+        <PositionContents {...position} />
         <article className='h-1/6 flex justify-between'>
           <span className='text-xs'>
             {position.applicants > 0

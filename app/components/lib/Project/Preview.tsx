@@ -2,8 +2,8 @@ import * as React from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
-const RemoveProject = dynamic(() => import('@components/lib/Remove/Project'))
-const EditProject = dynamic(() => import('@components/lib/Edit/Project'))
+const RemoveProject = dynamic(() => import('@components/lib/Project/Remove'))
+const EditProject = dynamic(() => import('@components/lib/Project/Edit'))
 
 import type {IProjectData} from 'app/types/project'
 

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import TechSelect from '@components/form/Select/Tech'
 import {DateSelect} from '@components/form/Select/Date'
-import {RadioInput} from '@components/form/Input/Radio'
-import {CheckboxInput} from '@components/form/Input/Checkbox'
+import {RadioInput} from '@components/form/Input/lib/Radio'
+import {CheckboxInput} from '@components/form/Input/lib/Checkbox'
 
 import {IDrawerProps} from 'app/types/navigation'
 

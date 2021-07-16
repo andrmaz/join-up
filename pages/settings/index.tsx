@@ -5,15 +5,15 @@ import Head from 'next/head'
 
 import Menu from '@components/navigation/Menu/Menu'
 import Panel from '@components/navigation/Tablist/Panel'
-import EditProfile from '@components/lib/Edit/Profile'
+import EditProfile from '@components/lib/User/Profile'
 
 import {getSessionTokenProps} from '@api/getServerSideProps'
 
 import type {TokenParamsType} from 'app/types/params'
 
-const EditUsername = dynamic(() => import('@components/lib/Edit/Username'))
-const EditEmail = dynamic(() => import('@components/lib/Edit/Email'))
-const EditPassword = dynamic(() => import('@components/lib/Edit/Password'))
+const EditUsername = dynamic(() => import('@components/lib/User/Username'))
+const EditEmail = dynamic(() => import('@components/lib/User/Email'))
+const EditPassword = dynamic(() => import('@components/lib/User/Password'))
 
 const Settings: NextPage<TokenParamsType> = ({
   token,

@@ -2,10 +2,10 @@ import * as React from 'react'
 import dynamic from 'next/dynamic'
 
 import Panel from '@components/navigation/Tablist/Panel'
-import PositionContent from '@components/lib/Position/Content'
+import PositionContents from '@components/lib/Position/Contents'
 
 const ConfirmDialog = dynamic(
-  () => import('@components/notifications/Dialog/Confirmation')
+  () => import('@components/lib/Application/Confirm')
 )
 
 import type {PositionOverviewType} from 'app/types/position'
@@ -18,7 +18,7 @@ const PositionOverview = ({
   return (
     <Panel index={index} isSelectedTab={isSelectedTab}>
       <section className='h-full w-full border-2 border-black p-2 rounded'>
-        <PositionContent {...position} />
+        <PositionContents {...position} />
         <article className='h-1/6 flex justify-between'>
           <span className='text-xs'>
             {position.applicants > 0

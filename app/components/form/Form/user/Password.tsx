@@ -1,4 +1,4 @@
-import FormInput from '@components/form/Input/Form'
+import FormInput from '@components/form/Input/lib/Form'
 import PasswordInput from '@components/form/Input/user/Password'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
