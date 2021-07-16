@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import type {ContainerPropsType} from 'app/types/container'
+import type {ContainerPropsType} from 'app/types/modal'
 
 const ErrorMessage = ({children}: ContainerPropsType): JSX.Element => {
   return (
