@@ -34,7 +34,7 @@ const Slug: NextPage<ProjectParamsType> = ({
         <section className='h-full py-12 px-40 xl:px-80'>
           <article className='w-full h-2/5'>
             <div className='absolute right-40 xl:right-80'>
-              {user?.id === project.owner && <CreatePosition />}
+              {user?.id === project.owner && <CreatePosition id={project.id} />}
             </div>
             <ProjectOverview {...project} />
           </article>

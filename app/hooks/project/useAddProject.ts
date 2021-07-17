@@ -1,6 +1,8 @@
-import axios from 'axios'
 import {useRouter} from 'next/router'
 import {useProjectContext} from '@hooks/project/useProjectContext'
+
+import {addProjectWithToken} from '@api/fetchWithToken'
+
 import type {IProjectInput} from 'app/types/project'
 import type {ProjectResponseType} from 'app/types/response'
 
@@ -13,17 +15,7 @@ export default function useAddProject(
     data: IProjectInput
   ): Promise<ProjectResponseType> => {
     try {
-      const response = await axios.post<ProjectResponseType>(
-        '/project',
-        {
-          project: data,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const response = await addProjectWithToken(data, token)
       if (response.status === 201) {
         add(response.data.project)
         router.push('/profile')

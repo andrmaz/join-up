@@ -7,7 +7,7 @@ import ModalContents from '@components/lib/Modal/Contents'
 import {RemovePositionForm} from '@components/Form/position/helpers/Remove'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 
-const RemovePosition = ({uid}: {uid: number}): JSX.Element => {
+const RemovePosition = ({id}: {id: number}): JSX.Element => {
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   return (
@@ -24,7 +24,7 @@ const RemovePosition = ({uid}: {uid: number}): JSX.Element => {
         aria-label='Remove position'
       >
         <RemovePositionForm
-          uid={uid}
+          id={id}
           onKeyDown={() => focusTrapRef.current?.focus()}
         />
       </ModalContents>

@@ -7,7 +7,7 @@ import ModalContents from '@components/lib/Modal/Contents'
 import {RemoveProjectForm} from '@components/Form/project/helpers/Remove'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 
-const RemoveProject = ({uid}: {uid: number}): JSX.Element => {
+const RemoveProject = ({id}: {id: number}): JSX.Element => {
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   return (
@@ -24,7 +24,7 @@ const RemoveProject = ({uid}: {uid: number}): JSX.Element => {
         aria-label='Edit position'
       >
         <RemoveProjectForm
-          uid={uid}
+          id={id}
           onKeyDown={() => focusTrapRef.current?.focus()}
         />
       </ModalContents>

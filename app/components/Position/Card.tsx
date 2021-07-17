@@ -26,7 +26,7 @@ const PositionCard = ({
           </span>
           <div className='w-12 flex justify-between'>
             <EditPosition position={position} />
-            <RemovePosition uid={position.id} />
+            <RemovePosition id={position.id} />
           </div>
         </article>
       </section>

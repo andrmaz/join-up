@@ -1,19 +1,21 @@
-import * as React from 'react'
+import useSessionCookie from '@hooks/cookie/useSessionCookie'
+import useModalContext from '@hooks/modal/useModalContext'
 import {useProjectContext} from '@hooks/project/useProjectContext'
+
 import {deleteProjectByIdWithToken} from '@api/fetchWithToken'
 import type {RemoveProjectResponseType} from 'app/types/response'
 
 export default function useRemoveProject(
-  token: string,
-  uid: number,
-  setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
+  id: number
 ): () => Promise<RemoveProjectResponseType> {
   const {remove} = useProjectContext()
+  const token = useSessionCookie()
+  const {setIsOpen} = useModalContext()
   const handleConfirm = async (): Promise<RemoveProjectResponseType> => {
     try {
-      const response = await deleteProjectByIdWithToken(token, uid)
+      const response = await deleteProjectByIdWithToken(token, id)
       if (response.status === 200) {
-        setShowDialog(false)
+        setIsOpen(false)
         remove(response.data.project.id)
         return Promise.resolve(response.data)
       }

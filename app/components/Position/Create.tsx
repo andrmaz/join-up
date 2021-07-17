@@ -6,7 +6,7 @@ import ModalContents from '@components/lib/Modal/Contents'
 
 import CreatePositionForm from '@components/Form/position/helpers/Create'
 
-const CreatePosition = (): JSX.Element => {
+const CreatePosition = ({id}: {id: number}): JSX.Element => {
   //* Trap focus inside modal dialog
   const focusTrapRef = React.useRef<HTMLElement | null>(null)
   return (
@@ -19,7 +19,10 @@ const CreatePosition = (): JSX.Element => {
         focusTrapRef={focusTrapRef}
         aria-label='New position'
       >
-        <CreatePositionForm onKeyDown={() => focusTrapRef.current?.focus()} />
+        <CreatePositionForm
+          id={id}
+          onKeyDown={() => focusTrapRef.current?.focus()}
+        />
       </ModalContents>
     </ModalProvider>
   )

@@ -1,37 +1,18 @@
 import * as React from 'react'
-import axios from 'axios'
+import {addApplicationWithToken} from '@api/fetchWithToken'
+import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import type {StatusResponseType} from 'app/types/response'
 
 export default function useAddApplication(
-  token: string,
   id: number,
   setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
-): [
-  boolean,
-  string,
-  React.Dispatch<React.SetStateAction<boolean>>,
-  () => Promise<StatusResponseType>
-] {
-  //* Toast Component Status
-  const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
-  const [successMessage, setSuccessMessage] = React.useState<string>('')
+): () => Promise<StatusResponseType> {
+  const token = useSessionCookie()
   const handleConfirm = async (): Promise<StatusResponseType> => {
     try {
-      const response = await axios.post<StatusResponseType>(
-        '/application',
-        {
-          position: id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const response = await addApplicationWithToken(id, token)
       const {data} = response
       if (response.status === 201) {
-        setIsSuccess(true)
-        setSuccessMessage(data.message)
         setShowDialog(false)
         return Promise.resolve(data)
       }
@@ -40,5 +21,5 @@ export default function useAddApplication(
       return Promise.reject(error)
     }
   }
-  return [isSuccess, successMessage, setIsSuccess, handleConfirm]
+  return handleConfirm
 }

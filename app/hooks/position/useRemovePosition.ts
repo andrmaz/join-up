@@ -1,17 +1,18 @@
 import * as React from 'react'
-import {deletePositionByIdWithToken} from '@api/fetchWithToken'
+import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import {usePositionContext} from '@hooks/position/usePositionContext'
+import {deletePositionByIdWithToken} from '@api/fetchWithToken'
 import type {RemovePositionResponseType} from 'app/types/response'
 
 export default function useRemovePosition(
-  token: string,
-  uid: number,
+  id: number,
   setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
 ): () => Promise<RemovePositionResponseType> {
+  const token = useSessionCookie()
   const {dispatch} = usePositionContext()
   const handleConfirm = async (): Promise<RemovePositionResponseType> => {
     try {
-      const response = await deletePositionByIdWithToken(token, uid)
+      const response = await deletePositionByIdWithToken(token, id)
       if (response.status === 200) {
         setShowDialog(false)
         dispatch({type: 'remove', payload: response.data.position.id})

@@ -1,4 +1,6 @@
+import {useForm} from 'react-hook-form'
 import {useAuthState} from '@hooks/auth/useAuthState'
+import useSessionCookie from '@hooks/cookie/useSessionCookie'
 
 import UserAvatar from '@components/User/Avatar'
 
@@ -13,19 +15,17 @@ import Textarea from '@components/form/Textarea/Textarea'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
-import type {IProfileForm} from 'app/types/form'
+import type {IUserContext} from 'app/types/user'
 
 const ProfileForm = ({
-  handleSubmit,
   onSubmit,
-  register,
-  errors,
-  reset,
-  control,
-  setValue,
-  token,
-}: IProfileForm): JSX.Element => {
+}: {
+  onSubmit: (data: IUserContext) => Promise<IUserContext>
+}): JSX.Element => {
   const {user} = useAuthState()
+  const token = useSessionCookie()
+  const {handleSubmit, register, errors, control, setValue, reset} =
+    useForm<IUserContext>()
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

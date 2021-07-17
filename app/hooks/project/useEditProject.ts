@@ -1,32 +1,25 @@
-import axios from 'axios'
-
+import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import {useProjectContext} from '@hooks/project/useProjectContext'
+import useModalContext from '@hooks/modal/useModalContext'
+import {editProjectWithToken} from '@api/fetchWithToken'
 
-import type {IProjectData} from 'app/types/project'
+import type {IProjectInput} from 'app/types/project'
 import type {ProjectResponseType} from 'app/types/response'
 
 export default function useEditProject(
-  token: string,
-  id: number | undefined,
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
-): (data: IProjectData) => Promise<ProjectResponseType> {
+  id: number
+): (data: IProjectInput) => Promise<ProjectResponseType> {
+  const token = useSessionCookie()
   const {edit} = useProjectContext()
-  const onSubmit = async (data: IProjectData): Promise<ProjectResponseType> => {
+  const {setIsOpen} = useModalContext()
+  const onSubmit = async (
+    data: IProjectInput
+  ): Promise<ProjectResponseType> => {
     try {
-      const response = await axios.patch<ProjectResponseType>(
-        `/project/${id}`,
-        {
-          project: data,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const response = await editProjectWithToken(data, id, token)
       if (response.status === 200) {
         edit(response.data.project)
-        setShowModal(false)
+        setIsOpen(false)
         return Promise.resolve(response.data)
       }
       return response.data
