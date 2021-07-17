@@ -26,7 +26,7 @@ const PositionOverview = ({
               : 'Be the first to apply this position'}
           </span>
           <div>
-            <ConfirmApplication uid={position.id} />
+            <ConfirmApplication id={position.id} />
           </div>
         </article>
       </section>

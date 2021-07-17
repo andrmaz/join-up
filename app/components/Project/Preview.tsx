@@ -45,7 +45,7 @@ const ProjectPreview = ({
           </span>
           <div className='w-10 flex justify-between'>
             <EditProject project={project} />
-            <RemoveProject uid={project.id} />
+            <RemoveProject id={project.id} />
           </div>
         </article>
       </section>
