@@ -1,11 +1,13 @@
 import React from 'react'
 import {Control, SetValueConfig, FieldElement} from 'react-hook-form'
 
-import type {ISigninInputs, ISignupInputs} from 'app/types/user'
-import type {IProjectData} from 'app/types/project'
-import type {IPositionData} from 'app/types/position'
+import type {IProjectData, IProjectInput} from 'app/types/project'
+import type {IPositionData, IPositionInput} from 'app/types/position'
 
-import type {UserResponseType} from 'app/types/response'
+import type {
+  ProjectResponseType,
+  PositionResponseType,
+} from 'app/types/response'
 
 //* Inputs
 type RegisterType = (ref: (FieldElement<T> & React.Ref) | null) => void
@@ -89,38 +91,15 @@ export type CloseButtonType = {
 }
 
 //* Forms
-export interface ISigninForm {
-  handleSubmit: (field: any) => typeof onSubmit
-  onSubmit: (data: ISigninInputs) => Promise<UserResponseType>
-  register: (ref: any) => RegisterType
-  errors: Record<string, any>
-}
-
-export interface ISignupForm {
-  handleSubmit: (field: any) => typeof onSubmit
-  onSubmit: (data: ISignupInputs) => Promise<UserResponseType>
-  register: (ref: any) => RegisterType
-  errors: Record<string, any>
-  watchPassword: string
-  control: Control
-  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
-}
-
 export interface IProjectForm {
-  token: string
   project?: IProjectData
-  register: (ref: any) => RegisterType
-  errors: Record<string, any>
-  control: Control
-  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
+  onSubmit: (data: IProjectInput) => Promise<ProjectResponseType>
+  onKeyDown: () => void
 }
 
 export interface IPositionForm {
   id?: number
-  token: string
   position?: IPositionData
-  register: (ref: any) => RegisterType
-  errors: Record<string, any>
-  control: Control
-  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
+  onSubmit: (data: IPositionInput) => Promise<PositionResponseType>
+  onKeyDown: () => void
 }

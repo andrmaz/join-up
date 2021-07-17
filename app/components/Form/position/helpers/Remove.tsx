@@ -1,6 +1,5 @@
 import * as React from 'react'
 
-import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useRemovePosition from '@hooks/position/useRemovePosition'
 import useModalContext from '@hooks/modal/useModalContext'
 
@@ -8,15 +7,14 @@ import CancelButton from '@components/form/Button/Cancel'
 import {ConfirmButton} from '@components/form/Button/Confirm'
 
 export const RemovePositionForm = ({
-  uid,
+  id,
   onKeyDown,
 }: {
-  uid: number
+  id: number
   onKeyDown: () => void
 }): JSX.Element => {
-  const token = useSessionCookie()
   const {setIsOpen} = useModalContext()
-  const handleConfirm = useRemovePosition(token, uid, setIsOpen)
+  const handleConfirm = useRemovePosition(id, setIsOpen)
   return (
     <React.Fragment>
       <div className='h-16 w-full'>

@@ -1,32 +1,20 @@
 import * as React from 'react'
 
-import useSessionCookie from '@hooks/cookie/useSessionCookie'
 import useAddApplication from '@hooks/application/useAddApplication'
 import useModalContext from '@hooks/modal/useModalContext'
 
 import CancelButton from '@components/form/Button/Cancel'
 import {ConfirmButton} from '@components/form/Button/Confirm'
-import SnackBar from '@components/lib/SnackBar/SnackBar'
 
 export const ApplicationForm = ({
-  uid,
+  id,
   onKeyDown,
 }: {
-  uid: number
+  id: number
   onKeyDown: () => void
 }): JSX.Element => {
-  const token = useSessionCookie()
   const {setIsOpen} = useModalContext()
-  const [isSuccess, successMessage, setIsSuccess, handleConfirm] =
-    useAddApplication(token, uid, setIsOpen)
-  if (isSuccess)
-    return (
-      <SnackBar
-        color='green'
-        message={successMessage}
-        onClose={() => setIsSuccess(false)}
-      />
-    )
+  const handleConfirm = useAddApplication(id, setIsOpen)
   return (
     <React.Fragment>
       <div className='h-16 w-full'>

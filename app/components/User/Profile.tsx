@@ -12,7 +12,7 @@ const EditProfile = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
     useEditUserData(token)
   return (
     <Panel index={0} isSelectedTab={isSelectedTab}>
-      <ProfileForm token={token} onSubmit={onSubmit} />
+      <ProfileForm onSubmit={onSubmit} />
       {isSuccess && (
         <SnackBar
           color='green'
