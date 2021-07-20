@@ -66,6 +66,7 @@ export type SubmitButtonType = {
   bgColor?: string
 }
 
+//TODO: Change onClickAction to onClick
 export type ConfirmButtonType = {
   children?: string
   errors?: boolean
@@ -73,17 +74,11 @@ export type ConfirmButtonType = {
   onClickAction?: () => void
 }
 
-export type ActionButtonType = {
-  children: string
-  action: () => void
-  tabIndex?: number
-  bgColor?: string
-}
-
 export type CancelButtonType = {
   onClickHandler: () => void
 }
 
+//TODO: Check if focusRef is unused
 export type CloseButtonType = {
   onClickAction: () => void
   focusRef?: React.Ref<T>
