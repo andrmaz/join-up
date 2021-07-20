@@ -1,4 +1,3 @@
-import {useAuthState} from '@hooks/auth/useAuthState'
 import UserAvatar from '@components/User/Avatar'
 import {FaUser, FaBitbucket, FaLinkedin} from 'react-icons/fa'
 import {FiGitlab} from 'react-icons/fi'
@@ -6,19 +5,19 @@ import {GiOpenBook, GiTechnoHeart} from 'react-icons/gi'
 import {BsFillChatFill} from 'react-icons/bs'
 import {GrGithub} from 'react-icons/gr'
 
-const UserCard = (): JSX.Element => {
-  const {user} = useAuthState()
-  const {
-    avatar,
-    username,
-    bio,
-    languages,
-    technologies,
-    bitbucketURL,
-    githubURL,
-    gitlabURL,
-    linkedinURL,
-  } = {...user}
+import type {IUserContext} from 'app/types/user'
+
+const UserCard = ({
+  avatar,
+  username,
+  bio,
+  languages,
+  technologies,
+  bitbucketURL,
+  githubURL,
+  gitlabURL,
+  linkedinURL,
+}: IUserContext): JSX.Element => {
   return (
     <section className='sticky top-44 h-70v p-1'>
       <div className='h-auto w-full mb-10'>
