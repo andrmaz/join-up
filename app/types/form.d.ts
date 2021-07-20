@@ -66,12 +66,11 @@ export type SubmitButtonType = {
   bgColor?: string
 }
 
-//TODO: Change onClickAction to onClick
 export type ConfirmButtonType = {
   children?: string
   errors?: boolean
   bgColor?: string
-  onClickAction?: () => void
+  onClick: () => void
 }
 
 export type CancelButtonType = {

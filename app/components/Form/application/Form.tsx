@@ -17,7 +17,7 @@ export const ApplicationForm = ({id}: {id: number}): JSX.Element => {
         </span>
       </div>
       <div className='w-full h-1/3 flex'>
-        <ConfirmButton onClickAction={handleConfirm}>Confirm</ConfirmButton>
+        <ConfirmButton onClick={handleConfirm} />
         <FocusRefButton onClickHandler={() => setIsOpen(false)} />
       </div>
     </React.Fragment>

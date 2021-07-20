@@ -17,9 +17,7 @@ export const RemoveProjectForm = ({id}: {id: number}): JSX.Element => {
         </span>
       </div>
       <div className='w-full h-1/3 flex'>
-        <ConfirmButton bgColor='red' onClickAction={handleConfirm}>
-          Confirm
-        </ConfirmButton>
+        <ConfirmButton bgColor='red' onClick={handleConfirm} />
         <FocusRefButton onClickHandler={() => setIsOpen(false)} />
       </div>
     </React.Fragment>
