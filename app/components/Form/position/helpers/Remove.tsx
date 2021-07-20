@@ -8,7 +8,7 @@ import {ConfirmButton} from '@components/form/Button/Confirm'
 
 export const RemovePositionForm = ({id}: {id: number}): JSX.Element => {
   const {setIsOpen} = useModalContext()
-  const handleConfirm = useRemovePosition(id, setIsOpen)
+  const handleConfirm = useRemovePosition(id)
   return (
     <React.Fragment>
       <div className='h-16 w-full'>
