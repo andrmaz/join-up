@@ -54,3 +54,10 @@ export interface IMenuPanel {
   index: number
   isSelectedTab: boolean
 }
+
+//* Dialog
+export type ConfirmDialogType = {
+  handleConfirm: () => void
+  message: string
+  btnColor?: string
+}
