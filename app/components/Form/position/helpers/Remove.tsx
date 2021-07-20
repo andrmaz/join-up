@@ -3,16 +3,10 @@ import * as React from 'react'
 import useRemovePosition from '@hooks/position/useRemovePosition'
 import useModalContext from '@hooks/modal/useModalContext'
 
-import CancelButton from '@components/form/Button/Cancel'
+import FocusRefButton from '@components/form/Button/FocusRef'
 import {ConfirmButton} from '@components/form/Button/Confirm'
 
-export const RemovePositionForm = ({
-  id,
-  onKeyDown,
-}: {
-  id: number
-  onKeyDown: () => void
-}): JSX.Element => {
+export const RemovePositionForm = ({id}: {id: number}): JSX.Element => {
   const {setIsOpen} = useModalContext()
   const handleConfirm = useRemovePosition(id, setIsOpen)
   return (
@@ -26,10 +20,7 @@ export const RemovePositionForm = ({
         <ConfirmButton bgColor='red' onClickAction={handleConfirm}>
           Confirm
         </ConfirmButton>
-        <CancelButton
-          onClickHandler={() => setIsOpen(false)}
-          onKeyDownHandler={onKeyDown}
-        />
+        <FocusRefButton onClickHandler={() => setIsOpen(false)} />
       </div>
     </React.Fragment>
   )

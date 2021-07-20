@@ -7,16 +7,12 @@ import TextInput from '@components/form/Input/lib/Text'
 import UrlInput from '@components/form/Input/project/Url'
 import TechSelect from '@components/form/Select/Tech'
 import {SubmitButton} from '@components/form/Button/Submit'
-import CancelButton from '@components/form/Button/Cancel'
+import FocusRefButton from '@components/form/Button/FocusRef'
 
 import type {IProjectInput} from 'app/types/project'
 import type {IProjectForm} from 'app/types/form'
 
-const ProjectForm = ({
-  project,
-  onSubmit,
-  onKeyDown,
-}: IProjectForm): JSX.Element => {
+const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
   const token = useSessionCookie()
   const {register, handleSubmit, errors, control, setValue, reset} =
     useForm<IProjectInput>()
@@ -70,10 +66,7 @@ const ProjectForm = ({
             )}
           />
         </div>
-        <CancelButton
-          onClickHandler={() => reset()}
-          onKeyDownHandler={onKeyDown}
-        />
+        <FocusRefButton onClickHandler={() => reset()} />
       </div>
     </form>
   )

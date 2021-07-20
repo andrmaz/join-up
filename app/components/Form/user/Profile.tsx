@@ -77,7 +77,7 @@ const ProfileForm = ({
       <Textarea register={register} defaultValue={user?.bio} />
       <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
         <CancelButton
-          onClickHandler={() => {
+          onClick={() => {
             reset({
               githubURL: '',
               gitlabURL: '',

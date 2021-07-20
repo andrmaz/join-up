@@ -6,26 +6,15 @@ import ModalContents from '@components/lib/Modal/Contents'
 
 import CreatePositionForm from '@components/Form/position/helpers/Create'
 
-const CreatePosition = ({id}: {id: number}): JSX.Element => {
-  //* Trap focus inside modal dialog
-  const focusTrapRef = React.useRef<HTMLElement | null>(null)
-  return (
-    <ModalProvider>
-      <ModalOpenButton>
-        <button tabIndex={0}>Add a new position</button>
-      </ModalOpenButton>
-      <ModalContents
-        title='New position'
-        focusTrapRef={focusTrapRef}
-        aria-label='New position'
-      >
-        <CreatePositionForm
-          id={id}
-          onKeyDown={() => focusTrapRef.current?.focus()}
-        />
-      </ModalContents>
-    </ModalProvider>
-  )
-}
+const CreatePosition = ({id}: {id: number}): JSX.Element => (
+  <ModalProvider>
+    <ModalOpenButton>
+      <button tabIndex={0}>Add a new position</button>
+    </ModalOpenButton>
+    <ModalContents title='New position' aria-label='New position'>
+      <CreatePositionForm id={id} />
+    </ModalContents>
+  </ModalProvider>
+)
 
 export default CreatePosition

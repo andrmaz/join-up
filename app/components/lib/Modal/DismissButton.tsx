@@ -1,18 +1,19 @@
 import * as React from 'react'
 import useModalContext from '@hooks/modal/useModalContext'
-import type {ChildrenPropsType} from 'app/types/modal'
+import useFocusTrapRefContext from '@hooks/ref/useRefContext'
 
-const DismissButton = React.forwardRef<HTMLButtonElement, ChildrenPropsType>(
-  function dismissButton(props, ref) {
-    return (
-      <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-        <ModalDismissButton>
-          <button ref={ref}>{props.children}</button>
-        </ModalDismissButton>
-      </div>
-    )
-  }
-)
+function DismissButton(
+  props: React.PropsWithChildren<React.ReactNode>
+): JSX.Element {
+  const ref = useFocusTrapRefContext()
+  return (
+    <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+      <ModalDismissButton>
+        <button ref={ref}>{props.children}</button>
+      </ModalDismissButton>
+    </div>
+  )
+}
 
 function ModalDismissButton({
   children: child,
