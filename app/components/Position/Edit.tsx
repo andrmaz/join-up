@@ -13,29 +13,18 @@ const EditPosition = ({
   position,
 }: {
   position: IPositionData
-}): React.ReactElement => {
-  //* Trap focus inside modal dialog
-  const focusTrapRef = React.useRef<HTMLElement | null>(null)
-  return (
-    <ModalProvider>
-      <ModalOpenButton>
-        <FiEdit2
-          tabIndex={0}
-          className='cursor-pointer focus:ring-2 focus:ring-yellow-600'
-        />
-      </ModalOpenButton>
-      <ModalContents
-        title='Edit position'
-        focusTrapRef={focusTrapRef}
-        aria-label='Edit position'
-      >
-        <EditPositionForm
-          onKeyDown={() => focusTrapRef.current?.focus()}
-          position={position}
-        />
-      </ModalContents>
-    </ModalProvider>
-  )
-}
+}): React.ReactElement => (
+  <ModalProvider>
+    <ModalOpenButton>
+      <FiEdit2
+        tabIndex={0}
+        className='cursor-pointer focus:ring-2 focus:ring-yellow-600'
+      />
+    </ModalOpenButton>
+    <ModalContents title='Edit position' aria-label='Edit position'>
+      <EditPositionForm position={position} />
+    </ModalContents>
+  </ModalProvider>
+)
 
 export default EditPosition

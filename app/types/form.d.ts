@@ -82,7 +82,6 @@ export type ActionButtonType = {
 
 export type CancelButtonType = {
   onClickHandler: () => void
-  onKeyDownHandler?: () => void
 }
 
 export type CloseButtonType = {
@@ -94,12 +93,10 @@ export type CloseButtonType = {
 export interface IProjectForm {
   project?: IProjectData
   onSubmit: (data: IProjectInput) => Promise<ProjectResponseType>
-  onKeyDown: () => void
 }
 
 export interface IPositionForm {
   id?: number
   position?: IPositionData
   onSubmit: (data: IPositionInput) => Promise<PositionResponseType>
-  onKeyDown: () => void
 }

@@ -1,17 +1,13 @@
-import type {CancelButtonType} from 'app/types/form'
-
-const CancelButton = ({
-  onClickHandler: onClickAction,
-  onKeyDownHandler: onKeyDownAction,
-}: CancelButtonType): JSX.Element => (
-  <button
-    type='button'
-    className='w-16 h-8 p-1 bg-gray-800 text-white m-1 rounded focus:bg-gray-600'
-    onClick={onClickAction}
-    onKeyDown={onKeyDownAction}
-  >
-    Cancel
-  </button>
-)
+const CancelButton = ({onClick}: {onClick: () => void}): JSX.Element => {
+  return (
+    <button
+      type='button'
+      className='w-16 h-8 p-1 bg-gray-800 text-white m-1 rounded focus:bg-gray-600'
+      onClick={onClick}
+    >
+      Cancel
+    </button>
+  )
+}
 
 export default CancelButton

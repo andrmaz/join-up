@@ -9,17 +9,12 @@ import TechSelect from '@components/form/Select/Tech'
 import LevelSelect from '@components/form/Select/Level'
 import RoleSelect from '@components/form/Select/Role'
 import {SubmitButton} from '@components/form/Button/Submit'
-import CancelButton from '@components/form/Button/Cancel'
+import FocusRefButton from '@components/form/Button/FocusRef'
 
 import type {IPositionInput} from 'app/types/position'
 import type {IPositionForm} from 'app/types/form'
 
-const PositionForm = ({
-  id,
-  onSubmit,
-  position,
-  onKeyDown,
-}: IPositionForm): JSX.Element => {
+const PositionForm = ({id, onSubmit, position}: IPositionForm): JSX.Element => {
   const token = useSessionCookie()
   const {register, handleSubmit, control, setValue, reset, errors} =
     useForm<IPositionInput>()
@@ -85,10 +80,7 @@ const PositionForm = ({
             )}
           />
         </div>
-        <CancelButton
-          onClickHandler={() => reset()}
-          onKeyDownHandler={onKeyDown}
-        />
+        <FocusRefButton onClickHandler={() => reset()} />
       </div>
     </form>
   )
