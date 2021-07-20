@@ -73,16 +73,6 @@ export type ConfirmButtonType = {
   onClick: () => void
 }
 
-export type CancelButtonType = {
-  onClickHandler: () => void
-}
-
-//TODO: Check if focusRef is unused
-export type CloseButtonType = {
-  onClickAction: () => void
-  focusRef?: React.Ref<T>
-}
-
 //* Forms
 export interface IProjectForm {
   project?: IProjectData

@@ -1,11 +1,6 @@
-import type {CloseButtonType} from 'app/types/form'
-
-const CloseButton = ({
-  onClickAction,
-  focusRef,
-}: CloseButtonType): JSX.Element => (
-  <button className='h-6 items-start' onClick={onClickAction}>
-    <span aria-label='dialog_close' tabIndex={-1} ref={focusRef}>
+const CloseButton = ({onClick}: {onClick: () => void}): JSX.Element => (
+  <button className='h-6 items-start' onClick={onClick}>
+    <span aria-label='dialog_close' tabIndex={-1}>
       &times;
     </span>
   </button>

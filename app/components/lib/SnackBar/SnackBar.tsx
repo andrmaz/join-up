@@ -8,7 +8,7 @@ const SnackBar = ({color, message, onClose}: SnackBarType): JSX.Element => (
   >
     <div className='flex flex-col'>
       <article className='h-1/3 w-full flex justify-end right-0'>
-        <CloseButton onClickAction={onClose} />
+        <CloseButton onClick={onClose} />
       </article>
       <article className='flex h-2/3'>
         <FaCheckCircle />

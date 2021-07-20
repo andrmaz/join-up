@@ -66,7 +66,7 @@ const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
             )}
           />
         </div>
-        <FocusRefButton onClickHandler={() => reset()} />
+        <FocusRefButton onClick={() => reset()} />
       </div>
     </form>
   )
