@@ -8,7 +8,7 @@ import {ConfirmButton} from '@components/form/Button/Confirm'
 
 export const ApplicationForm = ({id}: {id: number}): JSX.Element => {
   const {setIsOpen} = useModalContext()
-  const handleConfirm = useAddApplication(id, setIsOpen)
+  const handleConfirm = useAddApplication(id)
   return (
     <React.Fragment>
       <div className='h-16 w-full'>
