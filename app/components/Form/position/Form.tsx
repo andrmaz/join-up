@@ -80,7 +80,7 @@ const PositionForm = ({id, onSubmit, position}: IPositionForm): JSX.Element => {
             )}
           />
         </div>
-        <FocusRefButton onClickHandler={() => reset()} />
+        <FocusRefButton onClick={() => reset()} />
       </div>
     </form>
   )

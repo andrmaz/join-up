@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form'
 import FormInput from '@components/form/Input/lib/Form'
 import PasswordInput from '@components/form/Input/user/Password'
 import {SubmitButton} from '@components/form/Button/Submit'
-import FocusRefButton from '@components/form/Button/FocusRef'
+import CancelButton from '@components/form/Button/Cancel'
 
 import type {IEditPassword} from 'app/types/user'
 import {StatusResponseType} from 'app/types/response'
@@ -51,7 +51,7 @@ const PasswordForm = ({
         />
       </article>
       <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
-        <FocusRefButton onClickHandler={() => reset()} />
+        <CancelButton onClick={() => reset()} />
         <div className='w-16 p-1'>
           <SubmitButton
             value='Save'

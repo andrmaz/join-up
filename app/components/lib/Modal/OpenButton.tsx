@@ -1,7 +1,22 @@
 import * as React from 'react'
 import useModalContext from '@hooks/modal/useModalContext'
 
-export default function ModalOpenButton({
+const OpenButton = (
+  props: React.PropsWithChildren<React.ReactNode>
+): JSX.Element => (
+  <ModalOpenButton>
+    <button
+      tabIndex={0}
+      type='button'
+      className='h-auto w-auto py-1 px-2 cursor-pointer bg-blue-600 text-white rounded active:bg-blue-800'
+      aria-pressed={false}
+    >
+      {props.children}
+    </button>
+  </ModalOpenButton>
+)
+
+function ModalOpenButton({
   children: child,
 }: {
   children: React.ReactElement
@@ -10,3 +25,5 @@ export default function ModalOpenButton({
   const onClick = (): void => setIsOpen(true)
   return <React.Fragment>{React.cloneElement(child, {onClick})}</React.Fragment>
 }
+
+export {OpenButton, ModalOpenButton}

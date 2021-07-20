@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {ModalProvider} from '@providers/ModalProvider'
 
-import ModalOpenButton from '@components/lib/Modal/OpenButton'
+import {ModalOpenButton} from '@components/lib/Modal/OpenButton'
 import ModalContents from '@components/lib/Modal/Contents'
 
 import {RemoveProjectForm} from '@components/Form/project/helpers/Remove'

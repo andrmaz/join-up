@@ -70,23 +70,7 @@ export type ConfirmButtonType = {
   children?: string
   errors?: boolean
   bgColor?: string
-  onClickAction?: () => void
-}
-
-export type ActionButtonType = {
-  children: string
-  action: () => void
-  tabIndex?: number
-  bgColor?: string
-}
-
-export type CancelButtonType = {
-  onClickHandler: () => void
-}
-
-export type CloseButtonType = {
-  onClickAction: () => void
-  focusRef?: React.Ref<T>
+  onClick: () => void
 }
 
 //* Forms
