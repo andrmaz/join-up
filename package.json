@@ -12,8 +12,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@types/node": "^15.14.2",
-    "@types/react": "^17.0.14",
+    "@types/node": "^15.14.3",
+    "@types/react": "^17.0.15",
     "axios": "^0.21.1",
     "cookie": "^0.4.1",
     "next": "11.0.1",
@@ -27,7 +27,8 @@
   "devDependencies": {
     "@types/react-select": "^4.0.17",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
-    "@typescript-eslint/parser": "^4.28.4",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
     "autoprefixer": "^10.3.1",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
@@ -36,9 +37,9 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
-    "lint-staged": "^11.0.1",
-    "postcss": "^8.3.5",
+    "lint-staged": "^11.1.1",
+    "postcss": "^8.3.6",
     "prettier": "^2.3.2",
-    "tailwindcss": "^2.2.4"
+    "tailwindcss": "^2.2.7"
   }
 }
