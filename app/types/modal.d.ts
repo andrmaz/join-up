@@ -1,12 +1,4 @@
-export type ChildrenPropsType = {children: React.ReactNode}
-
-export type ModalPropsType = {
-  children: React.ReactNode
-  height: string
-  width?: string
-  top?: string
-  color?: string
-}
+export type ChildrenPropsType = React.PropsWithChildren<React.ReactNode>
 
 export type ModalDispatchType = React.Dispatch<React.SetStateAction<boolean>>
 
