@@ -1,21 +1,30 @@
 import * as React from 'react'
-import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
+import axios from 'axios'
 import Head from 'next/head'
 
-import useFetchUserProjectsWithToken from '@hooks/fetch/useFetchUserProjectsWithToken'
+import {useProjectContext} from '@hooks/project/useProjectContext'
 import {useAuthState} from '@hooks/auth/useAuthState'
+
+import {privateFetch} from '@utils/fetch'
+import {handleAxiosError, handleUnexpectedError} from '@utils/errors'
 
 import UserCard from '@components/User/Card'
 import ProjectsList from '@components/Project/List'
 
-import {getSessionTokenProps} from '@api/getServerSideProps'
+import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next'
+import type {ProjectsResponseType} from 'app/types/response'
+import type {IProjectData} from 'app/types/project'
 
-import type {TokenParamsType} from 'app/types/params'
+type Props = {projects: IProjectData[]}
 
-const Profile: NextPage<TokenParamsType> = ({
-  token,
+const Profile: NextPage<Props> = ({
+  projects,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const projects = useFetchUserProjectsWithToken(token)
+  const {persist, clear} = useProjectContext()
+  React.useEffect(() => {
+    persist(projects)
+    return () => clear()
+  }, [clear, persist, projects])
   const {user} = useAuthState()
   return (
     <section className='h-min-screen pt-16'>
@@ -32,7 +41,7 @@ const Profile: NextPage<TokenParamsType> = ({
                 <h3>Your Projects</h3>
               </header>
               <main className='w-full p-1'>
-                <ProjectsList projects={projects} />
+                <ProjectsList />
               </main>
             </article>
           </div>
@@ -44,5 +53,28 @@ const Profile: NextPage<TokenParamsType> = ({
 
 export default Profile
 
-export const getServerSideProps: GetServerSideProps<TokenParamsType> =
-  getSessionTokenProps
+export const getServerSideProps: GetServerSideProps<Props> = async context => {
+  try {
+    const response = await privateFetch(context).get<ProjectsResponseType>(
+      '/project/user'
+    )
+    const {projects} = response.data
+    return {props: {projects}}
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      handleAxiosError(error)
+      if (error?.response?.status === 401) {
+        console.log('Redirect')
+        return {
+          redirect: {
+            destination: '/signin',
+            permanent: false,
+          },
+        }
+      }
+    } else {
+      handleUnexpectedError(error)
+    }
+    return Promise.reject(error.toJSON())
+  }
+}

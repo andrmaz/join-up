@@ -8,7 +8,13 @@ const EditPositionForm = ({
   position: IPositionData
 }): JSX.Element => {
   const onSubmit = useEditPosition(position.id, position.projectId)
-  return <PositionForm position={position} onSubmit={onSubmit} />
+  return (
+    <PositionForm
+      id={position.projectId}
+      position={position}
+      onSubmit={onSubmit}
+    />
+  )
 }
 
 export default EditPositionForm

@@ -1,17 +1,12 @@
 import Head from 'next/head'
-import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
 import {FocusTrapRefProvider} from '@providers/RefProvider'
 import {FocusTrapRefContext} from '@context/refContext'
+
 import CreateProjectForm from '@components/Form/project/helpers/Create'
-
 import {BsArrow90DegDown} from 'react-icons/bs'
-import {getSessionTokenProps} from '@api/getServerSideProps'
-import type {TokenParamsType} from 'app/types/params'
 
-const Project: NextPage<TokenParamsType> = ({
-  token,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Project = (): JSX.Element => {
   return (
     <section className='h-min-screen pt-16'>
       <Head>
@@ -34,7 +29,7 @@ const Project: NextPage<TokenParamsType> = ({
                 Please fill out this form to start creating a new project
               </span>
             </header>
-            <CreateProjectForm token={token} />
+            <CreateProjectForm />
           </article>
         </main>
       </FocusTrapRefProvider>
@@ -43,6 +38,3 @@ const Project: NextPage<TokenParamsType> = ({
 }
 
 export default Project
-
-export const getServerSideProps: GetServerSideProps<TokenParamsType> =
-  getSessionTokenProps

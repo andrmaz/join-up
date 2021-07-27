@@ -1,25 +1,21 @@
 import * as React from 'react'
-import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import Head from 'next/head'
 
 import {useForm} from 'react-hook-form'
-import useFetchProjectsWithToken from '@hooks/fetch/useFetchProjectsWithToken'
+import useProjects from '@hooks/projects/useProjects'
 
 import Drawer from '@components/lib/Drawer/Drawer'
 import ProjectsGrid from '@components/Project/Grid'
 
-import {getSessionTokenProps} from '@api/getServerSideProps'
+import {NextPage} from 'next'
 
-import type {TokenParamsType} from 'app/types/params'
-
-const Projects: NextPage<TokenParamsType> = ({
-  token,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Projects: NextPage = () => {
+  //TODO: Infer Input Type (NestedValue)
   const {control, register, watch, setValue} = useForm()
   //* watching every fields in the form
   const fields = watch()
-  const {isIdle, isLoading, isError, isSuccess, data} =
-    useFetchProjectsWithToken(token, fields)
+  //* fetching project according to the fields
+  const {isIdle, isLoading, isError, isSuccess, data} = useProjects(fields)
   return (
     <section className='h-min-screen pt-16'>
       <Head>
@@ -49,6 +45,3 @@ const Projects: NextPage<TokenParamsType> = ({
 }
 
 export default Projects
-
-export const getServerSideProps: GetServerSideProps<TokenParamsType> =
-  getSessionTokenProps
