@@ -1,25 +1,24 @@
 import * as React from 'react'
 import axios, {Canceler} from 'axios'
+import {publicFetch} from '@utils/fetch'
 
 import type {SelectOptionsType} from 'app/types/form'
-import type {RolesResponseType} from 'app/types/response'
+import type {LevelsResponseType} from 'app/types/response'
 
-export default function useFetchRolesOptions():
-  | SelectOptionsType[]
-  | undefined {
+export default function useLevels(): SelectOptionsType[] | undefined {
   const [options, setOptions] = React.useState<SelectOptionsType[]>()
-  //* Set roles options to State as soon as the modal is shown
+  //* Set levels options to State as soon as the modal is shown
   React.useEffect(() => {
     let cancel: Canceler
     ;(async () => {
       try {
-        const response = await axios.get<RolesResponseType>('/role', {
+        const response = await publicFetch.get<LevelsResponseType>('/level', {
           //* An executor function receives a cancel function as a parameter
           cancelToken: new axios.CancelToken(c => (cancel = c)),
         })
-        const {roles, status, message} = response.data
+        const {levels, status, message} = response.data
         if (status === 200) {
-          setOptions(roles)
+          setOptions(levels)
           return Promise.resolve(message)
         }
         return response.data

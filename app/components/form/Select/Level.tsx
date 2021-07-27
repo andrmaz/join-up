@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {Controller} from 'react-hook-form'
-import useFetchLevelsOptions from '@hooks/fetch/useFetchLevelsOptions'
+import useLevels from '@hooks/options/useLevels'
 
 import Select from 'react-select'
 import ErrorMessage from '@components/lib/Message/Error'
@@ -14,7 +14,7 @@ const LevelSelect = ({
   errors,
   defaultValue,
 }: IPositionSelect): React.ReactElement => {
-  const options = useFetchLevelsOptions()
+  const options = useLevels()
   return (
     <React.Fragment>
       <label id='level-select' htmlFor='level'>
