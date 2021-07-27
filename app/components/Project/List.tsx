@@ -1,13 +1,10 @@
 import Link from 'next/link'
+import {useProjectContext} from '@hooks/project/useProjectContext'
 import ProjectPreview from '@components/Project/Preview'
 import {EmptyMessage} from '@components/lib/Message/Empty'
-import type {ProjectStateType} from 'app/types/project'
 
-const ProjectsList = ({
-  projects,
-}: {
-  projects: ProjectStateType
-}): React.ReactElement => {
+const ProjectsList = (): React.ReactElement => {
+  const {projects} = useProjectContext()
   return (
     <section className='pt-12 xl:pt-0'>
       {projects.length ? (

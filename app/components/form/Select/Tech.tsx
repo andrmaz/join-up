@@ -2,7 +2,7 @@ import * as React from 'react'
 import Select from 'react-select'
 
 import {Controller} from 'react-hook-form'
-import useTechnologies from '@hooks/technology/useTechnologies'
+import useTechnologies from '@hooks/options/useTechnologies'
 
 import ErrorMessage from '@components/lib/Message/Error'
 import type {IFormSelect, SelectOptionsType} from 'app/types/form'
@@ -15,9 +15,8 @@ const TechSelect = ({
   defaultValues,
   defaultValue,
   id,
-  token,
 }: IFormSelect): React.ReactElement => {
-  const options = useTechnologies(id, token)
+  const options = useTechnologies(id)
   return (
     <React.Fragment>
       <label id='technologies' htmlFor='technologies'>

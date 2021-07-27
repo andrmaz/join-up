@@ -1,20 +1,30 @@
 import * as React from 'react'
-import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
+import axios from 'axios'
 import Head from 'next/head'
 
 import {useAuthState} from '@hooks/auth/useAuthState'
 import {usePositionContext} from '@hooks/position/usePositionContext'
+
+import {privateFetch} from '@utils/fetch'
+import {handleAxiosError, handleUnexpectedError} from '@utils/errors'
 
 import ProjectOverview from '@components/Project/Overview'
 import {EmptyMessage} from '@components/lib/Message/Empty'
 import PositionTablist from '@components/Position/Tablist'
 import CreatePosition from '@components/Position/Create'
 
-import {getProjectProps} from '@api/getServerSideProps'
+import {Params} from 'next/dist/next-server/server/router'
+import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
+import type {IProjectData} from 'app/types/project'
+import type {IPositionData} from 'app/types/position'
+import {PositionsResponseType, ProjectResponseType} from 'app/types/response'
 
-import type {ProjectParamsType} from 'app/types/params'
+type Props = {
+  project: IProjectData
+  positions: IPositionData[]
+}
 
-const Slug: NextPage<ProjectParamsType> = ({
+const Slug: NextPage<Props> = ({
   project,
   positions,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -51,5 +61,49 @@ const Slug: NextPage<ProjectParamsType> = ({
 
 export default Slug
 
-export const getServerSideProps: GetServerSideProps<ProjectParamsType> =
-  getProjectProps
+export const getServerSideProps: GetServerSideProps<Props> = async context => {
+  try {
+    //* project id parameter will be sent as a query parameter (slug) to the page
+    const {slug} = context.params as Params
+
+    const getProject = privateFetch(context).get<ProjectResponseType>(
+      `/project/${slug}`
+    )
+
+    const getPositions = privateFetch(context).get<PositionsResponseType>(
+      `/position/project/${slug}`
+    )
+
+    const [
+      {
+        data: {project},
+      },
+      {
+        data: {positions},
+      },
+    ] = await Promise.all([getProject, getPositions])
+
+    return {
+      props: {
+        project,
+        positions,
+      },
+    }
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      handleAxiosError(error)
+      if (error?.response?.status === 401) {
+        console.log('Redirect')
+        return {
+          redirect: {
+            destination: '/signin',
+            permanent: false,
+          },
+        }
+      }
+    } else {
+      handleUnexpectedError(error)
+    }
+    return Promise.reject(error.toJSON())
+  }
+}

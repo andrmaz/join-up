@@ -5,12 +5,13 @@ import PasswordInput from '@components/form/Input/user/Password'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
-import type {IUserContext, IEditUsername} from 'app/types/user'
+import type {IEditUsername} from 'app/types/user'
+import type {UserResponseType} from 'app/types/response'
 
 const UsernameForm = ({
   onSubmit,
 }: {
-  onSubmit: (data: IEditUsername) => Promise<IUserContext>
+  onSubmit: (data: IEditUsername) => Promise<UserResponseType>
 }): JSX.Element => {
   const {handleSubmit, register, errors, reset} = useForm<IEditUsername>()
   return (

@@ -5,12 +5,13 @@ import PasswordInput from '@components/form/Input/user/Password'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
-import type {IEditEmail, IUserContext} from 'app/types/user'
+import type {IEditEmail} from 'app/types/user'
+import type {UserResponseType} from 'app/types/response'
 
 const EmailForm = ({
   onSubmit,
 }: {
-  onSubmit: (data: IEditEmail) => Promise<IUserContext>
+  onSubmit: (data: IEditEmail) => Promise<UserResponseType>
 }): JSX.Element => {
   const {handleSubmit, register, errors, reset} = useForm<IEditEmail>()
   return (

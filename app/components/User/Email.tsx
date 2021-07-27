@@ -6,11 +6,8 @@ import Panel from '@components/route/Tablist/Panel'
 import EmailForm from '@components/Form/user/Email'
 import SnackBar from '@components/lib/SnackBar/SnackBar'
 
-import type {PanelPropsType} from 'app/types/components'
-
-const EditEmail = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
-  const [isSuccess, successMessage, handleClose, onSubmit] =
-    useEditUserEmail(token)
+const EditEmail = ({isSelectedTab}: {isSelectedTab: boolean}): JSX.Element => {
+  const [isSuccess, successMessage, handleClose, onSubmit] = useEditUserEmail()
   return (
     <Panel index={2} isSelectedTab={isSelectedTab}>
       <EmailForm onSubmit={onSubmit} />

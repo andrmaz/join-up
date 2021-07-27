@@ -1,20 +1,19 @@
 import * as React from 'react'
-import axios from 'axios'
-
-import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {edit} from '@actions/authActions'
 
-import type {IUserContext} from 'app/types/user'
-import type {EditUserResponseType} from 'app/types/response'
+import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
+import {useFetchContext} from '@hooks/fetch/useFetchContext'
 
-export default function useEditUserData(
-  token: string
-): readonly [
+import type {IAuthUser} from 'app/types/user'
+import type {UserResponseType} from 'app/types/response'
+
+export default function useEditUserData(): readonly [
   boolean,
   string,
   () => void,
-  (data: IUserContext) => Promise<IUserContext>
+  (data: IAuthUser) => Promise<UserResponseType>
 ] {
+  const fetchContext = useFetchContext()
   //* Toast Component Status
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
   const [successMessage, setSuccessMessage] = React.useState<string>('')
@@ -23,22 +22,20 @@ export default function useEditUserData(
     setSuccessMessage('')
   }
   const dispatch = useAuthDispatch()
-  const onSubmit = async (data: IUserContext): Promise<IUserContext> => {
+  const onSubmit = async (data: IAuthUser): Promise<UserResponseType> => {
     try {
-      const response = await axios.patch<EditUserResponseType>(
+      const response = await fetchContext.authAxios.patch<UserResponseType>(
         '/user',
-        {user: data},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        {user: data}
       )
-      const {user, message} = response.data
-      edit(dispatch, user)
-      setIsSuccess(true)
-      setSuccessMessage(message)
-      return Promise.resolve(user)
+      if (response.status === 200) {
+        const {user, message} = response.data
+        edit(dispatch, user)
+        setIsSuccess(true)
+        setSuccessMessage(message)
+        return Promise.resolve(response.data)
+      }
+      return Promise.reject({message: 'Something went wrong'})
     } catch (error) {
       return Promise.reject(error)
     }

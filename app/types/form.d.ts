@@ -49,7 +49,6 @@ export interface IFormSelect {
   defaultValues?: SelectOptionsType[]
   defaultValue?: SelectOptionsType[]
   id?: number
-  token?: string
 }
 
 export interface IPositionSelect {
@@ -80,7 +79,7 @@ export interface IProjectForm {
 }
 
 export interface IPositionForm {
-  id?: number
+  id: number
   position?: IPositionData
   onSubmit: (data: IPositionInput) => Promise<PositionResponseType>
 }

@@ -1,20 +1,20 @@
 import {useRouter} from 'next/router'
-import {useCookies} from 'react-cookie'
-
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
+
+//import {publicFetch} from '@utils/fetch'
 import {logout} from '@actions/authActions'
 
 export const SignOutButton = (): JSX.Element => {
   const dispatch = useAuthDispatch()
-  const [, , removeCookie] = useCookies(['session'])
   const router = useRouter()
-  function signOut(): void {
-    removeCookie('session', {path: '/', sameSite: true})
+  async function signOut(): Promise<void> {
+    //await publicFetch.delete('/user/logout')
     logout(dispatch)
-    router.push('/')
+    router.push('/signin')
+    return
   }
   return (
-    <button onClick={() => signOut()} className='text-left m-1'>
+    <button onClick={signOut} className='text-left m-1'>
       Sign Out
     </button>
   )

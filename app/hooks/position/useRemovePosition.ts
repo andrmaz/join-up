@@ -1,25 +1,27 @@
-import useSessionCookie from '@hooks/cookie/useSessionCookie'
+import {useFetchContext} from '@hooks/fetch/useFetchContext'
 import {usePositionContext} from '@hooks/position/usePositionContext'
 import useModalContext from '@hooks/modal/useModalContext'
 
-import {deletePositionByIdWithToken} from '@api/fetchWithToken'
 import type {RemovePositionResponseType} from 'app/types/response'
 
 export default function useRemovePosition(
   id: number
 ): () => Promise<RemovePositionResponseType> {
-  const token = useSessionCookie()
+  const fetchContext = useFetchContext()
   const {dispatch} = usePositionContext()
   const {setIsOpen} = useModalContext()
   const handleConfirm = async (): Promise<RemovePositionResponseType> => {
     try {
-      const response = await deletePositionByIdWithToken(token, id)
+      const response =
+        await fetchContext.authAxios.delete<RemovePositionResponseType>(
+          `/position/${id}`
+        )
       if (response.status === 200) {
         setIsOpen(false)
         dispatch({type: 'remove', payload: response.data.position.id})
         return Promise.resolve(response.data)
       }
-      return response.data
+      return Promise.reject({message: 'Something went wrong'})
     } catch (error) {
       return Promise.reject(error)
     }

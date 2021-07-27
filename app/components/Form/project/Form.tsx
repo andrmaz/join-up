@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {useForm} from 'react-hook-form'
-import useSessionCookie from '@hooks/cookie/useSessionCookie'
 
 import TitleInput from '@components/form/Input/lib/Title'
 import TextInput from '@components/form/Input/lib/Text'
@@ -13,7 +12,6 @@ import type {IProjectInput} from 'app/types/project'
 import type {IProjectForm} from 'app/types/form'
 
 const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
-  const token = useSessionCookie()
   const {register, handleSubmit, errors, control, setValue, reset} =
     useForm<IProjectInput>()
   return (
@@ -43,7 +41,6 @@ const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
       />
       <div className='h-1/6 flex flex-col mb-6'>
         <TechSelect
-          token={token}
           control={control}
           defaultValues={project?.technologies}
           defaultValue={project?.technologies}

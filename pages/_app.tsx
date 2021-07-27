@@ -2,17 +2,13 @@ import type {AppProps} from 'next/app'
 import dynamic from 'next/dynamic'
 
 import {AuthProvider} from '@providers/AuthProvider'
-import {CookiesProvider} from 'react-cookie'
+import {FetchProvider} from '@providers/FetchProvider'
 import {ProjectProvider} from '@providers/ProjectProvider'
 import {PositionProvider} from '@providers/PositionProvider'
 
 import Navbar from '@components/route/Navbar/Navbar'
 
-import {webVitals} from '@utils/webVitals'
-
-import axios from 'axios'
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_URL
-axios.defaults.headers.post['Content-Type'] = 'application/json'
+import {webVitals} from '@utils/vitals'
 
 import 'tailwindcss/tailwind.css'
 
@@ -23,8 +19,8 @@ const DynamicComponent = dynamic(() => import('@components/lib/Root/Root'))
 
 function MyApp({Component, pageProps}: AppProps): React.ReactNode {
   return (
-    <CookiesProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <FetchProvider>
         <Navbar />
         <ProjectProvider>
           <PositionProvider>
@@ -32,8 +28,8 @@ function MyApp({Component, pageProps}: AppProps): React.ReactNode {
             <DynamicComponent />
           </PositionProvider>
         </ProjectProvider>
-      </AuthProvider>
-    </CookiesProvider>
+      </FetchProvider>
+    </AuthProvider>
   )
 }
 

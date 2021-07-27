@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {Controller} from 'react-hook-form'
-import useFetchRolesOptions from '@hooks/fetch/useFetchRolesOptions'
+import useRoles from '@hooks/options/useRoles'
 
 import Select from 'react-select'
 import ErrorMessage from '@components/lib/Message/Error'
@@ -14,7 +14,7 @@ const RoleSelect = ({
   errors,
   defaultValue,
 }: IPositionSelect): React.ReactElement => {
-  const options = useFetchRolesOptions()
+  const options = useRoles()
   return (
     <React.Fragment>
       <label id='role-select' htmlFor='role'>

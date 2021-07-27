@@ -1,24 +1,19 @@
 import * as React from 'react'
 import axios, {Canceler} from 'axios'
+import {publicFetch} from '@utils/fetch'
 import type {SelectOptionsType} from 'app/types/form'
 import type {TechnologiesResponseType} from 'app/types/response'
 
-export default function useTechnologies(
-  id?: number,
-  token?: string
-): SelectOptionsType[] {
-  const endpoint = id ? `/project/${id}` : ''
+export default function useTechnologies(id?: number): SelectOptionsType[] {
+  const endpoint: string = id ? `/project/${id}` : ''
   const [options, setOptions] = React.useState<SelectOptionsType[]>([])
   React.useEffect(() => {
     let cancel: Canceler
     ;(async () => {
       try {
-        const response = await axios.get<TechnologiesResponseType>(
+        const response = await publicFetch.get<TechnologiesResponseType>(
           `/technology${endpoint}`,
           {
-            headers: {
-              Authorization: token ? `Bearer ${token}` : undefined,
-            },
             //* An executor function receives a cancel function as a parameter
             cancelToken: new axios.CancelToken(c => (cancel = c)),
           }
@@ -36,6 +31,6 @@ export default function useTechnologies(
     })()
     //* cancel the request
     return () => cancel()
-  }, [endpoint, setOptions, token])
+  }, [endpoint])
   return options
 }
