@@ -1,9 +1,10 @@
 import type {AsyncStateType, AsyncActionsType} from 'app/types/async'
+import type {ProjectsResponseType} from 'app/types/response'
 
 export function asyncReducer(
-  state: AsyncStateType,
-  action: AsyncActionsType
-): AsyncStateType {
+  state: AsyncStateType<ProjectsResponseType>,
+  action: AsyncActionsType<ProjectsResponseType>
+): AsyncStateType<ProjectsResponseType> {
   switch (action.type) {
     case 'pending':
       return {status: 'pending', data: null, error: null}

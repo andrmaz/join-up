@@ -2,9 +2,9 @@ import * as React from 'react'
 import useModalContext from '@hooks/modal/useModalContext'
 import useFocusTrapRefContext from '@hooks/ref/useRefContext'
 
-function DismissButton(
-  props: React.PropsWithChildren<React.ReactNode>
-): JSX.Element {
+import type {ChildrenPropsType} from 'app/types/modal'
+
+function DismissButton(props: ChildrenPropsType): JSX.Element {
   const ref = useFocusTrapRefContext()
   return (
     <div style={{display: 'flex', justifyContent: 'flex-end'}}>

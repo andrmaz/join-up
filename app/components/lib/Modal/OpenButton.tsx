@@ -1,9 +1,9 @@
 import * as React from 'react'
 import useModalContext from '@hooks/modal/useModalContext'
 
-const OpenButton = (
-  props: React.PropsWithChildren<React.ReactNode>
-): JSX.Element => (
+import type {ChildrenPropsType} from 'app/types/modal'
+
+const OpenButton = (props: ChildrenPropsType): JSX.Element => (
   <ModalOpenButton>
     <button
       tabIndex={0}

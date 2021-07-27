@@ -4,8 +4,10 @@ import useModalContext from '@hooks/modal/useModalContext'
 import Portal from '@components/lib/Portal/Portal'
 import {Dialog} from '@components/lib/Modal/Dialog'
 
+import type {ChildrenPropsType} from 'app/types/modal'
+
 export default function ModalContentsBase(
-  props: React.PropsWithChildren<Record<string, unknown>>
+  props: ChildrenPropsType
 ): JSX.Element {
   const {isOpen} = useModalContext()
   return (

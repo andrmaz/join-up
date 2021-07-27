@@ -1,11 +1,15 @@
-import type {UserState, UserActionsType, UserDataType} from 'app/types/user'
+import type {
+  UserStateType,
+  UserContextType,
+  UserActionsType,
+} from 'app/types/user'
 
 export function authReducer(
-  state: UserState,
+  state: UserContextType,
   action: UserActionsType
-): UserState {
-  let userCopy: UserDataType
-  let updatedUser: UserDataType
+): UserContextType {
+  let userCopy: UserStateType
+  let updatedUser: UserStateType
   switch (action.type) {
     case 'login':
       return {

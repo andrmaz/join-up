@@ -1,6 +1,6 @@
 import {useProjectProvider} from '@hooks/project/useProjectProvider'
 import {NestedValue} from 'react-hook-form'
-import {IUserContext} from 'app/types/user'
+import {IAuthUser} from 'app/types/user'
 import {SelectOptionsType} from 'app/types/form'
 import {ProjectsResponseType} from 'app/types/response'
 
@@ -23,7 +23,7 @@ export interface IProjectData {
   technologies: SelectOptionsType[]
   projectURL?: string
   owner: number
-  collaborators: Array<IUserContext>
+  collaborators: Array<IAuthUser>
   hasPositions: boolean
   createdAt: string
   updatedAt: string
