@@ -1,4 +1,4 @@
-import type {IUserContext} from 'app/types/user'
+import type {IAuthUser} from 'app/types/user'
 import type {IProjectData} from 'app/types/project'
 import type {IPositionData} from 'app/types/position'
 import {SelectOptionsType} from 'app/types/form'
@@ -12,14 +12,7 @@ export type StatusResponseType = {
 export type UserResponseType = {
   message: string
   status: number
-  token: string
-  user: IUserContext
-}
-
-export type EditUserResponseType = {
-  status: number
-  message: string
-  user: IUserContext
+  user: IAuthUser
 }
 
 //* Project
@@ -41,6 +34,7 @@ export type RemoveProjectResponseType = {
   status: number
 }
 
+//* Async
 export type FetchProjectsResponseType = {
   isIdle: boolean
   isLoading: boolean

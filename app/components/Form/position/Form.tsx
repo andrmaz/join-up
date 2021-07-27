@@ -1,5 +1,4 @@
 import {useForm} from 'react-hook-form'
-import useSessionCookie from '@hooks/cookie/useSessionCookie'
 
 import TitleInput from '@components/form/Input/lib/Title'
 import TextInput from '@components/form/Input/lib/Text'
@@ -15,7 +14,6 @@ import type {IPositionInput} from 'app/types/position'
 import type {IPositionForm} from 'app/types/form'
 
 const PositionForm = ({id, onSubmit, position}: IPositionForm): JSX.Element => {
-  const token = useSessionCookie()
   const {register, handleSubmit, control, setValue, reset, errors} =
     useForm<IPositionInput>()
   return (
@@ -56,8 +54,7 @@ const PositionForm = ({id, onSubmit, position}: IPositionForm): JSX.Element => {
           errors={errors}
         />
         <TechSelect
-          id={id ? id : position?.projectId}
-          token={token}
+          id={id}
           control={control}
           defaultValue={position?.technologies}
           defaultValues={position?.technologies}

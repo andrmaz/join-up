@@ -1,9 +1,7 @@
 import {useForm} from 'react-hook-form'
 import {useAuthState} from '@hooks/auth/useAuthState'
-import useSessionCookie from '@hooks/cookie/useSessionCookie'
 
 import UserAvatar from '@components/User/Avatar'
-
 import GitHubInput from '@components/form/Input/user/GitHub'
 import GitLabInput from '@components/form/Input/user/GitLab'
 import BitBucketInput from '@components/form/Input/user/BitBucket'
@@ -15,17 +13,17 @@ import Textarea from '@components/form/Textarea/Textarea'
 import {SubmitButton} from '@components/form/Button/Submit'
 import CancelButton from '@components/form/Button/Cancel'
 
-import type {IUserContext} from 'app/types/user'
+import type {IAuthUser} from 'app/types/user'
+import type {UserResponseType} from 'app/types/response'
 
 const ProfileForm = ({
   onSubmit,
 }: {
-  onSubmit: (data: IUserContext) => Promise<IUserContext>
+  onSubmit: (data: IAuthUser) => Promise<UserResponseType>
 }): JSX.Element => {
   const {user} = useAuthState()
-  const token = useSessionCookie()
   const {handleSubmit, register, errors, control, setValue, reset} =
-    useForm<IUserContext>()
+    useForm<IAuthUser>()
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -55,7 +53,6 @@ const ProfileForm = ({
         </div>
         <div className='flex flex-col p-0.5'>
           <LangSelect
-            token={token}
             control={control}
             defaultValue={user?.languages}
             defaultValues={user?.languages}
@@ -65,7 +62,6 @@ const ProfileForm = ({
         </div>
         <div className='flex flex-col p-0.5'>
           <TechSelect
-            token={token}
             control={control}
             defaultValue={user?.technologies}
             defaultValues={user?.technologies}

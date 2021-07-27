@@ -6,11 +6,13 @@ import Panel from '@components/route/Tablist/Panel'
 import PasswordForm from '@components/Form/user/Password'
 import SnackBar from '@components/lib/SnackBar/SnackBar'
 
-import type {PanelPropsType} from 'app/types/components'
-
-const EditPassword = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
+const EditPassword = ({
+  isSelectedTab,
+}: {
+  isSelectedTab: boolean
+}): JSX.Element => {
   const [isSuccess, successMessage, handleClose, onSubmit] =
-    useEditUserPassword(token)
+    useEditUserPassword()
   return (
     <Panel index={3} isSelectedTab={isSelectedTab}>
       <PasswordForm onSubmit={onSubmit} />

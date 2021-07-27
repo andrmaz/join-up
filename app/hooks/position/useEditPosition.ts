@@ -1,7 +1,6 @@
 import useModalContext from '@hooks/modal/useModalContext'
 import {usePositionContext} from '@hooks/position/usePositionContext'
-import useSessionCookie from '@hooks/cookie/useSessionCookie'
-import {editPositionWithToken} from '@api/fetchWithToken'
+import {useFetchContext} from '@hooks/fetch/useFetchContext'
 
 import type {IPositionInput} from 'app/types/position'
 import type {PositionResponseType} from 'app/types/response'
@@ -10,7 +9,7 @@ export default function useEditPosition(
   positionId: number,
   projectId: number
 ): (data: IPositionInput) => Promise<PositionResponseType> {
-  const token = useSessionCookie()
+  const fetchContext = useFetchContext()
   const {dispatch} = usePositionContext()
   const {setIsOpen} = useModalContext()
   const onSubmit = async (
@@ -18,13 +17,18 @@ export default function useEditPosition(
   ): Promise<PositionResponseType> => {
     try {
       data.projectId = projectId
-      const response = await editPositionWithToken(data, token, positionId)
+      const response = await fetchContext.authAxios.patch<PositionResponseType>(
+        `/position/${positionId}`,
+        {
+          position: data,
+        }
+      )
       if (response.status === 200) {
         dispatch({type: 'edit', payload: response.data.position})
         setIsOpen(false)
         return Promise.resolve(response.data)
       }
-      return response.data
+      return Promise.reject({message: 'Something went wrong'})
     } catch (error) {
       return Promise.reject(error)
     }

@@ -19,12 +19,6 @@ export type DrawerInputsType = {
   isPending: boolean
 }
 
-//* Panel
-export type PanelPropsType = {
-  token: string
-  isSelectedTab: boolean
-}
-
 //*SnackBar
 export type SnackBarType = {
   color: string

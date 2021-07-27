@@ -1,24 +1,19 @@
 import * as React from 'react'
-import axios from 'axios'
-
-import {useCookies} from 'react-cookie'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {edit} from '@actions/authActions'
 
 import type {IEditUsername} from 'app/types/user'
-import type {IUserContext} from 'app/types/user'
 import type {UserResponseType} from 'app/types/response'
+import {useFetchContext} from '@hooks/fetch/useFetchContext'
 
-export default function useEditUsername(
-  token: string
-): readonly [
+export default function useEditUsername(): readonly [
   boolean,
   string,
   () => void,
-  (data: IEditUsername) => Promise<IUserContext>
+  (data: IEditUsername) => Promise<UserResponseType>
 ] {
   const dispatch = useAuthDispatch()
-  const [, setCookie] = useCookies(['session'])
+  const fetchContext = useFetchContext()
   //* Toast Component Status
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
   const [successMessage, setSuccessMessage] = React.useState<string>('')
@@ -26,30 +21,21 @@ export default function useEditUsername(
     setIsSuccess(false)
     setSuccessMessage('')
   }
-  const onSubmit = async (data: IEditUsername): Promise<IUserContext> => {
+  const onSubmit = async (data: IEditUsername): Promise<UserResponseType> => {
     try {
-      const response = await axios.patch<UserResponseType>(
+      const response = await fetchContext.authAxios.patch<UserResponseType>(
         '/user/username',
-        {user: data},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        {user: data}
       )
-      const {user, token: newToken, message} = response.data
-      edit(dispatch, user)
-      setCookie('session', newToken, {
-        path: '/',
-        // ? expiration date
-        //maxAge: 3600, // Expires after 1hr
-        sameSite: true,
-        //httpOnly: true,
-        //secure: true,
-      })
-      setIsSuccess(true)
-      setSuccessMessage(message)
-      return Promise.resolve(user)
+      if (response.status == 200) {
+        const {user, message} = response.data
+        edit(dispatch, user)
+        setIsSuccess(true)
+        setSuccessMessage(message)
+        return Promise.resolve(response.data)
+      } else {
+        return Promise.reject({message: 'Something went wrong'})
+      }
     } catch (error) {
       return Promise.reject(error)
     }

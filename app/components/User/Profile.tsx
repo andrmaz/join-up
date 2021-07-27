@@ -5,11 +5,12 @@ import Panel from '@components/route/Tablist/Panel'
 import SnackBar from '@components/lib/SnackBar/SnackBar'
 import ProfileForm from '@components/Form/user/Profile'
 
-import type {PanelPropsType} from 'app/types/components'
-
-const EditProfile = ({token, isSelectedTab}: PanelPropsType): JSX.Element => {
-  const [isSuccess, successMessage, handleClose, onSubmit] =
-    useEditUserData(token)
+const EditProfile = ({
+  isSelectedTab,
+}: {
+  isSelectedTab: boolean
+}): JSX.Element => {
+  const [isSuccess, successMessage, handleClose, onSubmit] = useEditUserData()
   return (
     <Panel index={0} isSelectedTab={isSelectedTab}>
       <ProfileForm onSubmit={onSubmit} />
