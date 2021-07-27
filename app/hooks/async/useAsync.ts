@@ -1,10 +1,13 @@
 import * as React from 'react'
 import {AxiosResponse} from 'axios'
 import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
-import type {AsyncResponseType} from 'app/types/async'
+import type {AsyncStateType, AsyncResponseType} from 'app/types/async'
+import type {ProjectsResponseType} from 'app/types/response'
 
-export default function useAsync(): AsyncResponseType {
-  const [{status, data, error}, dispatch] = useAsyncReducer()
+export default function useAsync(
+  init?: AsyncStateType<ProjectsResponseType>
+): AsyncResponseType<ProjectsResponseType> {
+  const [{status, data, error}, dispatch] = useAsyncReducer(init)
   const run = React.useCallback(
     promise => {
       if (!promise || !promise.then) {

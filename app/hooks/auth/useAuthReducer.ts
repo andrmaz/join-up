@@ -1,22 +1,22 @@
 import * as React from 'react'
 
 import {authReducer} from '@reducers/authReducer'
-import {UserState, UserActionsType} from 'app/types/user'
+import {UserContextType, UserActionsType} from 'app/types/user'
 
 export function useAuthReducer(): [
-  UserState,
+  UserContextType,
   React.Dispatch<UserActionsType>,
   React.EffectCallback
 ] {
   const [state, dispatch] = React.useReducer<
-    React.Reducer<UserState, UserActionsType>
+    React.Reducer<UserContextType, UserActionsType>
   >(authReducer, {user: null})
-  const {user} = state
+  const user = state.user
   const serializedUser = JSON.stringify(user)
   const updateLocalStorage = React.useCallback(() => {
-    document.cookie.includes('session')
+    user
       ? window.localStorage.setItem('user', serializedUser)
       : window.localStorage.removeItem('user')
-  }, [serializedUser])
+  }, [serializedUser, user])
   return [state, dispatch, updateLocalStorage]
 }

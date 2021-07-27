@@ -5,7 +5,7 @@ import {GiOpenBook, GiTechnoHeart} from 'react-icons/gi'
 import {BsFillChatFill} from 'react-icons/bs'
 import {GrGithub} from 'react-icons/gr'
 
-import type {IUserContext} from 'app/types/user'
+import type {IAuthUser} from 'app/types/user'
 
 const UserCard = ({
   avatar,
@@ -17,7 +17,7 @@ const UserCard = ({
   githubURL,
   gitlabURL,
   linkedinURL,
-}: IUserContext): JSX.Element => {
+}: IAuthUser): JSX.Element => {
   return (
     <section className='sticky top-44 h-70v p-1'>
       <div className='h-auto w-full mb-10'>

@@ -1,25 +1,23 @@
-import type {ProjectsResponseType} from 'app/types/response'
-
 export type AsyncStatusType = 'idle' | 'pending' | 'resolved' | 'rejected'
 
-export type AsyncStateType = {
+export type AsyncStateType<T> = {
   status: AsyncStatusType
-  data: ProjectsResponseType | null
+  data: T | null
   error: string | null
 }
 
-export type AsyncActionsType =
+export type AsyncActionsType<T> =
   | {type: 'idle'}
   | {type: 'pending'}
-  | {type: 'resolved'; payload: ProjectsResponseType}
+  | {type: 'resolved'; payload: T}
   | {type: 'rejected'; payload: string}
 
-export type AsyncResponseType = {
+export type AsyncResponseType<T> = {
   isIdle: boolean
   isLoading: boolean
   isError: boolean
   isSuccess: boolean
-  data: ProjectsResponseType | null
+  data: T | null
   error: string | null
   run: (promise: any) => any
 }

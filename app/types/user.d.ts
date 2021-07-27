@@ -19,7 +19,7 @@ export interface ISignupInputs {
   technologies: NestedStringsType
   bio?: string
 }
-export interface IUserContext {
+export interface IAuthUser {
   id: number
   username: string
   email: string
@@ -33,16 +33,16 @@ export interface IUserContext {
   technologies: SelectOptionsType[]
 }
 
-export type UserDataType = IUserContext | null
+export type UserStateType = IAuthUser | null
 
-export type UserState = {
-  user: UserDataType
+export type UserContextType = {
+  user: UserStateType
 }
 
 export type UserActionsType =
-  | {type: 'login'; payload: IUserContext}
+  | {type: 'login'; payload: UserStateType}
   | {type: 'logout'}
-  | {type: 'edit'; payload: IUserContext}
+  | {type: 'edit'; payload: UserStateType}
 
 export type UserDispatchType = (action: UserActionsType) => void
 
