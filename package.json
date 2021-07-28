@@ -12,7 +12,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@types/node": "^15.14.3",
+    "@types/node": "^15.14.4",
     "@types/react": "^17.0.15",
     "axios": "^0.21.1",
     "cookie": "^0.4.1",
