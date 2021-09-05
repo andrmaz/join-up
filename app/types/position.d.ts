@@ -1,5 +1,27 @@
+import * as React from 'react'
 import {SelectOptionsType} from 'app/types/form'
-import React from 'react'
+
+enum Levels {
+  junior = 'Junior',
+  mid = 'Mid',
+  senior = 'Senior',
+  lead = 'Lead',
+}
+enum Roles {
+  PM = 'Project manager',
+  RA = 'Requirement analyst',
+  UX = 'UX designer',
+  UI = 'UI designer',
+  QA = 'QA engineer',
+  FE = 'Front-end developer',
+  BE = 'Back-end developer',
+  FS = 'Full-stack developer',
+  MS = 'Marketing strategist',
+  SS = 'SEO specialist',
+  CS = 'Content specialist',
+  TS = 'Testing specialist',
+  SA = 'Security analyst',
+}
 export interface IPositionInput {
   projectId: number
   title: string
@@ -7,8 +29,8 @@ export interface IPositionInput {
   duties: string
   technologies: SelectOptionsType[]
   vacancies: number
-  level: string
-  role: string
+  level: keyof typeof Levels
+  role: keyof typeof Roles
 }
 export interface IPositionData {
   id: number
@@ -28,12 +50,20 @@ export interface IPositionData {
 
 export type PositionStateType = {positions: Array<IPositionData>}
 
+export enum Actions {
+  add = 'add',
+  remove = 'remove',
+  edit = 'edit',
+  persist = 'persist',
+  clear = 'clear',
+}
+
 export type PositionActionsType =
-  | {type: 'add'; payload: IPositionData}
-  | {type: 'remove'; payload: number}
-  | {type: 'edit'; payload: IPositionData}
-  | {type: 'persist'; payload: IPositionData[]}
-  | {type: 'clear'}
+  | {type: Actions.add; payload: IPositionData}
+  | {type: Actions.remove; payload: number}
+  | {type: Actions.edit; payload: IPositionData}
+  | {type: Actions.persist; payload: IPositionData[]}
+  | {type: Actions.clear}
 
 export type PositionDispatchType = (action: PositionActionsType) => void
 

@@ -4,6 +4,7 @@ import {useFetchContext} from '@hooks/fetch/useFetchContext'
 
 import type {IPositionInput} from 'app/types/position'
 import type {PositionResponseType} from 'app/types/response'
+import {Actions} from 'app/types/position'
 
 export default function useEditPosition(
   positionId: number,
@@ -24,7 +25,7 @@ export default function useEditPosition(
         }
       )
       if (response.status === 200) {
-        dispatch({type: 'edit', payload: response.data.position})
+        dispatch({type: Actions.edit, payload: response.data.position})
         setIsOpen(false)
         return Promise.resolve(response.data)
       }

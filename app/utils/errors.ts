@@ -18,8 +18,8 @@ function handleAxiosError(error: AxiosError): void {
   }
 }
 
-function handleUnexpectedError(error: AxiosError): void {
-  console.log('Error Config', error.config)
+function handleUnexpectedError(error: Error): void {
+  console.log('Error Config', error.message)
 }
 
 export {handleAxiosError, handleUnexpectedError}

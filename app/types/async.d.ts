@@ -1,16 +1,21 @@
-export type AsyncStatusType = 'idle' | 'pending' | 'resolved' | 'rejected'
+export enum Status {
+  idle = 'idle',
+  pending = 'pending',
+  resolved = 'resolved',
+  rejected = 'rejected',
+}
 
 export type AsyncStateType<T> = {
-  status: AsyncStatusType
+  status: keyof typeof Status
   data: T | null
   error: string | null
 }
 
 export type AsyncActionsType<T> =
-  | {type: 'idle'}
-  | {type: 'pending'}
-  | {type: 'resolved'; payload: T}
-  | {type: 'rejected'; payload: string}
+  | {type: Status.idle}
+  | {type: Status.pending}
+  | {type: Status.resolved; payload: T}
+  | {type: Status.rejected; payload: string}
 
 export type AsyncResponseType<T> = {
   isIdle: boolean
@@ -19,5 +24,5 @@ export type AsyncResponseType<T> = {
   isSuccess: boolean
   data: T | null
   error: string | null
-  run: (promise: any) => any
+  run: (promise: Promise) => unknown
 }
