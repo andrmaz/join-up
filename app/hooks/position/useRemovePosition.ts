@@ -3,6 +3,7 @@ import {usePositionContext} from '@hooks/position/usePositionContext'
 import useModalContext from '@hooks/modal/useModalContext'
 
 import type {RemovePositionResponseType} from 'app/types/response'
+import {Actions} from 'app/types/position'
 
 export default function useRemovePosition(
   id: number
@@ -18,7 +19,7 @@ export default function useRemovePosition(
         )
       if (response.status === 200) {
         setIsOpen(false)
-        dispatch({type: 'remove', payload: response.data.position.id})
+        dispatch({type: Actions.remove, payload: response.data.position.id})
         return Promise.resolve(response.data)
       }
       return Promise.reject({message: 'Something went wrong'})

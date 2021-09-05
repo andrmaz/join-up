@@ -18,6 +18,7 @@ import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import type {IProjectData} from 'app/types/project'
 import type {IPositionData} from 'app/types/position'
 import {PositionsResponseType, ProjectResponseType} from 'app/types/response'
+import {Actions} from 'app/types/position'
 
 type Props = {
   project: IProjectData
@@ -31,8 +32,8 @@ const Slug: NextPage<Props> = ({
   const {user} = useAuthState()
   const {state, dispatch} = usePositionContext()
   React.useEffect(() => {
-    dispatch({type: 'persist', payload: positions})
-    return () => dispatch({type: 'clear'})
+    dispatch({type: Actions.persist, payload: positions})
+    return () => dispatch({type: Actions.clear})
   }, [dispatch, positions])
   return (
     <section className='h-min-screen mt-16'>
@@ -51,7 +52,7 @@ const Slug: NextPage<Props> = ({
           {state.positions.length ? (
             <PositionTablist positions={state.positions} />
           ) : (
-            <EmptyMessage>This project has no posts available.</EmptyMessage>
+            <EmptyMessage>This project has no positions yet.</EmptyMessage>
           )}
         </section>
       </main>
@@ -89,7 +90,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
         positions,
       },
     }
-  } catch (error) {
+  } catch (error: any) {
     if (axios.isAxiosError(error)) {
       handleAxiosError(error)
       if (error?.response?.status === 401) {

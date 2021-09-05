@@ -28,12 +28,21 @@ export interface IProjectData {
   createdAt: string
   updatedAt: string
 }
+
+export enum Actions {
+  add = 'add',
+  remove = 'remove',
+  edit = 'edit',
+  persist = 'persist',
+  clear = 'clear',
+}
+
 export type ProjectActionsType =
-  | {type: 'add'; payload: IProjectData}
-  | {type: 'remove'; payload: number}
-  | {type: 'edit'; payload: IProjectData}
-  | {type: 'persist'; payload: IProjectData[]}
-  | {type: 'clear'}
+  | {type: Actions.add; payload: IProjectData}
+  | {type: Actions.remove; payload: number}
+  | {type: Actions.edit; payload: IProjectData}
+  | {type: Actions.persist; payload: IProjectData[]}
+  | {type: Actions.clear}
 
 export type ProjectStateType = Array<IProjectData>
 

@@ -60,7 +60,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
     )
     const {projects} = response.data
     return {props: {projects}}
-  } catch (error) {
+  } catch (error: any) {
     if (axios.isAxiosError(error)) {
       handleAxiosError(error)
       if (error?.response?.status === 401) {

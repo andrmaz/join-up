@@ -3,35 +3,36 @@ import {AxiosResponse} from 'axios'
 import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
 import type {AsyncStateType, AsyncResponseType} from 'app/types/async'
 import type {ProjectsResponseType} from 'app/types/response'
+import {Status} from 'app/types/async'
 
 export default function useAsync(
   init?: AsyncStateType<ProjectsResponseType>
 ): AsyncResponseType<ProjectsResponseType> {
   const [{status, data, error}, dispatch] = useAsyncReducer(init)
   const run = React.useCallback(
-    promise => {
+    (promise: Promise<any>) => {
       if (!promise || !promise.then) {
         throw new Error(
           `The argument passed to useAsync().run must be a promise. Maybe a function that's passed isn't returning anything?`
         )
       }
-      dispatch({type: 'pending'})
+      dispatch({type: Status.pending})
       return promise
         .then((response: AxiosResponse) => {
-          dispatch({type: 'resolved', payload: response.data})
+          dispatch({type: Status.resolved, payload: response.data})
         })
         .catch((error: string) => {
-          dispatch({type: 'rejected', payload: error})
+          dispatch({type: Status.rejected, payload: error})
           return Promise.reject(error)
         })
     },
     [dispatch]
   )
   return {
-    isIdle: status === 'idle',
-    isLoading: status === 'pending',
-    isError: status === 'rejected',
-    isSuccess: status === 'resolved',
+    isIdle: status === Status.idle,
+    isLoading: status === Status.pending,
+    isError: status === Status.rejected,
+    isSuccess: status === Status.resolved,
     data,
     error,
     run,

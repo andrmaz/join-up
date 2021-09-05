@@ -39,10 +39,16 @@ export type UserContextType = {
   user: UserStateType
 }
 
+export enum Actions {
+  login = 'login',
+  logout = 'logout',
+  edit = 'edit',
+}
+
 export type UserActionsType =
-  | {type: 'login'; payload: UserStateType}
-  | {type: 'logout'}
-  | {type: 'edit'; payload: UserStateType}
+  | {type: Actions.login; payload: UserStateType}
+  | {type: Actions.logout}
+  | {type: Actions.edit; payload: UserStateType}
 
 export type UserDispatchType = (action: UserActionsType) => void
 
