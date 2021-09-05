@@ -22,14 +22,16 @@
 ##### New Project Form
 
 - Name -> _String_
-- Description -> _String_ --Optional
+- Description -> _String_ 
+- Mission -> _String_ 
 - Technologies _Tags_ -> _Array_
 - Url -> _String_ --Optional
 
 ##### New Position Form
 
 - Title -> _String_
-- Description -> _String_ --Optional
+- Qualifications -> _String_
+- Duties -> _String_
 - Technologies _Tags_ -> _Array_
 - Vacancy -> _Number_
 - Level -> _Array_
@@ -52,7 +54,8 @@
 
 - Name -> _String_
 - Url -> _String_ --Optional
-- Description -> _String_ --Optional
+- Description -> _String_ 
+- Mission -> _String_
 - Technologies _Tags_ -> _Array_
 - Positions -> _Array_ --Optional
 - Collaborators -> _Array_ --Optional
@@ -61,7 +64,8 @@
 ##### Position
 
 - Title -> _String_
-- Description -> _String_ --Optional
+- Qualifications -> _String_ 
+- Duties -> _String_ 
 - Technologies _Tags_ -> _Array_
 - Vacancy -> _Number_
 - Level -> _String_
