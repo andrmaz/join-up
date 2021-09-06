@@ -12,5 +12,5 @@ export interface IApplicantData {
 export interface IApplicationData {
   id: number
   user: IApplicantData
-  position: {id: number; title: string}
+  position: {id: number; title: string; projectId: number}
 }
