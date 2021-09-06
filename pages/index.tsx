@@ -1,13 +1,17 @@
-import Head from 'next/head'
-import axios from 'axios'
-
-import {privateFetch} from '@utils/fetch'
+import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next'
 import {handleAxiosError, handleUnexpectedError} from '@utils/errors'
 
-import {GetServerSideProps, NextPage, InferGetServerSidePropsType} from 'next'
-import type {IProjectData} from 'app/types/project'
-import type {IPositionData} from 'app/types/position'
+import ApplicationFeed from '@components/Feed/Application'
+import Carousel from '@components/lib/Carousel/Carousel'
+import Head from 'next/head'
 import type {IApplicationData} from 'app/types/application'
+import type {IPositionData} from 'app/types/position'
+import type {IProjectData} from 'app/types/project'
+//import Image from 'next/image'
+import PositionFeed from '@components/Feed/Position'
+import ProjectFeed from '@components/Feed/Project'
+import axios from 'axios'
+import {privateFetch} from '@utils/fetch'
 
 type Props = {
   projects: IProjectData[]
@@ -18,6 +22,7 @@ type Props = {
 const Home: NextPage<{data: Props}> = ({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const {projects, position, applications} = data
   return (
     <section className='h-min-screen pt-16'>
       <Head>
@@ -27,50 +32,30 @@ const Home: NextPage<{data: Props}> = ({
       <main className='h-92v'>
         <section className='h-full py-12 xl:py-32 px-20 xl:px-40'>
           <article className='h-1/3 w-full border-2 my-1 rounded'>
-            Banner
+            {/* <Image
+              src=''
+              alt='banner'
+              width={900}
+              height={300}
+            /> */}
           </article>
           <section className='h-2/3 w-full flex flex-col justify-evenly'>
-            <article className='h-3/10 w-full my-4'>
-              <h2 className='h-1/5'>
-                Here you are some suggestions according to your profile
-              </h2>
-              <ul className='flex h-4/5 overflow-x-auto'>
-                {data.projects.map(p => (
-                  <li key={p.id} className='h-full min-w-1/4 border-2 p-1 mx-1'>
-                    <h3>{p.name}</h3>
-                  </li>
+            <Carousel>
+              {projects.map(project => (
+                <ProjectFeed key={project.id} {...project} />
+              ))}
+            </Carousel>
+            <Carousel>
+              {position.map(position => (
+                <PositionFeed key={position.id} {...position} />
+              ))}
+            </Carousel>
+            {applications.length ? (
+              <Carousel>
+                {applications.map(application => (
+                  <ApplicationFeed key={application.id} {...application} />
                 ))}
-              </ul>
-            </article>
-            <article className='h-3/10 w-full my-4'>
-              <h2 className='h-1/5'>
-                Here you are some suggestions according to your profile
-              </h2>
-              <ul className='flex h-4/5 overflow-x-auto'>
-                {data.position.map(p => (
-                  <li key={p.id} className='h-full min-w-1/4 border-2 p-1 mx-1'>
-                    <h3>{p.title}</h3>
-                  </li>
-                ))}
-              </ul>
-            </article>
-            {data.applications.length ? (
-              <article className='h-3/10 w-full my-4'>
-                <h2 className='h-1/5'>
-                  Here you are some suggestions according to your profile
-                </h2>
-
-                <ul className='flex h-4/5 overflow-x-auto'>
-                  {data.applications.map(a => (
-                    <li
-                      key={a.id}
-                      className='h-full min-w-1/4 border-2 p-1 mx-1'
-                    >
-                      {JSON.stringify(a, null, 2)}
-                    </li>
-                  ))}
-                </ul>
-              </article>
+              </Carousel>
             ) : null}
           </section>
         </section>
@@ -86,7 +71,7 @@ export const getServerSideProps: GetServerSideProps<{data: Props}> =
     try {
       const {data} = await privateFetch(context).get('/feed')
       return {props: {data}}
-    } catch (error) {
+    } catch (error: any) {
       if (axios.isAxiosError(error)) {
         handleAxiosError(error)
         if (error?.response?.status === 401) {
