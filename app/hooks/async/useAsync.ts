@@ -3,7 +3,7 @@ import {AxiosResponse} from 'axios'
 import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
 import type {AsyncStateType, AsyncResponseType} from 'app/types/async'
 import type {ProjectsResponseType} from 'app/types/response'
-import {Status} from 'app/types/async'
+import {Status} from 'app/types/constants'
 
 export default function useAsync(
   init?: AsyncStateType<ProjectsResponseType>

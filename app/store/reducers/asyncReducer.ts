@@ -1,6 +1,6 @@
 import type {AsyncStateType, AsyncActionsType} from 'app/types/async'
 import type {ProjectsResponseType} from 'app/types/response'
-import {Status} from 'app/types/async'
+import {Status} from 'app/types/constants'
 
 export function asyncReducer(
   state: AsyncStateType<ProjectsResponseType>,

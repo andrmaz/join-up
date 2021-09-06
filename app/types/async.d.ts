@@ -1,9 +1,4 @@
-export enum Status {
-  idle = 'idle',
-  pending = 'pending',
-  resolved = 'resolved',
-  rejected = 'rejected',
-}
+import {Status} from 'app/types/constants'
 
 export type AsyncStateType<T> = {
   status: keyof typeof Status

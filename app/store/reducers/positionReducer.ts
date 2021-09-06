@@ -3,7 +3,7 @@ import type {
   PositionStateType,
   IPositionData,
 } from 'app/types/position'
-import {Actions} from 'app/types/position'
+import {PActions} from 'app/types/constants'
 
 export function positionReducer(
   state: PositionStateType,
@@ -16,14 +16,14 @@ export function positionReducer(
   let filteredPositions: IPositionData[]
   let updatedPositions: IPositionData[]
   switch (action.type) {
-    case Actions.add:
+    case PActions.add:
       positionsCopy = [...state.positions]
       updatedPositions = [...positionsCopy, action.payload]
       return {
         ...state,
         positions: updatedPositions,
       }
-    case Actions.remove:
+    case PActions.remove:
       index = state.positions.findIndex(
         (position: IPositionData) => position.id === action.payload
       )
@@ -33,7 +33,7 @@ export function positionReducer(
         ...state,
         positions: positionsCopy,
       }
-    case Actions.edit:
+    case PActions.edit:
       positionCopy = state.positions.find(
         (position: IPositionData) => position.id === action.payload.id
       )
@@ -46,7 +46,7 @@ export function positionReducer(
       return {
         positions: updatedPositions,
       }
-    case Actions.persist:
+    case PActions.persist:
       //* State will be an empty Array
       positionsCopy = [...state.positions]
       //* create a fresh, new store instance on every request
@@ -60,7 +60,7 @@ export function positionReducer(
         ...state,
         positions: updatedPositions,
       }
-    case Actions.clear:
+    case PActions.clear:
       return {
         ...state,
         positions: [],
