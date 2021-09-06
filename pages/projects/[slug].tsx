@@ -18,7 +18,7 @@ import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import type {IProjectData} from 'app/types/project'
 import type {IPositionData} from 'app/types/position'
 import {PositionsResponseType, ProjectResponseType} from 'app/types/response'
-import {Actions} from 'app/types/position'
+import {PActions} from 'app/types/constants'
 
 type Props = {
   project: IProjectData
@@ -32,8 +32,8 @@ const Slug: NextPage<Props> = ({
   const {user} = useAuthState()
   const {state, dispatch} = usePositionContext()
   React.useEffect(() => {
-    dispatch({type: Actions.persist, payload: positions})
-    return () => dispatch({type: Actions.clear})
+    dispatch({type: PActions.persist, payload: positions})
+    return () => dispatch({type: PActions.clear})
   }, [dispatch, positions])
   return (
     <section className='h-min-screen mt-16'>

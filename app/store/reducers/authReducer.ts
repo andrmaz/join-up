@@ -3,7 +3,7 @@ import type {
   UserContextType,
   UserActionsType,
 } from 'app/types/user'
-import {Actions} from 'app/types/user'
+import {UActions} from 'app/types/constants'
 
 export function authReducer(
   state: UserContextType,
@@ -12,17 +12,17 @@ export function authReducer(
   let userCopy: UserStateType
   let updatedUser: UserStateType
   switch (action.type) {
-    case Actions.login:
+    case UActions.login:
       return {
         ...state,
         user: action.payload,
       }
-    case Actions.logout:
+    case UActions.logout:
       return {
         ...state,
         user: null,
       }
-    case Actions.edit:
+    case UActions.edit:
       userCopy = Object.assign({}, state.user)
       updatedUser = Object.assign({...userCopy}, action.payload)
       return {

@@ -4,7 +4,7 @@ import {useFetchContext} from '@hooks/fetch/useFetchContext'
 
 import type {IPositionInput} from 'app/types/position'
 import type {PositionResponseType} from 'app/types/response'
-import {Actions} from 'app/types/position'
+import {PActions} from 'app/types/constants'
 
 export default function useAddPosition(
   id: number
@@ -24,7 +24,7 @@ export default function useAddPosition(
         }
       )
       if (response.status === 201) {
-        dispatch({type: Actions.add, payload: response.data.position})
+        dispatch({type: PActions.add, payload: response.data.position})
         setIsOpen(false)
         return Promise.resolve(response.data)
       }

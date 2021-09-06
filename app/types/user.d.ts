@@ -1,5 +1,6 @@
 import type {SelectOptionsType} from 'app/types/form'
 import type {NestedStringsType} from 'app/types/project'
+import {UActions} from 'app/types/constants'
 
 export interface ISigninInputs {
   email: string
@@ -39,16 +40,10 @@ export type UserContextType = {
   user: UserStateType
 }
 
-export enum Actions {
-  login = 'login',
-  logout = 'logout',
-  edit = 'edit',
-}
-
 export type UserActionsType =
-  | {type: Actions.login; payload: UserStateType}
-  | {type: Actions.logout}
-  | {type: Actions.edit; payload: UserStateType}
+  | {type: UActions.login; payload: UserStateType}
+  | {type: UActions.logout}
+  | {type: UActions.edit; payload: UserStateType}
 
 export type UserDispatchType = (action: UserActionsType) => void
 
