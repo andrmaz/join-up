@@ -17,7 +17,7 @@
     // TypeScript will issue an error if a program tries to include a file by a casing different from the casing on disk
     "forceConsistentCasingInFileNames": true,
     // do not emit compiler output files like JavaScript source code, source-maps or declarations.
-    "noEmit": true,
+    "noEmit": false,
     // fix some problems in the code transpiled by TypeScript.
     "esModuleInterop": true,
     // sets the module system for the program
