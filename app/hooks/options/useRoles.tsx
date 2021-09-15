@@ -1,9 +1,10 @@
 import * as React from 'react'
-import axios, {Canceler} from 'axios'
-import {publicFetch} from '@utils/fetch'
 
-import type {SelectOptionsType} from 'app/types/form'
+import axios, {Canceler} from 'axios'
+
 import type {RolesResponseType} from 'app/types/response'
+import type {SelectOptionsType} from 'app/types/form'
+import {publicFetch} from '@utils/fetch'
 
 export default function useRoles(): SelectOptionsType[] | undefined {
   const [options, setOptions] = React.useState<SelectOptionsType[]>()
@@ -22,7 +23,7 @@ export default function useRoles(): SelectOptionsType[] | undefined {
           return Promise.resolve(message)
         }
         return response.data
-      } catch (thrown) {
+      } catch (thrown: any) {
         if (axios.isCancel(thrown)) {
           return thrown.message
         } else {

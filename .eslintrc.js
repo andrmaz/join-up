@@ -27,6 +27,7 @@ module.exports = {
         'plugin:react-hooks/recommended', // React hooks rules
         'plugin:jsx-a11y/recommended', // Accessibility rules
         'plugin:prettier/recommended', // Prettier recommended rules
+        'next', // Includes Next.js' base ESLint configuration
       ],
       rules: {
         // We will use TypeScript's types for component props instead

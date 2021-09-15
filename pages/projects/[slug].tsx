@@ -1,24 +1,22 @@
 import * as React from 'react'
-import axios from 'axios'
-import Head from 'next/head'
 
-import {useAuthState} from '@hooks/auth/useAuthState'
-import {usePositionContext} from '@hooks/position/usePositionContext'
-
-import {privateFetch} from '@utils/fetch'
+import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next'
+import {PositionsResponseType, ProjectResponseType} from 'app/types/response'
 import {handleAxiosError, handleUnexpectedError} from '@utils/errors'
 
-import ProjectOverview from '@components/Project/Overview'
-import {EmptyMessage} from '@components/lib/Message/Empty'
-import PositionTablist from '@components/Position/Tablist'
 import CreatePosition from '@components/Position/Create'
-
-import {Params} from 'next/dist/next-server/server/router'
-import {NextPage, GetServerSideProps, InferGetServerSidePropsType} from 'next'
-import type {IProjectData} from 'app/types/project'
+import {EmptyMessage} from '@components/lib/Message/Empty'
+import Head from 'next/head'
 import type {IPositionData} from 'app/types/position'
-import {PositionsResponseType, ProjectResponseType} from 'app/types/response'
+import type {IProjectData} from 'app/types/project'
 import {PActions} from 'app/types/constants'
+import {Params} from 'next/dist/server/router'
+import PositionTablist from '@components/Position/Tablist'
+import ProjectOverview from '@components/Project/Overview'
+import axios from 'axios'
+import {privateFetch} from '@utils/fetch'
+import {useAuthState} from '@hooks/auth/useAuthState'
+import {usePositionContext} from '@hooks/position/usePositionContext'
 
 type Props = {
   project: IProjectData
