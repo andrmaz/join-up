@@ -12,8 +12,9 @@ A platform to help developers find projects and collaborators to work with
 
 Project is created with:
 
-- nextjs version: 10.0.6,
-- typescript version: ^4.1.5,
+- nodejs version: ^14.17.4,
+- nextjs version: ^11.1.2,
+- typescript version: ^4.4.3,
 
 ## Setup
 

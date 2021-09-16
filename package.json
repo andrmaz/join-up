@@ -2,6 +2,10 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "engineStrict": true,
+  "engines": {
+    "node": ">=14.17.4"
+  },
   "scripts": {
     "postinstall": "husky install",
     "dev": "next dev",
@@ -13,9 +17,8 @@
   },
   "dependencies": {
     "@types/node": "^15.14.9",
-    "axios": "^0.21.4",
     "@types/react": "^17.0.21",
-    "cookie": "^0.4.1",
+    "axios": "^0.21.4",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
