@@ -1,10 +1,8 @@
-import Head from 'next/head'
-
-import {FocusTrapRefProvider} from '@providers/RefProvider'
-import {FocusTrapRefContext} from '@context/refContext'
-
-import CreateProjectForm from '@components/Form/project/helpers/Create'
 import {BsArrow90DegDown} from 'react-icons/bs'
+import CreateProjectForm from '@components/Form/project/helpers/Create'
+import {FocusTrapRefContext} from '@context/refContext'
+import {FocusTrapRefProvider} from '@providers/RefProvider'
+import Head from 'next/head'
 
 const Project = (): JSX.Element => {
   return (
@@ -38,3 +36,5 @@ const Project = (): JSX.Element => {
 }
 
 export default Project
+
+//TODO: Add Server Side User Authentication Check.

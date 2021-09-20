@@ -1,10 +1,10 @@
 import * as React from 'react'
-import dynamic from 'next/dynamic'
-import Head from 'next/head'
 
+import EditProfile from '@components/User/Profile'
+import Head from 'next/head'
 import Menu from '@components/route/Menu/Menu'
 import Panel from '@components/route/Tablist/Panel'
-import EditProfile from '@components/User/Profile'
+import dynamic from 'next/dynamic'
 
 const EditUsername = dynamic(() => import('@components/User/Username'))
 const EditEmail = dynamic(() => import('@components/User/Email'))
@@ -42,3 +42,5 @@ const Settings = (): JSX.Element => {
 }
 
 export default Settings
+
+//TODO: Add Server Side User Authentication Check.
