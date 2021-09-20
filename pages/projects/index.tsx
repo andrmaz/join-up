@@ -1,13 +1,11 @@
 import * as React from 'react'
-import Head from 'next/head'
-
-import {useForm} from 'react-hook-form'
-import useProjects from '@hooks/projects/useProjects'
 
 import Drawer from '@components/lib/Drawer/Drawer'
-import ProjectsGrid from '@components/Project/Grid'
-
+import Head from 'next/head'
 import {NextPage} from 'next'
+import ProjectsGrid from '@components/Project/Grid'
+import {useForm} from 'react-hook-form'
+import useProjects from '@hooks/projects/useProjects'
 
 const Projects: NextPage = () => {
   //TODO: Infer Input Type (NestedValue)
@@ -45,3 +43,5 @@ const Projects: NextPage = () => {
 }
 
 export default Projects
+
+//TODO: Add Server Side User Authentication Check.
