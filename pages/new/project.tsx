@@ -2,7 +2,9 @@ import {BsArrow90DegDown} from 'react-icons/bs'
 import CreateProjectForm from '@components/Form/project/helpers/Create'
 import {FocusTrapRefContext} from '@context/refContext'
 import {FocusTrapRefProvider} from '@providers/RefProvider'
+import {GetServerSideProps} from 'next'
 import Head from 'next/head'
+import checkAuth from '@utils/auth'
 
 const Project = (): JSX.Element => {
   return (
@@ -37,4 +39,7 @@ const Project = (): JSX.Element => {
 
 export default Project
 
-//TODO: Add Server Side User Authentication Check.
+export const getServerSideProps: GetServerSideProps = async context => {
+  await checkAuth(context)
+  return {props: {}}
+}

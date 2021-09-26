@@ -1,9 +1,11 @@
 import * as React from 'react'
 
+import {GetServerSideProps, NextPage} from 'next'
+
 import Drawer from '@components/lib/Drawer/Drawer'
 import Head from 'next/head'
-import {NextPage} from 'next'
 import ProjectsGrid from '@components/Project/Grid'
+import checkAuth from '@utils/auth'
 import {useForm} from 'react-hook-form'
 import useProjects from '@hooks/projects/useProjects'
 
@@ -44,4 +46,7 @@ const Projects: NextPage = () => {
 
 export default Projects
 
-//TODO: Add Server Side User Authentication Check.
+export const getServerSideProps: GetServerSideProps = async context => {
+  await checkAuth(context)
+  return {props: {}}
+}
