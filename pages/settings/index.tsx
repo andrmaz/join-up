@@ -1,9 +1,11 @@
 import * as React from 'react'
 
 import EditProfile from '@components/User/Profile'
+import {GetServerSideProps} from 'next'
 import Head from 'next/head'
 import Menu from '@components/route/Menu/Menu'
 import Panel from '@components/route/Tablist/Panel'
+import checkAuth from '@utils/auth'
 import dynamic from 'next/dynamic'
 
 const EditUsername = dynamic(() => import('@components/User/Username'))
@@ -43,4 +45,7 @@ const Settings = (): JSX.Element => {
 
 export default Settings
 
-//TODO: Add Server Side User Authentication Check.
+export const getServerSideProps: GetServerSideProps = async context => {
+  await checkAuth(context)
+  return {props: {}}
+}
