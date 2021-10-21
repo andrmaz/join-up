@@ -19,13 +19,6 @@ export type DrawerInputsType = {
   isPending: boolean
 }
 
-//*SnackBar
-export type SnackBarType = {
-  color: string
-  message: string
-  onClose: () => void
-}
-
 //* Menu
 export interface IMenuItem {
   label: string

@@ -1,23 +1,13 @@
-import * as React from 'react'
-import {useFetchContext} from '@hooks/fetch/useFetchContext'
-
 import type {IEditPassword} from 'app/types/user'
 import type {StatusResponseType} from 'app/types/response'
+import {useFetchContext} from '@hooks/fetch/useFetchContext'
+import useSnackbarContext from '@hooks/snackbar/useSnackbarContext'
 
-export default function useEditUserPassword(): readonly [
-  boolean,
-  string,
-  () => void,
-  (data: IEditPassword) => Promise<StatusResponseType>
-] {
+export default function useEditUserPassword(): (
+  data: IEditPassword
+) => Promise<StatusResponseType> {
   const fetchContext = useFetchContext()
-  //* Toast Component Status
-  const [isSuccess, setIsSuccess] = React.useState<boolean>(false)
-  const [successMessage, setSuccessMessage] = React.useState<string>('')
-  const handleClose = (): void => {
-    setIsSuccess(false)
-    setSuccessMessage('')
-  }
+  const {addAlert} = useSnackbarContext()
   const onSubmit = async (data: IEditPassword): Promise<StatusResponseType> => {
     try {
       const response = await fetchContext.authAxios.patch<StatusResponseType>(
@@ -27,8 +17,7 @@ export default function useEditUserPassword(): readonly [
         }
       )
       if (response.status === 200) {
-        setIsSuccess(true)
-        setSuccessMessage(response.data.message)
+        addAlert(response.data.message)
         return Promise.resolve(response.data)
       }
       return Promise.reject({message: 'Something went wrong'})
@@ -36,5 +25,5 @@ export default function useEditUserPassword(): readonly [
       return Promise.reject(error)
     }
   }
-  return [isSuccess, successMessage, handleClose, onSubmit] //as const
+  return onSubmit //as const
 }
