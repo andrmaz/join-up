@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import Panel from '@components/route/Tablist/Panel'
-import UsernameForm from '@components/Form/user/Username'
+import UsernameForm from '@components/Form/Username'
 import useEditUsername from '@hooks/user/useEditUsername'
 
 const EditUsername = ({

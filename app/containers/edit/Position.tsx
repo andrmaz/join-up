@@ -1,6 +1,6 @@
-import useEditPosition from '@hooks/position/useEditPosition'
-import PositionForm from '@components/Form/position/Form'
 import type {IPositionData} from 'app/types/position'
+import PositionForm from '@components/Form/Position'
+import useEditPosition from '@hooks/position/useEditPosition'
 
 const EditPositionForm = ({
   position,

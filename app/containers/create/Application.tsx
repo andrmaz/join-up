@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-import useAddApplication from '@hooks/application/useAddApplication'
 import {ConfirmDialog} from '@components/lib/Dialog/Confirm'
+import useAddApplication from '@hooks/application/useAddApplication'
 
-export const ConfirmApplicationForm = ({id}: {id: number}): JSX.Element => {
+export const CreateApplicationForm = ({id}: {id: number}): JSX.Element => {
   const handleConfirm = useAddApplication(id)
   return (
     <ConfirmDialog

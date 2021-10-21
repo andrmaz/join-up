@@ -1,10 +1,9 @@
 import * as React from 'react'
 
+import CreatePositionForm from '@containers/create/Position'
+import ModalContents from '@components/lib/Modal/Contents'
 import {ModalProvider} from '@providers/ModalProvider'
 import {OpenButton} from '@components/lib/Modal/OpenButton'
-import ModalContents from '@components/lib/Modal/Contents'
-
-import CreatePositionForm from '@components/Form/position/helpers/Create'
 
 const CreatePosition = ({id}: {id: number}): JSX.Element => (
   <ModalProvider>

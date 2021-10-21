@@ -1,13 +1,11 @@
 import * as React from 'react'
 
-import {ModalProvider} from '@providers/ModalProvider'
-import {ModalOpenButton} from '@components/lib/Modal/OpenButton'
-import ModalContents from '@components/lib/Modal/Contents'
-
-import EditProjectForm from '@components/Form/project/helpers/Edit'
+import EditProjectForm from '@containers/edit/Project'
 import {FiEdit2} from 'react-icons/fi'
-
 import type {IProjectData} from 'app/types/project'
+import ModalContents from '@components/lib/Modal/Contents'
+import {ModalOpenButton} from '@components/lib/Modal/OpenButton'
+import {ModalProvider} from '@providers/ModalProvider'
 
 const EditProject = ({
   project,
