@@ -8,7 +8,7 @@ module.exports = {
   parserOptions: {ecmaVersion: 8},
   // We don't want to lint generated files nor node_modules, but we want to lint .prettierrc.js (ignored by default by eslint)
   ignorePatterns: ['node_modules/*', '.next/*', '.out/*', '!.prettierrc.js'],
-  extends: ['eslint:recommended'],
+  extends: ['eslint:recommended', 'next'],
   overrides: [
     // This configuration will apply only to TypeScript files
     {
@@ -21,7 +21,7 @@ module.exports = {
         es6: true,
       },
       extends: [
-        'eslint:recommended',
+        'eslint:recommended', // ESLint recommended rules
         'plugin:@typescript-eslint/recommended', // TypeScript rules
         'plugin:react/recommended', // React rules
         'plugin:react-hooks/recommended', // React hooks rules

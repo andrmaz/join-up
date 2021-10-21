@@ -1,16 +1,14 @@
-import type {AppProps} from 'next/app'
-import dynamic from 'next/dynamic'
+import 'tailwindcss/tailwind.css'
 
+import type {AppProps} from 'next/app'
 import {AuthProvider} from '@providers/AuthProvider'
 import {FetchProvider} from '@providers/FetchProvider'
-import {ProjectProvider} from '@providers/ProjectProvider'
-import {PositionProvider} from '@providers/PositionProvider'
-
 import Navbar from '@components/route/Navbar/Navbar'
-
+import {PositionProvider} from '@providers/PositionProvider'
+import {ProjectProvider} from '@providers/ProjectProvider'
+import {SnackbarProvider} from '@providers/SnackbarProvider'
+import dynamic from 'next/dynamic'
 import {webVitals} from '@utils/vitals'
-
-import 'tailwindcss/tailwind.css'
 
 export const reportWebVitals = webVitals
 
@@ -24,8 +22,10 @@ function MyApp({Component, pageProps}: AppProps): React.ReactNode {
         <Navbar />
         <ProjectProvider>
           <PositionProvider>
-            <Component {...pageProps} />
-            <DynamicComponent />
+            <SnackbarProvider>
+              <Component {...pageProps} />
+              <DynamicComponent />
+            </SnackbarProvider>
           </PositionProvider>
         </ProjectProvider>
       </FetchProvider>
