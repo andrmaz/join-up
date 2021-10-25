@@ -41,6 +41,7 @@
       "@providers/*": ["app/store/providers/*"],
       "@reducers/*": ["app/store/reducers/*"],
       "@utils/*": ["app/utils/*"],
+      "@containers/*": ["app/containers/*"],
       "@api/*": ["app/api/*"],
     },
     "typeRoots": ["./node_modules/@types", "./app/types"]

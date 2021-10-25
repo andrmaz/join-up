@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import SignupForm from '@components/Form/user/Signup'
+import SignupForm from '@components/Form/Signup'
 
 const SignUp = (): JSX.Element => {
   return (

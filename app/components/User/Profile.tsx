@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import Panel from '@components/route/Tablist/Panel'
-import ProfileForm from '@components/Form/user/Profile'
+import ProfileForm from '@components/Form/Profile'
 import useEditUserData from '@hooks/user/useEditUserData'
 
 const EditProfile = ({

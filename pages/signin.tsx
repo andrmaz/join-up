@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-
-import SigninForm from '@components/Form/user/Signin'
+import SigninForm from '@components/Form/Signin'
 
 const SignIn = (): JSX.Element => {
   return (

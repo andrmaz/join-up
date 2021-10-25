@@ -1,10 +1,9 @@
 import * as React from 'react'
-import {ModalProvider} from '@providers/ModalProvider'
 
-import {ModalOpenButton} from '@components/lib/Modal/OpenButton'
 import ModalContents from '@components/lib/Modal/Contents'
-
-import {RemovePositionForm} from '@components/Form/position/helpers/Remove'
+import {ModalOpenButton} from '@components/lib/Modal/OpenButton'
+import {ModalProvider} from '@providers/ModalProvider'
+import RemovePositionForm from '@containers/remove/Position'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 
 const RemovePosition = ({id}: {id: number}): JSX.Element => (

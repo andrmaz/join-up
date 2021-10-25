@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-import useRemoveProject from '@hooks/project/useRemoveProject'
 import {ConfirmDialog} from '@components/lib/Dialog/Confirm'
+import useRemoveProject from '@hooks/project/useRemoveProject'
 
-export const RemoveProjectForm = ({id}: {id: number}): JSX.Element => {
+const RemoveProjectForm = ({id}: {id: number}): JSX.Element => {
   const handleConfirm = useRemoveProject(id)
   return (
     <ConfirmDialog
@@ -13,3 +13,5 @@ export const RemoveProjectForm = ({id}: {id: number}): JSX.Element => {
     />
   )
 }
+
+export default RemoveProjectForm

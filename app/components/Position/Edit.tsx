@@ -1,13 +1,11 @@
 import * as React from 'react'
 
-import {ModalProvider} from '@providers/ModalProvider'
-import {ModalOpenButton} from '@components/lib/Modal/OpenButton'
-import ModalContents from '@components/lib/Modal/Contents'
-
-import EditPositionForm from '@components/Form/position/helpers/Edit'
+import EditPositionForm from '@containers/edit/Position'
 import {FiEdit2} from 'react-icons/fi'
-
 import type {IPositionData} from 'app/types/position'
+import ModalContents from '@components/lib/Modal/Contents'
+import {ModalOpenButton} from '@components/lib/Modal/OpenButton'
+import {ModalProvider} from '@providers/ModalProvider'
 
 const EditPosition = ({
   position,

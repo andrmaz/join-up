@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-import useRemovePosition from '@hooks/position/useRemovePosition'
 import {ConfirmDialog} from '@components/lib/Dialog/Confirm'
+import useRemovePosition from '@hooks/position/useRemovePosition'
 
-export const RemovePositionForm = ({id}: {id: number}): JSX.Element => {
+const RemovePositionForm = ({id}: {id: number}): JSX.Element => {
   const handleConfirm = useRemovePosition(id)
   return (
     <ConfirmDialog
@@ -13,3 +13,5 @@ export const RemovePositionForm = ({id}: {id: number}): JSX.Element => {
     />
   )
 }
+
+export default RemovePositionForm

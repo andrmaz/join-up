@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import Panel from '@components/route/Tablist/Panel'
-import PasswordForm from '@components/Form/user/Password'
+import PasswordForm from '@components/Form/Password'
 import useEditUserPassword from '@hooks/user/useEditUserPassword'
 
 const EditPassword = ({
