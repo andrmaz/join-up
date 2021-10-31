@@ -39,9 +39,9 @@ const Slug: NextPage<Props> = ({
         <title>Project</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main className='h-92v'>
-        <section className='h-full py-12 px-40 xl:px-80'>
-          <article className='w-full h-2/5'>
+      <main className='h-full xl:h-92v'>
+        <section className='h-full py-4 xl:py-12 px-40 xl:px-80'>
+          <article className='w-full h-2/5 mb-4'>
             <div className='absolute right-40 xl:right-80'>
               {user?.id === project.owner && <CreatePosition id={project.id} />}
             </div>

@@ -1,10 +1,10 @@
 import * as React from 'react'
-import TechSelect from '@components/form/Select/Tech'
-import {DateSelect} from '@components/form/Select/Date'
-import {RadioInput} from '@components/form/Input/lib/Radio'
-import {CheckboxInput} from '@components/form/Input/lib/Checkbox'
 
+import {CheckboxInput} from '@components/form/Input/lib/Checkbox'
+import {DateSelect} from '@components/form/Select/Date'
 import {IDrawerProps} from 'app/types/components'
+import {RadioInput} from '@components/form/Input/lib/Radio'
+import TechSelect from '@components/form/Select/Tech'
 
 const Drawer = ({
   register,
@@ -13,7 +13,7 @@ const Drawer = ({
   control,
   technologies,
 }: IDrawerProps): JSX.Element => (
-  <section className='sticky top-40 w-5/6 h-70v p-2'>
+  <section className='sticky top-40 w-5/6 h-70v p-2 border-r-2'>
     <form className='flex flex-col h-auto max-h-full justify-around px-2'>
       <DateSelect register={register} isPending={isPending} />
       {technologies && technologies.length > 1 && (

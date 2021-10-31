@@ -1,11 +1,11 @@
 import * as React from 'react'
+
+import type {IPositionData} from 'app/types/position'
 import dynamic from 'next/dynamic'
 import {useAuthState} from '@hooks/auth/useAuthState'
 
 const PositionOverview = dynamic(() => import('@components/Position/Overview'))
 const PositionCard = dynamic(() => import('@components/Position/Card'))
-
-import type {IPositionData} from 'app/types/position'
 
 const PositionPanels = ({
   positions,
@@ -16,7 +16,7 @@ const PositionPanels = ({
 }): React.ReactElement => {
   const {user} = useAuthState()
   return (
-    <main className='h-full w-full overflow-y-scroll'>
+    <main className='h-auto w-full overflow-y-scroll'>
       {positions.map((position, index) => {
         return user?.id === position.userId ? (
           <PositionCard

@@ -1,14 +1,15 @@
 import * as React from 'react'
+
 import Link from 'next/link'
-import {useAuthState} from '@hooks/auth/useAuthState'
 import {SignOutButton} from '@components/form/Button/SignOut'
 import UserAvatar from '@components/User/Avatar'
+import {useAuthState} from '@hooks/auth/useAuthState'
 
 export function Dropdown(): JSX.Element {
   const {user} = useAuthState()
   let timeOutId: NodeJS.Timeout
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
-  const onClickHandler = (): void => setIsOpen(prevState => !prevState)
+  const onClickHandler = (): void => setIsOpen(!isOpen)
 
   //* We close the popover on the next tick by using setTimeout.
   //* This is necessary because we need to first check if
@@ -33,7 +34,7 @@ export function Dropdown(): JSX.Element {
       onFocus={onFocusHandler}
     >
       <button
-        className='flex-initial'
+        className='relative inline-block flex-initial'
         onClick={onClickHandler}
         aria-haspopup='true'
         aria-expanded={isOpen}
@@ -41,18 +42,22 @@ export function Dropdown(): JSX.Element {
         <div className='w-8 h-8'>
           <UserAvatar image={user?.avatar} />
         </div>
+        {isOpen && (
+          <ul className='absolute flex flex-col h-auto min-w-min	w-auto bg-gray-800 border-2 p-2 rounded z-40 text-xs'>
+            <Link href={'/profile'}>
+              <a className='flex-initial text-white m-1 whitespace-nowrap'>
+                Your profile
+              </a>
+            </Link>
+            <Link href={'/settings'}>
+              <a className='flex-initial text-white m-1 whitespace-nowrap'>
+                Settings
+              </a>
+            </Link>
+            <SignOutButton />
+          </ul>
+        )}
       </button>
-      {isOpen && (
-        <ul className='absolute top-12 right-12 xl:right-16 flex flex-col h-auto w-auto bg-gray-800 border-2 p-2 rounded z-40 text-xs'>
-          <Link href={'/profile'}>
-            <a className='flex-initial text-white m-1'>Your profile</a>
-          </Link>
-          <Link href={'/settings'}>
-            <a className='flex-initial text-white m-1'>Settings</a>
-          </Link>
-          <SignOutButton />
-        </ul>
-      )}
     </nav>
   )
 }

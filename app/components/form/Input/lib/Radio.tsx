@@ -5,7 +5,7 @@ export const RadioInput = ({
   isPending,
 }: DrawerInputsType): JSX.Element => (
   <div className='mt-4'>
-    <p className='text-xl italic mb-1'>Match technologies:</p>
+    <p className='mb-1'>Match technologies:</p>
     <div className='flex flex-row'>
       <div className='m-1'>
         <input

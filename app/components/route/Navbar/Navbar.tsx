@@ -1,14 +1,15 @@
 import * as React from 'react'
-import {useRouter} from 'next/router'
+
+import {Dropdown} from '@components/route/Dropdown/Dropdown'
 import Link from 'next/link'
 import {useAuthState} from '@hooks/auth/useAuthState'
-import {Dropdown} from '@components/route/Dropdown/Dropdown'
+import {useRouter} from 'next/router'
 
 const Navbar = (): JSX.Element => {
   const {user} = useAuthState()
   const router = useRouter()
   return (
-    <nav className='fixed top-0 flex justify-between items-center h-16 w-screen bg-blue-800 text-white z-50'>
+    <nav className='fixed top-0 flex justify-between items-center h-12 xl:h-16 w-screen bg-blue-800 text-white z-50 px-20 xl:px-40'>
       <div className='inline-flex justify-evenly w-3/12'>
         <Link href='/'>
           <a className='flex-initial'>Logo</a>

@@ -30,8 +30,8 @@ const Home: NextPage<{data: Props}> = ({
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='h-92v'>
-        <section className='h-full py-12 xl:py-32 px-20 xl:px-40'>
-          <article className='h-1/3 w-full border-2 my-1 rounded'>
+        <section className='h-full py-12 px-20 xl:px-40'>
+          <article className='h-1/3 w-full border-2 my-2 rounded'>
             {/* <Image
               src=''
               alt='banner'
@@ -39,7 +39,7 @@ const Home: NextPage<{data: Props}> = ({
               height={300}
             /> */}
           </article>
-          <section className='h-2/3 w-full flex flex-col justify-evenly'>
+          <section className='h-auto w-full flex flex-col justify-evenly'>
             <Carousel>
               {projects.map(project => (
                 <ProjectFeed key={project.id} {...project} />
