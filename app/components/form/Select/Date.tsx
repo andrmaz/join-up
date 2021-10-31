@@ -5,7 +5,7 @@ export const DateSelect = ({
   isPending,
 }: DrawerInputsType): JSX.Element => (
   <div className='flex flex-col'>
-    <label htmlFor='sort-by-date' className='text-xl italic mb-1'>
+    <label htmlFor='sort-by-date' className='mb-1'>
       Sort by date
     </label>
     <select

@@ -1,8 +1,16 @@
+import * as React from 'react'
+
 import Head from 'next/head'
 import Link from 'next/link'
 import SigninForm from '@components/Form/Signin'
+import {useRouter} from 'next/router'
 
 const SignIn = (): JSX.Element => {
+  const router = useRouter()
+  React.useEffect(() => {
+    // Prefetch the home page
+    router.prefetch('/')
+  }, [router])
   return (
     <section className='h-min-screen pt-16'>
       <Head>
@@ -10,7 +18,7 @@ const SignIn = (): JSX.Element => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='h-92v container flex justify-center items-center'>
-        <section className='h-2/5 w-3/6 xl:w-2/6 border border-black rounded py-4 px-10'>
+        <section className='h-80 xl:h-96 w-2/4 xl:w-128 border border-black rounded py-4 px-10'>
           <header className='h-3/20 text-center'>
             <h1 className='text-3xl'>SignIn</h1>
           </header>

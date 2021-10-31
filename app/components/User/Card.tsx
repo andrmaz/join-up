@@ -1,11 +1,11 @@
-import UserAvatar from '@components/User/Avatar'
-import {FaUser, FaBitbucket, FaLinkedin} from 'react-icons/fa'
-import {FiGitlab} from 'react-icons/fi'
+import {FaBitbucket, FaLinkedin, FaUser} from 'react-icons/fa'
 import {GiOpenBook, GiTechnoHeart} from 'react-icons/gi'
-import {BsFillChatFill} from 'react-icons/bs'
-import {GrGithub} from 'react-icons/gr'
 
+import {BsFillChatFill} from 'react-icons/bs'
+import {FiGitlab} from 'react-icons/fi'
+import {GrGithub} from 'react-icons/gr'
 import type {IAuthUser} from 'app/types/user'
+import UserAvatar from '@components/User/Avatar'
 
 const UserCard = ({
   avatar,
@@ -19,7 +19,7 @@ const UserCard = ({
   linkedinURL,
 }: IAuthUser): JSX.Element => {
   return (
-    <section className='sticky top-44 h-70v p-1'>
+    <section className='sticky top-1/4 h-70v p-1'>
       <div className='h-auto w-full mb-10'>
         <UserAvatar image={avatar} />
       </div>

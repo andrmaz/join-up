@@ -8,7 +8,7 @@ const PositionContents = ({
   qualifications,
   technologies,
 }: IPositionData): JSX.Element => (
-  <main className='h-5/6'>
+  <main className='h-96 xl:h-auto'>
     <header className='h-1/6 w-full'>
       <h1 className='font-extrabold text-xl'>{title}</h1>
     </header>
@@ -25,11 +25,11 @@ const PositionContents = ({
     <article className='h-3/6'>
       <div className='h-auto'>
         <h3 className='font-extrabold	'>What you&apos;ll do</h3>
-        <p className='h-4/6 text-sm'>{duties}</p>
+        <p className='h-4/6 text-xs xl:text-sm'>{duties}</p>
       </div>
       <div className='h-auto'>
         <h3 className='font-extrabold	'>Basic qualifications</h3>
-        <p className='h-4/6 text-sm'>{qualifications}</p>
+        <p className='h-4/6 text-xs xl:text-sm'>{qualifications}</p>
       </div>
     </article>
     <article className='h-1/6 py-2'>
