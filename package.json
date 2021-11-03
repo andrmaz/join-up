@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@types/node": "^15.14.9",
-    "@types/react": "^17.0.33",
+    "@types/react": "^17.0.34",
     "axios": "^0.24.0",
     "next": "11.1.2",
     "react": "17.0.2",
