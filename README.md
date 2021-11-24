@@ -13,8 +13,9 @@ A platform to help developers find projects and collaborators to work with
 Project is created with:
 
 - nodejs version: ^14.17.4,
-- nextjs version: ^11.1.2,
+- nextjs version: ^12.0.4,
 - typescript version: ^4.4.3,
+- tailwindcss: ^2.2.19
 
 ## Setup
 
