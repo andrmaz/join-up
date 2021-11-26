@@ -5,7 +5,7 @@ import {QueryClient, QueryClientProvider} from 'react-query'
 import type {AppProps} from 'next/app'
 import {AuthProvider} from '@providers/AuthProvider'
 import {FetchProvider} from '@providers/FetchProvider'
-import Navbar from '@components/route/Navbar/Navbar'
+import Navbar from '@components/Navbar/Navbar'
 import {PositionProvider} from '@providers/PositionProvider'
 import {ProjectProvider} from '@providers/ProjectProvider'
 import {SnackbarProvider} from '@providers/SnackbarProvider'
@@ -15,7 +15,7 @@ import {webVitals} from '@utils/vitals'
 export const reportWebVitals = webVitals
 
 //* the module will be dynamically loaded by the page in the browser
-const DynamicComponent = dynamic(() => import('@components/lib/Root/Root'))
+const DynamicComponent = dynamic(() => import('@lib/Root/Root'))
 
 const queryClient = new QueryClient()
 

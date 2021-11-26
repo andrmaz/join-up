@@ -1,20 +1,17 @@
-import {useForm} from 'react-hook-form'
-import {useAuthState} from '@hooks/auth/useAuthState'
-
-import UserAvatar from '@components/User/Avatar'
-import GitHubInput from '@components/form/Input/user/GitHub'
-import GitLabInput from '@components/form/Input/user/GitLab'
-import BitBucketInput from '@components/form/Input/user/BitBucket'
-import LinkedInInput from '@components/form/Input/user/LinkedIn'
-
-import LangSelect from '@components/form/Select/Lang'
-import TechSelect from '@components/form/Select/Tech'
-import Textarea from '@components/form/Textarea/Textarea'
-import {SubmitButton} from '@components/form/Button/Submit'
-import CancelButton from '@components/form/Button/Cancel'
-
+import BitBucketInput from '@components/Input/BitBucket'
+import CancelButton from '@lib/Button/Cancel'
+import GitHubInput from '@components/Input/GitHub'
+import GitLabInput from '@components/Input/GitLab'
 import type {IAuthUser} from 'app/types/user'
+import LangSelect from '@components/Select/Lang'
+import LinkedInInput from '@components/Input/LinkedIn'
+import {SubmitButton} from '@lib/Button/Submit'
+import TechSelect from '@components/Select/Tech'
+import Textarea from '@components/Textarea/Textarea'
+import UserAvatar from '@screens/User/Avatar'
 import type {UserResponseType} from 'app/types/response'
+import {useAuthState} from '@hooks/auth/useAuthState'
+import {useForm} from 'react-hook-form'
 
 const ProfileForm = ({
   onSubmit,

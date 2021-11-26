@@ -2,7 +2,7 @@ import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next'
 import {handleAxiosError, handleUnexpectedError} from '@utils/errors'
 
 import ApplicationFeed from '@components/Feed/Application'
-import Carousel from '@components/lib/Carousel/Carousel'
+import Carousel from '@lib/Carousel/Carousel'
 import Head from 'next/head'
 import type {IApplicationData} from 'app/types/application'
 import type {IPositionData} from 'app/types/position'

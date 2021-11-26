@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {ConfirmDialog} from '@components/lib/Dialog/Confirm'
+import {ConfirmDialog} from '@lib/Dialog/Confirm'
 import useRemoveProject from '@hooks/project/useRemoveProject'
 
 const RemoveProjectForm = ({id}: {id: number}): JSX.Element => {

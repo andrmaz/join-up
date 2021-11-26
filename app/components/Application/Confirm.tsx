@@ -1,9 +1,9 @@
 import * as React from 'react'
 
 import {CreateApplicationForm} from '@containers/create/Application'
-import ModalContents from '@components/lib/Modal/Contents'
+import ModalContents from '@lib/Modal/Contents'
 import {ModalProvider} from '@providers/ModalProvider'
-import {OpenButton} from '@components/lib/Modal/OpenButton'
+import {OpenButton} from '@lib/Modal/OpenButton'
 
 const ConfirmApplication = ({id}: {id: number}): JSX.Element => (
   <ModalProvider>

@@ -1,12 +1,10 @@
-import {useForm} from 'react-hook-form'
-
-import UsernameInput from '@components/form/Input/user/Username'
-import PasswordInput from '@components/form/Input/user/Password'
-import {SubmitButton} from '@components/form/Button/Submit'
-import CancelButton from '@components/form/Button/Cancel'
-
+import CancelButton from '@lib/Button/Cancel'
 import type {IEditUsername} from 'app/types/user'
+import PasswordInput from '@components/Input/Password'
+import {SubmitButton} from '@lib/Button/Submit'
 import type {UserResponseType} from 'app/types/response'
+import UsernameInput from '@components/Input/Username'
+import {useForm} from 'react-hook-form'
 
 const UsernameForm = ({
   onSubmit,
