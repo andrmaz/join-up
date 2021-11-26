@@ -1,21 +1,18 @@
 import * as React from 'react'
 
-import useAsync from '@hooks/async/useAsync'
-import {useFetchContext} from '@hooks/fetch/useFetchContext'
-
-import type {NestedStringsType} from 'app/types/project'
-import {AxiosResponse} from 'axios'
-
-import type {AsyncStateType} from 'app/types/async'
 import type {
   FetchProjectsResponseType,
   ProjectsResponseType,
 } from 'app/types/response'
 
+import type {AsyncStateType} from 'app/types/async'
+import {AxiosResponse} from 'axios'
+import {FieldValues} from 'app/types/components'
+import useAsync from '@hooks/async/useAsync'
+import {useFetchContext} from '@hooks/fetch/useFetchContext'
+
 export default function useProjects(
-  fields: {
-    [x: string]: NestedStringsType
-  },
+  fields: FieldValues,
   initialState?: AsyncStateType<ProjectsResponseType>
 ): FetchProjectsResponseType {
   const {date, match, available, technologies} = fields

@@ -6,7 +6,7 @@ export interface IDrawerProps {
   register: React.Ref<T>
   isPending: boolean
   setValue: (
-    name: string,
+    name: keyof FieldValues,
     value: unknown,
     config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
   ) => void
@@ -17,6 +17,13 @@ export interface IDrawerProps {
 export type DrawerInputsType = {
   register: React.Ref<T>
   isPending: boolean
+}
+
+export interface FieldValues {
+  technologies: NestedStringsType
+  date: 'datedesc' | 'dateasc'
+  available: boolean
+  match?: 'all' | 'any'
 }
 
 //* Menu
