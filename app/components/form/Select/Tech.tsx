@@ -1,11 +1,11 @@
 import * as React from 'react'
-import Select from 'react-select'
+
+import type {IFormSelect, SelectOptionsType} from 'app/types/form'
 
 import {Controller} from 'react-hook-form'
-import useTechnologies from '@hooks/options/useTechnologies'
-
 import ErrorMessage from '@components/lib/Message/Error'
-import type {IFormSelect, SelectOptionsType} from 'app/types/form'
+import Select from 'react-select'
+import useTechnologies from '@hooks/options/useTechnologies'
 
 const TechSelect = ({
   control,
@@ -16,7 +16,10 @@ const TechSelect = ({
   defaultValue,
   id,
 }: IFormSelect): React.ReactElement => {
-  const options = useTechnologies(id)
+  const {isError, error, data} = useTechnologies(id)
+  if (isError) {
+    return <ErrorMessage>{error?.message}</ErrorMessage>
+  }
   return (
     <React.Fragment>
       <label id='technologies' htmlFor='technologies'>
@@ -40,7 +43,7 @@ const TechSelect = ({
             defaultValue={defaultValue ? defaultValue : value}
             closeMenuOnSelect={false}
             isMulti
-            options={options}
+            options={data}
             getOptionValue={option => option['id']}
             placeholder='Choose your tech stack'
             blurInputOnSelect={false}
