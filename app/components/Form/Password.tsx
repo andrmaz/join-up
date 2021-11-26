@@ -1,12 +1,10 @@
-import {useForm} from 'react-hook-form'
-
-import FormInput from '@components/form/Input/lib/Form'
-import PasswordInput from '@components/form/Input/user/Password'
-import {SubmitButton} from '@components/form/Button/Submit'
-import CancelButton from '@components/form/Button/Cancel'
-
+import CancelButton from '@lib/Button/Cancel'
+import FormInput from '@lib/Input/Form'
 import type {IEditPassword} from 'app/types/user'
+import PasswordInput from '@components/Input/Password'
 import {StatusResponseType} from 'app/types/response'
+import {SubmitButton} from '@lib/Button/Submit'
+import {useForm} from 'react-hook-form'
 
 const PasswordForm = ({
   onSubmit,

@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import type {ChildrenPropsType} from 'app/types/modal'
-import SnackBar from '@components/lib/SnackBar/SnackBar'
+import SnackBar from '@lib/SnackBar/SnackBar'
 import {SnackbarContext} from '@context/snackbarContext'
 
 const timeout = 5000

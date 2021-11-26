@@ -1,15 +1,14 @@
 import * as React from 'react'
-import {useForm} from 'react-hook-form'
 
-import TitleInput from '@components/form/Input/lib/Title'
-import TextInput from '@components/form/Input/lib/Text'
-import UrlInput from '@components/form/Input/project/Url'
-import TechSelect from '@components/form/Select/Tech'
-import {SubmitButton} from '@components/form/Button/Submit'
-import FocusRefButton from '@components/form/Button/FocusRef'
-
-import type {IProjectInput} from 'app/types/project'
+import FocusRefButton from '@lib/Button/FocusRef'
 import type {IProjectForm} from 'app/types/form'
+import type {IProjectInput} from 'app/types/project'
+import {SubmitButton} from '@lib/Button/Submit'
+import TechSelect from '@components/Select/Tech'
+import TextInput from '@lib/Input/Text'
+import TitleInput from '@lib/Input/Title'
+import UrlInput from '@components/Input/Url'
+import {useForm} from 'react-hook-form'
 
 const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
   const {register, handleSubmit, errors, control, setValue, reset} =

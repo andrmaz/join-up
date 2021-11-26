@@ -68,6 +68,12 @@
       ],
       "@api/*": [
         "app/api/*"
+      ],
+      "@lib/*": [
+        "app/lib/*"
+      ],
+      "@screens/*": [
+        "app/screens/*"
       ]
     },
     "typeRoots": [

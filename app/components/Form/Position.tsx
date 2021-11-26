@@ -1,17 +1,14 @@
-import {useForm} from 'react-hook-form'
-
-import TitleInput from '@components/form/Input/lib/Title'
-import TextInput from '@components/form/Input/lib/Text'
-import VacancyInput from '@components/form/Input/position/Vacancy'
-
-import TechSelect from '@components/form/Select/Tech'
-import LevelSelect from '@components/form/Select/Level'
-import RoleSelect from '@components/form/Select/Role'
-import {SubmitButton} from '@components/form/Button/Submit'
-import FocusRefButton from '@components/form/Button/FocusRef'
-
-import type {IPositionInput} from 'app/types/position'
+import FocusRefButton from '@lib/Button/FocusRef'
 import type {IPositionForm} from 'app/types/form'
+import type {IPositionInput} from 'app/types/position'
+import LevelSelect from '@components/Select/Level'
+import RoleSelect from '@components/Select/Role'
+import {SubmitButton} from '@lib/Button/Submit'
+import TechSelect from '@components/Select/Tech'
+import TextInput from '@lib/Input/Text'
+import TitleInput from '@lib/Input/Title'
+import VacancyInput from '@components/Input/Vacancy'
+import {useForm} from 'react-hook-form'
 
 const PositionForm = ({id, onSubmit, position}: IPositionForm): JSX.Element => {
   const {register, handleSubmit, control, setValue, reset, errors} =

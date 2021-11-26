@@ -2,9 +2,9 @@ import * as React from 'react'
 
 import {GetServerSideProps, NextPage} from 'next'
 
-import Drawer from '@components/lib/Drawer/Drawer'
+import Drawer from '@components/Drawer/Drawer'
 import Head from 'next/head'
-import ProjectsGrid from '@components/Project/Grid'
+import ProjectsGrid from '@screens/Project/Grid'
 import checkAuth from '@utils/auth'
 import {useForm} from 'react-hook-form'
 import useProjects from '@hooks/projects/useProjects'

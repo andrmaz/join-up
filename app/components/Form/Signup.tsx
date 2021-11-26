@@ -1,22 +1,19 @@
+import BitBucketInput from '@components/Input/BitBucket'
+import EmailInput from '@components/Input/Email'
+import FormInput from '@lib/Input/Form'
+import GitHubInput from '@components/Input/GitHub'
+import GitLabInput from '@components/Input/GitLab'
+import type {ISignupInputs} from 'app/types/user'
+import LangSelect from '@components/Select/Lang'
 import Link from 'next/link'
-
+import LinkedInInput from '@components/Input/LinkedIn'
+import PasswordInput from '@components/Input/Password'
+import {SubmitButton} from '@lib/Button/Submit'
+import TechSelect from '@components/Select/Tech'
+import Textarea from '@components/Textarea/Textarea'
+import UsernameInput from '@components/Input/Username'
 import {useForm} from 'react-hook-form'
 import useUserRegister from '@hooks/user/useUserRegister'
-
-import FormInput from '@components/form/Input/lib/Form'
-import UsernameInput from '@components/form/Input/user/Username'
-import EmailInput from '@components/form/Input/user/Email'
-import PasswordInput from '@components/form/Input/user/Password'
-import GitHubInput from '@components/form/Input/user/GitHub'
-import GitLabInput from '@components/form/Input/user/GitLab'
-import BitBucketInput from '@components/form/Input/user/BitBucket'
-import LinkedInInput from '@components/form/Input/user/LinkedIn'
-import LangSelect from '@components/form/Select/Lang'
-import TechSelect from '@components/form/Select/Tech'
-import Textarea from '@components/form/Textarea/Textarea'
-import {SubmitButton} from '@components/form/Button/Submit'
-
-import type {ISignupInputs} from 'app/types/user'
 
 const SignupForm = (): JSX.Element => {
   const {register, handleSubmit, watch, errors, control, setValue} =
