@@ -3,6 +3,7 @@ import * as React from 'react'
 import {GetServerSideProps, NextPage} from 'next'
 
 import Drawer from '@components/Drawer/Drawer'
+import type {FieldValues} from 'app/types/components'
 import Head from 'next/head'
 import ProjectsGrid from '@screens/Project/Grid'
 import checkAuth from '@utils/auth'
@@ -10,8 +11,7 @@ import {useForm} from 'react-hook-form'
 import useProjects from '@hooks/projects/useProjects'
 
 const Projects: NextPage = () => {
-  //TODO: Infer Input Type (NestedValue)
-  const {control, register, watch, setValue} = useForm()
+  const {control, register, watch, setValue} = useForm<FieldValues>()
   //* watching every fields in the form
   const fields = watch()
   //* fetching project according to the fields
