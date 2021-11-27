@@ -9,7 +9,7 @@ const RemoveProjectForm = ({id}: {id: number}): JSX.Element => {
     <ConfirmDialog
       handleConfirm={handleConfirm}
       message=' Are you sure you want delete this project?'
-      btnColor='red'
+      variant='danger'
     />
   )
 }

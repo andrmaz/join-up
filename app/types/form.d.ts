@@ -68,7 +68,7 @@ export type SubmitButtonType = {
 export type ConfirmButtonType = {
   children?: string
   errors?: boolean
-  bgColor?: string
+  variant: 'success' | 'danger'
   onClick: () => void
 }
 

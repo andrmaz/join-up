@@ -6,7 +6,7 @@ import useModalContext from '@hooks/modal/useModalContext'
 const ConfirmDialog = ({
   handleConfirm,
   message,
-  btnColor,
+  variant = 'success',
 }: ConfirmDialogType): JSX.Element => {
   const {setIsOpen} = useModalContext()
   return (
@@ -17,7 +17,7 @@ const ConfirmDialog = ({
         </span>
       </div>
       <div className='w-full h-1/3 flex'>
-        <ConfirmButton onClick={handleConfirm} bgColor={btnColor} />
+        <ConfirmButton onClick={handleConfirm} variant={variant} />
         <FocusRefButton onClick={() => setIsOpen(false)} />
       </div>
     </main>

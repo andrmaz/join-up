@@ -53,5 +53,5 @@ export interface IMenuPanel {
 export type ConfirmDialogType = {
   handleConfirm: () => void
   message: string
-  btnColor?: string
+  variant?: 'success' | 'danger'
 }

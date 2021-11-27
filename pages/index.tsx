@@ -66,26 +66,27 @@ const Home: NextPage<{data: Props}> = ({
 
 export default Home
 
-export const getServerSideProps: GetServerSideProps<{data: Props}> =
-  async context => {
-    try {
-      const {data} = await privateFetch(context).get('/feed')
-      return {props: {data}}
-    } catch (error: any) {
-      if (axios.isAxiosError(error)) {
-        handleAxiosError(error)
-        if (error?.response?.status === 401) {
-          console.log('Redirect')
-          return {
-            redirect: {
-              destination: '/signin',
-              permanent: false,
-            },
-          }
+export const getServerSideProps: GetServerSideProps<{
+  data: Props
+}> = async context => {
+  try {
+    const {data} = await privateFetch(context).get('/feed')
+    return {props: {data}}
+  } catch (error: any) {
+    if (axios.isAxiosError(error)) {
+      handleAxiosError(error)
+      if (error?.response?.status === 401) {
+        console.log('Redirect')
+        return {
+          redirect: {
+            destination: '/signin',
+            permanent: false,
+          },
         }
-      } else {
-        handleUnexpectedError(error)
       }
-      return Promise.reject(error.toJSON())
+    } else {
+      handleUnexpectedError(error)
     }
+    return Promise.reject(error.toJSON())
   }
+}
