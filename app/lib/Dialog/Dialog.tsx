@@ -1,13 +1,13 @@
-import {ConfirmButton} from '@lib/Button/Confirm'
-import type {ConfirmDialogType} from 'app/types/components'
-import FocusRefButton from '@lib/Button/FocusRef'
+import Button from '@lib/Button'
+import type {DialogType} from 'app/types/components'
+import FocusButton from '@components/Button/Focus'
 import useModalContext from '@hooks/modal/useModalContext'
 
-const ConfirmDialog = ({
+const Dialog = ({
   handleConfirm,
   message,
   variant = 'success',
-}: ConfirmDialogType): JSX.Element => {
+}: DialogType): JSX.Element => {
   const {setIsOpen} = useModalContext()
   return (
     <main>
@@ -17,11 +17,11 @@ const ConfirmDialog = ({
         </span>
       </div>
       <div className='w-full h-1/3 flex'>
-        <ConfirmButton onClick={handleConfirm} variant={variant} />
-        <FocusRefButton onClick={() => setIsOpen(false)} />
+        <Button onClick={handleConfirm} variant={variant} />
+        <FocusButton onClick={() => setIsOpen(false)} />
       </div>
     </main>
   )
 }
 
-export {ConfirmDialog}
+export default Dialog

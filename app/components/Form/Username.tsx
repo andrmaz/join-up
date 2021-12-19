@@ -1,7 +1,7 @@
-import CancelButton from '@lib/Button/Cancel'
+import Button from '@lib/Button'
 import type {IEditUsername} from 'app/types/user'
+import {InputSubmit} from '@lib/Input/Submit'
 import PasswordInput from '@components/Input/Password'
-import {SubmitButton} from '@lib/Button/Submit'
 import type {UserResponseType} from 'app/types/response'
 import UsernameInput from '@components/Input/Username'
 import {useForm} from 'react-hook-form'
@@ -23,9 +23,9 @@ const UsernameForm = ({
         <PasswordInput id='username-pwd' register={register} errors={errors} />
       </article>
       <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
-        <CancelButton onClick={() => reset()} />
+        <Button onClick={() => reset()}>Cancel</Button>
         <div className='w-16 p-1'>
-          <SubmitButton
+          <InputSubmit
             value='Save'
             bgColor='green-600'
             errors={Boolean(errors.newUsername || errors.password)}

@@ -89,6 +89,8 @@
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "app/**/*.stories.@(js|jsx|ts|tsx)",
+    "app/**/*.stories.mdx"
   ]
 }

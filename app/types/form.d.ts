@@ -38,6 +38,12 @@ export type FormInputType = {
   errors?: DeepMap<T, FieldError>
 }
 
+export type InputSubmitType = {
+  value?: string
+  errors?: boolean
+  bgColor?: string
+}
+
 //* Selects
 export type SelectOptionsType = {id: number; label: string}
 
@@ -59,17 +65,12 @@ export interface IPositionSelect {
 }
 
 //*Buttons
-export type SubmitButtonType = {
-  value?: string
-  errors?: boolean
-  bgColor?: string
-}
-
-export type ConfirmButtonType = {
+export type ButtonType = {
   children?: string
   errors?: boolean
-  variant: 'success' | 'danger'
+  variant?: 'success' | 'danger' | 'base'
   onClick: () => void
+  onKeyDown?: () => void | undefined
 }
 
 //* Forms
