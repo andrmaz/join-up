@@ -12,10 +12,12 @@ const customJestConfig = {
   moduleDirectories: ['node_modules', 'utils', '<rootDir>/'],
   // We recommend placing the extensions most commonly used in your project on the left
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  modulePathIgnorePatterns: ['<rootDir>/dist/'],
+  testPathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/node_modules/'],
   testEnvironment: 'jest-environment-jsdom',
   // Resolve Typescript paths
   moduleNameMapper: {
-    'faker': '@faker-js/faker',
+    faker: '@faker-js/faker',
     '@pages/(.*)': '<rootDir>/pages/$1',
     '@components/(.*)': '<rootDir>/app/components/$1',
     '@utils/(.*)': '<rootDir>/app/utils/$1',
