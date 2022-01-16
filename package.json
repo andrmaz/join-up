@@ -17,6 +17,7 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@types/faker": "^5.5.9",
     "@types/node": "^15.14.9",
     "@types/react": "^17.0.38",
     "axios": "^0.24.0",
@@ -30,6 +31,7 @@
     "typescript": "^4.5.4"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.3",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@types/react-select": "^4.0.18",

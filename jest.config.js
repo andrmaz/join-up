@@ -10,8 +10,12 @@ const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/config/jest.setup.js'],
   // if using TypeScript with a baseUrl set to the root directory then you need the below for alias' to work
   moduleDirectories: ['node_modules', 'utils', '<rootDir>/'],
+  // We recommend placing the extensions most commonly used in your project on the left
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   testEnvironment: 'jest-environment-jsdom',
+  // Resolve Typescript paths
   moduleNameMapper: {
+    'faker': '@faker-js/faker',
     '@pages/(.*)': '<rootDir>/pages/$1',
     '@components/(.*)': '<rootDir>/app/components/$1',
     '@utils/(.*)': '<rootDir>/app/utils/$1',
@@ -27,6 +31,8 @@ const customJestConfig = {
     '@data/(.*)': '<rootDir>/app/data/$1',
   },
 }
+
+/* Cleanup is called after each test automatically by default */
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
 module.exports = createJestConfig(customJestConfig)
