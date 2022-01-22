@@ -1,3 +1,5 @@
+![CodeQL](https://github.com/andrmaz/grapevine/actions/workflows/codeql-analysis.yml/badge.svg)
+
 ## Table of contents
 
 - [General info](#general-info)
