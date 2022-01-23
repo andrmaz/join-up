@@ -6,6 +6,9 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [development]
+    paths:
+      - 'app/**'
+      - 'pages/**'
   schedule:
     - cron: '28 15 * * 4'
 
