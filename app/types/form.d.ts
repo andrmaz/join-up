@@ -15,7 +15,7 @@ type RegisterType = (ref: (FieldElement<T> & React.Ref) | null) => void
 export interface IFormInput {
   id: string
   name: string
-  type: string
+  type: React.HTMLInputTypeAttribute
   label: string
   placeholder: string
   register: RegisterType

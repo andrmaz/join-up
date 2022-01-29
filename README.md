@@ -1,3 +1,6 @@
+![CodeQL](https://github.com/andrmaz/grapevine/actions/workflows/codeql-analysis.yml/badge.svg)
+[![build and test](https://github.com/swapout/client/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/swapout/client/actions/workflows/build-and-test.yml)
+
 ## Table of contents
 
 - [General info](#general-info)
