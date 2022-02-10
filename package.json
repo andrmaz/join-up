@@ -33,7 +33,7 @@
     "typescript": "^4.5.5"
   },
   "devDependencies": {
-    "@faker-js/faker": "^6.0.0-alpha.5",
+    "@faker-js/faker": "^6.0.0-alpha.6",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@types/react-select": "^4.0.18",
