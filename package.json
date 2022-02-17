@@ -23,7 +23,7 @@
     "@types/node": "^15.14.9",
     "@types/react": "^17.0.39",
     "axios": "^0.26.0",
-    "next": "^12.0.10",
+    "next": "^12.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^6.15.8",
