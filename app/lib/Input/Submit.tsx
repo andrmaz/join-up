@@ -1,10 +1,10 @@
-import type {SubmitButtonType} from 'app/types/form'
+import type {InputSubmitType} from 'app/types/form'
 
-export const SubmitButton = ({
+export const InputSubmit = ({
   value = 'Submit',
   errors = false,
   bgColor = 'blue-800',
-}: SubmitButtonType): JSX.Element => (
+}: InputSubmitType): JSX.Element => (
   <input
     type='submit'
     value={value}

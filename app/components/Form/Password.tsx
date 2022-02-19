@@ -1,9 +1,9 @@
-import CancelButton from '@lib/Button/Cancel'
+import Button from '@lib/Button'
 import FormInput from '@lib/Input/Form'
 import type {IEditPassword} from 'app/types/user'
+import {InputSubmit} from '@lib/Input/Submit'
 import PasswordInput from '@components/Input/Password'
 import {StatusResponseType} from 'app/types/response'
-import {SubmitButton} from '@lib/Button/Submit'
 import {useForm} from 'react-hook-form'
 
 const PasswordForm = ({
@@ -49,9 +49,9 @@ const PasswordForm = ({
         />
       </article>
       <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
-        <CancelButton onClick={() => reset()} />
+        <Button onClick={() => reset()}>Cancel</Button>
         <div className='w-16 p-1'>
-          <SubmitButton
+          <InputSubmit
             value='Save'
             bgColor='green-600'
             errors={Boolean(

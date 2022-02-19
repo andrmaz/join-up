@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-import FocusRefButton from '@lib/Button/FocusRef'
+import FocusRefButton from '@components/Button/Focus'
 import type {IProjectForm} from 'app/types/form'
 import type {IProjectInput} from 'app/types/project'
-import {SubmitButton} from '@lib/Button/Submit'
+import {InputSubmit} from '@lib/Input/Submit'
 import TechSelect from '@components/Select/Tech'
 import TextInput from '@lib/Input/Text'
 import TitleInput from '@lib/Input/Title'
@@ -54,7 +54,7 @@ const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
       />
       <div className='h-1/6 flex items-end'>
         <div className='w-16 p-1'>
-          <SubmitButton
+          <InputSubmit
             value='Save'
             bgColor='green-600'
             errors={Boolean(

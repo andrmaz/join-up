@@ -1,9 +1,9 @@
-import FocusRefButton from '@lib/Button/FocusRef'
+import FocusRefButton from '@components/Button/Focus'
 import type {IPositionForm} from 'app/types/form'
 import type {IPositionInput} from 'app/types/position'
+import {InputSubmit} from '@lib/Input/Submit'
 import LevelSelect from '@components/Select/Level'
 import RoleSelect from '@components/Select/Role'
-import {SubmitButton} from '@lib/Button/Submit'
 import TechSelect from '@components/Select/Tech'
 import TextInput from '@lib/Input/Text'
 import TitleInput from '@lib/Input/Title'
@@ -61,7 +61,7 @@ const PositionForm = ({id, onSubmit, position}: IPositionForm): JSX.Element => {
       </div>
       <div className='h-1/10 flex'>
         <div className='w-16 p-1'>
-          <SubmitButton
+          <InputSubmit
             value='Save'
             bgColor='green-600'
             errors={Boolean(

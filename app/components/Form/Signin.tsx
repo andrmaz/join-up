@@ -1,7 +1,7 @@
 import EmailInput from '@components/Input/Email'
 import type {ISigninInputs} from 'app/types/user'
+import {InputSubmit} from '@lib/Input/Submit'
 import PasswordInput from '@components/Input/Password'
-import {SubmitButton} from '@lib/Button/Submit'
 import {useForm} from 'react-hook-form'
 import useUserLogin from '@hooks/user/useUserLogin'
 
@@ -15,7 +15,7 @@ const SigninForm = (): JSX.Element => {
     >
       <EmailInput register={register} errors={errors} />
       <PasswordInput register={register} errors={errors} />
-      <SubmitButton
+      <InputSubmit
         value='SignIn'
         errors={Boolean(errors.email || errors.password)}
       />

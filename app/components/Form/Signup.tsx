@@ -4,11 +4,11 @@ import FormInput from '@lib/Input/Form'
 import GitHubInput from '@components/Input/GitHub'
 import GitLabInput from '@components/Input/GitLab'
 import type {ISignupInputs} from 'app/types/user'
+import {InputSubmit} from '@lib/Input/Submit'
 import LangSelect from '@components/Select/Lang'
 import Link from 'next/link'
 import LinkedInInput from '@components/Input/LinkedIn'
 import PasswordInput from '@components/Input/Password'
-import {SubmitButton} from '@lib/Button/Submit'
 import TechSelect from '@components/Select/Tech'
 import Textarea from '@components/Textarea/Textarea'
 import UsernameInput from '@components/Input/Username'
@@ -62,7 +62,7 @@ const SignupForm = (): JSX.Element => {
       <article className='h-1/5 flex items-center'>
         <aside className='flex flex-row h-1/3 w-full justify-between'>
           <div className='h-full w-1/3'>
-            <SubmitButton
+            <InputSubmit
               value='SignUp'
               errors={Boolean(
                 errors.username ||

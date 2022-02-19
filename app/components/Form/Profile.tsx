@@ -1,11 +1,11 @@
 import BitBucketInput from '@components/Input/BitBucket'
-import CancelButton from '@lib/Button/Cancel'
+import Button from '@lib/Button'
 import GitHubInput from '@components/Input/GitHub'
 import GitLabInput from '@components/Input/GitLab'
 import type {IAuthUser} from 'app/types/user'
+import {InputSubmit} from '@lib/Input/Submit'
 import LangSelect from '@components/Select/Lang'
 import LinkedInInput from '@components/Input/LinkedIn'
-import {SubmitButton} from '@lib/Button/Submit'
 import TechSelect from '@components/Select/Tech'
 import Textarea from '@components/Textarea/Textarea'
 import UserAvatar from '@screens/User/Avatar'
@@ -69,7 +69,7 @@ const ProfileForm = ({
       </article>
       <Textarea register={register} defaultValue={user?.bio} />
       <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
-        <CancelButton
+        <Button
           onClick={() => {
             reset({
               githubURL: '',
@@ -79,9 +79,11 @@ const ProfileForm = ({
               bio: '',
             })
           }}
-        />
+        >
+          Cancel
+        </Button>
         <div className='w-16 p-1'>
-          <SubmitButton
+          <InputSubmit
             value='Save'
             bgColor='green-600'
             errors={Boolean(errors.languages || errors.technologies)}

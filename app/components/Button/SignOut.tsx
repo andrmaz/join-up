@@ -3,7 +3,7 @@ import {publicFetch} from '@utils/fetch'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {useRouter} from 'next/router'
 
-export const SignOutButton = (): JSX.Element => {
+const SignOutButton = (): JSX.Element => {
   const dispatch = useAuthDispatch()
   const router = useRouter()
   async function signOut(): Promise<void> {
@@ -18,3 +18,5 @@ export const SignOutButton = (): JSX.Element => {
     </button>
   )
 }
+
+export default SignOutButton
