@@ -3,7 +3,7 @@ import * as React from 'react'
 import type {IPositionData} from 'app/types/position'
 import Link from 'next/link'
 
-export default function PositionFeed(props: IPositionData): JSX.Element {
+function PositionFeed(props: IPositionData): JSX.Element {
   return (
     <li className='h-full min-w-1/4 border-2 v-1 mx-1 p-2 rounded'>
       <Link href={`/projects/${props.projectId}`} passHref replace>
@@ -16,3 +16,5 @@ export default function PositionFeed(props: IPositionData): JSX.Element {
     </li>
   )
 }
+
+export {PositionFeed}

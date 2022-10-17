@@ -6,7 +6,7 @@ import type {LanguagesResponseType} from 'app/types/response'
 import type {SelectOptionsType} from 'app/types/form'
 import {publicFetch} from '@utils/fetch'
 
-export default function useLanguages(): SelectOptionsType[] {
+export default function useLanguages(): readonly [SelectOptionsType[]] {
   const [options, setOptions] = React.useState<SelectOptionsType[]>([])
   React.useEffect(() => {
     let cancel: Canceler
@@ -21,17 +21,16 @@ export default function useLanguages(): SelectOptionsType[] {
         )
         const {languages} = response.data
         setOptions(languages)
-        return Promise.resolve(languages)
-      } catch (thrown: any) {
-        if (axios.isCancel(thrown)) {
-          return thrown.message
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log('Request canceled', error)
         } else {
-          return Promise.reject(thrown)
+          throw error
         }
       }
     })()
     //* cancel the request
     return () => cancel()
   }, [])
-  return options
+  return [options] as const
 }

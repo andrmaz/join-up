@@ -8,7 +8,7 @@ import checkAuth from '@utils/auth'
 import useAddProject from '@hooks/project/useAddProject'
 
 const Project = (): JSX.Element => {
-  const onSubmit = useAddProject()
+  const [onSubmit] = useAddProject()
   return (
     <section className='h-min-screen pt-16'>
       <Head>

@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "join-up",
   "version": "0.1.0",
   "private": true,
   "engineStrict": true,
@@ -36,13 +36,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
+    "@faker-js/faker": "^7.6.0",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-links": "^6.5.10",
     "@storybook/builder-webpack5": "^6.5.10",
     "@storybook/manager-webpack5": "^6.5.10",
     "@storybook/react": "^6.5.10",
-    "@faker-js/faker": "^6.3.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
     "@types/react-select": "^4.0.18",

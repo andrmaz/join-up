@@ -1,12 +1,11 @@
+import type {RemoveProjectResponseType} from 'app/types/response'
 import {useFetchContext} from '@hooks/fetch/useFetchContext'
 import useModalContext from '@hooks/modal/useModalContext'
 import {useProjectContext} from '@hooks/project/useProjectContext'
 
-import type {RemoveProjectResponseType} from 'app/types/response'
-
 export default function useRemoveProject(
   id: number
-): () => Promise<RemoveProjectResponseType> {
+): readonly [() => Promise<RemoveProjectResponseType>] {
   const {remove} = useProjectContext()
   const fetchContext = useFetchContext()
   const {setIsOpen} = useModalContext()
@@ -26,5 +25,5 @@ export default function useRemoveProject(
       return Promise.reject(error)
     }
   }
-  return handleConfirm
+  return [handleConfirm] as const
 }

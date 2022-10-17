@@ -40,5 +40,5 @@ export const useTabsKey = (
       handleNextTab(first, next, tabCount)
     }
   }
-  return [handleKeyPress, tabRef] //as const
+  return [handleKeyPress, tabRef] as const
 }

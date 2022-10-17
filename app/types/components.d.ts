@@ -55,3 +55,8 @@ export type DialogType = {
   message: string
   variant?: 'success' | 'danger'
 }
+
+//* Button
+export interface ICloseButton {
+  onClick: () => void
+}

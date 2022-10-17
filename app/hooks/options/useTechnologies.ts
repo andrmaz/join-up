@@ -14,5 +14,5 @@ export default function useTechnologies(id?: number): {
     cacheTime: 604800000, // 1 week
     staleTime: 604800000, // 1 week
   })
-  return {isError, data, error}
+  return {isError, data, error} as const
 }

@@ -1,4 +1,4 @@
-export type ChildrenPropsType = React.PropsWithChildren<React.ReactNode>
+export type ChildrenPropsType = React.PropsWithChildren<Record<string, unknown>>
 
 export type ModalDispatchType = React.Dispatch<React.SetStateAction<boolean>>
 

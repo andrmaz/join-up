@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import EditProjectForm from '@containers/edit/Project'
+import {EditProjectForm} from '@containers/edit/Project'
 import {FiEdit2} from 'react-icons/fi'
 import type {IProjectData} from 'app/types/project'
 import ModalContents from '@lib/Modal/Contents'

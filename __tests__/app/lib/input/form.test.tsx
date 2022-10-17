@@ -3,7 +3,7 @@ import { render, screen } from 'test-utils'
 import {FieldErrors} from 'react-hook-form'
 import FormInput from '@lib/Input/Form'
 import type { IFormInput } from 'app/types/form'
-import faker from 'faker'
+import { faker } from '@faker-js/faker';
 
 const name =faker.lorem.word()
 const id =faker.lorem.word()

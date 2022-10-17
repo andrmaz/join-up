@@ -3,9 +3,9 @@ import type {StatusResponseType} from 'app/types/response'
 import {useFetchContext} from '@hooks/fetch/useFetchContext'
 import useSnackbarContext from '@hooks/snackbar/useSnackbarContext'
 
-export default function useEditUserPassword(): (
-  data: IEditPassword
-) => Promise<StatusResponseType> {
+export default function useEditUserPassword(): readonly [
+  (data: IEditPassword) => Promise<StatusResponseType>
+] {
   const fetchContext = useFetchContext()
   const {addAlert} = useSnackbarContext()
   const onSubmit = async (data: IEditPassword): Promise<StatusResponseType> => {
@@ -25,5 +25,5 @@ export default function useEditUserPassword(): (
       return Promise.reject(error)
     }
   }
-  return onSubmit //as const
+  return [onSubmit] as const
 }

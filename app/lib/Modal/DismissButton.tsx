@@ -1,8 +1,8 @@
 import * as React from 'react'
-import useModalContext from '@hooks/modal/useModalContext'
-import useFocusTrapRefContext from '@hooks/ref/useRefContext'
 
 import type {ChildrenPropsType} from 'app/types/modal'
+import useFocusTrapRefContext from '@hooks/ref/useRefContext'
+import useModalContext from '@hooks/modal/useModalContext'
 
 function DismissButton(props: ChildrenPropsType): JSX.Element {
   const ref = useFocusTrapRefContext()

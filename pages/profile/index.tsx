@@ -58,7 +58,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
     )
     const {projects} = response.data
     return {props: {projects}}
-  } catch (error: any) {
+  } catch (error) {
     if (axios.isAxiosError(error)) {
       handleAxiosError(error)
       if (error?.response?.status === 401) {
@@ -73,6 +73,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
     } else {
       handleUnexpectedError(error)
     }
-    return Promise.reject(error.toJSON())
+    throw error
   }
 }

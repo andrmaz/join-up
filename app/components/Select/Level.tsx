@@ -13,7 +13,7 @@ const LevelSelect = ({
   errors,
   defaultValue,
 }: IPositionSelect): React.ReactElement => {
-  const options = useLevels()
+  const [options] = useLevels()
   return (
     <React.Fragment>
       <label id='level-select' htmlFor='level'>

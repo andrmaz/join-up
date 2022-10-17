@@ -13,7 +13,7 @@ const RoleSelect = ({
   errors,
   defaultValue,
 }: IPositionSelect): React.ReactElement => {
-  const options = useRoles()
+  const [options] = useRoles()
   return (
     <React.Fragment>
       <label id='role-select' htmlFor='role'>

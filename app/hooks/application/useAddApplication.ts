@@ -1,11 +1,10 @@
+import type {StatusResponseType} from 'app/types/response'
 import {useFetchContext} from '@hooks/fetch/useFetchContext'
 import useModalContext from '@hooks/modal/useModalContext'
 
-import type {StatusResponseType} from 'app/types/response'
-
 export default function useAddApplication(
   id: number
-): () => Promise<StatusResponseType> {
+): readonly [() => Promise<StatusResponseType>] {
   const fetchContext = useFetchContext()
   const {setIsOpen} = useModalContext()
   const handleConfirm = async (): Promise<StatusResponseType> => {
@@ -26,5 +25,5 @@ export default function useAddApplication(
       return Promise.reject(error)
     }
   }
-  return handleConfirm
+  return [handleConfirm] as const
 }

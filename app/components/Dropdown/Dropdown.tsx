@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import Link from 'next/link'
-import SignOutButton from '@components/Button/SignOut'
+import {SignOutButton} from '@components/Button/SignOut'
 import UserAvatar from '@screens/User/Avatar'
 import {useAuthState} from '@hooks/auth/useAuthState'
 

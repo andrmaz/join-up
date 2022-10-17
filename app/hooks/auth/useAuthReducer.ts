@@ -1,9 +1,10 @@
 import * as React from 'react'
 
-import {authReducer} from '@reducers/authReducer'
-import {UserContextType, UserActionsType} from 'app/types/user'
+import {UserActionsType, UserContextType} from 'app/types/user'
 
-export function useAuthReducer(): [
+import {authReducer} from '@reducers/authReducer'
+
+export function useAuthReducer(): readonly [
   UserContextType,
   React.Dispatch<UserActionsType>,
   React.EffectCallback
@@ -18,5 +19,5 @@ export function useAuthReducer(): [
       ? window.localStorage.setItem('user', serializedUser)
       : window.localStorage.removeItem('user')
   }, [serializedUser, user])
-  return [state, dispatch, updateLocalStorage]
+  return [state, dispatch, updateLocalStorage] as const
 }

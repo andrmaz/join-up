@@ -27,7 +27,7 @@
     // sets the module system for the program
     "module": "esnext",
     // specify the module resolution strategy
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     // allows importing modules with a ‘.json’ extension
     "resolveJsonModule": true,
     // warn you if you write certain code that can’t be correctly interpreted by a single-file transpilation process

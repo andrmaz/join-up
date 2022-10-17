@@ -9,7 +9,7 @@ const EditProfile = ({
 }: {
   isSelectedTab: boolean
 }): JSX.Element => {
-  const onSubmit = useEditUserData()
+  const [onSubmit] = useEditUserData()
   return (
     <Panel index={0} isSelectedTab={isSelectedTab}>
       <ProfileForm onSubmit={onSubmit} />

@@ -7,7 +7,7 @@ import useUserLogin from '@hooks/user/useUserLogin'
 
 const SigninForm = (): JSX.Element => {
   const {register, handleSubmit, errors} = useForm<ISigninInputs>()
-  const onSubmit = useUserLogin()
+  const [onSubmit] = useUserLogin()
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

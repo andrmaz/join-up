@@ -19,4 +19,4 @@ const SignOutButton = (): JSX.Element => {
   )
 }
 
-export default SignOutButton
+export {SignOutButton}

@@ -5,9 +5,9 @@ import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {useFetchContext} from '@hooks/fetch/useFetchContext'
 import useSnackbarContext from '@hooks/snackbar/useSnackbarContext'
 
-export default function useEditUsername(): (
-  data: IEditUsername
-) => Promise<UserResponseType> {
+export default function useEditUsername(): readonly [
+  (data: IEditUsername) => Promise<UserResponseType>
+] {
   const dispatch = useAuthDispatch()
   const fetchContext = useFetchContext()
   const {addAlert} = useSnackbarContext()
@@ -29,5 +29,5 @@ export default function useEditUsername(): (
       return Promise.reject(error)
     }
   }
-  return onSubmit //as const
+  return [onSubmit] as const
 }

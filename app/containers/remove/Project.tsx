@@ -4,7 +4,7 @@ import Dialog from '@lib/Dialog'
 import useRemoveProject from '@hooks/project/useRemoveProject'
 
 const RemoveProjectForm = ({id}: {id: number}): JSX.Element => {
-  const handleConfirm = useRemoveProject(id)
+  const [handleConfirm] = useRemoveProject(id)
   return (
     <Dialog
       handleConfirm={handleConfirm}
@@ -14,4 +14,4 @@ const RemoveProjectForm = ({id}: {id: number}): JSX.Element => {
   )
 }
 
-export default RemoveProjectForm
+export {RemoveProjectForm}

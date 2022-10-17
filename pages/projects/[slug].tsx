@@ -10,7 +10,7 @@ import Head from 'next/head'
 import type {IPositionData} from 'app/types/position'
 import type {IProjectData} from 'app/types/project'
 import {PActions} from 'app/types/constants'
-import {Params} from 'next/dist/server/router'
+import {Params} from 'next/dist/shared/lib/router/utils/route-matcher'
 import PositionTablist from '@screens/Position/Tablist'
 import ProjectOverview from '@screens/Project/Overview'
 import axios from 'axios'
@@ -88,7 +88,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
         positions,
       },
     }
-  } catch (error: any) {
+  } catch (error) {
     if (axios.isAxiosError(error)) {
       handleAxiosError(error)
       if (error?.response?.status === 401) {
@@ -103,6 +103,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
     } else {
       handleUnexpectedError(error)
     }
-    return Promise.reject(error.toJSON())
+    throw error
   }
 }

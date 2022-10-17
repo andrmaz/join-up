@@ -9,12 +9,13 @@ async function getTechnologies(path: string): Promise<SelectOptionsType[]> {
       `/technology${path}`
     )
     const {technologies} = response.data
-    return Promise.resolve(technologies)
-  } catch (thrown: any) {
-    if (axios.isCancel(thrown)) {
-      return thrown.message
+    return technologies
+  } catch (error) {
+    if (axios.isCancel(error)) {
+      console.log('Request canceled', error)
+      return Promise.reject()
     } else {
-      return Promise.reject(thrown)
+      throw error
     }
   }
 }

@@ -1,15 +1,15 @@
 import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next'
 import {handleAxiosError, handleUnexpectedError} from '@utils/errors'
 
-import ApplicationFeed from '@components/Feed/Application'
+import {ApplicationFeed} from '@components/Feed/Application'
 import Carousel from '@lib/Carousel/Carousel'
 import Head from 'next/head'
 import type {IApplicationData} from 'app/types/application'
 import type {IPositionData} from 'app/types/position'
 import type {IProjectData} from 'app/types/project'
 //import Image from 'next/image'
-import PositionFeed from '@components/Feed/Position'
-import ProjectFeed from '@components/Feed/Project'
+import {PositionFeed} from '@components/Feed/Position'
+import {ProjectFeed} from '@components/Feed/Project'
 import axios from 'axios'
 import {privateFetch} from '@utils/fetch'
 
@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps<{
   try {
     const {data} = await privateFetch(context).get('/feed')
     return {props: {data}}
-  } catch (error: any) {
+  } catch (error) {
     if (axios.isAxiosError(error)) {
       handleAxiosError(error)
       if (error?.response?.status === 401) {
@@ -87,6 +87,6 @@ export const getServerSideProps: GetServerSideProps<{
     } else {
       handleUnexpectedError(error)
     }
-    return Promise.reject(error.toJSON())
+    throw error
   }
 }

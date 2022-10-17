@@ -15,7 +15,7 @@ const LangSelect = ({
   defaultValues,
   defaultValue,
 }: IFormSelect): React.ReactElement => {
-  const languages = useLanguages()
+  const [languages] = useLanguages()
   return (
     <React.Fragment>
       <label id='languages' htmlFor='languages'>

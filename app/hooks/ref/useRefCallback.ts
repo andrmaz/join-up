@@ -17,5 +17,5 @@ export default function useRefCallback(): readonly [
     }
   }, [])
 
-  return [setRef] //as const
+  return [setRef] as const
 }

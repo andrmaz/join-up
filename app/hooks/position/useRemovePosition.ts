@@ -1,13 +1,12 @@
-import {useFetchContext} from '@hooks/fetch/useFetchContext'
-import {usePositionContext} from '@hooks/position/usePositionContext'
-import useModalContext from '@hooks/modal/useModalContext'
-
-import type {RemovePositionResponseType} from 'app/types/response'
 import {PActions} from 'app/types/constants'
+import type {RemovePositionResponseType} from 'app/types/response'
+import {useFetchContext} from '@hooks/fetch/useFetchContext'
+import useModalContext from '@hooks/modal/useModalContext'
+import {usePositionContext} from '@hooks/position/usePositionContext'
 
 export default function useRemovePosition(
   id: number
-): () => Promise<RemovePositionResponseType> {
+): readonly [() => Promise<RemovePositionResponseType>] {
   const fetchContext = useFetchContext()
   const {dispatch} = usePositionContext()
   const {setIsOpen} = useModalContext()
@@ -27,5 +26,5 @@ export default function useRemovePosition(
       return Promise.reject(error)
     }
   }
-  return handleConfirm
+  return [handleConfirm] as const
 }

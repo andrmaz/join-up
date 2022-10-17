@@ -1,9 +1,11 @@
 import * as React from 'react'
+
+import type {AsyncResponseType, AsyncStateType} from 'app/types/async'
+
 import {AxiosResponse} from 'axios'
-import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
-import type {AsyncStateType, AsyncResponseType} from 'app/types/async'
 import type {ProjectsResponseType} from 'app/types/response'
 import {Status} from 'app/types/constants'
+import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
 
 export default function useAsync(
   init?: AsyncStateType<ProjectsResponseType>
@@ -36,5 +38,5 @@ export default function useAsync(
     data,
     error,
     run,
-  }
+  } as const
 }

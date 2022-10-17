@@ -3,7 +3,7 @@ import * as React from 'react'
 import {render, screen} from 'test-utils'
 
 import Textarea  from '@components/Textarea/Textarea'
-import faker from 'faker'
+import { faker } from '@faker-js/faker';
 
 const defaultValue= faker.lorem.paragraph()
 const props = {

@@ -19,7 +19,7 @@ const SignupForm = (): JSX.Element => {
   const {register, handleSubmit, watch, errors, control, setValue} =
     useForm<ISignupInputs>()
   const watchPassword = watch('password')
-  const onSubmit = useUserRegister()
+  const [onSubmit] = useUserRegister()
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

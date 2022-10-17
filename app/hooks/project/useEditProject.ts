@@ -1,13 +1,12 @@
-import {useProjectContext} from '@hooks/project/useProjectContext'
-import useModalContext from '@hooks/modal/useModalContext'
-import {useFetchContext} from '@hooks/fetch/useFetchContext'
-
 import type {IProjectInput} from 'app/types/project'
 import type {ProjectResponseType} from 'app/types/response'
+import {useFetchContext} from '@hooks/fetch/useFetchContext'
+import useModalContext from '@hooks/modal/useModalContext'
+import {useProjectContext} from '@hooks/project/useProjectContext'
 
 export default function useEditProject(
   id: number
-): (data: IProjectInput) => Promise<ProjectResponseType> {
+): readonly [(data: IProjectInput) => Promise<ProjectResponseType>] {
   const fetchContext = useFetchContext()
   const {edit} = useProjectContext()
   const {setIsOpen} = useModalContext()
@@ -31,5 +30,5 @@ export default function useEditProject(
       return Promise.reject(error)
     }
   }
-  return onSubmit //as const
+  return [onSubmit] as const
 }

@@ -6,8 +6,8 @@ import type {RolesResponseType} from 'app/types/response'
 import type {SelectOptionsType} from 'app/types/form'
 import {publicFetch} from '@utils/fetch'
 
-export default function useRoles(): SelectOptionsType[] | undefined {
-  const [options, setOptions] = React.useState<SelectOptionsType[]>()
+export default function useRoles(): readonly [SelectOptionsType[]] {
+  const [options, setOptions] = React.useState<SelectOptionsType[]>([])
   //* Set roles options to State as soon as the modal is shown
   React.useEffect(() => {
     let cancel: Canceler
@@ -23,16 +23,17 @@ export default function useRoles(): SelectOptionsType[] | undefined {
           return Promise.resolve(message)
         }
         return response.data
-      } catch (thrown: any) {
-        if (axios.isCancel(thrown)) {
-          return thrown.message
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log('Request canceled', error)
+          Promise.reject(error)
         } else {
-          return Promise.reject(thrown)
+          throw error
         }
       }
     })()
     //* cancel the request
     return () => cancel()
   }, [])
-  return options
+  return [options] as const
 }

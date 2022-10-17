@@ -1,13 +1,12 @@
-import {useRouter} from 'next/router'
-import {useProjectContext} from '@hooks/project/useProjectContext'
-import {useFetchContext} from '@hooks/fetch/useFetchContext'
-
 import type {IProjectInput} from 'app/types/project'
 import type {ProjectResponseType} from 'app/types/response'
+import {useFetchContext} from '@hooks/fetch/useFetchContext'
+import {useProjectContext} from '@hooks/project/useProjectContext'
+import {useRouter} from 'next/router'
 
-export default function useAddProject(): (
-  data: IProjectInput
-) => Promise<ProjectResponseType> {
+export default function useAddProject(): readonly [
+  (data: IProjectInput) => Promise<ProjectResponseType>
+] {
   const fetchContext = useFetchContext()
   const {add} = useProjectContext()
   const router = useRouter()
@@ -31,5 +30,5 @@ export default function useAddProject(): (
       return Promise.reject(error)
     }
   }
-  return onSubmit
+  return [onSubmit] as const
 }

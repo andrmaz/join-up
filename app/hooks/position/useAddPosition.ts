@@ -1,14 +1,13 @@
+import type {IPositionInput} from 'app/types/position'
+import {PActions} from 'app/types/constants'
+import type {PositionResponseType} from 'app/types/response'
+import {useFetchContext} from '@hooks/fetch/useFetchContext'
 import useModalContext from '@hooks/modal/useModalContext'
 import {usePositionContext} from '@hooks/position/usePositionContext'
-import {useFetchContext} from '@hooks/fetch/useFetchContext'
-
-import type {IPositionInput} from 'app/types/position'
-import type {PositionResponseType} from 'app/types/response'
-import {PActions} from 'app/types/constants'
 
 export default function useAddPosition(
   id: number
-): (data: IPositionInput) => Promise<PositionResponseType> {
+): readonly [(data: IPositionInput) => Promise<PositionResponseType>] {
   const fetchContext = useFetchContext()
   const {setIsOpen} = useModalContext()
   const {dispatch} = usePositionContext()
@@ -33,5 +32,5 @@ export default function useAddPosition(
       return Promise.reject(error)
     }
   }
-  return onSubmit
+  return [onSubmit] as const
 }
