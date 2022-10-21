@@ -3,5 +3,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "editor.fontFamily": ""
+  "editor.fontFamily": "",
+  "cSpell.words": [
+    "trpc"
+  ]
 }
