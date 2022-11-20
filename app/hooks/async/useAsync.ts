@@ -12,7 +12,7 @@ export default function useAsync(
 ): AsyncResponseType<ProjectsResponseType> {
   const [{status, data, error}, dispatch] = useAsyncReducer(init)
   const run = React.useCallback(
-    (promise: Promise<any>) => {
+    (promise: Promise<AxiosResponse>) => {
       if (!promise || !promise.then) {
         throw new Error(
           `The argument passed to useAsync().run must be a promise. Maybe a function that's passed isn't returning anything?`
@@ -20,7 +20,7 @@ export default function useAsync(
       }
       dispatch({type: Status.pending})
       return promise
-        .then((response: AxiosResponse) => {
+        .then(response => {
           dispatch({type: Status.resolved, payload: response.data})
         })
         .catch((error: string) => {

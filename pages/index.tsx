@@ -12,9 +12,16 @@ import {privateFetch} from '@utils/fetch'
 import {trpc} from '../app/utils/trpc'
 
 const Home: NextPage = () => {
-  const res = trpc.feed.list.useQuery()
-  const {projects, positions, applications} = res.data || {}
+  const result = trpc.feed.list.useQuery()
+  const {projects, positions, applications} = result.data || {}
+  const isLoading = result.isLoading
+  const isFetching = result.isFetching
+  const isError = result.isError
 
+  if (isLoading) return <>Loading ...</>
+  if (isFetching) return <>Fetching ...</>
+
+  if (isError) return <>Error: {result.error.message}</>
   return (
     <section className='h-min-screen pt-16'>
       <Head>
