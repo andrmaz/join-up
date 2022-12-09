@@ -1,14 +1,9 @@
 import * as React from 'react'
 
-import {GetServerSideProps, NextPage} from 'next'
-import {handleAxiosError, handleUnexpectedError} from '@utils/errors'
-
 import Head from 'next/head'
+import {NextPage} from 'next'
 import ProjectsList from '@screens/Project/List'
-import type {ProjectsResponseType} from 'app/types/response'
 import UserCard from '@screens/User/Card'
-import axios from 'axios'
-import {privateFetch} from '@utils/fetch'
 import {trpc} from '@utils/trpc'
 import {useAuthState} from '@hooks/auth/useAuthState'
 import {useProjectContext} from '@hooks/project/useProjectContext'
@@ -51,7 +46,7 @@ const Profile: NextPage = () => {
 
 export default Profile
 
-export const getServerSideProps: GetServerSideProps = async context => {
+/* export const getServerSideProps: GetServerSideProps = async context => {
   try {
     await privateFetch(context).get<ProjectsResponseType>('/project/user')
     return {props: {}}
@@ -71,5 +66,5 @@ export const getServerSideProps: GetServerSideProps = async context => {
       handleUnexpectedError(error)
     }
     throw error
-  }
-}
+  } 
+}*/

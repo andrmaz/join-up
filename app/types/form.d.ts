@@ -45,7 +45,7 @@ export type InputSubmitType = {
 }
 
 //* Selects
-export type SelectOptionsType = {id: number; label: string}
+export type SelectOptionsType<T extends string> = {id: number; label: T}
 
 export interface IFormSelect {
   control: Control | undefined

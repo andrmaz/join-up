@@ -4,8 +4,9 @@ import type {IPositionSelect, SelectOptionsType} from 'app/types/form'
 
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@lib/Message/Error'
+import {Role} from 'app/types/constants'
 import Select from 'react-select'
-import useRoles from '@hooks/options/useRoles'
+import {trpc} from '@utils/trpc'
 
 const RoleSelect = ({
   control,
@@ -13,7 +14,8 @@ const RoleSelect = ({
   errors,
   defaultValue,
 }: IPositionSelect): React.ReactElement => {
-  const [options] = useRoles()
+  const result = trpc.role.list.useQuery()
+  const roles = result.data?.roles
   return (
     <React.Fragment>
       <label id='role-select' htmlFor='role'>
@@ -22,9 +24,7 @@ const RoleSelect = ({
       <Controller
         name='role'
         control={control}
-        defaultValue={
-          defaultValue ? defaultValue.id : options ? options[0].id : ''
-        }
+        defaultValue={defaultValue ? defaultValue.id : roles ? roles[0].id : ''}
         rules={{
           required: {
             value: true,
@@ -38,13 +38,13 @@ const RoleSelect = ({
             name='role'
             aria-labelledby='role'
             defaultValue={
-              defaultValue ? defaultValue : options ? options[0] : value
+              defaultValue ? defaultValue : roles ? roles[0] : value
             }
             closeMenuOnSelect={true}
-            options={options}
+            options={roles}
             getOptionValue={option => option['id']}
             blurInputOnSelect={false}
-            onChange={(value: SelectOptionsType) => {
+            onChange={(value: SelectOptionsType<Role>) => {
               setValue('role', value.id, {
                 shouldValidate: true,
                 shouldDirty: true,

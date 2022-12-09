@@ -1,4 +1,4 @@
-import {publicProcedure, router} from '../trpc'
+import {protectedProcedure, router} from '../trpc'
 
 import {IProjectData} from 'app/types/project'
 import {ProjectResponseType} from 'app/types/response'
@@ -22,10 +22,10 @@ const response: ProjectResponseType = {
 }
 
 export const projectRouter = router({
-  detail: publicProcedure.query(async () => {
+  detail: protectedProcedure.query(async () => {
     return {response}
   }),
-  list: publicProcedure.query(async () => {
+  list: protectedProcedure.query(async () => {
     const projects = [project]
     return {projects}
   }),

@@ -3,7 +3,7 @@ import EmailInput from '@components/Input/Email'
 import FormInput from '@lib/Input/Form'
 import GitHubInput from '@components/Input/GitHub'
 import GitLabInput from '@components/Input/GitLab'
-import type {ISignupInputs} from 'app/types/user'
+import type {ISignupInput} from 'app/types/user'
 import {InputSubmit} from '@lib/Input/Submit'
 import LangSelect from '@components/Select/Lang'
 import Link from 'next/link'
@@ -12,14 +12,17 @@ import PasswordInput from '@components/Input/Password'
 import TechSelect from '@components/Select/Tech'
 import Textarea from '@components/Textarea/Textarea'
 import UsernameInput from '@components/Input/Username'
+import {trpc} from '@utils/trpc'
 import {useForm} from 'react-hook-form'
-import useUserRegister from '@hooks/user/useUserRegister'
 
 const SignupForm = (): JSX.Element => {
+  const result = trpc.user.register.useMutation()
   const {register, handleSubmit, watch, errors, control, setValue} =
-    useForm<ISignupInputs>()
+    useForm<ISignupInput>()
   const watchPassword = watch('password')
-  const [onSubmit] = useUserRegister()
+  const onSubmit = async (input: ISignupInput): Promise<void> => {
+    result.mutateAsync(input)
+  }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

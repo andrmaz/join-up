@@ -1,8 +1,8 @@
 import 'tailwindcss/tailwind.css'
 
+import * as React from 'react'
+
 import type {AppProps} from 'next/app'
-import {AuthProvider} from '@providers/AuthProvider'
-import {FetchProvider} from '@providers/FetchProvider'
 import Navbar from '@components/Navbar/Navbar'
 import {PositionProvider} from '@providers/PositionProvider'
 import {ProjectProvider} from '@providers/ProjectProvider'
@@ -18,19 +18,17 @@ const DynamicComponent = dynamic(() => import('@lib/Root/Root'))
 
 function MyApp({Component, pageProps}: AppProps): React.ReactElement {
   return (
-    <AuthProvider>
-      <FetchProvider>
-        <Navbar />
-        <ProjectProvider>
-          <PositionProvider>
-            <SnackbarProvider>
-              <Component {...pageProps} />
-              <DynamicComponent />
-            </SnackbarProvider>
-          </PositionProvider>
-        </ProjectProvider>
-      </FetchProvider>
-    </AuthProvider>
+    <React.Fragment>
+      <Navbar />
+      <ProjectProvider>
+        <PositionProvider>
+          <SnackbarProvider>
+            <Component {...pageProps} />
+            <DynamicComponent />
+          </SnackbarProvider>
+        </PositionProvider>
+      </ProjectProvider>
+    </React.Fragment>
   )
 }
 

@@ -1,18 +1,12 @@
 import * as React from 'react'
 
-import {GetServerSideProps, NextPage} from 'next'
-import {PositionsResponseType, ProjectResponseType} from 'app/types/response'
-import {handleAxiosError, handleUnexpectedError} from '@utils/errors'
-
 import CreatePosition from '@screens/Position/Create'
 import {EmptyMessage} from '@lib/Message/Empty'
 import Head from 'next/head'
+import {NextPage} from 'next'
 import {PActions} from 'app/types/constants'
-import {Params} from 'next/dist/shared/lib/router/utils/route-matcher'
 import PositionTablist from '@screens/Position/Tablist'
 import ProjectOverview from '@screens/Project/Overview'
-import axios from 'axios'
-import {privateFetch} from '@utils/fetch'
 import {trpc} from '@utils/trpc'
 import {useAuthState} from '@hooks/auth/useAuthState'
 import {usePositionContext} from '@hooks/position/usePositionContext'
@@ -67,7 +61,7 @@ const Slug: NextPage = () => {
 
 export default Slug
 
-export const getServerSideProps: GetServerSideProps = async context => {
+/* export const getServerSideProps: GetServerSideProps = async context => {
   try {
     //* project id parameter will be sent as a query parameter (slug) to the page
     const {slug} = context.params as Params
@@ -99,4 +93,4 @@ export const getServerSideProps: GetServerSideProps = async context => {
     }
     throw error
   }
-}
+} */

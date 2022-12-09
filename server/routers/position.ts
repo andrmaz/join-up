@@ -1,4 +1,4 @@
-import {publicProcedure, router} from '../trpc'
+import {protectedProcedure, router} from '../trpc'
 
 import {PositionsResponseType} from 'app/types/response'
 import {z} from 'zod'
@@ -10,7 +10,7 @@ const response: PositionsResponseType = {
 }
 
 export const positionRouter = router({
-  detail: publicProcedure
+  detail: protectedProcedure
     // using zod schema to validate and infer input values
     .input(
       z

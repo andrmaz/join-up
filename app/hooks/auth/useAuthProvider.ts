@@ -3,20 +3,21 @@ import * as React from 'react'
 import {UserActionsType, UserContextType} from 'app/types/user'
 
 import Router from 'next/router'
-import {publicFetch} from '@utils/fetch'
+import {trpc} from '@utils/trpc'
 import {useAuthReducer} from '@hooks/auth/useAuthReducer'
 
 export function useAuthProvider(): [
   UserContextType,
   React.Dispatch<UserActionsType>
 ] {
+  const result = trpc.user.logout.useMutation()
   const [state, dispatch, updateLocalStorage] = useAuthReducer()
 
   const alertUser = React.useCallback(async (e: BeforeUnloadEvent) => {
     //* Cancel the event
     e.preventDefault()
     //* Remove Token Cookie
-    await publicFetch.get('/user/logout')
+    result.mutate()
     Router.replace('/signin')
     //* Chrome requires returnValue to be set
     e.returnValue =

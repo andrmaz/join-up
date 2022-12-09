@@ -1,14 +1,10 @@
-import {GetServerSideProps, NextPage} from 'next'
-import {handleAxiosError, handleUnexpectedError} from '@utils/errors'
-
 import {ApplicationFeed} from '@components/Feed/Application'
 import Carousel from '@lib/Carousel/Carousel'
 import Head from 'next/head'
+import {NextPage} from 'next'
 //import Image from 'next/image'
 import {PositionFeed} from '@components/Feed/Position'
 import {ProjectFeed} from '@components/Feed/Project'
-import axios from 'axios'
-import {privateFetch} from '@utils/fetch'
 import {trpc} from '../app/utils/trpc'
 
 const Home: NextPage = () => {
@@ -65,7 +61,7 @@ const Home: NextPage = () => {
 
 export default Home
 
-export const getServerSideProps: GetServerSideProps = async context => {
+/* export const getServerSideProps: GetServerSideProps = async context => {
   try {
     await privateFetch(context).get('/feed')
     return {props: {}}
@@ -86,4 +82,4 @@ export const getServerSideProps: GetServerSideProps = async context => {
     }
     throw error
   }
-}
+} */

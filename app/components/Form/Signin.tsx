@@ -1,13 +1,16 @@
 import EmailInput from '@components/Input/Email'
-import type {ISigninInputs} from 'app/types/user'
+import type {ISigninInput} from 'app/types/user'
 import {InputSubmit} from '@lib/Input/Submit'
 import PasswordInput from '@components/Input/Password'
+import {trpc} from '@utils/trpc'
 import {useForm} from 'react-hook-form'
-import useUserLogin from '@hooks/user/useUserLogin'
 
 const SigninForm = (): JSX.Element => {
-  const {register, handleSubmit, errors} = useForm<ISigninInputs>()
-  const [onSubmit] = useUserLogin()
+  const result = trpc.user.login.useMutation()
+  const {register, handleSubmit, errors} = useForm<ISigninInput>()
+  const onSubmit = async (input: ISigninInput): Promise<void> => {
+    result.mutateAsync(input)
+  }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

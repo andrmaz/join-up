@@ -1,16 +1,16 @@
 import {logout} from '@actions/authActions'
-import {publicFetch} from '@utils/fetch'
+import {trpc} from '@utils/trpc'
 import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
 import {useRouter} from 'next/router'
 
 const SignOutButton = (): JSX.Element => {
-  const dispatch = useAuthDispatch()
   const router = useRouter()
-  async function signOut(): Promise<void> {
-    await publicFetch.get('/user/logout')
+  const result = trpc.user.logout.useMutation()
+  const dispatch = useAuthDispatch()
+  const signOut = async (): Promise<void> => {
+    result.mutate()
     logout(dispatch)
     router.push('/signin')
-    return
   }
   return (
     <button onClick={signOut} className='text-left m-1'>

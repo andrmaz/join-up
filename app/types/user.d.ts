@@ -2,12 +2,12 @@ import type {SelectOptionsType} from 'app/types/form'
 import type {NestedStringsType} from 'app/types/project'
 import {UActions} from 'app/types/constants'
 
-export interface ISigninInputs {
+export interface ISigninInput {
   email: string
   password: string
 }
 
-export interface ISignupInputs {
+export interface ISignupInput {
   username: string
   email: string
   password: string

@@ -4,8 +4,9 @@ import type {IPositionSelect, SelectOptionsType} from 'app/types/form'
 
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@lib/Message/Error'
+import {Level} from 'app/types/constants'
 import Select from 'react-select'
-import useLevels from '@hooks/options/useLevels'
+import {trpc} from '@utils/trpc'
 
 const LevelSelect = ({
   control,
@@ -13,7 +14,8 @@ const LevelSelect = ({
   errors,
   defaultValue,
 }: IPositionSelect): React.ReactElement => {
-  const [options] = useLevels()
+  const result = trpc.level.list.useQuery()
+  const levels = result.data?.levels
   return (
     <React.Fragment>
       <label id='level-select' htmlFor='level'>
@@ -23,7 +25,7 @@ const LevelSelect = ({
         name='level'
         control={control}
         defaultValue={
-          defaultValue ? defaultValue.id : options ? options[0].id : ''
+          defaultValue ? defaultValue.id : levels ? levels[0].id : ''
         }
         rules={{
           required: {
@@ -38,13 +40,13 @@ const LevelSelect = ({
             name='level'
             aria-labelledby='level'
             defaultValue={
-              defaultValue ? defaultValue : options ? options[0] : value
+              defaultValue ? defaultValue : levels ? levels[0] : value
             }
             closeMenuOnSelect={true}
-            options={options}
+            options={levels}
             getOptionValue={option => option['id']}
             blurInputOnSelect={false}
-            onChange={(value: SelectOptionsType) => {
+            onChange={(value: SelectOptionsType<Level>) => {
               setValue('level', value.id, {
                 shouldValidate: true,
                 shouldDirty: true,

@@ -1,8 +1,6 @@
 import {TRPCError, initTRPC} from '@trpc/server'
 
-type Context = {
-  session: {user?: {email: ''}}
-}
+import {Context} from './context'
 
 // Avoid exporting the entire t-object since it's not very
 // descriptive and can be confusing to newcomers used to t

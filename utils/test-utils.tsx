@@ -2,15 +2,10 @@ import * as React from 'react'
 
 import {RenderOptions, RenderResult, render} from '@testing-library/react'
 
-import {AuthProvider} from '@providers/AuthProvider'
 import {ModalProvider} from '@providers/ModalProvider'
 
 const AllTheProviders: React.FC = ({children}) => {
-  return (
-    <AuthProvider>
-      <ModalProvider>{children}</ModalProvider>
-    </AuthProvider>
-  )
+  return <ModalProvider>{children}</ModalProvider>
 }
 
 const customRender = (
