@@ -12,7 +12,16 @@ export async function createContext(/* _opts: trpcNext.CreateNextContextOptions 
   //const session = await getSession({req: opts.req})
 
   return {
-    session: {user: {email: ''}},
+    session: {
+      user: {
+        id: 0,
+        username: '',
+        email: '',
+        avatar: '',
+        languages: [],
+        technologies: [],
+      },
+    },
   }
 }
 

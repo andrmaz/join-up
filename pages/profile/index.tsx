@@ -5,12 +5,13 @@ import {NextPage} from 'next'
 import ProjectsList from '@screens/Project/List'
 import UserCard from '@screens/User/Card'
 import {trpc} from '@utils/trpc'
-import {useAuthState} from '@hooks/auth/useAuthState'
 import {useProjectContext} from '@hooks/project/useProjectContext'
 
 const Profile: NextPage = () => {
-  const {user} = useAuthState()
   const {persist, clear} = useProjectContext()
+
+  const user = trpc.user.detail.useQuery().data?.user
+
   const result = trpc.project.list.useQuery()
   const projects = result.data?.projects
 

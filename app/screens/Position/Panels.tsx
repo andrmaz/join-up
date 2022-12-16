@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import type {IPositionData} from 'app/types/position'
 import dynamic from 'next/dynamic'
-import {useAuthState} from '@hooks/auth/useAuthState'
+import {trpc} from '@utils/trpc'
 
 const PositionOverview = dynamic(() => import('@screens/Position/Overview'))
 const PositionCard = dynamic(() => import('@screens/Position/Card'))
@@ -14,7 +14,8 @@ const PositionPanels = ({
   positions: IPositionData[]
   selectedTab: number
 }): React.ReactElement => {
-  const {user} = useAuthState()
+  const user = trpc.user.detail.useQuery().data?.user
+
   return (
     <main className='h-auto w-full overflow-y-scroll'>
       {positions.map((position, index) => {

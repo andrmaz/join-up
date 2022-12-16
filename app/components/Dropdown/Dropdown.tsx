@@ -3,10 +3,10 @@ import * as React from 'react'
 import Link from 'next/link'
 import {SignOutButton} from '@components/Button/SignOut'
 import UserAvatar from '@screens/User/Avatar'
-import {useAuthState} from '@hooks/auth/useAuthState'
+import {trpc} from '@utils/trpc'
 
 export function Dropdown(): JSX.Element {
-  const {user} = useAuthState()
+  const result = trpc.user.detail.useQuery()
   let timeOutId: NodeJS.Timeout
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
   const onClickHandler = (): void => setIsOpen(!isOpen)
@@ -40,7 +40,7 @@ export function Dropdown(): JSX.Element {
         aria-expanded={isOpen}
       >
         <div className='w-8 h-8'>
-          <UserAvatar image={user?.avatar} />
+          <UserAvatar image={result.data?.user.avatar} />
         </div>
         {isOpen && (
           <ul className='absolute flex flex-col h-auto min-w-min	w-auto bg-gray-800 border-2 p-2 rounded z-40 text-xs'>

@@ -8,21 +8,16 @@ import {PActions} from 'app/types/constants'
 import PositionTablist from '@screens/Position/Tablist'
 import ProjectOverview from '@screens/Project/Overview'
 import {trpc} from '@utils/trpc'
-import {useAuthState} from '@hooks/auth/useAuthState'
 import {usePositionContext} from '@hooks/position/usePositionContext'
 
 const Slug: NextPage = () => {
-  const {user} = useAuthState()
   const {state, dispatch} = usePositionContext()
+  const user = trpc.user.detail.useQuery().data?.user
 
-  const result = trpc.project.detail.useQuery()
-  const project = result.data?.response.project
-  const isLoading = result.isLoading
-  const isFetching = result.isFetching
-  const isError = result.isError
+  const {data, isLoading, isError, error} = trpc.project.detail.useQuery()
+  const project = data?.response.project
 
-  const res = trpc.position.detail.useQuery()
-  const positions = res.data?.response.positions
+  const positions = trpc.position.detail.useQuery().data?.response.positions
 
   React.useEffect(() => {
     //dispatch({type: PActions.persist, payload: positions})
@@ -30,9 +25,7 @@ const Slug: NextPage = () => {
   }, [dispatch, positions])
 
   if (isLoading) return <>Loading ...</>
-  if (isFetching) return <>Fetching ...</>
-
-  if (isError) return <>Error: {result.error.message}</>
+  if (isError) return <>Error: {error.message}</>
   if (!project) return <>Error: Something went wrong</>
   return (
     <section className='h-min-screen mt-16'>

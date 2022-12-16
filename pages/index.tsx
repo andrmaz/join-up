@@ -8,16 +8,11 @@ import {ProjectFeed} from '@components/Feed/Project'
 import {trpc} from '../app/utils/trpc'
 
 const Home: NextPage = () => {
-  const result = trpc.feed.list.useQuery()
-  const {projects, positions, applications} = result.data || {}
-  const isLoading = result.isLoading
-  const isFetching = result.isFetching
-  const isError = result.isError
+  const {data, isLoading, isError, error} = trpc.feed.list.useQuery()
 
   if (isLoading) return <>Loading ...</>
-  if (isFetching) return <>Fetching ...</>
-
-  if (isError) return <>Error: {result.error.message}</>
+  if (isError) return <>Error: {error.message}</>
+  if (!data) return <>Error: Something went wrong</>
   return (
     <section className='h-min-screen pt-16'>
       <Head>
@@ -36,22 +31,20 @@ const Home: NextPage = () => {
           </article>
           <section className='h-auto w-full flex flex-col justify-evenly'>
             <Carousel>
-              {projects?.map(project => (
+              {data.projects.map(project => (
                 <ProjectFeed key={project.id} {...project} />
-              )) || []}
+              ))}
             </Carousel>
             <Carousel>
-              {positions?.map(position => (
+              {data.positions.map(position => (
                 <PositionFeed key={position.id} {...position} />
-              )) || []}
+              ))}
             </Carousel>
-            {applications?.length ? (
-              <Carousel>
-                {applications.map(application => (
-                  <ApplicationFeed key={application.id} {...application} />
-                )) || []}
-              </Carousel>
-            ) : null}
+            <Carousel>
+              {data.applications.map(application => (
+                <ApplicationFeed key={application.id} {...application} />
+              ))}
+            </Carousel>
           </section>
         </section>
       </main>

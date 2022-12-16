@@ -1,4 +1,4 @@
-import {publicProcedure, router} from '../trpc'
+import {protectedProcedure, publicProcedure, router} from '../trpc'
 
 import {IAuthUser} from 'app/types/user'
 import {z} from 'zod'
@@ -13,6 +13,9 @@ const user: IAuthUser = {
 }
 
 export const userRouter = router({
+  detail: protectedProcedure.query(async () => {
+    return {user}
+  }),
   login: publicProcedure
     .input(
       z.object({

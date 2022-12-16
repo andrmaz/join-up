@@ -10,7 +10,7 @@ import TechSelect from '@components/Select/Tech'
 import Textarea from '@components/Textarea/Textarea'
 import UserAvatar from '@screens/User/Avatar'
 import type {UserResponseType} from 'app/types/response'
-import {useAuthState} from '@hooks/auth/useAuthState'
+import {trpc} from '@utils/trpc'
 import {useForm} from 'react-hook-form'
 
 const ProfileForm = ({
@@ -18,9 +18,10 @@ const ProfileForm = ({
 }: {
   onSubmit: (data: IAuthUser) => Promise<UserResponseType>
 }): JSX.Element => {
-  const {user} = useAuthState()
+  const user = trpc.user.detail.useQuery().data?.user
   const {handleSubmit, register, errors, control, setValue, reset} =
     useForm<IAuthUser>()
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
