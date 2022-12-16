@@ -1,3 +1,4 @@
+import {applicationRouter} from './application'
 import {feedRouter} from './feed'
 import {languageRouter} from './language'
 import {levelRouter} from './level'
@@ -17,6 +18,7 @@ export const appRouter = router({
   level: levelRouter,
   role: roleRouter,
   user: userRouter,
+  application: applicationRouter,
 })
 
 // export type definition of API

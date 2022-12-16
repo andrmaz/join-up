@@ -52,8 +52,8 @@ export interface IFormSelect {
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   errors?: Record<string, any>
   disabled?: boolean
-  defaultValues?: SelectOptionsType[]
-  defaultValue?: SelectOptionsType[]
+  defaultValues?: SelectOptionsType<string>[]
+  defaultValue?: SelectOptionsType<string>[]
   id?: number
 }
 
@@ -61,7 +61,7 @@ export interface IPositionSelect {
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   errors?: Record<string, any>
-  defaultValue?: SelectOptionsType
+  defaultValue?: SelectOptionsType<string>
 }
 
 //*Buttons

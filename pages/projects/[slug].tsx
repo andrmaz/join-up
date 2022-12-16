@@ -17,7 +17,8 @@ const Slug: NextPage = () => {
   const {data, isLoading, isError, error} = trpc.project.detail.useQuery()
   const project = data?.response.project
 
-  const positions = trpc.position.detail.useQuery().data?.response.positions
+  const positions = trpc.position.list.useQuery({id: project?.id || 0}).data
+    ?.response.positions
 
   React.useEffect(() => {
     //dispatch({type: PActions.persist, payload: positions})

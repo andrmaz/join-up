@@ -37,4 +37,25 @@ export const userRouter = router({
   logout: publicProcedure.mutation(async () => {
     return {}
   }),
+
+  edit: protectedProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        username: z.string().nullish(),
+        email: z.string().nullish(),
+        avatar: z.string().nullish(),
+        languages: z
+          .object({id: z.number(), label: z.string()})
+          .array()
+          .nullish(),
+        technologies: z
+          .object({id: z.number(), label: z.string()})
+          .array()
+          .nullish(),
+      })
+    )
+    .mutation(async () => {
+      return {message: 'Ok', user, status: 200}
+    }),
 })

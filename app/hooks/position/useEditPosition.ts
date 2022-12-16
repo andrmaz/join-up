@@ -1,7 +1,7 @@
 import type {IPositionInput} from 'app/types/position'
 import {PActions} from 'app/types/constants'
 import type {PositionResponseType} from 'app/types/response'
-import {useFetchContext} from '@hooks/fetch/useFetchContext'
+import {trpc} from '@utils/trpc'
 import useModalContext from '@hooks/modal/useModalContext'
 import {usePositionContext} from '@hooks/position/usePositionContext'
 
@@ -9,7 +9,7 @@ export default function useEditPosition(
   positionId: number,
   projectId: number
 ): readonly [(data: IPositionInput) => Promise<PositionResponseType>] {
-  const fetchContext = useFetchContext()
+  const result = trpc.position.edit.useMutation()
   const {dispatch} = usePositionContext()
   const {setIsOpen} = useModalContext()
   const onSubmit = async (
@@ -17,20 +17,16 @@ export default function useEditPosition(
   ): Promise<PositionResponseType> => {
     try {
       data.projectId = projectId
-      const response = await fetchContext.authAxios.patch<PositionResponseType>(
-        `/position/${positionId}`,
-        {
-          position: data,
-        }
-      )
+      const response = await result.mutateAsync({positionId, projectId})
       if (response.status === 200) {
-        dispatch({type: PActions.edit, payload: response.data.position})
-        setIsOpen(false)
-        return Promise.resolve(response.data)
+        dispatch({type: PActions.edit, payload: response.position})
+        return response
       }
       return Promise.reject({message: 'Something went wrong'})
     } catch (error) {
       return Promise.reject(error)
+    } finally {
+      setIsOpen(false)
     }
   }
   return [onSubmit] as const

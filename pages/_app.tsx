@@ -3,6 +3,7 @@ import 'tailwindcss/tailwind.css'
 import * as React from 'react'
 
 import type {AppProps} from 'next/app'
+import {AuthProvider} from '@providers/AuthProvider'
 import Navbar from '@components/Navbar/Navbar'
 import {PositionProvider} from '@providers/PositionProvider'
 import {ProjectProvider} from '@providers/ProjectProvider'
@@ -18,7 +19,7 @@ const DynamicComponent = dynamic(() => import('@lib/Root/Root'))
 
 function MyApp({Component, pageProps}: AppProps): React.ReactElement {
   return (
-    <React.Fragment>
+    <AuthProvider>
       <Navbar />
       <ProjectProvider>
         <PositionProvider>
@@ -28,7 +29,7 @@ function MyApp({Component, pageProps}: AppProps): React.ReactElement {
           </SnackbarProvider>
         </PositionProvider>
       </ProjectProvider>
-    </React.Fragment>
+    </AuthProvider>
   )
 }
 

@@ -1,24 +1,22 @@
 import type {IEditPassword} from 'app/types/user'
 import type {StatusResponseType} from 'app/types/response'
-import {useFetchContext} from '@hooks/fetch/useFetchContext'
+import {trpc} from '@utils/trpc'
+import {useAuthState} from '@hooks/auth/useAuthState'
 import useSnackbarContext from '@hooks/snackbar/useSnackbarContext'
 
 export default function useEditUserPassword(): readonly [
   (data: IEditPassword) => Promise<StatusResponseType>
 ] {
-  const fetchContext = useFetchContext()
+  const {user} = useAuthState()
+  const result = trpc.user.edit.useMutation()
   const {addAlert} = useSnackbarContext()
   const onSubmit = async (data: IEditPassword): Promise<StatusResponseType> => {
     try {
-      const response = await fetchContext.authAxios.patch<StatusResponseType>(
-        '/user/password',
-        {
-          user: data,
-        }
-      )
+      if (!user?.id) throw Response
+      const response = await result.mutateAsync({id: user.id, ...data})
       if (response.status === 200) {
-        addAlert(response.data.message)
-        return Promise.resolve(response.data)
+        addAlert(response.message)
+        return response
       }
       return Promise.reject({message: 'Something went wrong'})
     } catch (error) {
