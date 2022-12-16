@@ -1,5 +1,5 @@
 import {Control} from 'react-hook-form'
-import type {NestedStringsType} from 'app/types/project'
+import type {NestedNumbersType} from 'app/types/project'
 
 //* Drawer
 export interface IDrawerProps {
@@ -11,7 +11,7 @@ export interface IDrawerProps {
     config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
   ) => void
   control: Control
-  technologies: NestedStringsType
+  technologies: NestedNumbersType
 }
 
 export type DrawerInputsType = {
@@ -20,7 +20,7 @@ export type DrawerInputsType = {
 }
 
 export interface FieldValues {
-  technologies: NestedStringsType
+  technologies: NestedNumbersType
   date: 'datedesc' | 'dateasc'
   available: boolean
   match?: 'all' | 'any'
@@ -54,4 +54,9 @@ export type DialogType = {
   handleConfirm: () => void
   message: string
   variant?: 'success' | 'danger'
+}
+
+//* Button
+export interface ICloseButton {
+  onClick: () => void
 }

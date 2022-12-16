@@ -1,29 +1,25 @@
 import * as React from 'react'
 
-import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next'
-import {handleAxiosError, handleUnexpectedError} from '@utils/errors'
-
 import Head from 'next/head'
-import type {IProjectData} from 'app/types/project'
+import {NextPage} from 'next'
 import ProjectsList from '@screens/Project/List'
-import type {ProjectsResponseType} from 'app/types/response'
 import UserCard from '@screens/User/Card'
-import axios from 'axios'
-import {privateFetch} from '@utils/fetch'
-import {useAuthState} from '@hooks/auth/useAuthState'
+import {trpc} from '@utils/trpc'
 import {useProjectContext} from '@hooks/project/useProjectContext'
 
-type Props = {projects: IProjectData[]}
-
-const Profile: NextPage<Props> = ({
-  projects,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Profile: NextPage = () => {
   const {persist, clear} = useProjectContext()
+
+  const user = trpc.user.detail.useQuery().data?.user
+
+  const result = trpc.project.list.useQuery()
+  const projects = result.data?.projects
+
   React.useEffect(() => {
-    persist(projects)
+    persist(projects || [])
     return () => clear()
   }, [clear, persist, projects])
-  const {user} = useAuthState()
+
   return (
     <section className='h-min-screen pt-16'>
       <Head>
@@ -51,14 +47,11 @@ const Profile: NextPage<Props> = ({
 
 export default Profile
 
-export const getServerSideProps: GetServerSideProps<Props> = async context => {
+/* export const getServerSideProps: GetServerSideProps = async context => {
   try {
-    const response = await privateFetch(context).get<ProjectsResponseType>(
-      '/project/user'
-    )
-    const {projects} = response.data
-    return {props: {projects}}
-  } catch (error: any) {
+    await privateFetch(context).get<ProjectsResponseType>('/project/user')
+    return {props: {}}
+  } catch (error) {
     if (axios.isAxiosError(error)) {
       handleAxiosError(error)
       if (error?.response?.status === 401) {
@@ -73,6 +66,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
     } else {
       handleUnexpectedError(error)
     }
-    return Promise.reject(error.toJSON())
-  }
-}
+    throw error
+  } 
+}*/

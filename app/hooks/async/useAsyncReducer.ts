@@ -1,10 +1,10 @@
 import * as React from 'react'
 
-import {asyncReducer} from '@reducers/asyncReducer'
-import type {AsyncStateType, AsyncActionsType} from 'app/types/async'
-import type {ProjectsResponseType} from 'app/types/response'
+import type {AsyncActionsType, AsyncStateType} from 'app/types/async'
 
+import type {ProjectsResponseType} from 'app/types/response'
 import {Status} from 'app/types/constants'
+import {asyncReducer} from '@reducers/asyncReducer'
 
 const initialState: AsyncStateType<ProjectsResponseType> = {
   status: Status.idle,
@@ -24,5 +24,5 @@ export function useAsyncReducer(
       AsyncActionsType<ProjectsResponseType>
     >
   >(asyncReducer, init || initialState)
-  return [state, dispatch] //as const
+  return [state, dispatch] as const
 }

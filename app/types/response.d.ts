@@ -2,6 +2,7 @@ import type {IAuthUser} from 'app/types/user'
 import type {IProjectData} from 'app/types/project'
 import type {IPositionData} from 'app/types/position'
 import {SelectOptionsType} from 'app/types/form'
+import {Level, Role, Technology} from './constants'
 
 export type StatusResponseType = {
   status: number
@@ -66,24 +67,24 @@ export type RemovePositionResponseType = {
 //* Options
 export type TechnologiesResponseType = {
   message: string
-  technologies: SelectOptionsType[]
+  technologies: SelectOptionsType<Technology>[]
   status: number
 }
 
 export type LanguagesResponseType = {
   message: string
-  languages: SelectOptionsType[]
+  languages: SelectOptionsType<Language>[]
   status: number
 }
 
 export type LevelsResponseType = {
   status: number
   message: string
-  levels: SelectOptionsType[]
+  levels: SelectOptionsType<Level>[]
 }
 
 export type RolesResponseType = {
   status: number
   message: string
-  roles: SelectOptionsType[]
+  roles: SelectOptionsType<Role>[]
 }

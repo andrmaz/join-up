@@ -9,7 +9,7 @@ const EditPassword = ({
 }: {
   isSelectedTab: boolean
 }): JSX.Element => {
-  const onSubmit = useEditUserPassword()
+  const [onSubmit] = useEditUserPassword()
   return (
     <Panel index={3} isSelectedTab={isSelectedTab}>
       <PasswordForm onSubmit={onSubmit} />

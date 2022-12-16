@@ -1,16 +1,18 @@
 import * as React from 'react'
+
+import type {AsyncResponseType, AsyncStateType} from 'app/types/async'
+
 import {AxiosResponse} from 'axios'
-import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
-import type {AsyncStateType, AsyncResponseType} from 'app/types/async'
 import type {ProjectsResponseType} from 'app/types/response'
 import {Status} from 'app/types/constants'
+import {useAsyncReducer} from '@hooks/async/useAsyncReducer'
 
 export default function useAsync(
   init?: AsyncStateType<ProjectsResponseType>
 ): AsyncResponseType<ProjectsResponseType> {
   const [{status, data, error}, dispatch] = useAsyncReducer(init)
   const run = React.useCallback(
-    (promise: Promise<any>) => {
+    (promise: Promise<AxiosResponse>) => {
       if (!promise || !promise.then) {
         throw new Error(
           `The argument passed to useAsync().run must be a promise. Maybe a function that's passed isn't returning anything?`
@@ -18,7 +20,7 @@ export default function useAsync(
       }
       dispatch({type: Status.pending})
       return promise
-        .then((response: AxiosResponse) => {
+        .then(response => {
           dispatch({type: Status.resolved, payload: response.data})
         })
         .catch((error: string) => {
@@ -36,5 +38,5 @@ export default function useAsync(
     data,
     error,
     run,
-  }
+  } as const
 }

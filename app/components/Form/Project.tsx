@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import FocusRefButton from '@components/Button/Focus'
+import {FocusButton} from '@components/Button/Focus'
 import type {IProjectForm} from 'app/types/form'
 import type {IProjectInput} from 'app/types/project'
 import {InputSubmit} from '@lib/Input/Submit'
@@ -62,7 +62,7 @@ const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
             )}
           />
         </div>
-        <FocusRefButton onClick={() => reset()} />
+        <FocusButton onClick={reset} />
       </div>
     </form>
   )

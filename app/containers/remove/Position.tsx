@@ -4,7 +4,7 @@ import Dialog from '@lib/Dialog'
 import useRemovePosition from '@hooks/position/useRemovePosition'
 
 const RemovePositionForm = ({id}: {id: number}): JSX.Element => {
-  const handleConfirm = useRemovePosition(id)
+  const [handleConfirm] = useRemovePosition(id)
   return (
     <Dialog
       handleConfirm={handleConfirm}
@@ -14,4 +14,4 @@ const RemovePositionForm = ({id}: {id: number}): JSX.Element => {
   )
 }
 
-export default RemovePositionForm
+export {RemovePositionForm}

@@ -1,26 +1,26 @@
 import * as React from 'react'
 import {SelectOptionsType} from 'app/types/form'
-import {PActions} from 'app/types/constants'
-import {Levels, Roles} from 'app/types/constants'
+import {PActions, Technology} from 'app/types/constants'
+import {Level, Role} from 'app/types/constants'
 export interface IPositionInput {
   projectId: number
   title: string
   qualifications: string
   duties: string
-  technologies: SelectOptionsType[]
+  technologies: SelectOptionsType<Technology>[]
   vacancies: number
-  level: keyof typeof Levels
-  role: keyof typeof Roles
+  level: keyof typeof Level
+  role: keyof typeof Role
 }
 export interface IPositionData {
   id: number
   title: string
   qualifications: string
   duties: string
-  technologies: SelectOptionsType[]
+  technologies: SelectOptionsType<Technology>[]
   vacancies: number
-  level: SelectOptionsType
-  role: SelectOptionsType
+  level: SelectOptionsType<Level>
+  role: SelectOptionsType<Role>
   projectId: number
   userId: number
   applicants: number

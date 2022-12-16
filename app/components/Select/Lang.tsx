@@ -4,8 +4,9 @@ import type {IFormSelect, SelectOptionsType} from 'app/types/form'
 
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@lib/Message/Error'
+import {Language} from 'app/types/constants'
 import Select from 'react-select'
-import useLanguages from '@hooks/options/useLanguages'
+import {trpc} from '@utils/trpc'
 
 const LangSelect = ({
   control,
@@ -15,7 +16,10 @@ const LangSelect = ({
   defaultValues,
   defaultValue,
 }: IFormSelect): React.ReactElement => {
-  const languages = useLanguages()
+  const result = trpc.language.list.useQuery()
+
+  if (result.isError)
+    return <ErrorMessage>{result.error?.message}</ErrorMessage>
   return (
     <React.Fragment>
       <label id='languages' htmlFor='languages'>
@@ -39,7 +43,7 @@ const LangSelect = ({
             defaultValue={defaultValue ? defaultValue : value}
             closeMenuOnSelect={false}
             isMulti
-            options={languages}
+            options={result.data?.languages}
             getOptionValue={option => option['id']}
             placeholder='Select your languages'
             blurInputOnSelect={false}
@@ -47,7 +51,7 @@ const LangSelect = ({
             onChange={values => {
               setValue(
                 'languages',
-                values.map((value: SelectOptionsType) => value.id),
+                values.map((value: SelectOptionsType<Language>) => value.id),
                 {
                   shouldValidate: true,
                   shouldDirty: true,

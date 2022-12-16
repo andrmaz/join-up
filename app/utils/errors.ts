@@ -14,12 +14,16 @@ function handleAxiosError(error: AxiosError): void {
     console.log('Error Request', error.request)
   } else {
     // Something happened in setting up the request that triggered an Error
-    console.log('Error Messgae', error.message)
+    console.log('Error Message', error.message)
   }
 }
 
-function handleUnexpectedError(error: Error): void {
-  console.log('Error Config', error.message)
+function handleUnexpectedError(error: unknown): void {
+  if (error instanceof Error) {
+    console.log('Error Config', error.message)
+  } else {
+    console.log('Error Config', String(error))
+  }
 }
 
 export {handleAxiosError, handleUnexpectedError}

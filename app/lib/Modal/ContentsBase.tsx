@@ -13,7 +13,7 @@ export default function ModalContentsBase(
     <React.Fragment>
       {isOpen ? (
         <Portal>
-          <Dialog {...props} />
+          <Dialog>{props.children}</Dialog>
         </Portal>
       ) : null}
     </React.Fragment>

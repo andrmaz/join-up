@@ -18,7 +18,7 @@ const ProjectsGrid = ({
           <span>Loading projects...</span>
         ) : (
           isSuccess &&
-          (!data?.projects?.length ? (
+          (!data?.projects.length ? (
             <span>No match found</span>
           ) : (
             data?.projects.map(project => (

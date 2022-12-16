@@ -3,8 +3,8 @@ import * as React from 'react'
 import Dialog from '@lib/Dialog'
 import useAddApplication from '@hooks/application/useAddApplication'
 
-export const CreateApplicationForm = ({id}: {id: number}): JSX.Element => {
-  const handleConfirm = useAddApplication(id)
+const CreateApplicationForm = ({id}: {id: number}): JSX.Element => {
+  const [handleConfirm] = useAddApplication(id)
   return (
     <Dialog
       handleConfirm={handleConfirm}
@@ -12,3 +12,5 @@ export const CreateApplicationForm = ({id}: {id: number}): JSX.Element => {
     />
   )
 }
+
+export {CreateApplicationForm}

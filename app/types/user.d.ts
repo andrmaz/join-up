@@ -1,13 +1,13 @@
 import type {SelectOptionsType} from 'app/types/form'
-import type {NestedStringsType} from 'app/types/project'
-import {UActions} from 'app/types/constants'
+import type {NestedNumbersType} from 'app/types/project'
+import {Language, Technology, UActions} from 'app/types/constants'
 
-export interface ISigninInputs {
+export interface ISigninInput {
   email: string
   password: string
 }
 
-export interface ISignupInputs {
+export interface ISignupInput {
   username: string
   email: string
   password: string
@@ -16,8 +16,8 @@ export interface ISignupInputs {
   gitlabURL?: string
   bitbucketURL?: string
   linkedinURL?: string
-  languages: NestedStringsType
-  technologies: NestedStringsType
+  languages: NestedNumbersType
+  technologies: NestedNumbersType
   bio?: string
 }
 export interface IAuthUser {
@@ -30,8 +30,8 @@ export interface IAuthUser {
   linkedinURL?: string
   avatar: string
   bio?: string
-  languages: SelectOptionsType[]
-  technologies: SelectOptionsType[]
+  languages: SelectOptionsType<Language>[]
+  technologies: SelectOptionsType<Technology>[]
 }
 
 export type UserStateType = IAuthUser | null

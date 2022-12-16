@@ -1,4 +1,4 @@
-import FocusRefButton from '@components/Button/Focus'
+import {FocusButton} from '@components/Button/Focus'
 import type {IPositionForm} from 'app/types/form'
 import type {IPositionInput} from 'app/types/position'
 import {InputSubmit} from '@lib/Input/Submit'
@@ -74,7 +74,7 @@ const PositionForm = ({id, onSubmit, position}: IPositionForm): JSX.Element => {
             )}
           />
         </div>
-        <FocusRefButton onClick={() => reset()} />
+        <FocusButton onClick={reset} />
       </div>
     </form>
   )

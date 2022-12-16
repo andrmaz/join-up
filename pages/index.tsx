@@ -1,28 +1,18 @@
-import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next'
-import {handleAxiosError, handleUnexpectedError} from '@utils/errors'
-
-import ApplicationFeed from '@components/Feed/Application'
+import {ApplicationFeed} from '@components/Feed/Application'
 import Carousel from '@lib/Carousel/Carousel'
 import Head from 'next/head'
-import type {IApplicationData} from 'app/types/application'
-import type {IPositionData} from 'app/types/position'
-import type {IProjectData} from 'app/types/project'
+import {NextPage} from 'next'
 //import Image from 'next/image'
-import PositionFeed from '@components/Feed/Position'
-import ProjectFeed from '@components/Feed/Project'
-import axios from 'axios'
-import {privateFetch} from '@utils/fetch'
+import {PositionFeed} from '@components/Feed/Position'
+import {ProjectFeed} from '@components/Feed/Project'
+import {trpc} from '../app/utils/trpc'
 
-type Props = {
-  projects: IProjectData[]
-  position: IPositionData[]
-  applications: IApplicationData[]
-}
+const Home: NextPage = () => {
+  const {data, isLoading, isError, error} = trpc.feed.list.useQuery()
 
-const Home: NextPage<{data: Props}> = ({
-  data,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const {projects, position, applications} = data
+  if (isLoading) return <>Loading ...</>
+  if (isError) return <>Error: {error.message}</>
+  if (!data) return <>Error: Something went wrong</>
   return (
     <section className='h-min-screen pt-16'>
       <Head>
@@ -41,22 +31,20 @@ const Home: NextPage<{data: Props}> = ({
           </article>
           <section className='h-auto w-full flex flex-col justify-evenly'>
             <Carousel>
-              {projects.map(project => (
+              {data.projects.map(project => (
                 <ProjectFeed key={project.id} {...project} />
               ))}
             </Carousel>
             <Carousel>
-              {position.map(position => (
+              {data.positions.map(position => (
                 <PositionFeed key={position.id} {...position} />
               ))}
             </Carousel>
-            {applications.length ? (
-              <Carousel>
-                {applications.map(application => (
-                  <ApplicationFeed key={application.id} {...application} />
-                ))}
-              </Carousel>
-            ) : null}
+            <Carousel>
+              {data.applications.map(application => (
+                <ApplicationFeed key={application.id} {...application} />
+              ))}
+            </Carousel>
           </section>
         </section>
       </main>
@@ -66,13 +54,11 @@ const Home: NextPage<{data: Props}> = ({
 
 export default Home
 
-export const getServerSideProps: GetServerSideProps<{
-  data: Props
-}> = async context => {
+/* export const getServerSideProps: GetServerSideProps = async context => {
   try {
-    const {data} = await privateFetch(context).get('/feed')
-    return {props: {data}}
-  } catch (error: any) {
+    await privateFetch(context).get('/feed')
+    return {props: {}}
+  } catch (error) {
     if (axios.isAxiosError(error)) {
       handleAxiosError(error)
       if (error?.response?.status === 401) {
@@ -87,6 +73,6 @@ export const getServerSideProps: GetServerSideProps<{
     } else {
       handleUnexpectedError(error)
     }
-    return Promise.reject(error.toJSON())
+    throw error
   }
-}
+} */

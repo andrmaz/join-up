@@ -45,15 +45,15 @@ export type InputSubmitType = {
 }
 
 //* Selects
-export type SelectOptionsType = {id: number; label: string}
+export type SelectOptionsType<T extends string> = {id: number; label: T}
 
 export interface IFormSelect {
   control: Control | undefined
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   errors?: Record<string, any>
   disabled?: boolean
-  defaultValues?: SelectOptionsType[]
-  defaultValue?: SelectOptionsType[]
+  defaultValues?: SelectOptionsType<string>[]
+  defaultValue?: SelectOptionsType<string>[]
   id?: number
 }
 
@@ -61,7 +61,7 @@ export interface IPositionSelect {
   control: Control
   setValue: (name: any, value: unknown, config?: SetValueConfig) => void
   errors?: Record<string, any>
-  defaultValue?: SelectOptionsType
+  defaultValue?: SelectOptionsType<string>
 }
 
 //*Buttons

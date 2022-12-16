@@ -17,7 +17,6 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   // Resolve Typescript paths
   moduleNameMapper: {
-    faker: '@faker-js/faker',
     '@pages/(.*)': '<rootDir>/pages/$1',
     '@components/(.*)': '<rootDir>/app/components/$1',
     '@utils/(.*)': '<rootDir>/app/utils/$1',

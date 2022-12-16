@@ -2,17 +2,16 @@ import {useProjectProvider} from '@hooks/project/useProjectProvider'
 import {NestedValue} from 'react-hook-form'
 import {IAuthUser} from 'app/types/user'
 import {SelectOptionsType} from 'app/types/form'
-import {ProjectsResponseType} from 'app/types/response'
 import {PActions} from 'app/types/constants'
 
 // https://github.com/react-hook-form/react-hook-form/issues/987
-export type NestedStringsType = NestedValue<string[]>
+export type NestedNumbersType = NestedValue<number[]>
 
 export interface IProjectInput {
   name: string
   description: string
   mission: string
-  technologies: NestedStringsType
+  technologies: NestedNumbersType
   projectURL?: string
 }
 
@@ -21,7 +20,7 @@ export interface IProjectData {
   name: string
   description: string
   mission: string
-  technologies: SelectOptionsType[]
+  technologies: SelectOptionsType<Technology>[]
   projectURL?: string
   owner: number
   collaborators: Array<IAuthUser>
@@ -55,5 +54,5 @@ export type ProjectGridType = {
   isLoading: boolean
   isError: boolean
   isSuccess: boolean
-  data: ProjectsResponseType | null
+  data?: {projects: IProjectData[]}
 }

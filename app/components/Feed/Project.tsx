@@ -3,7 +3,7 @@ import * as React from 'react'
 import type {IProjectData} from 'app/types/project'
 import Link from 'next/link'
 
-export default function ProjectFeed(props: IProjectData): JSX.Element {
+function ProjectFeed(props: IProjectData): JSX.Element {
   return (
     <li className='h-full min-w-1/4 border-2 v-1 mx-1 p-2 rounded overflow-hidden	'>
       <Link href={`/projects/${props.id}`} passHref replace>
@@ -18,3 +18,5 @@ export default function ProjectFeed(props: IProjectData): JSX.Element {
     </li>
   )
 }
+
+export {ProjectFeed}

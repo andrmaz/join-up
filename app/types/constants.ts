@@ -19,13 +19,25 @@ export enum Status {
   rejected = 'rejected',
 }
 
-export enum Levels {
-  junior = 'Junior',
-  mid = 'Mid',
-  senior = 'Senior',
-  lead = 'Lead',
+export enum Language {
+  English = 'English',
+  Italian = 'Italian',
+  Spanish = 'Spanish',
+  French = 'French',
 }
-export enum Roles {
+export enum Technology {
+  JavaScript = 'JavaScript',
+  TypeScript = 'TypeScript',
+  Rust = 'Rust',
+  Python = 'Python',
+}
+export enum Level {
+  Junior = 'Junior',
+  Mid = 'Mid',
+  Senior = 'Senior',
+  Lead = 'Lead',
+}
+export enum Role {
   PM = 'Project manager',
   RA = 'Requirement analyst',
   UX = 'UX designer',

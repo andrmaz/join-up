@@ -1,4 +1,4 @@
-import CloseButton from '@components/Button/Close'
+import {CloseButton} from '@components/Button/Close'
 import {FaCheckCircle} from 'react-icons/fa'
 import React from 'react'
 

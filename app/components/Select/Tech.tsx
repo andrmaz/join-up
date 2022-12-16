@@ -5,7 +5,8 @@ import type {IFormSelect, SelectOptionsType} from 'app/types/form'
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@lib/Message/Error'
 import Select from 'react-select'
-import useTechnologies from '@hooks/options/useTechnologies'
+import {Technology} from 'app/types/constants'
+import {trpc} from '@utils/trpc'
 
 const TechSelect = ({
   control,
@@ -14,12 +15,12 @@ const TechSelect = ({
   disabled,
   defaultValues,
   defaultValue,
-  id,
-}: IFormSelect): React.ReactElement => {
-  const {isError, error, data} = useTechnologies(id)
-  if (isError) {
-    return <ErrorMessage>{error?.message}</ErrorMessage>
-  }
+}: /* id, */
+IFormSelect): React.ReactElement => {
+  const result = trpc.technology.list.useQuery()
+
+  if (result.isError)
+    return <ErrorMessage>{result.error?.message}</ErrorMessage>
   return (
     <React.Fragment>
       <label id='technologies' htmlFor='technologies'>
@@ -43,7 +44,7 @@ const TechSelect = ({
             defaultValue={defaultValue ? defaultValue : value}
             closeMenuOnSelect={false}
             isMulti
-            options={data}
+            options={result.data?.technologies}
             getOptionValue={option => option['id']}
             placeholder='Choose your tech stack'
             blurInputOnSelect={false}
@@ -51,7 +52,7 @@ const TechSelect = ({
             onChange={values => {
               setValue(
                 'technologies',
-                values.map((value: SelectOptionsType) => value.id),
+                values.map((value: SelectOptionsType<Technology>) => value.id),
                 {
                   shouldValidate: true,
                   shouldDirty: true,

@@ -9,7 +9,7 @@ const EditUsername = ({
 }: {
   isSelectedTab: boolean
 }): JSX.Element => {
-  const onSubmit = useEditUsername()
+  const [onSubmit] = useEditUsername()
   return (
     <Panel index={1} isSelectedTab={isSelectedTab}>
       <UsernameForm onSubmit={onSubmit} />

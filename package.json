@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "join-up",
   "version": "0.1.0",
   "private": true,
   "engineStrict": true,
@@ -21,6 +21,11 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.12.0",
+    "@trpc/client": "^10.0.0-proxy-beta.25",
+    "@trpc/next": "^10.0.0-proxy-beta.25",
+    "@trpc/react-query": "^10.0.0-proxy-beta.25",
+    "@trpc/server": "^10.0.0-proxy-beta.25",
     "@types/faker": "^5.5.9",
     "@types/node": "^15.14.9",
     "@types/react": "^17.0.45",
@@ -32,17 +37,18 @@
     "react-icons": "^4.7.1",
     "react-query": "^3.39.2",
     "react-select": "^4.3.1",
-    "typescript": "^4.9.4"
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
+    "@faker-js/faker": "^7.6.0",
     "@storybook/addon-actions": "^6.5.14",
     "@storybook/addon-essentials": "^6.5.14",
     "@storybook/addon-links": "^6.5.14",
     "@storybook/builder-webpack5": "^6.5.14",
     "@storybook/manager-webpack5": "^6.5.14",
     "@storybook/react": "^6.5.14",
-    "@faker-js/faker": "^6.3.1",
+    "typescript": "^4.9.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
     "@types/react-select": "^4.0.18",

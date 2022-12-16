@@ -3,7 +3,7 @@ import * as React from 'react'
 import ModalContents from '@lib/Modal/Contents'
 import {ModalOpenButton} from '@lib/Modal/OpenButton'
 import {ModalProvider} from '@providers/ModalProvider'
-import RemoveProjectForm from '@containers/remove/Project'
+import {RemoveProjectForm} from '@containers/remove/Project'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 
 const RemoveProject = ({id}: {id: number}): JSX.Element => (

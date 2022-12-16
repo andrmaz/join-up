@@ -2,7 +2,7 @@ import {render, screen} from 'test-utils'
 
 import type {IMenuPanel} from 'app/types/components'
 import Panel from '@lib/Tablist/Panel'
-import faker from 'faker'
+import { faker } from '@faker-js/faker';
 
 const props: IMenuPanel = {
   children: faker.random.word(),
