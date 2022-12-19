@@ -1,13 +1,14 @@
 import {GetServerSidePropsContext, GetServerSidePropsResult} from 'next'
 
 import Router from 'next/router'
-import {privateFetch} from './fetch'
+import {trpc} from './trpc'
 
 export default async function checkAuth(
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<Record<string, never>> | void> {
   try {
-    return await privateFetch(context).get('user')
+    const result = trpc.auth['verify-request'].useMutation()
+    return await result.mutateAsync()
   } catch {
     if (context.res) {
       //* handle server side redirect

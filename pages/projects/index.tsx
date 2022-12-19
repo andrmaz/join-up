@@ -1,10 +1,12 @@
 import * as React from 'react'
 
+import {GetServerSideProps, NextPage} from 'next'
+
 import Drawer from '@components/Drawer/Drawer'
 import type {FieldValues} from 'app/types/components'
 import Head from 'next/head'
-import {NextPage} from 'next'
 import ProjectsGrid from '@screens/Project/Grid'
+import checkAuth from '@utils/auth'
 import {trpc} from '@utils/trpc'
 import {useForm} from 'react-hook-form'
 
@@ -49,3 +51,8 @@ const Projects: NextPage = () => {
 }
 
 export default Projects
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  await checkAuth(context)
+  return {props: {}}
+}

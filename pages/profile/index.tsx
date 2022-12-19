@@ -1,9 +1,11 @@
 import * as React from 'react'
 
+import {GetServerSideProps, NextPage} from 'next'
+
 import Head from 'next/head'
-import {NextPage} from 'next'
 import ProjectsList from '@screens/Project/List'
 import UserCard from '@screens/User/Card'
+import checkAuth from '@utils/auth'
 import {trpc} from '@utils/trpc'
 import {useProjectContext} from '@hooks/project/useProjectContext'
 
@@ -47,25 +49,7 @@ const Profile: NextPage = () => {
 
 export default Profile
 
-/* export const getServerSideProps: GetServerSideProps = async context => {
-  try {
-    await privateFetch(context).get<ProjectsResponseType>('/project/user')
-    return {props: {}}
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      handleAxiosError(error)
-      if (error?.response?.status === 401) {
-        console.log('Redirect')
-        return {
-          redirect: {
-            destination: '/signin',
-            permanent: false,
-          },
-        }
-      }
-    } else {
-      handleUnexpectedError(error)
-    }
-    throw error
-  } 
-}*/
+export const getServerSideProps: GetServerSideProps = async context => {
+  await checkAuth(context)
+  return {props: {}}
+}

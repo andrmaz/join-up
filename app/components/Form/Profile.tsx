@@ -45,7 +45,7 @@ const ProfileForm = ({
           </div>
           <section className='w-2/5'>
             <div className='h-52 xl:h-60 w-52 xl:w-60 my-auto'>
-              <UserAvatar image={user?.avatar} />
+              <UserAvatar />
             </div>
           </section>
         </div>

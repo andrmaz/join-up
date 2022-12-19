@@ -3,10 +3,11 @@ import 'tailwindcss/tailwind.css'
 import * as React from 'react'
 
 import type {AppProps} from 'next/app'
-import {AuthProvider} from '@providers/AuthProvider'
 import Navbar from '@components/Navbar/Navbar'
 import {PositionProvider} from '@providers/PositionProvider'
 import {ProjectProvider} from '@providers/ProjectProvider'
+import {Session} from 'next-auth'
+import {SessionProvider} from 'next-auth/react'
 import {SnackbarProvider} from '@providers/SnackbarProvider'
 import dynamic from 'next/dynamic'
 import {trpc} from '../app/utils/trpc'
@@ -17,9 +18,12 @@ export const reportWebVitals = webVitals
 //* the module will be dynamically loaded by the page in the browser
 const DynamicComponent = dynamic(() => import('@lib/Root/Root'))
 
-function MyApp({Component, pageProps}: AppProps): React.ReactElement {
+function MyApp({
+  Component,
+  pageProps: {session, ...pageProps},
+}: AppProps<{session: Session}>): React.ReactElement {
   return (
-    <AuthProvider>
+    <SessionProvider session={session}>
       <Navbar />
       <ProjectProvider>
         <PositionProvider>
@@ -29,7 +33,7 @@ function MyApp({Component, pageProps}: AppProps): React.ReactElement {
           </SnackbarProvider>
         </PositionProvider>
       </ProjectProvider>
-    </AuthProvider>
+    </SessionProvider>
   )
 }
 

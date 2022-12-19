@@ -3,6 +3,7 @@ import * as React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import SigninForm from '@components/Form/Signin'
+import {signIn} from 'next-auth/react'
 import {useRouter} from 'next/router'
 
 const SignIn = (): JSX.Element => {
@@ -23,6 +24,13 @@ const SignIn = (): JSX.Element => {
             <h1 className='text-3xl'>SignIn</h1>
           </header>
           <SigninForm />
+          <button
+            onClick={() =>
+              signIn('github', {callbackUrl: 'http://localhost:3000'})
+            }
+          >
+            Sign in with GitHub
+          </button>
           <div className='inline-flex justify-between w-full h-3/20 pt-5 lg:text-xs'>
             <Link href='/signup'>
               <a>Do not have an account? SignUp</a>

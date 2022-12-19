@@ -8,8 +8,7 @@ import type {IAuthUser} from 'app/types/user'
 import UserAvatar from '@screens/User/Avatar'
 
 const UserCard = ({
-  avatar,
-  username,
+  name,
   bio,
   languages,
   technologies,
@@ -21,12 +20,12 @@ const UserCard = ({
   return (
     <section className='sticky top-1/4 h-70v p-1'>
       <div className='h-auto w-full mb-10'>
-        <UserAvatar image={avatar} />
+        <UserAvatar />
       </div>
       <ul className='h-auto w-full flex flex-col justify-around text-lg xl:text-xl'>
         <li className='flex py-1 my-1'>
           <FaUser className='mr-1' />
-          <span className='font-bold truncate'>{username}</span>
+          <span className='font-bold truncate'>{name}</span>
         </li>
         <li className='flex py-1 my-1'>
           <GiOpenBook className='mr-1' />

@@ -19,7 +19,7 @@ const PositionPanels = ({
   return (
     <main className='h-auto w-full overflow-y-scroll'>
       {positions.map((position, index) => {
-        return user?.id === position.userId ? (
+        return user?.id === position.userId.toString() ? (
           <PositionCard
             key={position.id}
             isSelectedTab={selectedTab === index}

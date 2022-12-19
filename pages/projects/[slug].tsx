@@ -1,12 +1,14 @@
 import * as React from 'react'
 
+import {GetServerSideProps, NextPage} from 'next'
+
 import CreatePosition from '@screens/Position/Create'
 import {EmptyMessage} from '@lib/Message/Empty'
 import Head from 'next/head'
-import {NextPage} from 'next'
 import {PActions} from 'app/types/constants'
 import PositionTablist from '@screens/Position/Tablist'
 import ProjectOverview from '@screens/Project/Overview'
+import checkAuth from '@utils/auth'
 import {trpc} from '@utils/trpc'
 import {usePositionContext} from '@hooks/position/usePositionContext'
 
@@ -38,7 +40,9 @@ const Slug: NextPage = () => {
         <section className='h-full py-4 xl:py-12 px-40 xl:px-80'>
           <article className='w-full h-2/5 mb-4'>
             <div className='absolute right-40 xl:right-80'>
-              {user?.id === project.owner && <CreatePosition id={project.id} />}
+              {user?.id === project.owner.toString() && (
+                <CreatePosition id={project.id} />
+              )}
             </div>
             <ProjectOverview {...project} />
           </article>
@@ -55,36 +59,7 @@ const Slug: NextPage = () => {
 
 export default Slug
 
-/* export const getServerSideProps: GetServerSideProps = async context => {
-  try {
-    //* project id parameter will be sent as a query parameter (slug) to the page
-    const {slug} = context.params as Params
-
-    await Promise.all([
-      privateFetch(context).get<ProjectResponseType>(`/project/${slug}`),
-      privateFetch(context).get<PositionsResponseType>(
-        `/position/project/${slug}`
-      ),
-    ])
-
-    return {
-      props: {},
-    }
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      handleAxiosError(error)
-      if (error?.response?.status === 401) {
-        console.log('Redirect')
-        return {
-          redirect: {
-            destination: '/signin',
-            permanent: false,
-          },
-        }
-      }
-    } else {
-      handleUnexpectedError(error)
-    }
-    throw error
-  }
-} */
+export const getServerSideProps: GetServerSideProps = async context => {
+  await checkAuth(context)
+  return {props: {}}
+}

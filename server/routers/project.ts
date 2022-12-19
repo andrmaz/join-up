@@ -6,15 +6,15 @@ import {z} from 'zod'
 
 const project: IProjectData = {
   id: 0,
-  name: '',
-  mission: '',
-  description: '',
+  name: 'Test',
+  mission: 'Fake',
+  description: 'First',
   technologies: [],
   owner: 0,
   collaborators: [],
   hasPositions: false,
-  createdAt: '',
-  updatedAt: '',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
 }
 const response: ProjectResponseType = {
   message: '',
@@ -37,10 +37,8 @@ export const projectRouter = router({
         })
         .nullish()
     )
-    .query(async ({input}) => {
-      input
-      const projects = [project]
-      return {projects}
+    .query(async () => {
+      return {projects: [project]}
     }),
 
   create: protectedProcedure
@@ -56,18 +54,7 @@ export const projectRouter = router({
     .mutation(() => {
       return {
         message: 'Ok',
-        project: {
-          id: 0,
-          name: '',
-          description: '',
-          mission: '',
-          technologies: [],
-          owner: 0,
-          collaborators: [],
-          hasPositions: false,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        },
+        project,
         status: 201,
       }
     }),
@@ -100,18 +87,7 @@ export const projectRouter = router({
     .mutation(() => {
       return {
         message: 'Ok',
-        project: {
-          id: 0,
-          name: '',
-          description: '',
-          mission: '',
-          technologies: [],
-          owner: 0,
-          collaborators: [],
-          hasPositions: false,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        },
+        project,
         status: 200,
       }
     }),

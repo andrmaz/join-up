@@ -6,10 +6,18 @@ import {NextPage} from 'next'
 import {PositionFeed} from '@components/Feed/Position'
 import {ProjectFeed} from '@components/Feed/Project'
 import {trpc} from '../app/utils/trpc'
+import {useRouter} from 'next/router'
+import {useSession} from 'next-auth/react'
 
 const Home: NextPage = () => {
+  const {status} = useSession()
+  const router = useRouter()
+
   const {data, isLoading, isError, error} = trpc.feed.list.useQuery()
 
+  if (status === 'unauthenticated') {
+    router.push('/signin')
+  }
   if (isLoading) return <>Loading ...</>
   if (isError) return <>Error: {error.message}</>
   if (!data) return <>Error: Something went wrong</>
@@ -53,26 +61,3 @@ const Home: NextPage = () => {
 }
 
 export default Home
-
-/* export const getServerSideProps: GetServerSideProps = async context => {
-  try {
-    await privateFetch(context).get('/feed')
-    return {props: {}}
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      handleAxiosError(error)
-      if (error?.response?.status === 401) {
-        console.log('Redirect')
-        return {
-          redirect: {
-            destination: '/signin',
-            permanent: false,
-          },
-        }
-      }
-    } else {
-      handleUnexpectedError(error)
-    }
-    throw error
-  }
-} */

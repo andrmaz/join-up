@@ -29,7 +29,7 @@ IFormSelect): React.ReactElement => {
       <Controller
         name='technologies'
         control={control}
-        defaultValue={defaultValues ? defaultValues.map(v => v.id) : ''}
+        defaultValue={defaultValues ? defaultValues.map(v => v.id) : []}
         rules={{
           //* recommended for object or array input data
           validate: value =>
@@ -41,7 +41,7 @@ IFormSelect): React.ReactElement => {
             inputId='technologies'
             name='technologies'
             aria-labelledby='technologies'
-            defaultValue={defaultValue ? defaultValue : value}
+            defaultValue={defaultValue ? defaultValue : [value]}
             closeMenuOnSelect={false}
             isMulti
             options={result.data?.technologies}
