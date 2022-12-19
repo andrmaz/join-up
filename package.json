@@ -21,7 +21,7 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@tanstack/react-query": "^4.12.0",
+    "@tanstack/react-query": "^4.20.4",
     "@trpc/client": "^10.0.0-proxy-beta.25",
     "@trpc/next": "^10.0.0-proxy-beta.25",
     "@trpc/react-query": "^10.0.0-proxy-beta.25",
