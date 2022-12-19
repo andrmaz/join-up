@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import type {IPositionData} from 'app/types/position'
+import {QueryResult} from '@components/Result/Query'
 import dynamic from 'next/dynamic'
 import {trpc} from '@utils/trpc'
 
@@ -14,27 +15,31 @@ const PositionPanels = ({
   positions: IPositionData[]
   selectedTab: number
 }): React.ReactElement => {
-  const user = trpc.user.detail.useQuery().data?.user
+  const {status, error, data} = trpc.user.detail.useQuery()
 
   return (
     <main className='h-auto w-full overflow-y-scroll'>
-      {positions.map((position, index) => {
-        return user?.id === position.userId.toString() ? (
-          <PositionCard
-            key={position.id}
-            isSelectedTab={selectedTab === index}
-            index={index}
-            position={position}
-          />
-        ) : (
-          <PositionOverview
-            key={position.id}
-            isSelectedTab={selectedTab === index}
-            index={index}
-            position={position}
-          />
-        )
-      })}
+      <QueryResult status={status} error={error} data={data}>
+        {({user}) =>
+          positions.map((position, index) => {
+            return user.id === position.userId.toString() ? (
+              <PositionCard
+                isSelectedTab={selectedTab === index}
+                index={index}
+                position={position}
+                key={position.id}
+              />
+            ) : (
+              <PositionOverview
+                isSelectedTab={selectedTab === index}
+                index={index}
+                position={position}
+                key={position.id}
+              />
+            )
+          })
+        }
+      </QueryResult>
     </main>
   )
 }

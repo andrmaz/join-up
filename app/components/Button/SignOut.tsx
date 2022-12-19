@@ -8,9 +8,15 @@ const SignOutButton = (): JSX.Element => {
     router.push(url)
   }
   return (
-    <button onClick={onClick} className='text-left m-1'>
+    <div
+      onClick={onClick}
+      className='text-left m-1'
+      onKeyDown={() => ''}
+      role='button'
+      tabIndex={0}
+    >
       Sign Out
-    </button>
+    </div>
   )
 }
 

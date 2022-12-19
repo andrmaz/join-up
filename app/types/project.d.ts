@@ -48,11 +48,3 @@ export type ProjectContextType = {
 }
 
 export type UseProjectContextResults = ReturnType<typeof useProjectProvider>
-
-export type ProjectGridType = {
-  isIdle: boolean
-  isLoading: boolean
-  isError: boolean
-  isSuccess: boolean
-  data?: {projects: IProjectData[]}
-}

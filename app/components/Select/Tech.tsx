@@ -4,6 +4,7 @@ import type {IFormSelect, SelectOptionsType} from 'app/types/form'
 
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@lib/Message/Error'
+import {QueryResult} from '@components/Result/Query'
 import Select from 'react-select'
 import {Technology} from 'app/types/constants'
 import {trpc} from '@utils/trpc'
@@ -15,58 +16,61 @@ const TechSelect = ({
   disabled,
   defaultValues,
   defaultValue,
-}: /* id, */
-IFormSelect): React.ReactElement => {
-  const result = trpc.technology.list.useQuery()
+}: IFormSelect): React.ReactElement => {
+  const {status, error, data} = trpc.technology.list.useQuery()
 
-  if (result.isError)
-    return <ErrorMessage>{result.error?.message}</ErrorMessage>
   return (
-    <React.Fragment>
-      <label id='technologies' htmlFor='technologies'>
-        Technologies :
-      </label>
-      <Controller
-        name='technologies'
-        control={control}
-        defaultValue={defaultValues ? defaultValues.map(v => v.id) : []}
-        rules={{
-          //* recommended for object or array input data
-          validate: value =>
-            value.length || 'Please select at least one technology',
-        }}
-        render={({value, onBlur}) => (
-          <Select
-            id='technologies'
-            inputId='technologies'
+    <QueryResult status={status} error={error} data={data}>
+      {({technologies}) => (
+        <React.Fragment>
+          <label id='technologies' htmlFor='technologies'>
+            Technologies :
+          </label>
+          <Controller
             name='technologies'
-            aria-labelledby='technologies'
-            defaultValue={defaultValue ? defaultValue : [value]}
-            closeMenuOnSelect={false}
-            isMulti
-            options={result.data?.technologies}
-            getOptionValue={option => option['id']}
-            placeholder='Choose your tech stack'
-            blurInputOnSelect={false}
-            onBlur={onBlur}
-            onChange={values => {
-              setValue(
-                'technologies',
-                values.map((value: SelectOptionsType<Technology>) => value.id),
-                {
-                  shouldValidate: true,
-                  shouldDirty: true,
-                }
-              )
+            control={control}
+            defaultValue={defaultValues ? defaultValues.map(v => v.id) : []}
+            rules={{
+              //* recommended for object or array input data
+              validate: value =>
+                value.length || 'Please select at least one technology',
             }}
-            isDisabled={disabled}
+            render={({value, onBlur}) => (
+              <Select
+                id='technologies'
+                inputId='technologies'
+                name='technologies'
+                aria-labelledby='technologies'
+                defaultValue={defaultValue ?? [value]}
+                closeMenuOnSelect={false}
+                isMulti
+                options={technologies}
+                getOptionValue={option => option['id']}
+                placeholder='Choose your tech stack'
+                blurInputOnSelect={false}
+                onBlur={onBlur}
+                onChange={values => {
+                  setValue(
+                    'technologies',
+                    values.map(
+                      (value: SelectOptionsType<Technology>) => value.id
+                    ),
+                    {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    }
+                  )
+                }}
+                isDisabled={disabled}
+              />
+            )}
           />
-        )}
-      />
-      {errors?.technologies && (
-        <ErrorMessage>{errors?.technologies?.message}</ErrorMessage>
+          {errors?.technologies && (
+            <ErrorMessage>{errors?.technologies?.message}</ErrorMessage>
+          )}
+        </React.Fragment>
       )}
-    </React.Fragment>
+    </QueryResult>
   )
 }
 
