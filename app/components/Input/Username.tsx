@@ -2,8 +2,8 @@ import FormInput from '@lib/Input/Form'
 import type {FormInputType} from 'app/types/form'
 
 const UsernameInput = ({
-  id = 'username',
-  name = 'username',
+  id = 'name',
+  name = 'name',
   label = 'Username',
   register,
   errors,

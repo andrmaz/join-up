@@ -6,7 +6,7 @@ import {trpc} from '@utils/trpc'
 import {useForm} from 'react-hook-form'
 
 const SigninForm = (): JSX.Element => {
-  const result = trpc.user.login.useMutation()
+  const result = trpc.auth.signin.useMutation()
   const {register, handleSubmit, errors} = useForm<ISigninInput>()
   const onSubmit = async (input: ISigninInput): Promise<void> => {
     result.mutateAsync(input)

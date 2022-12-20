@@ -1,21 +1,22 @@
-import {logout} from '@actions/authActions'
-import {trpc} from '@utils/trpc'
-import {useAuthDispatch} from '@hooks/auth/useAuthDispatch'
+import {signOut} from 'next-auth/react'
 import {useRouter} from 'next/router'
 
 const SignOutButton = (): JSX.Element => {
   const router = useRouter()
-  const result = trpc.user.logout.useMutation()
-  const dispatch = useAuthDispatch()
-  const signOut = async (): Promise<void> => {
-    result.mutate()
-    logout(dispatch)
-    router.push('/signin')
+  const onClick = async (): Promise<void> => {
+    const {url} = await signOut({redirect: false, callbackUrl: '/signin'})
+    router.push(url)
   }
   return (
-    <button onClick={signOut} className='text-left m-1'>
+    <div
+      onClick={onClick}
+      className='text-left m-1'
+      onKeyDown={() => ''}
+      role='button'
+      tabIndex={0}
+    >
       Sign Out
-    </button>
+    </div>
   )
 }
 

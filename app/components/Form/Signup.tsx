@@ -16,7 +16,7 @@ import {trpc} from '@utils/trpc'
 import {useForm} from 'react-hook-form'
 
 const SignupForm = (): JSX.Element => {
-  const result = trpc.user.register.useMutation()
+  const result = trpc.auth.register.useMutation()
   const {register, handleSubmit, watch, errors, control, setValue} =
     useForm<ISignupInput>()
   const watchPassword = watch('password')
@@ -68,7 +68,7 @@ const SignupForm = (): JSX.Element => {
             <InputSubmit
               value='SignUp'
               errors={Boolean(
-                errors.username ||
+                errors.name ||
                   errors.email ||
                   errors.password ||
                   errors.confirmPassword ||

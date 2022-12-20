@@ -8,7 +8,7 @@ export interface ISigninInput {
 }
 
 export interface ISignupInput {
-  username: string
+  name: string
   email: string
   password: string
   confirmPassword: string
@@ -20,15 +20,16 @@ export interface ISignupInput {
   technologies: NestedNumbersType
   bio?: string
 }
+
 export interface IAuthUser {
-  id: number
-  username: string
+  id: string
   email: string
+  name: string
+  image: string
   githubURL?: string
   gitlabURL?: string
   bitbucketURL?: string
   linkedinURL?: string
-  avatar: string
   bio?: string
   languages: SelectOptionsType<Language>[]
   technologies: SelectOptionsType<Technology>[]

@@ -1,6 +1,6 @@
-//import * as trpcNext from '@trpc/server/adapters/next'
+import * as trpcNext from '@trpc/server/adapters/next'
 
-//import {getSession} from 'next-auth/react'
+import {getSession} from 'next-auth/react'
 import {inferAsyncReturnType} from '@trpc/server'
 
 /**
@@ -8,21 +8,10 @@ import {inferAsyncReturnType} from '@trpc/server'
  * @link https://trpc.io/docs/context
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-export async function createContext(/* _opts: trpcNext.CreateNextContextOptions */) {
-  //const session = await getSession({req: opts.req})
+export async function createContext(opts: trpcNext.CreateNextContextOptions) {
+  const session = await getSession(opts)
 
-  return {
-    session: {
-      user: {
-        id: 0,
-        username: '',
-        email: '',
-        avatar: '',
-        languages: [],
-        technologies: [],
-      },
-    },
-  }
+  return {session}
 }
 
 export type Context = inferAsyncReturnType<typeof createContext>

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export default function Carousel<T>({children}: {children: T[]}): JSX.Element {
+export const Carousel: React.FC = ({children}): JSX.Element => {
   return (
     <article className='h-64 w-full my-4'>
       <h2 className='h-1/5'>

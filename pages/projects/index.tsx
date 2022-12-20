@@ -1,10 +1,13 @@
 import * as React from 'react'
 
+import {GetServerSideProps, NextPage} from 'next'
+
 import Drawer from '@components/Drawer/Drawer'
 import type {FieldValues} from 'app/types/components'
 import Head from 'next/head'
-import {NextPage} from 'next'
 import ProjectsGrid from '@screens/Project/Grid'
+import {QueryResult} from '@components/Result/Query'
+import checkAuth from '@utils/auth'
 import {trpc} from '@utils/trpc'
 import {useForm} from 'react-hook-form'
 
@@ -13,13 +16,13 @@ const Projects: NextPage = () => {
   //* watching every fields in the form
   const {date, match, available, technologies} = watch()
   //* fetching project according to the fields
-  const {isLoading, isInitialLoading, isError, isSuccess, data} =
-    trpc.project.list.useQuery({
-      date,
-      match,
-      technologies,
-      position: available,
-    })
+  const {status, error, data, isFetching} = trpc.project.list.useQuery({
+    date,
+    match,
+    technologies,
+    position: available,
+  })
+
   return (
     <section className='h-min-screen pt-16'>
       <Head>
@@ -30,18 +33,14 @@ const Projects: NextPage = () => {
         <article className='h-auto grid grid-cols-3 divide-x divide-black-500'>
           <Drawer
             register={register}
-            isPending={isLoading}
+            isPending={isFetching}
             setValue={setValue}
             control={control}
             technologies={technologies}
           />
-          <ProjectsGrid
-            isIdle={isInitialLoading}
-            isLoading={isLoading}
-            isError={isError}
-            isSuccess={isSuccess}
-            data={data}
-          />
+          <QueryResult status={status} error={error} data={data}>
+            {({projects}) => <ProjectsGrid projects={projects} />}
+          </QueryResult>
         </article>
       </main>
     </section>
@@ -49,3 +48,8 @@ const Projects: NextPage = () => {
 }
 
 export default Projects
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  await checkAuth(context)
+  return {props: {}}
+}
