@@ -1,6 +1,7 @@
 import type {AppRouter} from '../../server/routers/_app'
 import {createTRPCNext} from '@trpc/next'
 import {httpBatchLink} from '@trpc/client'
+import {transformer} from 'server/utils/transformer'
 
 function getBaseUrl(): string {
   if (typeof window !== 'undefined')
@@ -34,6 +35,7 @@ export const trpc = createTRPCNext<AppRouter>({
     }
 
     return {
+      transformer,
       links: [
         httpBatchLink({
           /**

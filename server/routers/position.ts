@@ -52,8 +52,8 @@ export const positionRouter = router({
           projectId: 0,
           userId: 0,
           applicants: 0,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
         },
         status: 201,
       }
@@ -105,8 +105,8 @@ export const positionRouter = router({
           projectId: 0,
           userId: 0,
           applicants: 0,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
         },
         status: 200,
       }

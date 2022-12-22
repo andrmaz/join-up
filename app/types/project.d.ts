@@ -1,11 +1,11 @@
 import {useProjectProvider} from '@hooks/project/useProjectProvider'
-import {NestedValue} from 'react-hook-form'
+//import {NestedValue} from 'react-hook-form'
 import {IAuthUser} from 'app/types/user'
 import {SelectOptionsType} from 'app/types/form'
 import {PActions} from 'app/types/constants'
 
 // https://github.com/react-hook-form/react-hook-form/issues/987
-export type NestedNumbersType = NestedValue<number[]>
+export type NestedNumbersType = number[]
 
 export interface IProjectInput {
   name: string
@@ -22,11 +22,11 @@ export interface IProjectData {
   mission: string
   technologies: SelectOptionsType<Technology>[]
   projectURL?: string
-  owner: number
+  userId: number
   collaborators: Array<IAuthUser>
-  hasPositions: boolean
-  createdAt: string
-  updatedAt: string
+  available: boolean
+  created_at: string
+  updated_at: string
 }
 
 export type ProjectActionsType =

@@ -2,6 +2,7 @@ import {protectedProcedure, router} from '../trpc'
 
 import {IProjectData} from 'app/types/project'
 import {ProjectResponseType} from 'app/types/response'
+import {getProjectList} from 'server/controllers/projects'
 import {z} from 'zod'
 
 const project: IProjectData = {
@@ -10,11 +11,11 @@ const project: IProjectData = {
   mission: 'Fake',
   description: 'First',
   technologies: [],
-  owner: 0,
+  userId: 0,
   collaborators: [],
-  hasPositions: false,
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
+  available: false,
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString(),
 }
 const response: ProjectResponseType = {
   message: '',
@@ -30,15 +31,20 @@ export const projectRouter = router({
     .input(
       z
         .object({
-          date: z.string().optional(), // 'asc' | 'desc'
-          match: z.string().optional(), // 'all' | 'any'
-          technologies: z.number().array().optional(),
-          position: z.boolean().optional(),
+          date: z.enum(['asc', 'desc']),
+          available: z.boolean(),
+          technologies: z.number().array(),
+          match: z.enum(['all', 'any']).optional(),
         })
-        .nullish()
+        .default({
+          date: 'asc',
+          available: true,
+          technologies: [],
+        })
     )
-    .query(async () => {
-      return {projects: [project]}
+    .query(async ({input}) => {
+      const projects = await getProjectList(input)
+      return {projects}
     }),
 
   create: protectedProcedure

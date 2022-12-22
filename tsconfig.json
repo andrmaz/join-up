@@ -25,7 +25,7 @@
     // fix some problems in the code transpiled by TypeScript.
     "esModuleInterop": true,
     // sets the module system for the program
-    "module": "esnext",
+    "module": "CommonJS",
     // specify the module resolution strategy
     "moduleResolution": "Node",
     // allows importing modules with a ‘.json’ extension

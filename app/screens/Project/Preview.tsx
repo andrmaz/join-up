@@ -22,10 +22,10 @@ const ProjectPreview = ({
       <section className='h-4/5'>
         <article className='h-1/5 flex justify-between text-sm'>
           <small className='w-1/2'>
-            Created at {project.createdAt.slice(0, 7)}{' '}
+            Created at {project.created_at.slice(0, 7)}{' '}
           </small>
           <small className='w-1/2'>
-            Updated at {project.updatedAt.slice(0, 7)}{' '}
+            Updated at {project.updated_at.slice(0, 7)}{' '}
           </small>
         </article>
         <p className='h-1/5 font-bold text-xs truncate'>
@@ -39,9 +39,8 @@ const ProjectPreview = ({
         </article>
         <article className='h-1/5 flex pr-1 justify-between'>
           <span className='text-xs italic'>
-            This project{' '}
-            {project.hasPositions ? 'has one or more' : 'has not any'} positions
-            available
+            This project {project.available ? 'has one or more' : 'has not any'}{' '}
+            positions available
           </span>
           <div className='w-10 flex justify-between'>
             <EditProject project={project} />

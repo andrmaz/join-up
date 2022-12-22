@@ -24,8 +24,8 @@ export interface IPositionData {
   projectId: number
   userId: number
   applicants: number
-  createdAt: string
-  updatedAt: string
+  created_at: string
+  updated_at: string
 }
 
 export type PositionStateType = {positions: Array<IPositionData>}

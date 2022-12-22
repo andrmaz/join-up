@@ -5,7 +5,11 @@
   },
   "editor.fontFamily": "",
   "cSpell.words": [
+    "knexfile",
+    "knexpath",
     "nextauth",
+    "superjson",
+    "tanstack",
     "trpc"
   ]
 }

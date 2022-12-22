@@ -1,28 +1,21 @@
 import * as React from 'react'
 
+import {GetServerSideProps, NextPage} from 'next'
+
 import {ApplicationFeed} from '@components/Feed/Application'
 import {Carousel} from '@lib/Carousel/Carousel'
 import Head from 'next/head'
-import {NextPage} from 'next'
 //import Image from 'next/image'
 import {PositionFeed} from '@components/Feed/Position'
 import {ProjectFeed} from '@components/Feed/Project'
 import {QueryResult} from '@components/Result/Query'
 import {trpc} from '../app/utils/trpc'
-import {useRouter} from 'next/router'
-import {useSession} from 'next-auth/react'
 
 const Home: NextPage = () => {
-  const router = useRouter()
-  const {status: sessionStatus} = useSession()
-  const {status: queryStatus, error, data} = trpc.feed.list.useQuery()
-
-  React.useEffect(() => {
-    if (sessionStatus === 'unauthenticated') router.push('/signin')
-  }, [router, sessionStatus])
+  const {status, error, data} = trpc.feed.list.useQuery()
 
   return (
-    <QueryResult status={queryStatus} error={error} data={data}>
+    <QueryResult status={status} error={error} data={data}>
       {({projects, positions, applications}) => (
         <section className='h-min-screen pt-16'>
           <Head>
@@ -65,3 +58,16 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = context.req.cookies['next-auth.session-token']
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/signin',
+        permanent: false,
+      },
+    }
+  }
+  return {props: {}}
+}

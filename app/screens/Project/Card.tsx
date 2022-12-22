@@ -1,13 +1,14 @@
 import * as React from 'react'
-import Link from 'next/link'
+
 import type {IProjectData} from 'app/types/project'
+import Link from 'next/link'
 
 const ProjectCard = ({
   id,
   name,
   mission,
   technologies,
-  updatedAt,
+  updated_at,
 }: IProjectData): JSX.Element => {
   return (
     <section className='h-48 w-full border-2 border-black p-1 rounded'>
@@ -20,7 +21,8 @@ const ProjectCard = ({
       </header>
       <main className='h-3/6'>
         <span className='h-1/6 text-xs'>
-          Last update: <small className='italic'>{updatedAt.slice(0, 7)}</small>
+          Last update:{' '}
+          <small className='italic'>{updated_at.slice(0, 7)}</small>
         </span>
         <p className='h-5/6 text-sm tracking-wide overflow-hidden'>{mission}</p>
       </main>
