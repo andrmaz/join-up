@@ -20,7 +20,7 @@ const Projects: NextPage = () => {
     date,
     match,
     technologies,
-    position: available,
+    available,
   })
 
   return (

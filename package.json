@@ -18,7 +18,9 @@
     "build-storybook": "build-storybook",
     "test": "jest --ci",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "seed:make": "knex seed:make --knexfile ./server/db/knexfile -x ts --debug",
+    "seed:run": "knex seed:run --knexfile ./server/db/knexfile --debug"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.20.4",
@@ -30,7 +32,9 @@
     "@types/node": "^15.14.9",
     "@types/react": "^17.0.45",
     "axios": "^0.27.2",
+    "knex": "^2.3.0",
     "next": "^12.3.4",
+    "pg": "^8.8.0",
     "next-auth": "^4.18.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -38,9 +42,11 @@
     "react-icons": "^4.7.1",
     "react-query": "^3.39.2",
     "react-select": "^4.3.1",
+    "superjson": "^1.12.1",
     "zod": "^3.20.2"
   },
   "devDependencies": {
+    "@babel/register": "^7.18.9",
     "@babel/core": "^7.20.7",
     "@faker-js/faker": "^7.6.0",
     "@storybook/addon-actions": "^6.5.15",
@@ -49,7 +55,6 @@
     "@storybook/builder-webpack5": "^6.5.15",
     "@storybook/manager-webpack5": "^6.5.15",
     "@storybook/react": "^6.5.15",
-    "typescript": "^4.9.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
     "@types/react-select": "^4.0.18",
@@ -71,7 +76,9 @@
     "postcss": "^8.4.20",
     "prettier": "^2.8.1",
     "tailwindcss": "^2.2.19",
+    "ts-node": "^10.9.1",
     "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "typescript": "^4.9.4",
     "webpack": "^5.75.0"
   }
 }

@@ -8,7 +8,7 @@ const PositionPreview = ({
   isSelectedTab,
   setSelectedTab,
   tabRef,
-  position: {title, createdAt, vacancies, updatedAt},
+  position: {title, created_at, vacancies, updated_at},
 }: PositionPreviewType): React.ReactElement => (
   <Tab
     isSelectedTab={isSelectedTab}
@@ -22,13 +22,14 @@ const PositionPreview = ({
       </header>
       <article className='h-3/5 flex flex-col justify-start'>
         <span className='text-xs font-semibold'>
-          Created at: <small className='italic'>{createdAt.slice(0, 7)}</small>
+          Created at: <small className='italic'>{created_at.slice(0, 7)}</small>
         </span>
         <span className='text-xs font-semibold'>
           Positions available: <small className='italic'>{vacancies}</small>
         </span>
         <span className='text-xs font-semibold'>
-          Last update: <small className='italic'>{updatedAt.slice(0, 7)}</small>
+          Last update:{' '}
+          <small className='italic'>{updated_at.slice(0, 7)}</small>
         </span>
       </article>
     </li>

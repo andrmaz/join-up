@@ -27,7 +27,7 @@ const Slug: NextPage = () => {
             <section className='h-full py-4 xl:py-12 px-40 xl:px-80'>
               <article className='w-full h-2/5 mb-4'>
                 <div className='absolute right-40 xl:right-80'>
-                  {session?.user.id === project.owner.toString() && (
+                  {session?.user.id === project.userId.toString() && (
                     <CreatePosition id={project.id} />
                   )}
                 </div>

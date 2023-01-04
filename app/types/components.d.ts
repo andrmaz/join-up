@@ -21,7 +21,7 @@ export type DrawerInputsType = {
 
 export interface FieldValues {
   technologies: NestedNumbersType
-  date: 'datedesc' | 'dateasc'
+  date: 'desc' | 'asc'
   available: boolean
   match?: 'all' | 'any'
 }
