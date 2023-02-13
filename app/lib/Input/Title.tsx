@@ -2,9 +2,9 @@ import FormInput from '@lib/Input/Form'
 import type {FormInputType} from 'app/types/form'
 
 const TitleInput = ({
-  id = 'title',
-  name = 'title',
-  register,
+  id,
+  name,
+  inputProps,
   errors,
   defaultValue,
 }: FormInputType): JSX.Element => (
@@ -13,18 +13,9 @@ const TitleInput = ({
     id={id}
     name={name}
     label='Title'
-    placeholder={
-      defaultValue ? defaultValue : 'Give it a unique and memorable title'
-    }
-    defaultValue={defaultValue ? defaultValue : ''}
-    register={register({
-      required: 'title is required',
-      minLength: {
-        value: 3,
-        message: 'please provide a longer title',
-      },
-      maxLength: 255,
-    })}
+    placeholder={defaultValue || 'Give it a unique and memorable title'}
+    defaultValue={defaultValue}
+    inputProps={inputProps}
     errors={errors}
   />
 )

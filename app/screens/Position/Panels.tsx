@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import type {IPositionData} from 'app/types/position'
-import {QueryResult} from '@components/Result/Query'
+import QueryResult from '@components/Result/Query'
 import dynamic from 'next/dynamic'
 import {trpc} from '@utils/trpc'
 

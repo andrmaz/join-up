@@ -13,7 +13,7 @@ interface QueryResultProps<T> {
   children: (data: T) => React.ReactNode
 }
 
-export function QueryResult<TData>({
+export default function QueryResult<TData>({
   status,
   error,
   data,

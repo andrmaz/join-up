@@ -1,8 +1,8 @@
 import {DrawerInputsType} from 'app/types/components'
 
-export const CheckboxInput = ({
-  register,
-  isPending,
+const CheckboxInput = ({
+  inputProps,
+  disabled,
 }: DrawerInputsType): JSX.Element => (
   <div className='my-4'>
     <p className='mb-1'>See available positions:</p>
@@ -10,12 +10,13 @@ export const CheckboxInput = ({
       <input
         type='checkbox'
         id='available'
-        name='available'
-        ref={register}
-        disabled={Boolean(isPending)}
+        disabled={disabled}
         defaultChecked
+        {...inputProps}
       />
       <label htmlFor='available'>Available</label>
     </div>
   </div>
 )
+
+export default CheckboxInput

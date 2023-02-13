@@ -4,7 +4,7 @@ import type {IPositionSelect, SelectOptionsType} from 'app/types/form'
 
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@lib/Message/Error'
-import {QueryResult} from '@components/Result/Query'
+import QueryResult from '@components/Result/Query'
 import {Role} from 'app/types/constants'
 import Select from 'react-select'
 import {trpc} from '@utils/trpc'
@@ -34,7 +34,7 @@ const RoleSelect = ({
                 message: `Please select at least one role'`,
               },
             }}
-            render={({onBlur, value}) => (
+            render={({field: {value, onBlur}}) => (
               <Select
                 id='role-select'
                 inputId='role-select'

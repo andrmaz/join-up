@@ -8,4 +8,4 @@ const CloseButton = ({onClick}: ICloseButton): JSX.Element => (
   </button>
 )
 
-export {CloseButton}
+export default CloseButton

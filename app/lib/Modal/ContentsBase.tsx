@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import type {ChildrenPropsType} from 'app/types/modal'
-import {Dialog} from '@lib/Modal/Dialog'
+import Dialog from '@lib/Modal/Dialog'
 import Portal from '@lib/Portal/Portal'
 import useModalContext from '@hooks/modal/useModalContext'
 

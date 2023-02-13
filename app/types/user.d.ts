@@ -1,6 +1,6 @@
 import type {SelectOptionsType} from 'app/types/form'
 import type {NestedNumbersType} from 'app/types/project'
-import {Language, Technology, UActions} from 'app/types/constants'
+import {Language, Technology, UAction} from 'app/types/constants'
 
 export interface ISigninInput {
   email: string
@@ -42,18 +42,18 @@ export type UserContextType = {
 }
 
 export type UserActionsType =
-  | {type: UActions.login; payload: UserStateType}
-  | {type: UActions.logout}
-  | {type: UActions.edit; payload: UserStateType}
+  | {type: UAction.login; payload: UserStateType}
+  | {type: UAction.logout}
+  | {type: UAction.edit; payload: UserStateType}
 
 export type UserDispatchType = (action: UserActionsType) => void
 
 export interface IEditUsername {
-  newUsername: string
+  name: string
   password: string
 }
 export interface IEditEmail {
-  newEmail: string
+  email: string
   password: string
 }
 export interface IEditPassword {

@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-import {EmptyMessage} from '@lib/Message/Empty'
+import EmptyMessage from '@lib/Message/Empty'
 import Link from 'next/link'
 import ProjectPreview from '@screens/Project/Preview'
-import {QueryResult} from '@components/Result/Query'
+import QueryResult from '@components/Result/Query'
 import {trpc} from '@utils/trpc'
 
 const ProjectsList = (): React.ReactElement => {

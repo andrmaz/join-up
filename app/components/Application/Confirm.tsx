@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {CreateApplicationForm} from '@containers/create/Application'
+import CreateApplicationForm from '@containers/create/Application'
 import ModalContents from '@lib/Modal/Contents'
 import {ModalProvider} from '@providers/ModalProvider'
 import {OpenButton} from '@lib/Modal/OpenButton'

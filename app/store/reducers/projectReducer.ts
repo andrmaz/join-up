@@ -3,7 +3,7 @@ import type {
   ProjectContextType,
   IProjectData,
 } from 'app/types/project'
-import {PActions} from 'app/types/constants'
+import {PAction} from 'app/types/constants'
 
 export function projectReducer(
   state: ProjectContextType,
@@ -16,14 +16,14 @@ export function projectReducer(
   let filteredProjects: IProjectData[]
   let updatedProjects: IProjectData[]
   switch (action.type) {
-    case PActions.add:
+    case PAction.add:
       projectsCopy = [...state.projects]
       updatedProjects = [...projectsCopy, action.payload]
       return {
         ...state,
         projects: updatedProjects,
       }
-    case PActions.remove:
+    case PAction.remove:
       index = state.projects.findIndex(
         (project: IProjectData) => project.id === action.payload
       )
@@ -33,7 +33,7 @@ export function projectReducer(
         ...state,
         projects: projectsCopy,
       }
-    case PActions.edit:
+    case PAction.edit:
       projectCopy = state.projects.find(
         (project: IProjectData) => project.id === action.payload.id
       )
@@ -47,7 +47,7 @@ export function projectReducer(
         ...state,
         projects: updatedProjects,
       }
-    case PActions.persist:
+    case PAction.persist:
       //* State will be an empty Array
       projectsCopy = [...state.projects]
       //* create a fresh, new store instance on every request
@@ -61,7 +61,7 @@ export function projectReducer(
         ...state,
         projects: updatedProjects,
       }
-    case PActions.clear:
+    case PAction.clear:
       return {
         ...state,
         projects: [],

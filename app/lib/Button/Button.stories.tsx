@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof Button> = args => <Button {...args} />
 export const Success = Template.bind({})
 Success.args = {
   children: 'Confirm',
-  errors: false,
+  disabled: false,
   variant: 'success',
   onClick: () => console.log('Confirm clicked'),
 }
@@ -22,7 +22,7 @@ Success.args = {
 export const Base = Template.bind({})
 Base.args = {
   children: 'Cancel',
-  errors: false,
+  disabled: false,
   variant: 'base',
   onClick: () => console.log('Cancel clicked'),
 }
@@ -30,7 +30,7 @@ Base.args = {
 export const Danger = Template.bind({})
 Danger.args = {
   children: 'Confirm',
-  errors: false,
+  disabled: false,
   variant: 'danger',
   onClick: () => console.log('Confirm clicked'),
 }

@@ -2,10 +2,10 @@ import FormInput from '@lib/Input/Form'
 import type {FormInputType} from 'app/types/form'
 
 const PasswordInput = ({
-  id = 'password',
-  name = 'password',
+  id,
+  name,
   label = 'Password',
-  register,
+  inputProps,
   errors,
 }: FormInputType): JSX.Element => (
   <FormInput
@@ -14,13 +14,7 @@ const PasswordInput = ({
     name={name}
     label={label}
     placeholder='min. 8 char, mix letters and numbers'
-    register={register({
-      required: 'password is required',
-      pattern: {
-        value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-        message: 'please enter a valid password',
-      },
-    })}
+    inputProps={inputProps}
     errors={errors}
   />
 )

@@ -1,4 +1,4 @@
-import {PActions} from 'app/types/constants'
+import {PAction} from 'app/types/constants'
 import type {RemovePositionResponseType} from 'app/types/response'
 import {trpc} from '@utils/trpc'
 import useModalContext from '@hooks/modal/useModalContext'
@@ -14,7 +14,7 @@ export default function useRemovePosition(
     try {
       const response = await result.mutateAsync({positionId: id})
       if (response.status === 200) {
-        dispatch({type: PActions.remove, payload: response.position.id})
+        dispatch({type: PAction.remove, payload: response.position.id})
         return response
       }
       return Promise.reject({message: 'Something went wrong'})

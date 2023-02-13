@@ -2,10 +2,10 @@ import FormInput from '@lib/Input/Form'
 import type {FormInputType} from 'app/types/form'
 
 const EmailInput = ({
-  id = 'email',
-  name = 'email',
+  id,
+  name,
   label = 'Email',
-  register,
+  inputProps,
   errors,
 }: FormInputType): JSX.Element => (
   <FormInput
@@ -15,16 +15,10 @@ const EmailInput = ({
     label={label}
     placeholder={
       name !== 'email'
-        ? 'please enter a new email address '
-        : 'please enter your email'
+        ? 'Please enter a new email address '
+        : 'Please enter your email'
     }
-    register={register({
-      required: 'email is required',
-      pattern: {
-        value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-        message: 'please enter a valid email address',
-      },
-    })}
+    inputProps={inputProps}
     errors={errors}
   />
 )

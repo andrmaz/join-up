@@ -1,18 +1,26 @@
 import * as React from 'react'
 
-import {FocusButton} from '@components/Button/Focus'
+import FocusButton from '@components/Button/Focus'
 import type {IProjectForm} from 'app/types/form'
 import type {IProjectInput} from 'app/types/project'
-import {InputSubmit} from '@lib/Input/Submit'
+import InputSubmit from '@lib/Input/Submit'
 import TechSelect from '@components/Select/Tech'
 import TextInput from '@lib/Input/Text'
 import TitleInput from '@lib/Input/Title'
 import UrlInput from '@components/Input/Url'
 import {useForm} from 'react-hook-form'
+import {descriptionRegisterOptions, titleRegisterOptions} from '@data/register'
 
 const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
-  const {register, handleSubmit, errors, control, setValue, reset} =
-    useForm<IProjectInput>()
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+    control,
+    setValue,
+    reset,
+  } = useForm<IProjectInput>()
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -22,12 +30,14 @@ const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
         id='name'
         name='name'
         defaultValue={project?.name}
-        register={register}
+        inputProps={register('name', titleRegisterOptions)}
         errors={errors}
       />
       <TextInput
+        id='description'
+        name='description'
         defaultValue={project?.description}
-        register={register}
+        inputProps={register('description', descriptionRegisterOptions)}
         errors={errors}
       />
       <TextInput
@@ -35,7 +45,7 @@ const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
         name='mission'
         label='Mission'
         defaultValue={project?.mission}
-        register={register}
+        inputProps={register('mission')}
         errors={errors}
       />
       <div className='h-1/6 flex flex-col mb-6'>
@@ -48,8 +58,10 @@ const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
         />
       </div>
       <UrlInput
+        id='projectURL'
+        name='projectURL'
+        inputProps={register('projectURL')}
         defaultValue={project?.projectURL}
-        register={register}
         errors={errors}
       />
       <div className='h-1/6 flex items-end'>
@@ -57,7 +69,7 @@ const ProjectForm = ({project, onSubmit}: IProjectForm): JSX.Element => {
           <InputSubmit
             value='Save'
             bgColor='green-600'
-            errors={Boolean(
+            disabled={Boolean(
               errors.name || errors.description || errors.technologies
             )}
           />

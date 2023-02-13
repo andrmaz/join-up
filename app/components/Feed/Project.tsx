@@ -19,4 +19,4 @@ function ProjectFeed(props: IProjectData): JSX.Element {
   )
 }
 
-export {ProjectFeed}
+export default ProjectFeed

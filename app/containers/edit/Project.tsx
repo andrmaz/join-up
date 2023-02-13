@@ -7,4 +7,4 @@ const EditProjectForm = ({project}: {project: IProjectData}): JSX.Element => {
   return <ProjectForm project={project} onSubmit={onSubmit} />
 }
 
-export {EditProjectForm}
+export default EditProjectForm

@@ -3,10 +3,10 @@ import Button from '@lib/Button'
 import GitHubInput from '@components/Input/GitHub'
 import GitLabInput from '@components/Input/GitLab'
 import type {IAuthUser} from 'app/types/user'
-import {InputSubmit} from '@lib/Input/Submit'
+import InputSubmit from '@lib/Input/Submit'
 import LangSelect from '@components/Select/Lang'
 import LinkedInInput from '@components/Input/LinkedIn'
-import {QueryResult} from '@components/Result/Query'
+import QueryResult from '@components/Result/Query'
 import TechSelect from '@components/Select/Tech'
 import Textarea from '@components/Textarea/Textarea'
 import UserAvatar from '@screens/User/Avatar'
@@ -20,8 +20,14 @@ const ProfileForm = ({
   onSubmit: (data: IAuthUser) => Promise<UserResponseType>
 }): JSX.Element => {
   const {status, error, data} = trpc.user.detail.useQuery()
-  const {handleSubmit, register, errors, control, setValue, reset} =
-    useForm<IAuthUser>()
+  const {
+    handleSubmit,
+    register,
+    formState: {errors},
+    control,
+    setValue,
+    reset,
+  } = useForm<IAuthUser>()
 
   return (
     <QueryResult status={status} error={error} data={data}>
@@ -35,19 +41,27 @@ const ProfileForm = ({
               <div className='w-3/5'>
                 <div className='flex flex-col xl:justify-between'>
                   <GitHubInput
-                    register={register}
+                    id='githubURL'
+                    name='githubURL'
+                    inputProps={register('githubURL')}
                     defaultValue={user.githubURL}
                   />
                   <GitLabInput
-                    register={register}
+                    id='gitlabURL'
+                    name='gitlabURL'
+                    inputProps={register('gitlabURL')}
                     defaultValue={user.gitlabURL}
                   />
                   <BitBucketInput
-                    register={register}
+                    id='bitbucketURL'
+                    name='bitbucketURL'
+                    inputProps={register('bitbucketURL')}
                     defaultValue={user.bitbucketURL}
                   />
                   <LinkedInInput
-                    register={register}
+                    id='linkedinURL'
+                    name='linkedinURL'
+                    inputProps={register('linkedinURL')}
                     defaultValue={user.linkedinURL}
                   />
                 </div>
@@ -77,7 +91,12 @@ const ProfileForm = ({
               />
             </div>
           </article>
-          <Textarea register={register} defaultValue={user.bio} />
+          <Textarea
+            id='bio'
+            name='bio'
+            inputProps={register('bio')}
+            defaultValue={user.bio}
+          />
           <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
             <Button
               onClick={() => {
@@ -96,7 +115,7 @@ const ProfileForm = ({
               <InputSubmit
                 value='Save'
                 bgColor='green-600'
-                errors={Boolean(errors.languages || errors.technologies)}
+                disabled={Boolean(errors.languages || errors.technologies)}
               />
             </div>
           </aside>

@@ -1,10 +1,8 @@
 import {BsArrow90DegDown} from 'react-icons/bs'
 import {FocusTrapRefContext} from '@context/refContext'
 import {FocusTrapRefProvider} from '@providers/RefProvider'
-import {GetServerSideProps} from 'next'
 import Head from 'next/head'
 import ProjectForm from '@components/Form/Project'
-import checkAuth from '@utils/auth'
 import useAddProject from '@hooks/project/useAddProject'
 
 const Project = (): JSX.Element => {
@@ -41,7 +39,7 @@ const Project = (): JSX.Element => {
 
 export default Project
 
-export const getServerSideProps: GetServerSideProps = async context => {
+/* export const getServerSideProps: GetServerSideProps = async context => {
   await checkAuth(context)
   return {props: {}}
-}
+} */

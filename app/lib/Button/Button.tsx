@@ -17,7 +17,7 @@ const STYLES = {
 
 const Button = ({
   children = 'Confirm',
-  errors = false,
+  disabled = false,
   variant = 'base',
   onClick,
   onKeyDown,
@@ -28,7 +28,7 @@ const Button = ({
       type='button'
       onClick={onClick}
       className={`w-16 min-w-max h-8 p-1 cursor-pointer ${styles['--bg']} text-white rounded m-1 px-2 py-1 disabled:opacity-50 focus:${styles['--focus']}`}
-      disabled={errors}
+      disabled={disabled}
       onKeyDown={onKeyDown}
     >
       {children}

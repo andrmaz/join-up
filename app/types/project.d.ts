@@ -2,7 +2,7 @@ import {useProjectProvider} from '@hooks/project/useProjectProvider'
 //import {NestedValue} from 'react-hook-form'
 import {IAuthUser} from 'app/types/user'
 import {SelectOptionsType} from 'app/types/form'
-import {PActions} from 'app/types/constants'
+import {PAction} from 'app/types/constants'
 
 // https://github.com/react-hook-form/react-hook-form/issues/987
 export type NestedNumbersType = number[]
@@ -30,11 +30,11 @@ export interface IProjectData {
 }
 
 export type ProjectActionsType =
-  | {type: PActions.add; payload: IProjectData}
-  | {type: PActions.remove; payload: number}
-  | {type: PActions.edit; payload: IProjectData}
-  | {type: PActions.persist; payload: IProjectData[]}
-  | {type: PActions.clear}
+  | {type: PAction.add; payload: IProjectData}
+  | {type: PAction.remove; payload: number}
+  | {type: PAction.edit; payload: IProjectData}
+  | {type: PAction.persist; payload: IProjectData[]}
+  | {type: PAction.clear}
 
 export type ProjectStateType = Array<IProjectData>
 

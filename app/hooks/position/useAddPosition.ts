@@ -1,5 +1,5 @@
 import type {IPositionInput} from 'app/types/position'
-import {PActions} from 'app/types/constants'
+import {PAction} from 'app/types/constants'
 import type {PositionResponseType} from 'app/types/response'
 import {trpc} from '@utils/trpc'
 import useModalContext from '@hooks/modal/useModalContext'
@@ -18,7 +18,7 @@ export default function useAddPosition(
       data.projectId = id
       const response = await result.mutateAsync(data)
       if (response.status === 201) {
-        dispatch({type: PActions.add, payload: response.position})
+        dispatch({type: PAction.add, payload: response.position})
         return response
       }
       return Promise.reject({message: 'Something went wrong'})

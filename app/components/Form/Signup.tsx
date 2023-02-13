@@ -1,10 +1,9 @@
 import BitBucketInput from '@components/Input/BitBucket'
 import EmailInput from '@components/Input/Email'
-import FormInput from '@lib/Input/Form'
 import GitHubInput from '@components/Input/GitHub'
 import GitLabInput from '@components/Input/GitLab'
 import type {ISignupInput} from 'app/types/user'
-import {InputSubmit} from '@lib/Input/Submit'
+import InputSubmit from '@lib/Input/Submit'
 import LangSelect from '@components/Select/Lang'
 import Link from 'next/link'
 import LinkedInInput from '@components/Input/LinkedIn'
@@ -14,15 +13,27 @@ import Textarea from '@components/Textarea/Textarea'
 import UsernameInput from '@components/Input/Username'
 import {trpc} from '@utils/trpc'
 import {useForm} from 'react-hook-form'
+import {
+  emailRegisterOptions,
+  passwordRegisterOptions,
+  usernameRegisterOptions,
+} from '@data/register'
 
 const SignupForm = (): JSX.Element => {
   const result = trpc.auth.register.useMutation()
-  const {register, handleSubmit, watch, errors, control, setValue} =
-    useForm<ISignupInput>()
-  const watchPassword = watch('password')
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: {errors},
+    control,
+    setValue,
+  } = useForm<ISignupInput>()
+  const subscription = watch('password')
   const onSubmit = async (input: ISignupInput): Promise<void> => {
     result.mutateAsync(input)
   }
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -30,27 +41,57 @@ const SignupForm = (): JSX.Element => {
     >
       <article className='w-full h-1/2 flex'>
         <section className='w-3/6 flex flex-col justify-around'>
-          <UsernameInput register={register} errors={errors} />
-          <EmailInput register={register} errors={errors} />
-          <PasswordInput register={register} errors={errors} />
-          <FormInput
-            type='password'
-            id='confirmPassword'
+          <UsernameInput
+            id='name'
+            name='name'
+            inputProps={register('name', usernameRegisterOptions)}
+            errors={errors}
+          />
+          <EmailInput
+            id='email'
+            name='email'
+            inputProps={register('email', emailRegisterOptions)}
+            errors={errors}
+          />
+          <PasswordInput
+            id='password'
+            name='password'
+            inputProps={register('password', passwordRegisterOptions)}
+            errors={errors}
+          />
+          <PasswordInput
+            id='confirm_password'
             name='confirmPassword'
             label='Confirm Password'
-            placeholder='please confirm your password'
-            register={register({
+            inputProps={register('confirmPassword', {
+              ...passwordRegisterOptions,
               validate: (value: string) =>
-                value === watchPassword || 'passwords must match',
+                value === subscription || 'passwords must match',
             })}
             errors={errors}
           />
         </section>
         <section className='w-3/6 flex flex-col justify-around'>
-          <GitHubInput register={register} />
-          <GitLabInput register={register} />
-          <BitBucketInput register={register} />
-          <LinkedInInput register={register} />
+          <GitHubInput
+            id='githubURL'
+            name='githubURL'
+            inputProps={register('githubURL')}
+          />
+          <GitLabInput
+            id='gitlabURL'
+            name='gitlabURL'
+            inputProps={register('gitlabURL')}
+          />
+          <BitBucketInput
+            id='bitbucketURL'
+            name='bitbucketURL'
+            inputProps={register('bitbucketURL')}
+          />
+          <LinkedInInput
+            id='linkedinURL'
+            name='linkedinURL'
+            inputProps={register('linkedinURL')}
+          />
         </section>
       </article>
       <article className='h-1/5 w-full flex mt-2'>
@@ -61,13 +102,13 @@ const SignupForm = (): JSX.Element => {
           <TechSelect control={control} setValue={setValue} errors={errors} />
         </div>
       </article>
-      <Textarea register={register} />
+      <Textarea id='bio' name='bio' inputProps={register('bio')} />
       <article className='h-1/5 flex items-center'>
         <aside className='flex flex-row h-1/3 w-full justify-between'>
           <div className='h-full w-1/3'>
             <InputSubmit
               value='SignUp'
-              errors={Boolean(
+              disabled={Boolean(
                 errors.name ||
                   errors.email ||
                   errors.password ||

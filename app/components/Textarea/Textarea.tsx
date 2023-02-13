@@ -1,17 +1,16 @@
+import {FormInputType} from 'app/types/form'
+
 const Textarea = ({
-  register,
+  id,
+  name,
+  inputProps,
   defaultValue,
-}: {
-  register: React.LegacyRef<HTMLTextAreaElement> | undefined
-  defaultValue?: string
-}): JSX.Element => (
+}: FormInputType): JSX.Element => (
   <article className='h-1/5'>
     <div className='h-full flex flex-col'>
-      <label htmlFor='bio'>Biography:</label>
+      <label htmlFor={name}>Biography:</label>
       <textarea
-        id='bio'
-        name='bio'
-        ref={register}
+        id={id}
         cols={5}
         rows={10}
         maxLength={100}
@@ -20,6 +19,7 @@ const Textarea = ({
         spellCheck={true}
         wrap='hard'
         className=':resize-none p-1 border-2'
+        {...inputProps}
       />
     </div>
   </article>

@@ -2,16 +2,18 @@ import FormInput from '@lib/Input/Form'
 import type {FormInputType} from 'app/types/form'
 
 const BitBucketInput = ({
-  register,
+  id,
+  name,
+  inputProps,
   defaultValue,
 }: FormInputType): JSX.Element => (
   <FormInput
     type='text'
-    id='bitbucketURL'
-    name='bitbucketURL'
+    id={id}
+    name={name}
     label='BitBucket'
-    placeholder='your BitBucket username here'
-    register={register}
+    placeholder='Your BitBucket username here'
+    inputProps={inputProps}
     defaultValue={
       defaultValue ? defaultValue?.slice(22, defaultValue.length - 1) : ''
     }

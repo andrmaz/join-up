@@ -1,7 +1,8 @@
 import * as React from 'react'
 import {SelectOptionsType} from 'app/types/form'
-import {PActions, Technology} from 'app/types/constants'
+import {PAction, Technology} from 'app/types/constants'
 import {Level, Role} from 'app/types/constants'
+
 export interface IPositionInput {
   projectId: number
   title: string
@@ -31,11 +32,11 @@ export interface IPositionData {
 export type PositionStateType = {positions: Array<IPositionData>}
 
 export type PositionActionsType =
-  | {type: PActions.add; payload: IPositionData}
-  | {type: PActions.remove; payload: number}
-  | {type: PActions.edit; payload: IPositionData}
-  | {type: PActions.persist; payload: IPositionData[]}
-  | {type: PActions.clear}
+  | {type: PAction.add; payload: IPositionData}
+  | {type: PAction.remove; payload: number}
+  | {type: PAction.edit; payload: IPositionData}
+  | {type: PAction.persist; payload: IPositionData[]}
+  | {type: PAction.clear}
 
 export type PositionDispatchType = (action: PositionActionsType) => void
 

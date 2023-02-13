@@ -15,4 +15,4 @@ function ApplicationFeed(props: IApplicationData): JSX.Element {
   )
 }
 
-export {ApplicationFeed}
+export default ApplicationFeed

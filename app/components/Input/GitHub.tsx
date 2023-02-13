@@ -1,14 +1,19 @@
 import FormInput from '@lib/Input/Form'
 import type {FormInputType} from 'app/types/form'
 
-const GitHubInput = ({register, defaultValue}: FormInputType): JSX.Element => (
+const GitHubInput = ({
+  id,
+  name,
+  inputProps,
+  defaultValue,
+}: FormInputType): JSX.Element => (
   <FormInput
     type='text'
-    id='githubURL'
-    name='githubURL'
+    id={id}
+    name={name}
     label='GitHub'
     placeholder='your GitHub username here'
-    register={register}
+    inputProps={inputProps}
     defaultValue={
       defaultValue ? defaultValue?.slice(19, defaultValue.length) : ''
     }

@@ -4,10 +4,19 @@ import {render, screen} from 'test-utils'
 
 import Textarea  from '@components/Textarea/Textarea'
 import { faker } from '@faker-js/faker';
+import { FormInputType } from 'app/types/form';
 
-const defaultValue= faker.lorem.paragraph()
-const props = {
-  register: jest.fn()
+const defaultValue = faker.lorem.paragraph()
+const name = faker.lorem.word()
+const props: FormInputType = {
+  id: name,
+  name,
+  inputProps: {
+    onChange: jest.fn(),
+    onBlur: jest.fn(),
+    ref: jest.fn(),
+    name,
+  },
 }
 
 it('renders a textarea', () => {
