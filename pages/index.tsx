@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {NextPage} from 'next'
+import {GetServerSideProps, NextPage} from 'next'
 
 import ApplicationFeed from '@components/Feed/Application'
 import Carousel from '@lib/Carousel/Carousel'
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
 
 export default Home
 
-/* export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps = async context => {
   const session = context.req.cookies['next-auth.session-token']
   if (!session) {
     return {
@@ -71,4 +71,3 @@ export default Home
   }
   return {props: {}}
 }
- */

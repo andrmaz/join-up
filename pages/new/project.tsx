@@ -4,6 +4,8 @@ import {FocusTrapRefProvider} from '@providers/RefProvider'
 import Head from 'next/head'
 import ProjectForm from '@components/Form/Project'
 import useAddProject from '@hooks/project/useAddProject'
+import checkAuth from '@utils/auth'
+import {GetServerSideProps} from 'next'
 
 const Project = (): JSX.Element => {
   const [onSubmit] = useAddProject()
@@ -39,7 +41,7 @@ const Project = (): JSX.Element => {
 
 export default Project
 
-/* export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps = async context => {
   await checkAuth(context)
   return {props: {}}
-} */
+}

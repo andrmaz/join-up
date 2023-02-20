@@ -1,4 +1,4 @@
-import {publicProcedure, router} from '../trpc'
+import {protectedProcedure, router} from '../trpc'
 
 import {IApplicationData} from 'app/types/application'
 import {IPositionData} from 'app/types/position'
@@ -9,7 +9,7 @@ const positions: IPositionData[] = []
 const applications: IApplicationData[] = []
 
 export const feedRouter = router({
-  list: publicProcedure.query(async () => {
+  list: protectedProcedure.query(async () => {
     return {projects, positions, applications}
   }),
 })
