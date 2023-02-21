@@ -6,4 +6,4 @@ const CreatePositionForm = ({id}: {id: number}): JSX.Element => {
   return <PositionForm id={id} onSubmit={onSubmit} />
 }
 
-export {CreatePositionForm}
+export default CreatePositionForm

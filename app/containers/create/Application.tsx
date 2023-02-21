@@ -13,4 +13,4 @@ const CreateApplicationForm = ({id}: {id: number}): JSX.Element => {
   )
 }
 
-export {CreateApplicationForm}
+export default CreateApplicationForm

@@ -5,7 +5,7 @@ import type {IPositionSelect, SelectOptionsType} from 'app/types/form'
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@lib/Message/Error'
 import {Level} from 'app/types/constants'
-import {QueryResult} from '@components/Result/Query'
+import QueryResult from '@components/Result/Query'
 import Select from 'react-select'
 import {trpc} from '@utils/trpc'
 
@@ -34,7 +34,7 @@ const LevelSelect = ({
                 message: `Please select at least one level'`,
               },
             }}
-            render={({onBlur, value}) => (
+            render={({field: {value, onBlur}}) => (
               <Select
                 id='level-select'
                 inputId='level-select'

@@ -1,18 +1,17 @@
 import * as React from 'react'
 
-import {GetServerSideProps, NextPage} from 'next'
+import {NextPage} from 'next'
 
 import Drawer from '@components/Drawer/Drawer'
-import type {FieldValues} from 'app/types/components'
+import type {DrawerValues} from 'app/types/components'
 import Head from 'next/head'
 import ProjectsGrid from '@screens/Project/Grid'
-import {QueryResult} from '@components/Result/Query'
-import checkAuth from '@utils/auth'
+import QueryResult from '@components/Result/Query'
 import {trpc} from '@utils/trpc'
 import {useForm} from 'react-hook-form'
 
 const Projects: NextPage = () => {
-  const {control, register, watch, setValue} = useForm<FieldValues>()
+  const {control, register, watch, setValue} = useForm<DrawerValues>()
   //* watching every fields in the form
   const {date, match, available, technologies} = watch()
   //* fetching project according to the fields
@@ -49,7 +48,7 @@ const Projects: NextPage = () => {
 
 export default Projects
 
-export const getServerSideProps: GetServerSideProps = async context => {
+/* export const getServerSideProps: GetServerSideProps = async context => {
   await checkAuth(context)
   return {props: {}}
-}
+} */

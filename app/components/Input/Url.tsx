@@ -2,26 +2,20 @@ import FormInput from '@lib/Input/Form'
 import type {FormInputType} from 'app/types/form'
 
 const UrlInput = ({
-  register,
+  id,
+  name,
+  inputProps,
   errors,
   defaultValue,
 }: FormInputType): JSX.Element => (
   <FormInput
     type='url'
-    id='projectURL'
-    name='projectURL'
+    id={id}
+    name={name}
     label='Url'
-    placeholder={
-      defaultValue ? defaultValue : 'Connect this project to an existing one'
-    }
-    defaultValue={defaultValue ? defaultValue : ''}
-    register={register({
-      pattern: {
-        value:
-          /(https?:\/\/)?([\w-])+\.{1}([a-zA-Z]{2,63})([/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)/,
-        message: 'Please enter a valid URL',
-      },
-    })}
+    placeholder={defaultValue || 'Connect this project to an existing one'}
+    defaultValue={defaultValue || ''}
+    inputProps={inputProps}
     errors={errors}
     optional
   />

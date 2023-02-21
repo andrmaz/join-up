@@ -4,7 +4,7 @@ import type {IFormSelect, SelectOptionsType} from 'app/types/form'
 
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@lib/Message/Error'
-import {QueryResult} from '@components/Result/Query'
+import QueryResult from '@components/Result/Query'
 import Select from 'react-select'
 import {Technology} from 'app/types/constants'
 import {trpc} from '@utils/trpc'
@@ -35,7 +35,7 @@ const TechSelect = ({
               validate: value =>
                 value.length || 'Please select at least one technology',
             }}
-            render={({value, onBlur}) => (
+            render={({field: {value, onBlur}}) => (
               <Select
                 id='technologies'
                 inputId='technologies'

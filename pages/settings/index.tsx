@@ -1,11 +1,9 @@
 import * as React from 'react'
 
 import EditProfile from '@screens/User/Profile'
-import {GetServerSideProps} from 'next'
 import Head from 'next/head'
 import Menu from '@lib/Menu/Menu'
 import Panel from '@lib/Tablist/Panel'
-import checkAuth from '@utils/auth'
 import dynamic from 'next/dynamic'
 
 const EditUsername = dynamic(() => import('@screens/User/Username'))
@@ -45,7 +43,8 @@ const Settings = (): JSX.Element => {
 
 export default Settings
 
-export const getServerSideProps: GetServerSideProps = async context => {
+/* export const getServerSideProps: GetServerSideProps = async context => {
   await checkAuth(context)
   return {props: {}}
 }
+ */

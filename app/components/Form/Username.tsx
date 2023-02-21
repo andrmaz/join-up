@@ -1,17 +1,24 @@
 import Button from '@lib/Button'
 import type {IEditUsername} from 'app/types/user'
-import {InputSubmit} from '@lib/Input/Submit'
+import InputSubmit from '@lib/Input/Submit'
 import PasswordInput from '@components/Input/Password'
 import type {UserResponseType} from 'app/types/response'
 import UsernameInput from '@components/Input/Username'
 import {useForm} from 'react-hook-form'
+import {passwordRegisterOptions, usernameRegisterOptions} from '@data/register'
 
 const UsernameForm = ({
   onSubmit,
 }: {
   onSubmit: (data: IEditUsername) => Promise<UserResponseType>
 }): JSX.Element => {
-  const {handleSubmit, register, errors, reset} = useForm<IEditUsername>()
+  const {
+    handleSubmit,
+    register,
+    formState: {errors},
+    reset,
+  } = useForm<IEditUsername>()
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -19,8 +26,18 @@ const UsernameForm = ({
     >
       <h2 className='text-2xl mb-4'>Change username</h2>
       <article className='h-auto flex flex-col justify-evenly mb-8'>
-        <UsernameInput name='newUsername' register={register} errors={errors} />
-        <PasswordInput id='username-pwd' register={register} errors={errors} />
+        <UsernameInput
+          id='name'
+          name='name'
+          inputProps={register('name', usernameRegisterOptions)}
+          errors={errors}
+        />
+        <PasswordInput
+          id='password'
+          name='password'
+          inputProps={register('password', passwordRegisterOptions)}
+          errors={errors}
+        />
       </article>
       <aside className='h-1/5 flex flex-row items-end justify-start pb-2'>
         <Button onClick={() => reset()}>Cancel</Button>
@@ -28,7 +45,7 @@ const UsernameForm = ({
           <InputSubmit
             value='Save'
             bgColor='green-600'
-            errors={Boolean(errors.newUsername || errors.password)}
+            disabled={Boolean(errors.name || errors.password)}
           />
         </div>
       </aside>

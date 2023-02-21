@@ -1,10 +1,10 @@
-export enum UActions {
+export enum UAction {
   login = 'login',
   logout = 'logout',
   edit = 'edit',
 }
 
-export enum PActions {
+export enum PAction {
   add = 'add',
   remove = 'remove',
   edit = 'edit',
@@ -25,18 +25,21 @@ export enum Language {
   Spanish = 'Spanish',
   French = 'French',
 }
+
 export enum Technology {
   JavaScript = 'JavaScript',
   TypeScript = 'TypeScript',
   Rust = 'Rust',
   Python = 'Python',
 }
+
 export enum Level {
   Junior = 'Junior',
   Mid = 'Mid',
   Senior = 'Senior',
   Lead = 'Lead',
 }
+
 export enum Role {
   PM = 'Project manager',
   RA = 'Requirement analyst',

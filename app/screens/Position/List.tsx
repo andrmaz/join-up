@@ -1,11 +1,11 @@
 import * as React from 'react'
 
-import {EmptyMessage} from '@lib/Message/Empty'
+import EmptyMessage from '@lib/Message/Empty'
 import PositionTablist from './Tablist'
-import {QueryResult} from '@components/Result/Query'
+import QueryResult from '@components/Result/Query'
 import {trpc} from '@utils/trpc'
 
-export const PositionList = ({id}: {id: number}): React.ReactElement => {
+const PositionList = ({id}: {id: number}): React.ReactElement => {
   const {status, error, data} = trpc.position.list.useQuery({id})
 
   return (
@@ -20,3 +20,5 @@ export const PositionList = ({id}: {id: number}): React.ReactElement => {
     </QueryResult>
   )
 }
+
+export default PositionList

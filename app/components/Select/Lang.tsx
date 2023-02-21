@@ -5,7 +5,7 @@ import type {IFormSelect, SelectOptionsType} from 'app/types/form'
 import {Controller} from 'react-hook-form'
 import ErrorMessage from '@lib/Message/Error'
 import {Language} from 'app/types/constants'
-import {QueryResult} from '@components/Result/Query'
+import QueryResult from '@components/Result/Query'
 import Select from 'react-select'
 import {trpc} from '@utils/trpc'
 
@@ -35,7 +35,7 @@ const LangSelect = ({
               validate: value =>
                 value.length || 'Please select at least one language',
             }}
-            render={({value, onBlur}) => (
+            render={({field: {value, onBlur}}) => (
               <Select
                 id='languages'
                 inputId='languages'

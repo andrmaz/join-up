@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {Dropdown} from '@components/Dropdown/Dropdown'
+import Dropdown from '@components/Dropdown/Dropdown'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {useSession} from 'next-auth/react'

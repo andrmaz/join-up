@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {EditPositionForm} from '@containers/edit/Position'
+import EditPositionForm from '@containers/edit/Position'
 import {FiEdit2} from 'react-icons/fi'
 import type {IPositionData} from 'app/types/position'
 import ModalContents from '@lib/Modal/Contents'

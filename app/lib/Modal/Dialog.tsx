@@ -1,8 +1,4 @@
-export const Dialog = ({
-  children,
-}: {
-  children?: React.ReactNode
-}): JSX.Element => (
+const Dialog = ({children}: {children?: React.ReactNode}): JSX.Element => (
   <section
     id='dialog_layer'
     className='fixed top-0 left-0 h-screen w-screen bg-gray-500 bg-opacity-50 z-50'
@@ -20,3 +16,5 @@ export const Dialog = ({
     </article>
   </section>
 )
+
+export default Dialog

@@ -17,4 +17,4 @@ function PositionFeed(props: IPositionData): JSX.Element {
   )
 }
 
-export {PositionFeed}
+export default PositionFeed

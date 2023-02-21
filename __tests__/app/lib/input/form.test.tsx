@@ -1,6 +1,5 @@
 import { render, screen } from 'test-utils'
 
-import {FieldErrors} from 'react-hook-form'
 import FormInput from '@lib/Input/Form'
 import type { IFormInput } from 'app/types/form'
 import { faker } from '@faker-js/faker';
@@ -14,7 +13,7 @@ const placeholder = faker.lorem.sentence()
 const register = jest.fn()
 
 const message = faker.lorem.sentence()
-const errors: FieldErrors = {[name]: {message}}
+const errors = {[name]: {message}}
 
 const props: IFormInput = {
   name,
@@ -24,7 +23,12 @@ const props: IFormInput = {
   type,
   defaultValue,
   placeholder,
-  register,
+  inputProps: {
+    onChange: jest.fn(),
+    onBlur: jest.fn(),
+    ref: jest.fn(),
+    name,
+  },
   errors: {},
 }
 

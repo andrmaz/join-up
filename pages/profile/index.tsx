@@ -1,12 +1,11 @@
 import * as React from 'react'
 
-import {GetServerSideProps, NextPage} from 'next'
+import {NextPage} from 'next'
 
 import Head from 'next/head'
 import ProjectsList from '@screens/Project/List'
-import {QueryResult} from '@components/Result/Query'
+import QueryResult from '@components/Result/Query'
 import UserCard from '@screens/User/Card'
-import checkAuth from '@utils/auth'
 import {trpc} from '@utils/trpc'
 
 const Profile: NextPage = () => {
@@ -43,7 +42,8 @@ const Profile: NextPage = () => {
 
 export default Profile
 
-export const getServerSideProps: GetServerSideProps = async context => {
+/* export const getServerSideProps: GetServerSideProps = async context => {
   await checkAuth(context)
   return {props: {}}
 }
+ */

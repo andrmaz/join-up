@@ -11,4 +11,4 @@ const FocusButton = (props: Omit<ButtonType, 'onKeyDown'>): JSX.Element => {
   )
 }
 
-export {FocusButton}
+export default FocusButton

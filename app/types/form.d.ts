@@ -1,5 +1,5 @@
 import React from 'react'
-import {Control, SetValueConfig, FieldElement} from 'react-hook-form'
+import {Control, UseFormSetValue, UseFormRegisterReturn} from 'react-hook-form'
 
 import type {IProjectData, IProjectInput} from 'app/types/project'
 import type {IPositionData, IPositionInput} from 'app/types/position'
@@ -10,37 +10,30 @@ import type {
 } from 'app/types/response'
 
 //* Inputs
-type RegisterType = (ref: (FieldElement<T> & React.Ref) | null) => void
-
 export interface IFormInput {
   id: string
   name: string
   type: React.HTMLInputTypeAttribute
   label: string
   placeholder: string
-  register: RegisterType
+  inputProps: UseFormRegisterReturn
   defaultValue?: string
   optional?: boolean
   errors?: Record<string, any>
 }
 
-export interface IVacancyInput {
-  defaultValue?: number
-  register: React.Ref<T>
-}
-
 export type FormInputType = {
-  id?: string
-  name?: string
+  id: string
+  name: string
   label?: string
-  register: (ref: FieldElement<T> & React.Ref) => RegisterType
+  inputProps: UseFormRegisterReturn
   defaultValue?: string
-  errors?: DeepMap<T, FieldError>
+  errors?: Record<string, any>
 }
 
 export type InputSubmitType = {
   value?: string
-  errors?: boolean
+  disabled?: boolean
   bgColor?: string
 }
 
@@ -48,8 +41,8 @@ export type InputSubmitType = {
 export type SelectOptionsType<T extends string> = {id: number; label: T}
 
 export interface IFormSelect {
-  control: Control | undefined
-  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
+  control: Control<any>
+  setValue: UseFormSetValue
   errors?: Record<string, any>
   disabled?: boolean
   defaultValues?: SelectOptionsType<string>[]
@@ -58,8 +51,8 @@ export interface IFormSelect {
 }
 
 export interface IPositionSelect {
-  control: Control
-  setValue: (name: any, value: unknown, config?: SetValueConfig) => void
+  control: Control<any>
+  setValue: UseFormSetValue
   errors?: Record<string, any>
   defaultValue?: SelectOptionsType<string>
 }
@@ -67,7 +60,7 @@ export interface IPositionSelect {
 //*Buttons
 export type ButtonType = {
   children?: string
-  errors?: boolean
+  disabled?: boolean
   variant?: 'success' | 'danger' | 'base'
   onClick: () => void
   onKeyDown?: () => void | undefined

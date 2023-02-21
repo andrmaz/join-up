@@ -17,4 +17,4 @@ const EditPositionForm = ({
   )
 }
 
-export {EditPositionForm}
+export default EditPositionForm

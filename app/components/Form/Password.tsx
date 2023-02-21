@@ -1,19 +1,24 @@
 import Button from '@lib/Button'
-import FormInput from '@lib/Input/Form'
 import type {IEditPassword} from 'app/types/user'
-import {InputSubmit} from '@lib/Input/Submit'
+import InputSubmit from '@lib/Input/Submit'
 import PasswordInput from '@components/Input/Password'
 import {StatusResponseType} from 'app/types/response'
 import {useForm} from 'react-hook-form'
+import {passwordRegisterOptions} from '@data/register'
 
 const PasswordForm = ({
   onSubmit,
 }: {
   onSubmit: (data: IEditPassword) => Promise<StatusResponseType>
 }): JSX.Element => {
-  const {handleSubmit, register, errors, watch, reset} =
-    useForm<IEditPassword>()
-  const watchPassword = watch('newPassword')
+  const {
+    handleSubmit,
+    register,
+    formState: {errors},
+    watch,
+    reset,
+  } = useForm<IEditPassword>()
+  const subscription = watch('newPassword')
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -22,28 +27,27 @@ const PasswordForm = ({
       <h2 className='text-2xl mb-4'>Change password</h2>
       <article className='h-auto flex flex-col justify-evenly mb-8'>
         <PasswordInput
-          id='currentPassword'
+          id='current_password'
           name='currentPassword'
           label='Current Password'
-          register={register}
+          inputProps={register('currentPassword', passwordRegisterOptions)}
           errors={errors}
         />
         <PasswordInput
-          id='newPassword'
+          id='new_password'
           name='newPassword'
           label='New Password'
-          register={register}
+          inputProps={register('newPassword', passwordRegisterOptions)}
           errors={errors}
         />
-        <FormInput
-          type='password'
-          id='newPasswordConfirm'
+        <PasswordInput
+          id='new_password_confirm'
           name='newPasswordConfirm'
           label='Confirm New Password'
-          placeholder='please confirm your new password'
-          register={register({
+          inputProps={register('newPasswordConfirm', {
+            ...passwordRegisterOptions,
             validate: (value: string) =>
-              value === watchPassword || 'passwords must match',
+              value === subscription || 'passwords must match',
           })}
           errors={errors}
         />
@@ -54,7 +58,7 @@ const PasswordForm = ({
           <InputSubmit
             value='Save'
             bgColor='green-600'
-            errors={Boolean(
+            disabled={Boolean(
               errors.currentPassword ||
                 errors.newPassword ||
                 errors.newPasswordConfirm

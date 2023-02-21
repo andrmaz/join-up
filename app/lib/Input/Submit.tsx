@@ -1,14 +1,16 @@
 import type {InputSubmitType} from 'app/types/form'
 
-export const InputSubmit = ({
+const InputSubmit = ({
   value = 'Submit',
-  errors = false,
+  disabled = false,
   bgColor = 'blue-800',
 }: InputSubmitType): JSX.Element => (
   <input
     type='submit'
     value={value}
-    disabled={errors}
+    disabled={disabled}
     className={`h-auto w-full py-1 cursor-pointer bg-${bgColor} text-white rounded disabled:opacity-50`}
   />
 )
+
+export default InputSubmit

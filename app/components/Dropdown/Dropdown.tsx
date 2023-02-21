@@ -1,10 +1,10 @@
 import * as React from 'react'
 
 import Link from 'next/link'
-import {SignOutButton} from '@components/Button/SignOut'
+import SignOutButton from '@components/Button/SignOut'
 import UserAvatar from '@screens/User/Avatar'
 
-export function Dropdown(): JSX.Element {
+const Dropdown = (): JSX.Element => {
   let timeOutId: NodeJS.Timeout
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
   const onClickHandler = (): void => setIsOpen(!isOpen)
@@ -59,3 +59,5 @@ export function Dropdown(): JSX.Element {
     </nav>
   )
 }
+
+export default Dropdown

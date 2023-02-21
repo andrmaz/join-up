@@ -14,4 +14,4 @@ const RemoveProjectForm = ({id}: {id: number}): JSX.Element => {
   )
 }
 
-export {RemoveProjectForm}
+export default RemoveProjectForm

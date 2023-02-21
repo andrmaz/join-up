@@ -1,9 +1,9 @@
 import type {UserDispatchType, UserStateType} from 'app/types/user'
-import {UActions} from 'app/types/constants'
+import {UAction} from 'app/types/constants'
 
 export const login = (dispatch: UserDispatchType, data: UserStateType): void =>
-  dispatch({type: UActions.login, payload: data})
+  dispatch({type: UAction.login, payload: data})
 export const logout = (dispatch: UserDispatchType): void =>
-  dispatch({type: UActions.logout})
+  dispatch({type: UAction.logout})
 export const edit = (dispatch: UserDispatchType, data: UserStateType): void =>
-  dispatch({type: UActions.edit, payload: data})
+  dispatch({type: UAction.edit, payload: data})

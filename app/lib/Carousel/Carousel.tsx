@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export const Carousel: React.FC = ({children}): JSX.Element => {
+const Carousel: React.FC = ({children}): JSX.Element => {
   return (
     <article className='h-64 w-full my-4'>
       <h2 className='h-1/5'>
@@ -10,3 +10,5 @@ export const Carousel: React.FC = ({children}): JSX.Element => {
     </article>
   )
 }
+
+export default Carousel

@@ -1,14 +1,14 @@
 import * as React from 'react'
 
-import {GetServerSideProps, NextPage} from 'next'
+import {NextPage} from 'next'
 
-import {ApplicationFeed} from '@components/Feed/Application'
-import {Carousel} from '@lib/Carousel/Carousel'
+import ApplicationFeed from '@components/Feed/Application'
+import Carousel from '@lib/Carousel/Carousel'
 import Head from 'next/head'
 //import Image from 'next/image'
-import {PositionFeed} from '@components/Feed/Position'
-import {ProjectFeed} from '@components/Feed/Project'
-import {QueryResult} from '@components/Result/Query'
+import PositionFeed from '@components/Feed/Position'
+import ProjectFeed from '@components/Feed/Project'
+import QueryResult from '@components/Result/Query'
 import {trpc} from '../app/utils/trpc'
 
 const Home: NextPage = () => {
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
 
 export default Home
 
-export const getServerSideProps: GetServerSideProps = async context => {
+/* export const getServerSideProps: GetServerSideProps = async context => {
   const session = context.req.cookies['next-auth.session-token']
   if (!session) {
     return {
@@ -71,3 +71,4 @@ export const getServerSideProps: GetServerSideProps = async context => {
   }
   return {props: {}}
 }
+ */

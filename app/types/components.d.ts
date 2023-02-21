@@ -1,25 +1,26 @@
-import {Control} from 'react-hook-form'
+import {
+  Control,
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormRegisterReturn,
+} from 'react-hook-form'
 import type {NestedNumbersType} from 'app/types/project'
 
 //* Drawer
 export interface IDrawerProps {
-  register: React.Ref<T>
+  register: UseFormRegister<DrawerValues>
   isPending: boolean
-  setValue: (
-    name: keyof FieldValues,
-    value: unknown,
-    config?: Partial<{shouldValidate: boolean; shouldDirty: boolean}>
-  ) => void
-  control: Control
+  setValue: UseFormSetValue<DrawerValues>
+  control: Control<DrawerValues>
   technologies: NestedNumbersType
 }
 
 export type DrawerInputsType = {
-  register: React.Ref<T>
-  isPending: boolean
+  inputProps: UseFormRegisterReturn
+  disabled: boolean
 }
 
-export interface FieldValues {
+export interface DrawerValues {
   technologies: NestedNumbersType
   date: 'desc' | 'asc'
   available: boolean

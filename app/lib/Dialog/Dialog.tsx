@@ -1,6 +1,6 @@
 import Button from '@lib/Button'
 import type {DialogType} from 'app/types/components'
-import {FocusButton} from '@components/Button/Focus'
+import FocusButton from '@components/Button/Focus'
 import useModalContext from '@hooks/modal/useModalContext'
 
 const Dialog = ({

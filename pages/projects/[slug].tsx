@@ -1,13 +1,12 @@
 import * as React from 'react'
 
-import {GetServerSideProps, NextPage} from 'next'
+import {NextPage} from 'next'
 
 import CreatePosition from '@screens/Position/Create'
 import Head from 'next/head'
-import {PositionList} from '@screens/Position/List'
+import PositionList from '@screens/Position/List'
 import ProjectOverview from '@screens/Project/Overview'
-import {QueryResult} from '@components/Result/Query'
-import checkAuth from '@utils/auth'
+import QueryResult from '@components/Result/Query'
 import {trpc} from '@utils/trpc'
 import {useSession} from 'next-auth/react'
 
@@ -44,7 +43,7 @@ const Slug: NextPage = () => {
 
 export default Slug
 
-export const getServerSideProps: GetServerSideProps = async context => {
+/* export const getServerSideProps: GetServerSideProps = async context => {
   await checkAuth(context)
   return {props: {}}
-}
+} */

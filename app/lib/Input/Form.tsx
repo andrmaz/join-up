@@ -11,7 +11,7 @@ const FormInput = ({
   type,
   defaultValue,
   placeholder,
-  register,
+  inputProps,
   errors,
 }: IFormInput): JSX.Element => {
   return (
@@ -22,11 +22,10 @@ const FormInput = ({
       <input
         id={id}
         type={type}
-        name={name}
         defaultValue={defaultValue}
         placeholder={placeholder}
         className='focus:outline-none focus:ring focus:border-blue-300 border-2 border-gray-400 p-0.5 mr-2 rounded'
-        ref={register}
+        {...inputProps}
       />
       {errors?.[name] && <ErrorMessage>{errors?.[name]?.message}</ErrorMessage>}
     </div>
