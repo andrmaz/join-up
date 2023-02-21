@@ -1,12 +1,13 @@
 import * as React from 'react'
 
-import {NextPage} from 'next'
+import {GetServerSideProps, NextPage} from 'next'
 
 import Head from 'next/head'
 import ProjectsList from '@screens/Project/List'
 import QueryResult from '@components/Result/Query'
 import UserCard from '@screens/User/Card'
 import {trpc} from '@utils/trpc'
+import checkAuth from '@utils/auth'
 
 const Profile: NextPage = () => {
   const {status, error, data} = trpc.user.detail.useQuery()
@@ -42,8 +43,7 @@ const Profile: NextPage = () => {
 
 export default Profile
 
-/* export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps = async context => {
   await checkAuth(context)
   return {props: {}}
 }
- */
