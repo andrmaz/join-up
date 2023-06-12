@@ -46,7 +46,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@babel/register": "^7.21.0",
+    "@babel/register": "^7.22.5",
     "@babel/core": "^7.22.5",
     "@faker-js/faker": "^7.6.0",
     "@storybook/addon-actions": "^6.5.16",
