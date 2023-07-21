@@ -6,6 +6,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import {trpc} from '@utils/trpc'
 
 export const authOptions: AuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   // Configure one or more authentication providers
   providers: [
     // ...add more providers here

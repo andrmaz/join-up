@@ -7,7 +7,9 @@ import ProjectsList from '@screens/Project/List'
 import QueryResult from '@components/Result/Query'
 import UserCard from '@screens/User/Card'
 import {trpc} from '@utils/trpc'
-import checkAuth from '@utils/auth'
+//import checkAuth from '@utils/auth'
+import {getServerSession} from 'next-auth/next'
+import {authOptions} from '@pages/api/auth/[...nextauth]'
 
 const Profile: NextPage = () => {
   const {status, error, data} = trpc.user.detail.useQuery()
@@ -44,6 +46,15 @@ const Profile: NextPage = () => {
 export default Profile
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  await checkAuth(context)
+  const session = await getServerSession(context.req, context.res, authOptions)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/signin',
+        permanent: false,
+      },
+    }
+  }
   return {props: {}}
 }

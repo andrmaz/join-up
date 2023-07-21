@@ -54,6 +54,7 @@ export const trpc = createTRPCNext<AppRouter>({
               } = ctx.req.headers */
               return {
                 ...ctx.req.headers,
+                cookie: ctx.req.headers.cookie,
                 // Optional: inform server that it's an SSR request
                 'x-ssr': '1',
               }

@@ -9,7 +9,9 @@ import ProjectsGrid from '@screens/Project/Grid'
 import QueryResult from '@components/Result/Query'
 import {trpc} from '@utils/trpc'
 import {useForm} from 'react-hook-form'
-import checkAuth from '@utils/auth'
+//import checkAuth from '@utils/auth'
+import {getServerSession} from 'next-auth/next'
+import {authOptions} from '@pages/api/auth/[...nextauth]'
 
 const Projects: NextPage = () => {
   const {control, register, watch, setValue} = useForm<DrawerValues>()
@@ -50,6 +52,15 @@ const Projects: NextPage = () => {
 export default Projects
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  await checkAuth(context)
+  const session = await getServerSession(context.req, context.res, authOptions)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/signin',
+        permanent: false,
+      },
+    }
+  }
   return {props: {}}
 }
