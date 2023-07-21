@@ -10,6 +10,8 @@ import PositionFeed from '@components/Feed/Position'
 import ProjectFeed from '@components/Feed/Project'
 import QueryResult from '@components/Result/Query'
 import {trpc} from '../app/utils/trpc'
+import {getServerSession} from 'next-auth'
+import {authOptions} from './api/auth/[...nextauth]'
 
 const Home: NextPage = () => {
   const {status, error, data} = trpc.feed.list.useQuery()
@@ -60,7 +62,8 @@ const Home: NextPage = () => {
 export default Home
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const session = context.req.cookies['next-auth.session-token']
+  const session = await getServerSession(context.req, context.res, authOptions)
+
   if (!session) {
     return {
       redirect: {

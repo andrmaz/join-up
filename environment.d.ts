@@ -5,6 +5,7 @@ declare global {
       GITHUB_ID: string
       GITHUB_SECRET: string
       POSTGRES_PASSWORD: string
+      NEXTAUTH_SECRET: string
     }
   }
 }

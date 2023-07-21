@@ -9,7 +9,9 @@ import ProjectOverview from '@screens/Project/Overview'
 import QueryResult from '@components/Result/Query'
 import {trpc} from '@utils/trpc'
 import {useSession} from 'next-auth/react'
-import checkAuth from '@utils/auth'
+//import checkAuth from '@utils/auth'
+import {getServerSession} from 'next-auth/next'
+import {authOptions} from '@pages/api/auth/[...nextauth]'
 
 const Slug: NextPage = () => {
   const {data: session} = useSession()
@@ -45,6 +47,15 @@ const Slug: NextPage = () => {
 export default Slug
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  await checkAuth(context)
+  const session = await getServerSession(context.req, context.res, authOptions)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/signin',
+        permanent: false,
+      },
+    }
+  }
   return {props: {}}
 }

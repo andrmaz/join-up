@@ -1,4 +1,4 @@
-import {TRPCError, initTRPC} from '@trpc/server'
+import {/* TRPCError, */ initTRPC} from '@trpc/server'
 
 import {Context} from './context'
 import {transformer} from './utils/transformer'
@@ -18,12 +18,13 @@ export const publicProcedure = t.procedure
  * Reusable middleware that checks if users are authenticated.
  * @note Example only, yours may vary depending on how your auth is setup
  **/
-const isAuth = t.middleware(({next, ctx}) => {
-  if (!ctx.session?.user?.email) {
+const isAuth = t.middleware(async ({next, ctx}) => {
+  //TODO
+  /* if (!ctx.session?.user?.email) {
     throw new TRPCError({
       code: 'UNAUTHORIZED',
     })
-  }
+  } */
   return next({
     ctx: {
       // Infers the `session` as non-nullable
