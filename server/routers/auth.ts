@@ -31,7 +31,7 @@ export const authRouter = router({
     return {user: null}
   }),
   'verify-request': protectedProcedure.mutation(async ({ctx}) => {
-    if (!ctx.session.user.email) {
+    if (!ctx.session?.user.email) {
       throw new TRPCError({
         code: 'UNAUTHORIZED',
       })
