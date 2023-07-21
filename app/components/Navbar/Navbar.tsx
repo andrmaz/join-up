@@ -11,7 +11,7 @@ const Navbar = (): JSX.Element => {
   const authenticated = status === 'authenticated'
 
   return (
-    <nav className='fixed top-0 flex justify-between items-center h-12 xl:h-16 w-screen bg-blue-800 text-white z-50 px-20 xl:px-40'>
+    <nav className='navbar bg-base-100'>
       {authenticated && (
         <div className='inline-flex justify-evenly w-3/12'>
           <Link href='/'>
@@ -23,14 +23,14 @@ const Navbar = (): JSX.Element => {
         </div>
       )}
       {authenticated ? (
-        <div className='inline-flex justify-around items-center w-2/12 h-full'>
+        <div className='menu menu-horizontal px-1'>
           <Link href='/new/project'>
             <a className='cursor-pointer'>&#43;</a>
           </Link>
           <Dropdown />
         </div>
       ) : (
-        <div className='inline-flex justify-around items-center ml-auto	w-2/12 h-full'>
+        <div className='menu menu-horizontal px-1'>
           {router.pathname === '/signup' ? (
             <Link href='/signin'>
               <a className='flex-initial'>SignIn</a>

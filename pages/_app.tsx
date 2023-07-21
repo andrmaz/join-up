@@ -1,4 +1,4 @@
-import 'tailwindcss/tailwind.css'
+import '../app/styles/globals.css'
 
 import * as React from 'react'
 

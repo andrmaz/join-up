@@ -15,7 +15,6 @@ export const Success = Template.bind({})
 Success.args = {
   children: 'Confirm',
   disabled: false,
-  variant: 'success',
   onClick: () => console.log('Confirm clicked'),
 }
 
@@ -23,7 +22,6 @@ export const Base = Template.bind({})
 Base.args = {
   children: 'Cancel',
   disabled: false,
-  variant: 'base',
   onClick: () => console.log('Cancel clicked'),
 }
 
@@ -31,6 +29,5 @@ export const Danger = Template.bind({})
 Danger.args = {
   children: 'Confirm',
   disabled: false,
-  variant: 'danger',
   onClick: () => console.log('Confirm clicked'),
 }

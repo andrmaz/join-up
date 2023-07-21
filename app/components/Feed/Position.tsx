@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 function PositionFeed(props: IPositionData): JSX.Element {
   return (
-    <li className='h-full min-w-1/4 border-2 v-1 mx-1 p-2 rounded'>
+    <article className='carousel-item'>
       <Link href={`/projects/${props.projectId}`} passHref replace>
         <h3 className='font-bold text-sm truncate '>{props.title}</h3>
       </Link>
@@ -13,7 +13,7 @@ function PositionFeed(props: IPositionData): JSX.Element {
       <p className='font-semibold text-xs overflow-clip overflow-hidden'>
         {props.duties}
       </p>
-    </li>
+    </article>
   )
 }
 

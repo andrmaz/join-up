@@ -27,7 +27,7 @@ const Dropdown = (): JSX.Element => {
   return (
     <nav
       role='navigation'
-      className='w-1/6'
+      className='dropdown'
       onBlur={onBlurHandler}
       onFocus={onFocusHandler}
     >
@@ -41,7 +41,7 @@ const Dropdown = (): JSX.Element => {
           <UserAvatar />
         </div>
         {isOpen && (
-          <ul className='absolute flex flex-col h-auto min-w-min	w-auto bg-gray-800 border-2 p-2 rounded z-40 text-xs'>
+          <ul className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52'>
             <Link href={'/profile'}>
               <a className='flex-initial text-white m-1 whitespace-nowrap'>
                 Your profile

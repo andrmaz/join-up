@@ -21,7 +21,7 @@ const Menu = ({
         role='tablist'
         aria-label='tabs'
         onKeyDown={handleKeyPress}
-        className='h-3/5 flex flex-col'
+        className='menu bg-base-200 w-56 rounded-box'
       >
         <li className='h-12 border-gray-400 border-2 p-2 text-center'>
           <h3>Account Settings</h3>

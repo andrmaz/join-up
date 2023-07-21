@@ -5,13 +5,13 @@ import Link from 'next/link'
 
 function ApplicationFeed(props: IApplicationData): JSX.Element {
   return (
-    <li className='h-full min-w-1/4 border-2 v-1 mx-1'>
+    <article className='carousel-item'>
       <Link href={`/projects/${props.position.projectId}`} passHref replace>
         <span className='text-xs'>
           {props.user.username} has just applied to {props.position.title}
         </span>
       </Link>
-    </li>
+    </article>
   )
 }
 

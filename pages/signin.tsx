@@ -25,6 +25,7 @@ const SignIn = (): JSX.Element => {
           </header>
           <SigninForm />
           <button
+            className='btn btn-accent'
             onClick={() =>
               signIn('github', {callbackUrl: 'http://localhost:3000'})
             }
@@ -32,8 +33,8 @@ const SignIn = (): JSX.Element => {
             Sign in with GitHub
           </button>
           <div className='inline-flex justify-between w-full h-3/20 pt-5 lg:text-xs'>
-            <Link href='/signup'>
-              <a>Do not have an account? SignUp</a>
+            <Link href='/signup' className='btn btn-link'>
+              Do not have an account? SignUp
             </Link>
             <span className='text-right'>Forgot your password?</span>
           </div>

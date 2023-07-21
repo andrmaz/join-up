@@ -5,7 +5,11 @@ import useFocusTrapRefContext from '@hooks/ref/useRefContext'
 const FocusButton = (props: Omit<ButtonType, 'onKeyDown'>): JSX.Element => {
   const ref = useFocusTrapRefContext()
   return (
-    <Button onKeyDown={() => ref?.current?.focus()} {...props}>
+    <Button
+      className='btn-ghost'
+      onKeyDown={() => ref?.current?.focus()}
+      {...props}
+    >
       Cancel
     </Button>
   )

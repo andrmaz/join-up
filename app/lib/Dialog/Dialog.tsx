@@ -3,24 +3,20 @@ import type {DialogType} from 'app/types/components'
 import FocusButton from '@components/Button/Focus'
 import useModalContext from '@hooks/modal/useModalContext'
 
-const Dialog = ({
-  handleConfirm,
-  message,
-  variant = 'success',
-}: DialogType): JSX.Element => {
+const Dialog = ({handleConfirm, message}: DialogType): JSX.Element => {
   const {setIsOpen} = useModalContext()
   return (
-    <main>
-      <div className='h-16 w-full'>
+    <dialog id='my_modal_1' className='modal'>
+      <form method='dialog' className='modal-box'>
         <span role='article' className='h-1/2'>
           {message}
         </span>
-      </div>
-      <div className='w-full h-1/3 flex'>
-        <Button onClick={handleConfirm} variant={variant} />
-        <FocusButton onClick={() => setIsOpen(false)} />
-      </div>
-    </main>
+        <div className='modal-action'>
+          <Button onClick={handleConfirm} />
+          <FocusButton onClick={() => setIsOpen(false)} />
+        </div>
+      </form>
+    </dialog>
   )
 }
 

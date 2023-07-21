@@ -61,7 +61,7 @@ export interface IPositionSelect {
 export type ButtonType = {
   children?: string
   disabled?: boolean
-  variant?: 'success' | 'danger' | 'base'
+  className?: string
   onClick: () => void
   onKeyDown?: () => void | undefined
 }

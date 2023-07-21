@@ -22,9 +22,9 @@ const LangSelect = ({
   return (
     <QueryResult status={status} error={error} data={data}>
       {({languages}) => (
-        <React.Fragment>
-          <label id='languages' htmlFor='languages'>
-            Languages :
+        <div className='form-control w-full max-w-xs'>
+          <label id='languages' htmlFor='languages' className='label'>
+            <span className='label-text'>Languages :</span>
           </label>
           <Controller
             name='languages'
@@ -62,13 +62,14 @@ const LangSelect = ({
                   )
                 }}
                 isDisabled={disabled}
+                className='select select-bordered'
               />
             )}
           />
           {errors?.languages && (
             <ErrorMessage>{errors?.languages?.message}</ErrorMessage>
           )}
-        </React.Fragment>
+        </div>
       )}
     </QueryResult>
   )

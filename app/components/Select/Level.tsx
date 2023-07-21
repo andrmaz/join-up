@@ -20,8 +20,8 @@ const LevelSelect = ({
   return (
     <QueryResult status={status} error={error} data={data}>
       {({levels}) => (
-        <React.Fragment>
-          <label id='level-select' htmlFor='level'>
+        <div className='form-control w-full max-w-xs'>
+          <label id='level-select' htmlFor='level' className='label'>
             Choose a level :
           </label>
           <Controller
@@ -52,13 +52,14 @@ const LevelSelect = ({
                   })
                 }}
                 onBlur={onBlur}
+                className='select select-bordered'
               />
             )}
           />
           {errors?.level && (
             <ErrorMessage>{errors?.level?.message}</ErrorMessage>
           )}
-        </React.Fragment>
+        </div>
       )}
     </QueryResult>
   )

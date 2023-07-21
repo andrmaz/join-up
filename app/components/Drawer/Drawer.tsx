@@ -13,7 +13,7 @@ const Drawer = ({
   control,
   technologies,
 }: IDrawerProps): JSX.Element => (
-  <section className='sticky top-40 w-5/6 h-70v p-2 border-r-2'>
+  <section className='drawer-side'>
     <form className='flex flex-col h-auto max-h-full justify-around px-2'>
       <DateSelect inputProps={register('date')} disabled={isPending} />
       {technologies && technologies.length > 1 && (

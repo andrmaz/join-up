@@ -6,9 +6,11 @@ const Textarea = ({
   inputProps,
   defaultValue,
 }: FormInputType): JSX.Element => (
-  <article className='h-1/5'>
-    <div className='h-full flex flex-col'>
-      <label htmlFor={name}>Biography:</label>
+  <section className='h-1/5'>
+    <div className='form-control'>
+      <label htmlFor={name} className='label'>
+        <span className='label-text'>Your bio :</span>
+      </label>
       <textarea
         id={id}
         cols={5}
@@ -18,11 +20,11 @@ const Textarea = ({
         defaultValue={defaultValue}
         spellCheck={true}
         wrap='hard'
-        className=':resize-none p-1 border-2'
+        className='textarea textarea-bordered  textarea-lg w-full max-w-xs :resize-none'
         {...inputProps}
       />
     </div>
-  </article>
+  </section>
 )
 
 export default Textarea

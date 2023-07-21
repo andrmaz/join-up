@@ -15,16 +15,17 @@ const FormInput = ({
   errors,
 }: IFormInput): JSX.Element => {
   return (
-    <div className='flex flex-col'>
-      <label htmlFor={name}>
-        {label} : {optional && `(optional)`}
+    <div className='form-control w-full max-w-xs'>
+      <label htmlFor={name} className='label'>
+        <span className='label-text'>{label} :</span>
+        <span className='label-text-alt'>{optional && `(optional)`}</span>
       </label>
       <input
         id={id}
         type={type}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        className='focus:outline-none focus:ring focus:border-blue-300 border-2 border-gray-400 p-0.5 mr-2 rounded'
+        className='input input-bordered w-full max-w-xs'
         {...inputProps}
       />
       {errors?.[name] && <ErrorMessage>{errors?.[name]?.message}</ErrorMessage>}

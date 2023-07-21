@@ -1,14 +1,14 @@
 import {DrawerInputsType} from 'app/types/components'
 
 const DateSelect = ({inputProps, disabled}: DrawerInputsType): JSX.Element => (
-  <div className='flex flex-col'>
-    <label htmlFor='sort-by-date' className='mb-1'>
-      Sort by date
+  <div className='form-control w-full max-w-xs'>
+    <label htmlFor='sort-by-date' className='label'>
+      <span className='label-text'>Sort by date</span>
     </label>
     <select
       id='sort-by-date'
-      className='border-2 border-gray-200	w-24'
       disabled={disabled}
+      className='select select-bordered'
       {...inputProps}
     >
       <option value='desc' defaultChecked>

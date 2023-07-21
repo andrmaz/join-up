@@ -10,7 +10,7 @@ const SignOutButton = (): JSX.Element => {
   return (
     <div
       onClick={onClick}
-      className='text-left m-1'
+      className='btn btn-ghost'
       onKeyDown={() => ''}
       role='button'
       tabIndex={0}

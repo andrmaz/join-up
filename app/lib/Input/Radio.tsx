@@ -4,26 +4,32 @@ const RadioInput = ({inputProps, disabled}: DrawerInputsType): JSX.Element => (
   <div className='mt-4'>
     <p className='mb-1'>Match technologies:</p>
     <div className='flex flex-row'>
-      <div className='m-1'>
-        <input
-          type='radio'
-          id='any'
-          value='any'
-          defaultChecked
-          disabled={disabled}
-          {...inputProps}
-        />
-        <label htmlFor='any'>Any</label>
+      <div className='form-control'>
+        <label htmlFor='any' className='label cursor-pointer'>
+          <span className='label-text'>Any</span>
+          <input
+            type='radio'
+            id='any'
+            value='any'
+            defaultChecked
+            disabled={disabled}
+            className='radio'
+            {...inputProps}
+          />
+        </label>
       </div>
-      <div className='m-1'>
-        <input
-          type='radio'
-          id='all'
-          value='all'
-          disabled={disabled}
-          {...inputProps}
-        />
-        <label htmlFor='all'>All</label>
+      <div className='form-control'>
+        <label htmlFor='all' className='label cursor-pointer'>
+          <span className='label-text'>All</span>
+          <input
+            type='radio'
+            id='all'
+            value='all'
+            disabled={disabled}
+            className='radio'
+            {...inputProps}
+          />
+        </label>
       </div>
     </div>
   </div>

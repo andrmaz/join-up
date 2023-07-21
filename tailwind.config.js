@@ -2,13 +2,16 @@ const colors = require('tailwindcss/colors')
 
 module.exports = {
   // Tailwind can tree-shake unused styles in production builds
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
   important: true,
   darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
-        gray: colors.coolGray,
+        gray: colors.gray,
         blue: colors.sky,
         red: colors.rose,
         pink: colors.fuchsia,
@@ -49,7 +52,7 @@ module.exports = {
       },
       minWidth: {
         '1/4': '25%',
-      }
+      },
     },
     screens: {
       sm: '640px',
@@ -86,4 +89,5 @@ module.exports = {
       backgroundColor: ['active'],
     },
   },
+  plugins: [require('daisyui')],
 }

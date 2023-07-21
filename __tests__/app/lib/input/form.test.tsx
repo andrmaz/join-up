@@ -42,11 +42,11 @@ it('renders the placeholder text', () => {
 })
 it('does not render the optional label', () => {
   render(<FormInput {...props} />)
-  expect(screen.queryByText(`${label} : (optional)`)).not.toBeInTheDocument()
+  expect(screen.queryByText(`(optional)`)).not.toBeInTheDocument()
 })
 it('renders the optional label', () => {
   render(<FormInput {...props} optional />)
-  expect(screen.getByText(`${label} : (optional)`)).toBeInTheDocument()
+  expect(screen.getByText(`(optional)`)).toBeInTheDocument()
 })
 it('does not render an error message', () => {
   render(<FormInput {...props}/>)

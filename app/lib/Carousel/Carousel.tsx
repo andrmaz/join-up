@@ -6,7 +6,7 @@ const Carousel: React.FC = ({children}): JSX.Element => {
       <h2 className='h-1/5'>
         Here you are some suggestions according to your profile
       </h2>
-      <ul className='flex h-4/5 overflow-x-auto'>{children}</ul>
+      <div className='carousel carousel-center rounded-box'>{children}</div>
     </article>
   )
 }

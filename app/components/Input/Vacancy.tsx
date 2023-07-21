@@ -7,8 +7,8 @@ const VacancyInput = ({
   defaultValue,
 }: FormInputType): JSX.Element => {
   return (
-    <div className='flex'>
-      <label htmlFor='vacancies' className='mr-2'>
+    <div className='form-control w-full max-w-xs'>
+      <label htmlFor='vacancies' className='label'>
         Vacancy
       </label>
       <input
@@ -18,7 +18,7 @@ const VacancyInput = ({
         step={1}
         min={1}
         max={20}
-        className='w-12 focus:outline-none focus:ring focus:border-blue-300 border-2 border-gray-400 p-0.5 mr-2 rounded'
+        className='input input-bordered w-full max-w-xs'
         {...inputProps}
       />
     </div>

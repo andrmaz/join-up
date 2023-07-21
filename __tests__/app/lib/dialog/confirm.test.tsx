@@ -12,5 +12,5 @@ const props: DialogType = {
 
 it('renders a dialog displaying a message', () => {
   render(<Dialog {...props} />)
-  expect(screen.getByRole('article').innerHTML).toBe(message)
+  expect(screen.getByRole('article', {hidden: true}).innerHTML).toBe(message)
 })

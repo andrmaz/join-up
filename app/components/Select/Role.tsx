@@ -20,8 +20,8 @@ const RoleSelect = ({
   return (
     <QueryResult status={status} error={error} data={data}>
       {({roles}) => (
-        <React.Fragment>
-          <label id='role-select' htmlFor='role'>
+        <div className='form-control w-full max-w-xs'>
+          <label id='role-select' htmlFor='role' className='label'>
             {`Choose a role :`}
           </label>
           <Controller
@@ -52,11 +52,12 @@ const RoleSelect = ({
                   })
                 }}
                 onBlur={onBlur}
+                className='select select-bordered'
               />
             )}
           />
           {errors?.role && <ErrorMessage>{errors?.role?.message}</ErrorMessage>}
-        </React.Fragment>
+        </div>
       )}
     </QueryResult>
   )

@@ -22,9 +22,9 @@ const TechSelect = ({
   return (
     <QueryResult status={status} error={error} data={data}>
       {({technologies}) => (
-        <React.Fragment>
-          <label id='technologies' htmlFor='technologies'>
-            Technologies :
+        <div className='form-control w-full max-w-xs'>
+          <label id='technologies' htmlFor='technologies' className='label'>
+            <span className='label-text'>Technologies :</span>
           </label>
           <Controller
             name='technologies'
@@ -62,13 +62,14 @@ const TechSelect = ({
                   )
                 }}
                 isDisabled={disabled}
+                className='select select-bordered'
               />
             )}
           />
           {errors?.technologies && (
             <ErrorMessage>{errors?.technologies?.message}</ErrorMessage>
           )}
-        </React.Fragment>
+        </div>
       )}
     </QueryResult>
   )

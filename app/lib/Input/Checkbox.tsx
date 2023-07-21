@@ -4,9 +4,8 @@ const CheckboxInput = ({
   inputProps,
   disabled,
 }: DrawerInputsType): JSX.Element => (
-  <div className='my-4'>
-    <p className='mb-1'>See available positions:</p>
-    <div>
+  <div className='form-control'>
+    <label htmlFor='available' className='label cursor-pointer'>
       <input
         type='checkbox'
         id='available'
@@ -14,8 +13,8 @@ const CheckboxInput = ({
         defaultChecked
         {...inputProps}
       />
-      <label htmlFor='available'>Available</label>
-    </div>
+      <span className='label-text'>Available</span>
+    </label>
   </div>
 )
 

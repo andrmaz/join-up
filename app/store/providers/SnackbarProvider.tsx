@@ -29,10 +29,12 @@ export const SnackbarProvider = ({
   const value = {addAlert}
   return (
     <SnackbarContext.Provider value={value}>
-      {children}
-      {alerts.map((alert, index) => (
-        <SnackBar key={`alert-${index}`} alert={alert} />
-      ))}
+      <div className='toast toast-end'>
+        {children}
+        {alerts.map((alert, index) => (
+          <SnackBar key={`alert-${index}`} alert={alert} />
+        ))}
+      </div>
     </SnackbarContext.Provider>
   )
 }
