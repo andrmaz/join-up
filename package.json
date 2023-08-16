@@ -43,7 +43,7 @@
     "react-query": "^3.39.3",
     "react-select": "^4.3.1",
     "superjson": "^1.13.1",
-    "zod": "^3.22.0"
+    "zod": "^3.22.1"
   },
   "devDependencies": {
     "@babel/register": "^7.22.5",
