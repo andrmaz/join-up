@@ -73,7 +73,7 @@
     "husky": "^6.0.0",
     "jest": "^27.5.1",
     "lint-staged": "^11.2.6",
-    "postcss": "^8.4.27",
+    "postcss": "^8.4.28",
     "prettier": "^2.8.8",
     "tailwindcss": "^2.2.19",
     "ts-node": "^10.9.1",
