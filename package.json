@@ -23,7 +23,7 @@
     "seed:run": "knex seed:run --knexfile ./server/db/knexfile --debug"
   },
   "dependencies": {
-    "@tanstack/react-query": "^4.35.3",
+    "@tanstack/react-query": "^4.35.7",
     "@trpc/client": "^10.38.5",
     "@trpc/next": "^10.38.5",
     "@trpc/react-query": "^10.38.5",
