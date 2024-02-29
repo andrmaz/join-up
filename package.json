@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@babel/register": "^7.23.7",
-    "@babel/core": "^7.23.9",
+    "@babel/core": "^7.24.0",
     "@faker-js/faker": "^7.6.0",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-essentials": "^6.4.22",
